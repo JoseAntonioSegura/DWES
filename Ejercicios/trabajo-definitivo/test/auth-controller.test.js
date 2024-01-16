@@ -20,7 +20,7 @@ test('authenticateUser should return a valid JWT token for correct credentials',
       t.is(code, 200);
       return responseObject;
     },
-    json: (data) => {
+    json: (data) => { 
       t.truthy(data.token);
       t.is(typeof data.token, 'string');
     },

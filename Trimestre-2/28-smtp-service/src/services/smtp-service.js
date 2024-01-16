@@ -1,36 +1,43 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer';
+import { config as dotenvConfig } from 'dotenv';
+
+dotenvConfig();
 
 let transporter = null;
 
-export function init(config) {
+export function init() {
   const smtpConfig = {
-  host: config.host,
-  port: config.port,
-  secure: false,
-};
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false,
+  };
 
-if(config.user){
-  smtpConfig.auth = {
-      user: config.smtp.user,
-      pass: config.smtp.password,
+  if (process.env.SMTP_USER) {
+    smtpConfig.auth = {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
     };
   }
 
-transporter = nodemailer.createTransport(smtpConfig);
+  transporter = nodemailer.createTransport(smtpConfig);
 
-transporter.verify(function(error, success){
-  if(error) {
-    console.log(error);
-  } else {
-      console.log("SMTP ready");
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log("SMTP listo");
     }
   });
-}
+};
 
-export async function send(mailOptions){
-  return transporter.sendMail({
-    from: transporter.options.auth.user,
-    ...mailOptions
-  })
+export async function send(mailOption) {
+  let info = await transporter.sendMail({
+    from: 'its@me.com',
+    to: "nose@cual.es",
+    subject: "Mensaje de prueba",
+    text: "Este es el texto",
+    html: "<h1 style='color: blue'>Este es el HTML</h1>",
+  });
+  console.log("Message sent: %s", info.messageId);
 }
 
