@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import config from '../config.js';
 
 export function login(req, res, next){
-       const { username, password } = req.body;
+    const { username, password } = req.body;
 
     const user = findUser(username);
 
