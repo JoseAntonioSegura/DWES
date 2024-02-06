@@ -18,7 +18,7 @@ const cleanedQuery = Object.fromEntries(
   Object.entries(query).filter(([_, a]) => a !==undefined)
 );
   console.log(cleanedQuery);
-  const users = await User.find(cleanedQuery);
+  const users = await User.find(cleanedQuery).select({password: 0});
 
   return users;
 }
