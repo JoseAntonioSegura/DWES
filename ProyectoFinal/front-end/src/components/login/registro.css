@@ -1,0 +1,43 @@
+.registro-container {
+    margin: auto;
+    padding: 20px;
+    width: 300px;
+    background-color: #f0f8ff; /* Cyan claro */
+    border-radius: 10px;
+    border: 2px solid #333; /* Gris oscuro */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Efecto de sombra */
+  
+    /* Estilo de texto */
+    color: #333; /* Gris oscuro */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: calc(90% - 10px); /* Ajuste para evitar desbordamiento */
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Gris claro */
+  }
+  
+  .form-group.error input {
+    border-color: red; /* Rojo para errores */
+  }
+  
+  .error-indicator {
+    color: red; /* Color de asterisco para errores */
+    margin-left: 5px;
+  }
+  
+  .error-message {
+    color: red; /* Color de mensaje de error */
+    margin-top: 10px;
+  }
+  
