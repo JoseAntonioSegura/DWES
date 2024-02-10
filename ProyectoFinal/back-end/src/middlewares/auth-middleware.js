@@ -9,7 +9,7 @@ export function checkToken(req, res, next){
 
     const {authorization} = req.headers;
 
-    if(!authorization) throw HttpStatusError(401, 'No token provided');
+    if (!authorization) throw new HttpStatusError(401, 'No token provided');
 
     const [_bearer, token] = authorization.split(' ');
 
@@ -18,7 +18,8 @@ export function checkToken(req, res, next){
         req.user = tokenInfo;
     }catch(err){
         logger.error(err.message);
-        throw HttpStatusError(401, 'Invalid token');
+        throw new HttpStatusError(401, 'Invalid token');
+
     }
 
     next();

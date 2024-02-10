@@ -23,4 +23,3 @@ export async function updateGameByTitle(title, newData) {
   const game = await Game.findOneAndUpdate({ titulo: title }, newData, { new: true });
   return game;
 }
-

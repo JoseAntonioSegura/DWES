@@ -1,12 +1,13 @@
-import {User, Note} from '../../models/index.js';
-import {  checkHash } from '../../utils/encrypt.js';
+import { User } from '../../models/index.js';
 
+//Obtener usuario por nombre
 export async function getUserByName(username){
   const user = await User.findOne({ username});
 
   return user;
 }
 
+//Obtener usuarios segun los filtros
 export async function getUsers(filters){
   const { name } = filters;
 
@@ -23,8 +24,20 @@ const cleanedQuery = Object.fromEntries(
   return users;
 }
 
+//Crear usuario
 export async function createUser(user){
   const userDoc = new User(user);
   const createdUser = await userDoc.save();
   return createdUser;
+}
+
+export async function deleteUser(username) {
+  return User.findOneAndDelete({ username: username });
+}
+
+export async function updateUser(username, updatedUserInfo) {
+  // Encuentra y actualiza el usuario en la base de datos
+  const updatedUser = await User.findOneAndUpdate({ username }, updatedUserInfo, { new: true });
+
+  return updatedUser;
 }
