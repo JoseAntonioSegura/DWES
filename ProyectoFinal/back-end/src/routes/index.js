@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/login', login);
 
 router.use(miscRouter);
-router.use('/games', checkToken, gameRouter);
+router.use('/games', gameRouter);
 router.use('/users', userRouter);
 
 
