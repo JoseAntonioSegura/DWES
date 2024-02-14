@@ -52,15 +52,16 @@ function Productos() {
 }
 
 function Producto({ titulo, precio, imagen }) {
-    return (
-      <div className="producto-container">
-        <img src={imagen} alt={titulo} className="producto-image" />
-        <div className="producto-info">
-          <div className="producto-title">{titulo}</div>
-          <div className="producto-price">{precio}</div>
-        </div>
+  return (
+    <div className="producto-container">
+      <img src={imagen} alt={titulo} className="producto-image" />
+      <div className="producto-info">
+        <div className="titulo">{titulo}</div>
+        <div className="precio">{precio}€</div>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
 
 export default Productos;
