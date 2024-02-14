@@ -10,10 +10,8 @@ function Header() {
         <h1>Bienvenido a mi aplicación</h1>
         <Link to="/login">Iniciar Sesión</Link>
       </header>
-      <div className='imagenHero'>
-      <h1>Bienvenido a mi aplicación</h1>
-
-        <img src='baner'/>
+      <div className='imagenContenedor'>
+        <img className='imagenHero' src={baner}/>
       </div>
     </>
   );
