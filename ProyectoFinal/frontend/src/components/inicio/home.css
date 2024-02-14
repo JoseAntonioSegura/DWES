@@ -1,5 +1,21 @@
+body {
+    background-color: rgb(32, 31, 31);
+    margin: 0px;
+}
+
 .ListaDeProductos {
-    width: 90%;
-    background-color: gray;
+    width: 75%;
     margin: auto;
+}
+
+.titulos {
+    font-size: 40px;
+    color: rgb(172, 172, 172);
+    text-decoration: underline;
+    transition: transform 0.3s; 
+}
+
+.titulos:hover {
+    transform: scale(1.1);
+    color: white;
 }

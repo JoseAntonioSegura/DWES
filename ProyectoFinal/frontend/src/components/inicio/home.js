@@ -2,20 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Productos from '../tienda/obtenerProductos.js'; 
 import './home.css';
+import Header from './header.js';
 
 function Home() {
   return (
-    <div>
-      <header>
-        <h1>Bienvenido a mi aplicación</h1>
-        <Link to="/login">Iniciar Sesión</Link>
-      </header>
+    <>
+      <Header />
       <main>
         <div className='ListaDeProductos'>
+        <h1 className='titulos'>Catálogo:</h1>
           <Productos />
         </div>
       </main>
-    </div>
+    </>
   );
 }
 
