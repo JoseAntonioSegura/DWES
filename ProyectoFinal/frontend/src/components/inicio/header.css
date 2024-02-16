@@ -8,6 +8,17 @@ header {
     height: 100px; /* Altura original del encabezado */
     transition: background-color 0.3s, height 0.3s; /* Transición suave para cambios en el color de fondo y altura */
     z-index: 1000;
+    justify-content: space-between;
+}
+
+header div {
+    margin-right: 3%;
+    display: flex;
+    width: 15%;
+}
+
+header div div {
+    width: 100%;
 }
 
 .imagenContenedor {
@@ -24,22 +35,15 @@ header h1 {
 }
 
 .imagenHero {
-    position: relative;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.5;
-    z-index: 1;
 }
 
 .imagenContenedor::after {
-    content: "";
     position: absolute;
     bottom: -20px; /* ajusta según sea necesario para superponer el degradado a la imagen */
     left: 0;
     width: 100%;
-    height: 120px; /* ajusta según sea necesario para superponer el degradado a la imagen */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent); /* degradado con transición gradual */
+    height: 120px;
 }

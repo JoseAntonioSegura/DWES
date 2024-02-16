@@ -14,7 +14,6 @@ window.addEventListener('scroll', function() {
 
 window.addEventListener('scroll', function() {
   const header = document.querySelector('header');
-  const imagenContenedor = document.querySelector('.imagenContenedor');
 
   if (window.scrollY > 10) {
     header.style.height = '50px'; // Cambia la altura del encabezado a 50px al desplazarse hacia abajo
@@ -29,7 +28,10 @@ function Header() {
     <>
       <header>
         <h1>Bienvenido a mi aplicación</h1>
-        <Link to="/login">Iniciar Sesión</Link>
+        <div>
+          <div><Link to="/login">Iniciar Sesión</Link></div>
+          <div><Link to="/Comprar">Comprar</Link></div>
+        </div>
       </header>
       <div className='imagenContenedor'>
         <img className='imagenHero' src={baner}/>

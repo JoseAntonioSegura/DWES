@@ -17,7 +17,7 @@ export async function login(req, res, next){
                 const userInfo = { id: user._id, username: user.username };
                 const jwtConfig = { expiresIn: 60*60 };
                 const token = jwt.sign(userInfo, config.app.secretKey, jwtConfig);
-                return res.send({token});
+                return res.send({token, username});
             }
         }
 
