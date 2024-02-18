@@ -10,6 +10,7 @@ const gameSchema = new Schema({
   precio: { type: Number, required: true},
   imagen: { type: String, required: true},
   trailer: { type: String, required: true},
+  fechaLanzamiento: { type: Date, required: true }
 }, {timestamps: true});
 
 export default model('Game', gameSchema);

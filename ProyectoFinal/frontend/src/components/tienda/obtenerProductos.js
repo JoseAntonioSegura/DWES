@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './obtenerProductos.css';
 
-function Productos() {
+function Productos({ cantidad }) {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,9 @@ function Productos() {
           throw new Error('Error al obtener los productos');
         }
         const data = await response.json();
-        setProductos(data);
+        // Ordena los productos por unidades y toma los primeros 'cantidad'
+        const productosOrdenados = data.sort((a, b) => a.unidades - b.unidades).slice(0, cantidad);
+        setProductos(productosOrdenados);
         setLoading(false);
       } catch (error) {
         setError('Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.');
@@ -25,9 +27,9 @@ function Productos() {
         console.error('Error:', error);
       }
     };
-    obtenerProductos();
 
-  }, []);
+    obtenerProductos();
+  }, [cantidad]);
 
   
   if (loading) {

@@ -16,6 +16,10 @@
     transform: scale(1.05);
 }
 
+.producto-container:hover {
+    font-size: 50px;
+}
+
 .producto-image {
     display: block;
     width: 100%;

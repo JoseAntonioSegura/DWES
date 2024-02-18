@@ -10,6 +10,11 @@ function Home() {
       <Header />
       <main>
         <div className='ListaDeProductos'>
+        <h1 className='titulos'>Ultimas Unidades:</h1>
+          <Productos cantidad={3} />
+        </div>
+
+        <div className='ListaDeProductos'>
         <h1 className='titulos'>Catálogo:</h1>
           <Productos />
         </div>

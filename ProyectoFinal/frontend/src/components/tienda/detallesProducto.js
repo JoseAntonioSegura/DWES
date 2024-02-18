@@ -33,14 +33,17 @@ function DetallesProducto() {
     return <div>Cargando detalles del producto...</div>;
   }
   
+  console.log(producto)
   return (
     <div>
       <>
       <Header />
+        <img src={producto[0].imagen} alt={titulo}/>
         <h2>{producto[0].titulo}</h2>
         <p>Descripción: {producto[0].descripcion}</p>
         <p>Precio: {producto[0].precio}€</p>
         <p>Unidades disponibles: {producto[0].unidades}</p>
+        <p>Fecha Lanzamiento: {producto[0].fechaLanzamiento}</p>
       </>
     </div>
   );
