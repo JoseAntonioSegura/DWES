@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './obtenerProductos.css';
 
 function Productos() {
@@ -24,10 +25,11 @@ function Productos() {
         console.error('Error:', error);
       }
     };
-
     obtenerProductos();
+
   }, []);
 
+  
   if (loading) {
     return <div>Cargando productos...</div>;
   }
@@ -39,13 +41,14 @@ function Productos() {
   return (
     <div>
       {productos.map(producto => (
-        <Producto
-          key={producto.id}
-          titulo={producto.titulo}
-          precio={producto.precio}
-          imagen={producto.imagen}
-          video={producto.video}
-        />
+        <Link key={producto.id} to={`/producto/${producto.titulo}`}>
+          <Producto
+            titulo={producto.titulo}
+            precio={producto.precio}
+            imagen={producto.imagen}
+            video={producto.video}
+          />
+        </Link>
       ))}
     </div>
   );
