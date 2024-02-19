@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import YouTube from 'react-youtube'; // Importar el componente YouTube
 import Header from '../inicio/header.js';
+import './detallesProducto.css'
 
 function DetallesProducto() {
   const { titulo } = useParams();
@@ -28,6 +30,24 @@ function DetallesProducto() {
     obtenerDetallesProducto();
   }, [titulo]);
   
+  function extractVideoId(url) {
+    // Patrones para encontrar el ID del video de YouTube en la URL
+    const patterns = [
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /^([a-zA-Z0-9_-]{11})$/,
+    ];
+  
+    // Iterar sobre los patrones y extraer el ID del video si se encuentra
+    for (let pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) {
+        return match[1];
+      }
+    }
+  
+    return null; 
+  }
+
   // Verificar si producto tiene elementos antes de acceder a sus propiedades
   if (!producto || producto.length === 0) {
     return <div>Cargando detalles del producto...</div>;
@@ -35,19 +55,24 @@ function DetallesProducto() {
   
   console.log(producto)
   return (
-    <div>
-      <>
+    <>
       <Header />
-        <img src={producto[0].imagen} alt={titulo}/>
-        <h2>{producto[0].titulo}</h2>
-        <p>Descripción: {producto[0].descripcion}</p>
-        <p>Precio: {producto[0].precio}€</p>
-        <p>Unidades disponibles: {producto[0].unidades}</p>
-        <p>Fecha Lanzamiento: {producto[0].fechaLanzamiento}</p>
-      </>
-    </div>
+      <div className="contenedorProducto">
+        <div className='contenedorDatos'>
+          <img src={producto[0].imagen} alt={titulo}/>
+          <YouTube videoId={extractVideoId(producto[0].trailer)} /> 
+          <p>Descripción: {producto[0].descripcion}</p>
+          <p>Fecha Lanzamiento: {producto[0].fechaLanzamiento}</p>
+        </div>
+        <div className='contenedorCompra'>
+          <h2>{producto[0].titulo}</h2>
+          <p>Precio: {producto[0].precio}€</p>
+          <p>Unidades disponibles: {producto[0].unidades}</p>
+        </div>
+      </div>
+    </>
   );
-  
 }
+
 
 export default DetallesProducto;

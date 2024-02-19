@@ -1,0 +1,37 @@
+header {
+    position: relative;
+}
+
+.contenedorProducto {
+    position: relative;
+    display: inline-flex;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 20px;
+    height: auto;
+    border-radius: 5%;
+    width: 80%;
+}
+
+.contenedorDatos {
+    position: relative;
+    display: block;
+    margin: 3%;
+    width: 40%;
+
+}
+
+.contenedorCompra {
+    background-color: rgba(240, 248, 255, 0.166);
+    position: relative;
+    margin: 3%;
+    width: 40%;
+    border-radius: 5%;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-radius: 5%;
+}

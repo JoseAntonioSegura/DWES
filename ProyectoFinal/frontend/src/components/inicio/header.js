@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
-import baner from '../../resources/baner.jpeg';
 
 function Header() {
   useEffect(() => {
@@ -32,9 +31,6 @@ function Header() {
           <div><Link to="/Comprar">Comprar</Link></div>
         </div>
       </header>
-      <div className='imagenContenedor'>
-        <img className='imagenHero' src={baner} alt="Banner"/>
-      </div>
     </>
   );
 }
