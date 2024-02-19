@@ -12,6 +12,7 @@ function Home() {
       <div className='imagenContenedor'>
         <img className='imagenHero' src={baner2} alt="Banner"/>
       </div>
+      <div className='contenedorTransicion'></div>
       <main>
         <div className='ListaDeProductos'>
         <h1 className='titulos'>Ultimas Unidades:</h1>

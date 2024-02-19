@@ -59,15 +59,26 @@ function DetallesProducto() {
       <Header />
       <div className="contenedorProducto">
         <div className='contenedorDatos'>
-          <img src={producto[0].imagen} alt={titulo}/>
-          <YouTube videoId={extractVideoId(producto[0].trailer)} /> 
-          <p>Descripción: {producto[0].descripcion}</p>
-          <p>Fecha Lanzamiento: {producto[0].fechaLanzamiento}</p>
+          <YouTube  iframeClassName="youtubeContainer" videoId={extractVideoId(producto[0].trailer) } opts={{ playerVars: { autoplay: 1 }}}  /> 
+          <div className='contenedorDatosInfo'>
+            <h1>{producto[0].titulo}</h1>
+            <p>Descripción: {producto[0].descripcion}</p>
+          </div>
         </div>
         <div className='contenedorCompra'>
-          <h2>{producto[0].titulo}</h2>
-          <p>Precio: {producto[0].precio}€</p>
-          <p>Unidades disponibles: {producto[0].unidades}</p>
+          <h1></h1>
+          <img src={producto[0].imagen} alt={titulo}/>
+          <div className='contenedorCompraDatos'>
+            <p>Unidades disponibles: {producto[0].unidades}</p>
+            <p>Géneros: {producto[0].categoria}</p>
+            <p>categoria: {producto[0].pegi}</p>
+            <p>Fecha Lanzamiento: {producto[0].fechaLanzamiento}</p>
+            <p className='precioDatos'>Precio: {producto[0].precio}€</p>
+          </div>
+          <div className='contenedorCompraBotones'>
+            <button className='carritoBtn'><strong>Agregar al Carrito</strong></button>
+            <button className='compraBtn'><strong>Comprar Ahora</strong></button>
+          </div>
         </div>
       </div>
     </>
