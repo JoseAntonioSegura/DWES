@@ -9,6 +9,7 @@ header {
     transition: background-color 0.3s, height 0.3s; /* Transición suave para cambios en el color de fondo y altura */
     z-index: 1000;
     justify-content: space-between;
+    padding-left: 4%;
 }
 
 header div {

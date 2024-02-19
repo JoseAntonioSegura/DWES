@@ -7,6 +7,8 @@ body {
     width: 75%;
     margin: auto;
     margin-bottom: 5%;
+    padding: 20px;
+
 }
 
 .titulos {
@@ -44,4 +46,8 @@ body {
     top: -150px;
     width: 100%;
     height: 150px;
+}
+
+.separador{
+    width: 100%;
 }

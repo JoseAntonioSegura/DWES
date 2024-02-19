@@ -70,6 +70,7 @@ function DetallesProducto() {
           <img src={producto[0].imagen} alt={titulo}/>
           <div className='contenedorCompraDatos'>
             <p>Unidades disponibles: {producto[0].unidades}</p>
+            <p>Desarrolladora: {producto[0].desarrollador}</p>
             <p>Géneros: {producto[0].categoria}</p>
             <p>categoria: {producto[0].pegi}</p>
             <p>Fecha Lanzamiento: {producto[0].fechaLanzamiento}</p>
