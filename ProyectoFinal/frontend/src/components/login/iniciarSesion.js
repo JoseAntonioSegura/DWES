@@ -36,12 +36,22 @@ function Login() {
 
       // Verificar el estado de la respuesta
       if (response.ok) {
-        // Convertir la respuesta a JSON
-        const data = await response.json();
-        // Almacenar el token en localStorage
-        localStorage.setItem('token', data.token);
-        // Almacenar el nombre de usuario en localStorage si lo necesitas
-        localStorage.setItem('username', username);
+      // Convertir la respuesta a JSON
+      const data = await response.json();
+      // Almacenar el token en localStorage
+      localStorage.setItem('token', data.token);
+      // Almacenar el nombre de usuario en localStorage si lo necesitas
+      localStorage.setItem('user', username);
+      // Obtener el usuario completo y guardarlo en localStorage
+      const userResponse = await fetch('http://localhost:3000/users/me', {
+        headers: {
+          Authorization: `Bearer ${data.token}`
+        }
+      });
+      if (userResponse.ok) {
+        const userData = await userResponse.json();
+        localStorage.setItem('user', JSON.stringify(userData));
+      }
         navigate('/'); // Redirige al usuario al menú inicial
       } else {
         // Si la solicitud no fue exitosa, mostrar un mensaje de error

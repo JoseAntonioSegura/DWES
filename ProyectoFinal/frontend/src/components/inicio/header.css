@@ -1,22 +1,26 @@
 header {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo inicial con transparencia */
+    background-color: rgba(0, 0, 0, 0.5);
     margin: 0px;
     width: 100%;
     display: flex;
     align-items: center;
-    height: 100px; /* Altura original del encabezado */
-    transition: background-color 0.3s, height 0.3s; /* Transición suave para cambios en el color de fondo y altura */
+    height: 100px;
+    transition: background-color 0.3s, height 0.3s;
     z-index: 1000;
     justify-content: space-between;
-    padding-left: 4%;
+    padding-left: 1%;
     color: white;
 }
 
 header div {
     margin-right: 3%;
     display: flex;
-    width: 15%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 100%;
 }
 
 header div div {
@@ -25,4 +29,16 @@ header div div {
 
 header h1 {
     color: white;
+}
+
+header .logo {
+    border-radius: 100%;
+    width: 4%;
+}
+
+header div div img {
+    width: 70px;
+    height: auto;
+    border-radius: 100%;
+    margin-left: 15%;
 }

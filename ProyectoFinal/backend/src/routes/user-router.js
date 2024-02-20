@@ -4,7 +4,7 @@ import { checkToken } from '../middlewares/auth-middleware.js'
 
 const router = Router();
 
-router.get('/me',  getUserMe);
+router.get('/me',checkToken,  getUserMe);
 router.get('/', getUsersController);
 router.post('/', createUsersController);
 router.delete('/:username', deleteUserController);

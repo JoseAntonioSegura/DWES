@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
-
+import logo from '../../resources/logoHeader.jpeg';
 function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
-        header.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-        header.style.height = '50px';
+        header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
+        header.style.height = '80px';
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
         header.style.height = '100px';
@@ -22,17 +22,17 @@ function Header() {
     };
   }, []);
 
-  // Función para obtener el nombre de usuario almacenado en el localStorage
-  const getLoggedInUsername = () => {
-    return localStorage.getItem('username');
-  };
-
   // Función para renderizar el nombre de usuario o el enlace "Iniciar Sesión"
   const renderUserOrLoginLink = () => {
-    const username = getLoggedInUsername();
-
-    if (username) {
-      return <div>Bienvenido, {username}</div>;
+    const user = JSON.parse(localStorage.getItem('user')); // Parsea el objeto JSON guardado en localStorage
+  
+    if (user.username) {
+      return (
+        <div>
+          {user.username}
+          {user && user.usernameImage && <img src={user.usernameImage} alt="User Avatar"/>}
+        </div>
+      );
     } else {
       return <div><Link to="/login">Iniciar Sesión</Link></div>;
     }
@@ -41,10 +41,10 @@ function Header() {
   return (
     <>
       <header>
-        <h1>Bienvenido a mi aplicación</h1>
+        <img className='logo' src={logo}/>
         <div>
-          {renderUserOrLoginLink()}
           <div><Link to="/Comprar">Comprar</Link></div>
+          {renderUserOrLoginLink()}
         </div>
       </header>
     </>
