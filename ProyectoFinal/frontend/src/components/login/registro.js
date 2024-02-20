@@ -8,6 +8,9 @@ function Registro() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [country, setCountry] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
@@ -32,12 +35,24 @@ function Registro() {
     setEmail(event.target.value);
   };
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleLastnameChange = (event) => {
+    setLastname(event.target.value);
+  };
+
+  const handleCountryChange = (event) => {
+    setCountry(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
     // Campos de verificacion
-    if (!username || !password || !confirmPassword || !email) {
+    if (!username || !password || !confirmPassword || !email || !name || !lastname || !country) {
       setErrorMessage('Por favor, completa todos los campos.');
       return;
     }
@@ -53,7 +68,10 @@ function Registro() {
       username: username,
       password: password,
       phone: phone,
-      email: email
+      email: email,
+      name: name,
+      lastname: lastname,
+      country: country
     };
 
     try {
@@ -109,6 +127,21 @@ function Registro() {
           <label>Confirmar Contraseña:</label>
           <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
           {formSubmitted && !confirmPassword && <span className="error-indicator">*</span>}
+        </div>
+        <div className={`form-group ${formSubmitted && !name ? 'error' : ''}`}>
+          <label>Nombre:</label>
+          <input type="text" value={name} onChange={handleNameChange} />
+          {formSubmitted && !name && <span className="error-indicator">*</span>}
+        </div>
+        <div className={`form-group ${formSubmitted && !lastname ? 'error' : ''}`}>
+          <label>Apellido:</label>
+          <input type="text" value={lastname} onChange={handleLastnameChange} />
+          {formSubmitted && !lastname && <span className="error-indicator">*</span>}
+        </div>
+        <div className={`form-group ${formSubmitted && !country ? 'error' : ''}`}>
+          <label>País:</label>
+          <input type="text" value={country} onChange={handleCountryChange} />
+          {formSubmitted && !country && <span className="error-indicator">*</span>}
         </div>
         <button type="submit">Registrarse</button>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
