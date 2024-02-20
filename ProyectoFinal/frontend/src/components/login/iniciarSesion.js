@@ -36,41 +36,27 @@ function Login() {
 
       // Verificar el estado de la respuesta
       if (response.ok) {
-      // Convertir la respuesta a JSON
-      const data = await response.json();
-      // Almacenar el token en localStorage
-      localStorage.setItem('token', data.token);
-      // Almacenar el nombre de usuario en localStorage si lo necesitas
-      localStorage.setItem('user', username);
-      // Obtener el usuario completo y guardarlo en localStorage
-      const userResponse = await fetch('http://localhost:3000/users/me', {
-        headers: {
-          Authorization: `Bearer ${data.token}`
+        // Convertir la respuesta a JSON
+        const data = await response.json();
+        // Almacenar el token en localStorage
+        localStorage.setItem('token', data.token);
+        // Obtener el usuario completo y guardarlo en localStorage
+        const userResponse = await fetch('http://localhost:3000/users/me', {
+          headers: {
+            Authorization: `Bearer ${data.token}`
+          }
+        });
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          // No almacenar la contraseña en el localStorage
+          delete userData.password;
+          localStorage.setItem('user', JSON.stringify(userData));
         }
-      });
-      if (userResponse.ok) {
-        const userData = await userResponse.json();
-        localStorage.setItem('user', JSON.stringify(userData));
-      }
         navigate('/'); // Redirige al usuario al menú inicial
       } else {
         // Si la solicitud no fue exitosa, mostrar un mensaje de error
         alert('Error al iniciar sesión. Por favor, inténtalo de nuevo.');
       }
-
-      const getLoggedInUsername = () => {
-        return localStorage.getItem('username');
-      };
-
-      const renderUserOrLoginLink = () => {
-        const username = getLoggedInUsername();
-      
-        if (username) {
-          return <div>Bienvenido, {username}</div>;
-        } else {
-          return <div><Link to="/login">Iniciar Sesión</Link></div>;
-        }
-      };
     } catch (error) {
       // Manejar errores de red u otros errores
       console.error('Error:', error);
@@ -79,21 +65,23 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <div className="login-form">
+        <h2>Iniciar Sesión</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Usuario:</label>
+            <input type="text" value={username} onChange={handleUsernameChange} />
+          </div>
+          <div className="form-group">
+            <label>Contraseña:</label>
+            <input type="password" value={password} onChange={handlePasswordChange} />
+          </div>
+          <button type="submit">Iniciar Sesión</button>
+        </form>
         <div>
-          <label>Usuario:</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          ¿No tienes una cuenta? <Link to="/registro">Regístrate</Link>
         </div>
-        <div>
-          <label>Contraseña:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </div>
-        <button type="submit">Iniciar Sesión</button>
-      </form>
-      <div>
-        ¿No tienes una cuenta? <Link to="/registro">Regístrate</Link>
       </div>
     </div>
   );

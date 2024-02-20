@@ -82,6 +82,7 @@ function Registro() {
   };
 
   return (
+    <div className='registro'>
     <div className="registro-container">
       <h2>Registrarse</h2>
       <form onSubmit={handleSubmit}>
@@ -112,6 +113,7 @@ function Registro() {
         <button type="submit">Registrarse</button>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
       </form>
+    </div>
     </div>
   );
 }

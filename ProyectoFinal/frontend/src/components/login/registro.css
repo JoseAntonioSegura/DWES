@@ -1,16 +1,26 @@
 .registro-container {
+    position: relative;
+    vertical-align: middle;
+    justify-content: center;
     margin: auto;
     padding: 20px;
-    width: 300px;
-    background-color: #f0f8ff; /* Cyan claro */
+    width: 20%;
+    background-color: hsla(208, 100%, 97%, 0.956); /* Cyan claro */
     border-radius: 10px;
     border: 2px solid #333; /* Gris oscuro */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Efecto de sombra */
   
-    /* Estilo de texto */
-    color: #333; /* Gris oscuro */
+    color: #000000; /* Gris oscuro */
   }
   
+  .registro {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Utiliza toda la altura de la ventana del navegador */
+    margin: 0; /* Elimina el margen predeterminado del body */
+}
+
   .form-group {
     margin-bottom: 15px;
   }
@@ -21,10 +31,15 @@
   }
   
   .form-group input {
-    width: calc(90% - 10px); /* Ajuste para evitar desbordamiento */
+    width: calc(100% - 10px); /* Ajuste para evitar desbordamiento */
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ddd; /* Gris claro */
+  }
+
+  .registro-container button {
+    border-radius: 10px;
+    background-color: aqua;
   }
   
   .form-group.error input {
@@ -32,12 +47,12 @@
   }
   
   .error-indicator {
-    color: red; /* Color de asterisco para errores */
+    color: red;
     margin-left: 5px;
   }
   
   .error-message {
-    color: red; /* Color de mensaje de error */
+    color: red;
     margin-top: 10px;
   }
   

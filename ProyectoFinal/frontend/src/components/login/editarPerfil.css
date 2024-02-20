@@ -1,4 +1,4 @@
-.login-container {
+.contenedorPrincipalEditarPerfil {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     margin: 0;
 }
 
-.login-form {
+.contenedorEditarPerfil {
     position: relative;
     padding: 20px;
     width: 20%;
@@ -17,19 +17,19 @@
     color: #000000; /* Gris oscuro */
 }
 
-.login-form label {
+.contenedorEditarPerfil label {
     display: block;
     margin-bottom: 5px;
 }
 
-.login-form input {
+.contenedorEditarPerfil input {
     width: calc(100% - 10px);
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ddd; /* Gris claro */
 }
 
-.login-form button {
+.contenedorEditarPerfil button {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -37,7 +37,7 @@
     background-color: aqua;
 }
 
-.login-form .form-group.error input {
+.contenedorEditarPerfil .form-group.error input {
     border-color: red; /* Rojo para errores */
 }
 

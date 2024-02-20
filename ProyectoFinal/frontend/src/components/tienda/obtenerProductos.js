@@ -28,7 +28,14 @@ function Productos({ cantidad }) {
       }
     };
 
+    // Llama a obtenerProductos al montar el componente
     obtenerProductos();
+
+    // Define un intervalo para actualizar los productos cada 5 minutos (300000 milisegundos)
+    const interval = setInterval(obtenerProductos, 300000);
+
+    // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(interval);
   }, [cantidad]);
 
   
@@ -58,15 +65,16 @@ function Productos({ cantidad }) {
 
 function Producto({ titulo, precio, imagen }) {
   return (
-    <div className="producto-container">
-      <img src={imagen} alt={titulo} className="producto-image" />
-      <div className="producto-info">
-        <div className="titulo">{titulo}</div>
-        <div className="precio">{precio}€</div>
+    <div className='contenedorProductoInterior'>
+      <div className="producto-container">
+        <img src={imagen} alt={titulo} className="producto-image" />
+        <div className="producto-info">
+          <div className="titulo">{titulo}</div>
+          <div className="precio">{precio}€</div>
+        </div>
       </div>
     </div>
   );
 }
-
 
 export default Productos;

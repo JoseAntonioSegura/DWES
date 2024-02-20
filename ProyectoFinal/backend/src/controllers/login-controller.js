@@ -15,10 +15,10 @@ export async function login(req, res, next){
             console.log(password, user.password);
             if(checkHash(password, user.password)){
                 const userInfo = { id: user._id, username: user.username };
-                const jwtConfig = { expiresIn: 60*60 };
+                const jwtConfig = { expiresIn: 7 * 24 * 60 * 60 };
                 const token = jwt.sign(userInfo, config.app.secretKey, jwtConfig);
                 return res.send({token});
-            }
+              }
         }
 
         throw new HttpStatusError(401, 'Invalid credentials');

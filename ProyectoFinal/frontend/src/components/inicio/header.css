@@ -37,8 +37,43 @@ header .logo {
 }
 
 header div div img {
-    width: 70px;
-    height: auto;
+    width: 60px;
+    height: 60px;
     border-radius: 100%;
     margin-left: 15%;
+    object-fit: cover;
+    transition: 0.3s;
+} 
+
+
+header div div img:hover {
+    border: 2px solid aqua;
+    transform: scale(1.1);
+} 
+
+.user-profile {
+    position: relative;
+    cursor: pointer;
 }
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 0;
+}
+  
+  .dropdown-menu button,
+  .dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .dropdown-menu button:hover,
+  .dropdown-menu a:hover {
+    background-color: #f0f0f0;
+  }

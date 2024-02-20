@@ -1,11 +1,11 @@
 .producto-container {
     position: relative;
-    display: inline-flex;
+    display: flex;
+    margin: auto;
     justify-content: center;
     width: 90%;
     max-width: 390px;
     height: auto;
-    margin: 2.5%;
     border: 2px solid rgb(64, 64, 64);
     border-radius: 20px;
     overflow: hidden;
@@ -47,4 +47,11 @@
 .producto-info > .precio {
     vertical-align: middle;
     font-size: 20px;
+}
+
+.contenedorProductoInterior {
+    width: 33.33%;
+    display: inline-flex;
+    margin: 0px;
+    margin-top: 5%;
 }
