@@ -22,12 +22,28 @@ function Header() {
     };
   }, []);
 
+  // Función para obtener el nombre de usuario almacenado en el localStorage
+  const getLoggedInUsername = () => {
+    return localStorage.getItem('username');
+  };
+
+  // Función para renderizar el nombre de usuario o el enlace "Iniciar Sesión"
+  const renderUserOrLoginLink = () => {
+    const username = getLoggedInUsername();
+
+    if (username) {
+      return <div>Bienvenido, {username}</div>;
+    } else {
+      return <div><Link to="/login">Iniciar Sesión</Link></div>;
+    }
+  };
+
   return (
     <>
       <header>
         <h1>Bienvenido a mi aplicación</h1>
         <div>
-          <div><Link to="/login">Iniciar Sesión</Link></div>
+          {renderUserOrLoginLink()}
           <div><Link to="/Comprar">Comprar</Link></div>
         </div>
       </header>

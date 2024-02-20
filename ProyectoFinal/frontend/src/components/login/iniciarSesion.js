@@ -36,12 +36,31 @@ function Login() {
 
       // Verificar el estado de la respuesta
       if (response.ok) {
-        // Si la solicitud fue exitosa, redirigir al usuario a otra página
+        // Convertir la respuesta a JSON
+        const data = await response.json();
+        // Almacenar el token en localStorage
+        localStorage.setItem('token', data.token);
+        // Almacenar el nombre de usuario en localStorage si lo necesitas
+        localStorage.setItem('username', username);
         navigate('/'); // Redirige al usuario al menú inicial
       } else {
         // Si la solicitud no fue exitosa, mostrar un mensaje de error
         alert('Error al iniciar sesión. Por favor, inténtalo de nuevo.');
       }
+
+      const getLoggedInUsername = () => {
+        return localStorage.getItem('username');
+      };
+
+      const renderUserOrLoginLink = () => {
+        const username = getLoggedInUsername();
+      
+        if (username) {
+          return <div>Bienvenido, {username}</div>;
+        } else {
+          return <div><Link to="/login">Iniciar Sesión</Link></div>;
+        }
+      };
     } catch (error) {
       // Manejar errores de red u otros errores
       console.error('Error:', error);
