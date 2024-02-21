@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import YouTube from 'react-youtube'; // Importar el componente YouTube
 import Header from '../inicio/header.js';
-import './detallesProducto.css'
+import './detallesProducto.css';
 
 function DetallesProducto() {
   const { titulo } = useParams();
@@ -29,7 +29,37 @@ function DetallesProducto() {
   
     obtenerDetallesProducto();
   }, [titulo]);
-  
+
+  const agregarAlCarrito = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Manejar el caso en que el usuario no esté autenticado
+      alert('Debes iniciar sesión para agregar productos al carrito.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/carrito/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` // Enviar el token en el encabezado de autorización
+        },
+        body: JSON.stringify({ productId: producto._id }) // Enviar el ID del producto al carrito
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al agregar el producto al carrito');
+      }
+
+      // Manejar la respuesta exitosa
+      alert('Producto agregado al carrito correctamente.');
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al agregar el producto al carrito.');
+    }
+  };
+
   function extractVideoId(url) {
     // Patrones para encontrar el ID del video de YouTube en la URL
     const patterns = [
@@ -49,11 +79,16 @@ function DetallesProducto() {
   }
 
   // Verificar si producto tiene elementos antes de acceder a sus propiedades
-  if (!producto || producto.length === 0) {
+  if (loading) {
     return <div>Cargando detalles del producto...</div>;
   }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
   
-  console.log(producto)
+  console.log(producto);
+
   return (
     <>
       <Header />
@@ -77,7 +112,7 @@ function DetallesProducto() {
             <p className='precioDatos'>Precio: {producto[0].precio}€</p>
           </div>
           <div className='contenedorCompraBotones'>
-            <button className='carritoBtn'><strong>Agregar al Carrito</strong></button>
+            <button className='carritoBtn' onClick={agregarAlCarrito}><strong>Agregar al Carrito</strong></button>
             <button className='compraBtn'><strong>Comprar Ahora</strong></button>
           </div>
         </div>
@@ -85,6 +120,5 @@ function DetallesProducto() {
     </>
   );
 }
-
 
 export default DetallesProducto;

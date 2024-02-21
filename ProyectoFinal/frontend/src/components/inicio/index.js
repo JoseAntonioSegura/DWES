@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Productos from '../tienda/obtenerProductos.js'; 
-import './home.css';
+import './index.css';
 import Header from './header.js';
 import Footer from './footer.js';
 import baner2 from '../../resources/baner3.png';
 
-function Home() {
+function Index() {
   return (
     <>
       <Header />
@@ -30,4 +30,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Index;
