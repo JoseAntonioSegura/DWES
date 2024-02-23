@@ -1,23 +1,42 @@
 import * as CarritoService from '../services/database/carrito-db-service.js';
 
-export async function addToCart(req, res, next) {
-  const { userId, productId } = req.body;
-
+export const obtenerProductosCarrito = async (req, res) => {
   try {
-    const carrito = await CarritoService.addToCart(userId, productId);
-    res.status(201).json(carrito);
+    const productos = await CarritoService.obtenerProductosDelCarrito(req.params.userId);
+    res.json(productos);
   } catch (error) {
-    next(error);
+    console.error('Error al obtener los productos del carrito:', error);
+    res.status(500).json({ message: 'Error al obtener los productos del carrito' });
   }
-}
+};
 
-export async function removeFromCart(req, res, next) {
-  const { id } = req.params;
 
+export const agregarProductoAlCarrito = async (req, res) => {
+  const { userId, productId, cantidad } = req.body;
   try {
-    await CarritoService.removeFromCart(id);
-    res.status(200).json({ message: 'Producto eliminado del carrito exitosamente.' });
+    const result = await CarritoService.agregarProductoAlCarrito(userId, productId, cantidad);
+    res.json(result);
   } catch (error) {
-    next(error);
+    res.status(500).json({ message: error.message });
   }
-}
+};
+
+export const modificarCantidadProductoEnCarrito = async (req, res) => {
+  const { carritoId, cantidad } = req.body;
+  try {
+    const result = await CarritoService.modificarCantidadProductoEnCarrito(carritoId, cantidad);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const eliminarProductoDelCarrito = async (req, res) => {
+  const { carritoId } = req.params;
+  try {
+    const result = await CarritoService.eliminarProductoDelCarrito(carritoId);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

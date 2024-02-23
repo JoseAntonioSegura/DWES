@@ -1,77 +1,109 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function CarritoCompra() {
-  const [carrito, setCarrito] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [error, setError] = useState('');
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Método para agregar un artículo al carrito
-  const agregarAlCarrito = (producto) => {
-    setCarrito([...carrito, producto]);
-    setTotal(total + producto.precio);
-  };
+  useEffect(() => {
+    obtenerProductosDelCarrito();
+  }, []);
 
-  // Método para eliminar un artículo del carrito
-  const eliminarDelCarrito = (producto) => {
-    const nuevoCarrito = carrito.filter(item => item !== producto);
-    setCarrito(nuevoCarrito);
-    setTotal(total - producto.precio);
-  };
-
-  // Método para actualizar la cantidad de un artículo en el carrito
-  const actualizarCantidad = (producto, nuevaCantidad) => {
-    const nuevoCarrito = carrito.map(item => {
-      if (item === producto) {
-        return { ...item, cantidad: nuevaCantidad };
+  const obtenerProductosDelCarrito = async () => {
+    try {
+      // Recuperar userId del localStorage
+// Recuperar userId del localStorage
+const userId = localStorage.getItem('userId');
+if (!userId) {
+  throw new Error('Usuario no encontrado en el almacenamiento local');
+}
+      if (!userId) {
+        throw new Error('Usuario no encontrado en el almacenamiento local');
       }
-      return item;
-    });
-    setCarrito(nuevoCarrito);
-    calcularTotal(nuevoCarrito);
-  };
 
-  // Método para calcular el total de la compra
-  const calcularTotal = (carrito) => {
-    let totalCompra = 0;
-    carrito.forEach(item => {
-      totalCompra += item.precio * item.cantidad;
-    });
-    setTotal(totalCompra);
-  };
+      // Recuperar token del localStorage
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token no encontrado en el almacenamiento local');
+      }
 
-  // Método para simular el proceso de checkout
-  const checkout = () => {
-    if (carrito.length === 0) {
-      setError('El carrito está vacío. Por favor, agrega artículos antes de continuar.');
-    } else {
-      // Implementa lógica para finalizar la compra (puede ser una llamada a una API, etc.)
-      setError('');
-      setCarrito([]);
-      setTotal(0);
-      alert('¡Compra realizada con éxito!');
+      const response = await fetch(`http://localhost:3000/carrito/${userId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Error al obtener los productos del carrito');
+      }
+      const data = await response.json();
+      setProductos(data);
+      setLoading(false);
+    } catch (error) {
+      setError('Error al obtener los productos del carrito');
+      setLoading(false);
+      console.error('Error:', error);
     }
   };
 
+  const modificarCantidadProducto = async (carritoId, nuevaCantidad) => {
+    try {
+      const response = await fetch(`/carrito/${carritoId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}` // Recuperar token del localStorage
+        },
+        body: JSON.stringify({ carritoId, nuevaCantidad })
+      });
+      if (!response.ok) {
+        throw new Error('Error al modificar la cantidad del producto en el carrito');
+      }
+      // Actualizar el estado después de modificar la cantidad
+      obtenerProductosDelCarrito();
+    } catch (error) {
+      console.error('Error al modificar la cantidad del producto en el carrito:', error);
+    }
+  };
+
+  const eliminarProductoDelCarrito = async (carritoId) => {
+    try {
+      const response = await fetch(`/carrito/${carritoId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}` // Recuperar token del localStorage
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Error al eliminar el producto del carrito');
+      }
+      // Actualizar el estado después de eliminar el producto
+      obtenerProductosDelCarrito();
+    } catch (error) {
+      console.error('Error al eliminar el producto del carrito:', error);
+    }
+  };
+
+  if (loading) {
+    return <div>Cargando productos del carrito...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div>
-      <h2>Carrito de Compra</h2>
-      {carrito.length === 0 ? (
-        <p>El carrito está vacío.</p>
-      ) : (
-        <div>
-          {carrito.map((producto, index) => (
-            <div key={index}>
-              <p>{producto.nombre} - Cantidad: {producto.cantidad}</p>
-              <button onClick={() => actualizarCantidad(producto, producto.cantidad - 1)}>-</button>
-              <button onClick={() => actualizarCantidad(producto, producto.cantidad + 1)}>+</button>
-              <button onClick={() => eliminarDelCarrito(producto)}>Eliminar</button>
-            </div>
-          ))}
-          <p>Total: {total}€</p>
-          <button onClick={checkout}>Checkout</button>
-        </div>
-      )}
-      {error && <p>{error}</p>}
+      <h2>Carrito de Compras</h2>
+      <ul>
+        {productos.map(producto => (
+          <li key={producto.id}>
+            <p>{producto.nombre} - Cantidad: {producto.cantidad}</p>
+            <button onClick={() => modificarCantidadProducto(producto.id, producto.cantidad + 1)}>+</button>
+            <button onClick={() => modificarCantidadProducto(producto.id, producto.cantidad - 1)}>-</button>
+            <button onClick={() => eliminarProductoDelCarrito(producto.id)}>Eliminar</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
