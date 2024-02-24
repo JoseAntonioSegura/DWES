@@ -20,6 +20,16 @@ export async function getGame(req, res, next){
   }
 }
 
+export async function getGameById(req, res, next) {
+  try {
+    const game = await gameService.getGameById(req.params.id);
+    return res.send(game);
+  } catch (error) {
+    next(error);
+  }
+}
+
+
 export async function createGame(req, res, next){
   try {
     const body = req.body;

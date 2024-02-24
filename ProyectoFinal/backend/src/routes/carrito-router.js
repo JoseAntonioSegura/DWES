@@ -7,7 +7,7 @@ const router = Router();
 // Rutas para el carrito
 router.get('/:userId', checkToken, obtenerProductosCarrito);
 router.post('/agregar', checkToken, agregarProductoAlCarrito);
-router.patch('/:carritoId', checkToken, modificarCantidadProductoEnCarrito);
+router.patch('/', checkToken, modificarCantidadProductoEnCarrito);
 router.delete('/:carritoId', checkToken, eliminarProductoDelCarrito);
 
 export default router;

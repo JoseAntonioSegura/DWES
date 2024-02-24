@@ -1,0 +1,51 @@
+/* Estilos para el contenedor principal del carrito */
+.carrito-container {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para la tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  /* Estilos para las filas de la tabla */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos para las celdas de la tabla */
+  td, th {
+    padding: 8px;
+    text-align: left;
+  }
+  /* Estilos para el título del producto */
+  .producto-titulo {
+    font-weight: bold;
+  }
+  
+  /* Estilos para el precio total */
+  .total {
+    font-weight: bold;
+  }
+  
+  /* Estilos para el encabezado de la tabla */
+  thead {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* Estilos para la imagen del producto */
+.imagenes {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+  

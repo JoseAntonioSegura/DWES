@@ -9,6 +9,10 @@ export async function getGameByTitle(titulo) {
   return Game.find({ titulo: { $regex: titulo, $options: 'i' } });
 }
 
+export async function getGameById(id) {
+  return Game.findById(id);
+}
+
 export async function getGames(filters){
   const { sort, offset, limit, ...query} = filters;
   return Game.find(query).sort(sort).skip(offset).limit(limit);
