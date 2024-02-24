@@ -58,30 +58,56 @@ function DetallesProducto() {
         throw new Error('Token de autorización o usuario no encontrado');
       }
   
-      // Construir el cuerpo de la solicitud
-      const body = JSON.stringify({
-        userId: user._id, // Suponiendo que el ID del usuario está en la propiedad _id
+      // Construir el cuerpo de la solicitud para agregar al carrito
+      const carritoBody = JSON.stringify({
+        userId: user._id,
         productId: producto[0]._id,
         cantidad: 1
       });
   
-      // Enviar la solicitud al backend con el token de autorización en el encabezado
-      const response = await fetch('http://localhost:3000/carrito/agregar', {
+      // Enviar la solicitud al backend para agregar al carrito
+      const carritoResponse = await fetch('http://localhost:3000/carrito/agregar', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Añadir el token de autorización al encabezado
+          'Authorization': `Bearer ${token}`
         },
-        body: body
+        body: carritoBody
       });
   
-      // Verificar si la respuesta fue exitosa
-      if (!response.ok) {
+      // Verificar si la respuesta para agregar al carrito fue exitosa
+      if (!carritoResponse.ok) {
         throw new Error('Error al agregar producto al carrito');
       }
   
-      const data = await response.json();
-      alert(data.message); // Mostrar mensaje de respuesta del servidor
+      // Obtener el producto actualizado con la cantidad reducida de unidades
+      const updatedProduct = { ...producto[0], unidades: producto[0].unidades - 1 };
+  
+      // Construir el cuerpo de la solicitud para actualizar las unidades del producto
+      const productoBody = JSON.stringify({
+        unidades: updatedProduct.unidades
+      });
+  
+      // Enviar la solicitud al backend para actualizar las unidades del producto
+      const productoResponse = await fetch(`http://localhost:3000/games/${titulo}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: productoBody
+      });
+  
+      // Verificar si la respuesta para actualizar las unidades del producto fue exitosa
+      if (!productoResponse.ok) {
+        throw new Error('Error al actualizar las unidades del producto');
+      }
+  
+      // Volver a cargar los detalles del producto actualizados
+      window.location.reload();
+  
+      // Mostrar mensaje de éxito
+      alert('Producto agregado al carrito correctamente.');
   
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
@@ -98,6 +124,8 @@ function DetallesProducto() {
   if (error) {
     return <div>{error}</div>;
   }
+  
+  const unidadesDisponibles = producto[0].unidades;
 
   return (
     <>
@@ -122,8 +150,12 @@ function DetallesProducto() {
             <p className='precioDatos'>Precio: {producto[0].precio}€</p>
           </div>
           <div className='contenedorCompraBotones'>
-            <button className='carritoBtn' onClick={agregarAlCarrito}><strong>Agregar al Carrito</strong></button>
-            <button className='compraBtn'><strong>Comprar Ahora</strong></button>
+          <button className='carritoBtn' onClick={agregarAlCarrito} disabled={unidadesDisponibles === 0}>
+            <strong>Agregar al Carrito</strong>
+          </button>
+          <button className='compraBtn' disabled={unidadesDisponibles === 0}>
+            <strong>Comprar Ahora</strong>
+          </button>
           </div>
         </div>
       </div>

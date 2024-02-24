@@ -121,3 +121,17 @@
     justify-content: end;
     color: rgb(255, 255, 255);
 }
+
+.carritoBtn[disabled], .compraBtn[disabled] {
+    background-color: #dddddd; /* Cambia el color de fondo a gris */
+    color: #777777; /* Cambia el color del texto a un tono más oscuro */
+    cursor: not-allowed; /* Cambia el cursor para indicar que el botón no está disponible */
+    transform: scale(1);
+  }
+  
+  .carritoBtn[disabled]:hover, .compraBtn[disabled]:hover {
+    /* Cambia el estilo de hover para que no cambie nada cuando el botón esté deshabilitado */
+    background-color: #dddddd;
+    color: #777777;
+    transform: scale(1);
+  }

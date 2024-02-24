@@ -8,7 +8,7 @@ const gameSchema = new Schema({
   unidades: { type: Number, required: true},
   categoria: {
     type: [String],
-    enum: ['acción', 'aventura', 'rol', 'disparos', 'estrategia', 'deportes', 'carreras', 'puzzle', 'sandbox', 'terror', 'plataforma', 'lucha', 'mundo abierto', 'simulación', 'otros'],
+    enum: ['acción', 'aventura', 'rol', 'disparos', 'estrategia', 'deportes', 'carreras', 'puzzle', 'sandbox', 'terror', 'plataforma', 'lucha', 'mundo abierto', 'simulación', 'otros', 'supervivencia'],
     default: ['undefined']
   },
   precio: { type: Number, required: true},
@@ -21,7 +21,7 @@ const gameSchema = new Schema({
   desarrollador: { type: String, required: true},
   plataforma: {
     type: String,
-    enum: ['Steam', 'EpicGames', 'Xbox', 'PlayStation', 'Windows', 'Origin', 'Nintendo'],
+    enum: ['Steam', 'EpicGames', 'Xbox', 'PlayStation', 'Windows', 'Origin', 'Nintendo', 'Launcher'],
     required: true
   },
   fechaLanzamiento: { type: Date, required: true }
