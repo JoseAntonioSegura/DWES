@@ -1,51 +1,153 @@
-/* Estilos para el contenedor principal del carrito */
 .carrito-container {
-    margin: 20px auto;
-    max-width: 800px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilos para la tabla */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  /* Estilos para las filas de la tabla */
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  /* Estilos para las celdas de la tabla */
-  td, th {
-    padding: 8px;
-    text-align: left;
-  }
-  /* Estilos para el título del producto */
-  .producto-titulo {
-    font-weight: bold;
-  }
-  
-  /* Estilos para el precio total */
-  .total {
-    font-weight: bold;
-  }
-  
-  /* Estilos para el encabezado de la tabla */
-  thead {
-    background-color: #333;
-    color: white;
-  }
-  
-  /* Estilos para la imagen del producto */
+  position: relative; /* Establecer posición relativa */
+  width: 100%;
+  padding: 10% 0px 0px 10%;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.productosCarrito {
+  display: flex;
+  margin-bottom: 30px;
+  background-color: rgb(56, 56, 56);
+  border-radius: 8px;
+  width: 70%;
+  height: 9em;
+  border-radius: 10px;
+
+}
+
 .imagenes {
-    max-width: 100px;
-    height: auto;
-    margin-right: 10px;
-    border-radius: 4px;
-  }
-  
+  width: 15em;
+  height: 100%;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.productosCarritoInfo button{
+  margin-top: 110px;
+  vertical-align: bottom;
+  margin-right: 20px;
+}
+
+.productosCarritoPrecio{
+  padding: 10px;
+  width: 50%;
+}
+
+.productosCarritoPrecio span{
+  padding: 10px;
+  width: 50%;
+}
+
+.contenedorIzquierdo {
+  float: left;
+  width: calc(70% - 20px);
+}
+
+.contenedorDerecho {
+  position: fixed;
+  top: 20%;
+  right: 10%;
+  width: 25%;
+  overflow-y: auto;
+  background-color: rgb(56, 56, 56);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.resumen{
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.5;
+}
+
+.contenedorDerechoContenido {
+  background-color: rgba(85, 85, 85, 0.966);
+  border-radius: 10px;
+}
+
+.tituloContenedorDerecho{
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.contenedorDerechoTitulo{
+  position: fixed;
+  top: 12%;
+  right: 28%;
+}
+
+.modificar-cantidad-btn {
+  background-color: #ddd;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 8px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  transition: 0.3s;
+}
+
+.modificar-cantidad-btn:hover {
+  transform: scale(1.1);
+}
+
+
+.container-center {
+  display: flex;
+  align-items: center;
+  top: 20%;
+  position: ab;
+  height: 100vh;
+}
+
+.botonEliminar{
+  background-color: rgb(213, 28, 28);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  transition: 0.3s;
+}
+
+.botonEliminar:hover { 
+  background-color: red;
+  color: white;
+  transform: scale(1.1);
+}
+
+.botonProcesarCompra{
+  background-color: rgb(1, 241, 229);
+  padding: 10px;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.botonProcesarCompra:hover { 
+  background-color: rgb(0, 255, 242);
+  transform: scale(1.1);
+}
+
+.totalCompra {
+  padding-top: 5% 0% 0% 5%;
+  margin: 10px;
+}
+
+.totalCompra button {
+  padding: 10px;
+  font-size: 16px;
+  width: 80%;
+  display: flex;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  justify-content: center;
+}

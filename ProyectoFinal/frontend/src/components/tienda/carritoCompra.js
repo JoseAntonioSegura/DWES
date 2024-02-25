@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './carritoCompra.css';
+import Header from '../inicio/header';
 
 const CarritoCompra = () => {
   const [productos, setProductos] = useState([]);
@@ -47,8 +48,11 @@ const CarritoCompra = () => {
     productos.forEach(producto => {
       total += producto.cantidad * producto.productId.precio;
     });
+    // Redondear el total a dos decimales
+    total = parseFloat(total.toFixed(2));
     setTotalCompra(total);
   };
+  
   
   const eliminarDelCarrito = async (producto) => {
     try {
@@ -182,14 +186,9 @@ const CarritoCompra = () => {
   };
   
   const procesarCompra = async () => {
-    if (!direccionEnvio || !metodoPago) {
-      setError('Por favor ingresa una dirección de envío y selecciona un método de pago.');
-      return;
-    }
 
     // Si la compra se realiza con éxito, puedes eliminar los productos del carrito.
     alert('Compra procesada con éxito!');
-    eliminarTodosLosProductos();
   };
 
   if (!sesionIniciada) {
@@ -197,82 +196,68 @@ const CarritoCompra = () => {
   }
 
   return (
-    <div>
-      {error && <div>{error}</div>}
-      <div>
-        {productos.length === 0 ? (
-          <div>No hay productos en el carrito.</div>
-        ) : (
+    <>
+      <Header />
+      <div className="container-center">
+        <div className="carrito-container">
+          {error && <div>{error}</div>}
           <div>
-            <h2>Carrito de Compra</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Producto</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Total</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
+            {productos.length === 0 ? (
+              <div>No hay productos en el carrito.</div>
+            ) : (
+              <div className='contenedorIzquierdo'>
+                <h2>Carrito de Compra</h2>
                 {productos.map((producto, index) => (
-                  <tr key={index}>
-                    <td>
+                  <div key={index} className='productosCarrito'>
+                    <div className='productosCarritoImagen'>
                       <img src={producto.productId.imagen} alt={producto.productId.titulo} className='imagenes' />
-                      <span>{producto.productId.titulo}</span>
-                    </td>
-                    <td>
-                      <input
-                        type="button"
-                        value="-"
-                        onClick={() => modificarCantidad(producto._id, producto.cantidad, -1)}
-                      />
-                      <span>{producto.cantidad}</span>
-                      <input
-                        type="button"
-                        value="+"
-                        onClick={() => modificarCantidad(producto._id, producto.cantidad, 1)}
-                      />
-                    </td>
-                    <td>${producto.productId.precio}</td>
-                    <td>${producto.cantidad * producto.productId.precio}</td> {/* Precio total */}
-                    <td>
-                      <button onClick={() => eliminarDelCarrito(producto)}>Eliminar</button>
-                    </td>
-                  </tr>
+                    </div>
+                    <div className='productosCarritoPrecio'>
+                      <h3>{producto.productId.titulo}</h3>
+                      <div className='productosCarritoCantidad'>
+                        <span className='productosPrecio'>{producto.productId.precio}€</span>
+                        <input className='modificar-cantidad-btn'
+                          type="button"
+                          value="-"
+                          onClick={() => modificarCantidad(producto._id, producto.cantidad, -1)}
+                        />
+                        <span>{producto.cantidad}</span>
+                        <input className='modificar-cantidad-btn'
+                          type="button"
+                          value="+"
+                          onClick={() => modificarCantidad(producto._id, producto.cantidad, 1)}
+                        />
+                      </div>
+                    </div>
+                    <div className='productosCarritoInfo'>
+                      <button className='botonEliminar' onClick={() => eliminarDelCarrito(producto)}>Eliminar</button>
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-            <div>Total de la compra: ${totalCompra}</div>
-            <div>
-              <label htmlFor="direccionEnvio">Dirección de Envío:</label>
-              <input
-                type="text"
-                id="direccionEnvio"
-                value={direccionEnvio}
-                onChange={(e) => setDireccionEnvio(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="metodoPago">Método de Pago:</label>
-              <select
-                id="metodoPago"
-                value={metodoPago}
-                onChange={(e) => setMetodoPago(e.target.value)}
-              >
-                <option value="">Selecciona un método de pago</option>
-                <option value="tarjeta">Tarjeta de Crédito</option>
-                <option value="paypal">PayPal</option>
-                <option value="efectivo">Efectivo</option>
-              </select>
-            </div>
-            <button onClick={procesarCompra}>Procesar Compra</button>
+              </div>
+            )}
           </div>
-        )}
+
+          <div className='contenedorDerecho'>
+          <h2 className='contenedorDerechoTitulo'>Resumen</h2>
+          <div className='contenedorDerechoContenido'>
+            <p className='tituloContenedorDerecho'>Productos</p>
+            {productos.map((producto, index) => (
+              <div key={index} className='resumen'>
+                <p>{producto.cantidad} x {producto.productId.titulo}</p>
+                <p>{(producto.cantidad * producto.productId.precio).toFixed(2)}€</p>
+              </div>
+            ))}
+          </div>
+          <div className='totalCompra'>
+            <p>Total de la compra: {totalCompra}€</p>
+            <button className='botonProcesarCompra' onClick={procesarCompra}>Realizar el pago</button>
+          </div>
+        </div>
       </div>
     </div>
+    </>
   );
-};
+            }
 
 export default CarritoCompra;

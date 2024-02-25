@@ -43,6 +43,7 @@ header div div img {
     margin-left: 15%;
     object-fit: cover;
     transition: 0.3s;
+    border: 2px solid transparent;
 } 
 
 
