@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './carritoCompra.css';
 import Header from '../inicio/header';
+import { Link } from 'react-router-dom';
 
 const CarritoCompra = () => {
   const [productos, setProductos] = useState([]);
   const [totalCompra, setTotalCompra] = useState(0);
   const [sesionIniciada, setSesionIniciada] = useState(false);
   const [error, setError] = useState('');
-  const [direccionEnvio, setDireccionEnvio] = useState('');
-  const [metodoPago, setMetodoPago] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -168,27 +167,8 @@ const CarritoCompra = () => {
     }
   };
   
-  // Función para eliminar todos los productos del carrito
-  const eliminarTodosLosProductos = async () => {
-    try {
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (user && user._id) {
-        for (const producto of productos) {
-          await eliminarDelCarrito(producto);
-        }
-        setProductos([]);
-        setTotalCompra(0);
-      }
-    } catch (error) {
-      console.error('Error al eliminar todos los productos del carrito:', error);
-      setError('Error al eliminar todos los productos del carrito');
-    }
-  };
-  
   const procesarCompra = async () => {
-
-    // Si la compra se realiza con éxito, puedes eliminar los productos del carrito.
-    alert('Compra procesada con éxito!');
+    console.log("Ningun fall0");
   };
 
   if (!sesionIniciada) {
@@ -251,13 +231,13 @@ const CarritoCompra = () => {
           </div>
           <div className='totalCompra'>
             <p>Total de la compra: {totalCompra}€</p>
-            <button className='botonProcesarCompra' onClick={procesarCompra}>Realizar el pago</button>
+            <Link to="/checkout"><button className='botonProcesarCompra' onClick={procesarCompra}>Realizar el pago</button></Link>
           </div>
         </div>
       </div>
     </div>
     </>
   );
-            }
+}
 
 export default CarritoCompra;

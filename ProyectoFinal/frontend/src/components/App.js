@@ -6,7 +6,8 @@ import Registro from './login/registro.js';
 import ObtenerProductos from "./tienda/obtenerProductos.js";
 import DetallesProducto from "./tienda/detallesProducto.js";
 import EditarPerfil from './login/editarPerfil.js';
-import CarritoCompra from './tienda/carritoCompra.js'
+import CarritoCompra from './tienda/carritoCompra.js';
+import Checkout from './tienda/checkout';
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path="/obtenerProductos" element={<ObtenerProductos />} />
         <Route path="/producto/:titulo" element={<DetallesProducto />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
-        <Route path="/comprar" element={<CarritoCompra />} />
+        <Route path="/carrito" element={<CarritoCompra />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
   );
 }

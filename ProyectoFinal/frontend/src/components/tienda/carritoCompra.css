@@ -1,11 +1,11 @@
 .carrito-container {
   position: relative; /* Establecer posición relativa */
   width: 100%;
-  padding: 10% 0px 0px 10%;
+  padding: 12% 0px 0px 10%;
   color: rgb(255, 255, 255);
   font-size: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 .productosCarrito {

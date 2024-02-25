@@ -77,7 +77,7 @@ function Header() {
       <header>
         <img className='logo' src={logo} alt="Logo"/>
         <div>
-          <div><Link to="/comprar">Comprar</Link></div>
+          <div><Link to="/carrito">Comprar</Link></div>
           {renderUserOrLoginLink()}
         </div>
       </header>
