@@ -75,7 +75,7 @@ function Header() {
   return (
     <>
       <header>
-        <img className='logo' src={logo} alt="Logo"/>
+        <Link to="/"><img className='logo' src={logo} alt="Logo"/></Link>
         <div>
           <div><Link to="/carrito">Comprar</Link></div>
           {renderUserOrLoginLink()}

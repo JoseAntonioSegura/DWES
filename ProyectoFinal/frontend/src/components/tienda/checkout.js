@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './checkout.css';
-import { Link } from 'react-router-dom';
+import Header from '../inicio/header';
 
 const Checkout = () => {
   const [productos, setProductos] = useState([]);
@@ -75,8 +75,8 @@ const Checkout = () => {
         throw new Error('Error al obtener productos del carrito');
       }
       const data = await response.json();
-      setProductos(data);
       calcularTotalCompra(data);
+      setProductos(data);
     } catch (error) {
       console.error('Error al obtener productos del carrito:', error);
       setError('Error al obtener productos del carrito');
@@ -204,7 +204,6 @@ const Checkout = () => {
 
     try {
       // Aquí puedes agregar la lógica para simular el pago
-      alert('Compra procesada con éxito!');
       await eliminarTodosLosProductos();
     } catch (error) {
       console.error('Error al procesar la compra:', error);
@@ -213,6 +212,7 @@ const Checkout = () => {
 
   return (
   <>
+    <Header/>
     <div className="container-checkout">
       <h2>Datos del Usuario</h2>
       <div className='contenedorIzquierdoUsuario'>

@@ -133,7 +133,6 @@ const CarritoCompra = () => {
     }
   };
   
-  
 
   // Función para modificar la cantidad de un producto en el carrito y actualizar la cantidad en el backend
   const modificarCantidadJuegos = async (carritoId, nuevaCantidad, incremento) => {
