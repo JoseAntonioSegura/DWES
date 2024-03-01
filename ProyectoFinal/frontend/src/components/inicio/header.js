@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import logo from '../../resources/logoHeader.jpeg';
 
 function Header() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -49,6 +50,7 @@ function Header() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setDropdownVisible(false);
+    navigate("/");  
   };
 
   // Función para renderizar el nombre de usuario o el enlace "Iniciar Sesión"
