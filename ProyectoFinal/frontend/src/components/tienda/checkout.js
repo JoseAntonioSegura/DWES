@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './checkout.css';
+import { useNavigate } from 'react-router-dom';
 import Header from '../inicio/header';
 
 const Checkout = () => {
@@ -7,6 +8,7 @@ const Checkout = () => {
   const [totalCompra, setTotalCompra] = useState(0);
   const [sesionIniciada, setSesionIniciada] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
   const [datosUsuario, setDatosUsuario] = useState({
     nombre: '',
     apellido: '',
@@ -205,6 +207,10 @@ const Checkout = () => {
     try {
       // Aquí puedes agregar la lógica para simular el pago
       await eliminarTodosLosProductos();
+
+      // Redirigir a la página principal y mostrar la alerta
+      navigate('/');
+      alert('La compra se ha realizado correctamente.');
     } catch (error) {
       console.error('Error al procesar la compra:', error);
     }

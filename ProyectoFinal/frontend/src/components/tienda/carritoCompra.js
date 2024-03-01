@@ -217,24 +217,26 @@ const CarritoCompra = () => {
             )}
           </div>
 
-          <div className='contenedorDerecho'>
-          <h2 className='contenedorDerechoTitulo'>Resumen</h2>
-          <div className='contenedorDerechoContenido'>
-            <p className='tituloContenedorDerecho'>Productos</p>
-            {productos.map((producto, index) => (
-              <div key={index} className='resumen'>
-                <p>{producto.cantidad} x {producto.productId.titulo}</p>
-                <p>{(producto.cantidad * producto.productId.precio).toFixed(2)}€</p>
+          {productos.length > 0 && (
+            <div className='contenedorDerecho'>
+              <h2 className='contenedorDerechoTitulo'>Resumen</h2>
+              <div className='contenedorDerechoContenido'>
+                <p className='tituloContenedorDerecho'>Productos</p>
+                {productos.map((producto, index) => (
+                  <div key={index} className='resumen'>
+                    <p>{producto.cantidad} x {producto.productId.titulo}</p>
+                    <p>{(producto.cantidad * producto.productId.precio).toFixed(2)}€</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className='totalCompra'>
-            <p>Total de la compra: {totalCompra}€</p>
-            <Link to="/checkout"><button className='botonProcesarCompra' onClick={procesarCompra}>Realizar el pago</button></Link>
-          </div>
+              <div className='totalCompra'>
+                <p>Total de la compra: {totalCompra}€</p>
+                <Link to="/checkout"><button className='botonProcesarCompra' onClick={procesarCompra}>Realizar el pago</button></Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-    </div>
     </>
   );
 }
