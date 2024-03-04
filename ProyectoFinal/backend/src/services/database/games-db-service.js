@@ -13,9 +13,21 @@ export async function getGameById(id) {
   return Game.findById(id);
 }
 
-export async function getGames(filters){
-  const { sort, offset, limit, ...query} = filters;
-  return Game.find(query).sort(sort).skip(offset).limit(limit);
+export async function getGames(filters = {}) {
+  const { sort, offset, limit, ...query } = filters;
+  const gamesQuery = Game.find(query);
+
+  if (sort) {
+    gamesQuery.sort(sort);
+  }
+  if (offset) {
+    gamesQuery.skip(offset);
+  }
+  if (limit) {
+    gamesQuery.limit(limit);
+  }
+
+  return gamesQuery.exec();
 }
 
 export async function deleteGameByTitle(titulo) {

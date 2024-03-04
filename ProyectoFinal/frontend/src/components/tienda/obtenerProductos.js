@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './obtenerProductos.css';
 
-function Productos({ cantidad }) {
+function Productos({ cantidad, ordenar }) {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,13 +12,13 @@ function Productos({ cantidad }) {
   useEffect(() => {
     const obtenerProductos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/games');
+        const response = await fetch(`http://localhost:3000/games?sort=${ordenar}&limit=${cantidad}`);
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }
         const data = await response.json();
         // Ordena los productos por unidades y toma los primeros 'cantidad'
-        const productosOrdenados = data.sort((a, b) => a.unidades - b.unidades).slice(0, cantidad);
+        const productosOrdenados = data;
         setProductos(productosOrdenados);
         setLoading(false);
       } catch (error) {

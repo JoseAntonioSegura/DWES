@@ -17,7 +17,7 @@ function Index() {
       <main>
         <div className='ListaDeProductos'>
         <h1 className='titulos'>Ultimas Unidades:</h1>
-          <Productos cantidad={3} />
+          <Productos cantidad={3} ordenar={ "unidades" } />
         </div>
         <div className='separador'></div>
         <div className='ListaDeProductos'>

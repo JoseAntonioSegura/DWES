@@ -3,13 +3,34 @@ import * as gameService from '../services/database/games-db-service.js';
 
 export async function getAllGames(req, res, next){
   try {
-    const filters = {}
+    // Obtener los parámetros de consulta de la URL
+    const { sort, limit, plataforma } = req.query;
+
+    // Construir el objeto de filtros
+    const filters = {};
+
+    // Agregar los filtros según los parámetros de consulta
+    if (sort) {
+      filters.sort = sort;
+    }
+    if (limit) {
+      filters.limit = parseInt(limit); // Convertir a entero si es necesario
+    }
+    if (plataforma) {
+      filters.plataforma = plataforma;
+    }
+
+    // Llamar a la función getGames con los filtros
     const games = await gameService.getGames(filters);
+
+    // Enviar la respuesta
     return res.send(games);
   } catch (error){
+    // Manejar errores
     next(error);
   }
 }
+
 
 export async function getGame(req, res, next){
   try {

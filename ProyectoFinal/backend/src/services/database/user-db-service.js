@@ -35,7 +35,6 @@ export async function deleteUser(username) {
 }
 
 export async function updateUser(username, updatedUserInfo) {
-  // Encuentra y actualiza el usuario en la base de datos
   const updatedUser = await User.findOneAndUpdate({ username }, updatedUserInfo, { new: true });
 
   return updatedUser;
