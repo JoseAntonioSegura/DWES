@@ -152,46 +152,86 @@ const Checkout = () => {
     }
   };
 
-  const procesarCompra = async () => {
-    // Validar campos de usuario
-    const camposUsuarioRellenados = Object.values(datosUsuario).every(valor => valor !== '');
-    const camposPagoRellenados = Object.values(datosPago).every(valor => valor !== '');
+ const procesarCompra = async () => {
+  // Validar campos de usuario
+  const camposUsuarioRellenados = Object.values(datosUsuario).every(valor => valor !== '');
+  const camposPagoRellenados = Object.values(datosPago).every(valor => valor !== '');
 
-    // Establecer estados de error
-    setErroresUsuario({
-      nombre: !datosUsuario.nombre,
-      apellido: !datosUsuario.apellido,
-      correo: !datosUsuario.correo,
-      telefono: !datosUsuario.telefono,
-      pais: !datosUsuario.pais,
-      codigoPostal: !datosUsuario.codigoPostal,
-      direccionFacturacion: !datosUsuario.direccionFacturacion
+  // Establecer estados de error
+  setErroresUsuario({
+    nombre: !datosUsuario.nombre,
+    apellido: !datosUsuario.apellido,
+    correo: !datosUsuario.correo,
+    telefono: !datosUsuario.telefono,
+    pais: !datosUsuario.pais,
+    codigoPostal: !datosUsuario.codigoPostal,
+    direccionFacturacion: !datosUsuario.direccionFacturacion
+  });
+  setErroresPago({
+    nombreTarjeta: !datosPago.nombreTarjeta,
+    numeroTarjeta: !datosPago.numeroTarjeta,
+    fechaExpiracion: !datosPago.fechaExpiracion,
+    cvv: !datosPago.cvv
+  });
+
+  // Verificar si hay campos incompletos
+  const camposRellenados = camposUsuarioRellenados && camposPagoRellenados;
+  setCamposRellenados(camposRellenados);
+
+  if (!aceptaCondiciones || !camposRellenados) {
+    return;
+  }
+
+  try {
+    // Agregar la factura a la base de datos
+    await agregarFacturaYProductos();
+
+    // Eliminar Productos del carrito
+    await eliminarTodosLosProductos();
+
+    // Redirigir a la página principal y mostrar la alerta
+    navigate('/');
+    alert('La compra se ha realizado correctamente.');
+  } catch (error) {
+    console.error('Error al procesar la compra:', error);
+  }
+};
+
+const agregarFacturaYProductos = async () => {
+  try {
+    const userId = JSON.parse(localStorage.getItem('user'))._id;
+
+    // Construir la lista de productos para la factura
+    const productosParaFactura = productos.map(producto => ({
+      productId: producto.productId._id,
+      cantidad: producto.cantidad,
+      precioOriginal: producto.productId.precio
+    }));
+
+    // Enviar la solicitud para agregar la factura con los productos al servidor
+    const response = await fetch('http://localhost:3000/factura/agregar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        userId,
+        productos: productosParaFactura
+      })
     });
-    setErroresPago({
-      nombreTarjeta: !datosPago.nombreTarjeta,
-      numeroTarjeta: !datosPago.numeroTarjeta,
-      fechaExpiracion: !datosPago.fechaExpiracion,
-      cvv: !datosPago.cvv
-    });
 
-    // Verificar si hay campos incompletos
-    const camposRellenados = camposUsuarioRellenados && camposPagoRellenados;
-    setCamposRellenados(camposRellenados);
-
-    if (!aceptaCondiciones || !camposRellenados) {
-      return;
+    if (!response.ok) {
+      throw new Error('Error al agregar factura y productos');
     }
+  } catch (error) {
+    console.error('Error al agregar factura y productos:', error);
+    throw error;
+  }
+};
 
-    try {
-      await eliminarTodosLosProductos();
 
-      // Redirigir a la página principal y mostrar la alerta
-      navigate('/');
-      alert('La compra se ha realizado correctamente.');
-    } catch (error) {
-      console.error('Error al procesar la compra:', error);
-    }
-  };
+
 
   return (
     <>
