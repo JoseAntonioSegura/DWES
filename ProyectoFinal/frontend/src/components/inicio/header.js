@@ -63,8 +63,9 @@ function Header() {
           {user.usernameImage && <img onClick={handleProfileClick} src={user.usernameImage} alt="User Avatar" />}
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
-              <button onClick={handleLogout}>Logout</button>
-              <Link to="/editar-perfil">Editar Perfil</Link>
+              <div><Link to="/mis-facturas">Mis facturas</Link></div>
+              <div><Link to="/editar-perfil">Editar Perfil</Link></div>
+              <div><button onClick={handleLogout}>Logout</button></div>
             </div>
           )}
         </div>

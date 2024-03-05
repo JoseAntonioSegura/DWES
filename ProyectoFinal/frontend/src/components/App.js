@@ -8,6 +8,7 @@ import DetallesProducto from "./tienda/detallesProducto.js";
 import EditarPerfil from './login/editarPerfil.js';
 import CarritoCompra from './tienda/carritoCompra.js';
 import Checkout from './tienda/checkout';
+import Facturas from './facturas/facturas.js';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/editar-perfil" element={<EditarPerfil />} />
         <Route path="/carrito" element={<CarritoCompra />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path='/mis-facturas' element={<Facturas />}/>
       </Routes>
   );
 }
