@@ -9,6 +9,7 @@ import EditarPerfil from './login/editarPerfil.js';
 import CarritoCompra from './tienda/carritoCompra.js';
 import Checkout from './tienda/checkout';
 import Facturas from './facturas/facturas.js';
+import Administrar from './admin/administrar.js';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/carrito" element={<CarritoCompra />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path='/mis-facturas' element={<Facturas />}/>
+        <Route path="/administrador" element={<Administrar />} />
       </Routes>
   );
 }

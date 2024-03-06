@@ -50,6 +50,7 @@ function Login() {
           const userData = await userResponse.json();
           // No almacenar la contraseña en el localStorage
           delete userData.password;
+          delete userData.role;
           localStorage.setItem('user', JSON.stringify(userData));
         }
         navigate('/'); // Redirige al usuario al menú inicial

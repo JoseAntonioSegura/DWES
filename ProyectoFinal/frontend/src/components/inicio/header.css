@@ -11,9 +11,9 @@ header {
     justify-content: space-between;
     padding-left: 1%;
     color: white;
-}
-
-header div {
+  }
+  
+  header div {
     margin-right: 3%;
     display: flex;
     position: relative;
@@ -21,22 +21,22 @@ header div {
     justify-content: center;
     width: 20%;
     height: 100%;
-}
-
-header div div {
+  }
+  
+  header div div {
     width: 100%;
-}
-
-header h1 {
+  }
+  
+  header h1 {
     color: white;
-}
-
-header .logo {
+  }
+  
+  header .logo {
     border-radius: 100%;
     width: 30%;
-}
-
-header div div img {
+  }
+  
+  header div div img {
     width: 60px;
     height: 60px;
     border-radius: 100%;
@@ -44,27 +44,26 @@ header div div img {
     object-fit: cover;
     transition: 0.3s;
     border: 2px solid transparent;
-} 
-
-
-header div div img:hover {
+  }
+  
+  header div div img:hover {
     border: 2px solid aqua;
     transform: scale(1.1);
-} 
-
-.user-profile {
+  }
+  
+  .user-profile {
     position: relative;
     cursor: pointer;
-}
-
-.dropdown-menu {
+  }
+  
+  .dropdown-menu {
     position: absolute;
     top: 100%;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 5px 0;
-}
+  }
   
   .dropdown-menu button,
   .dropdown-menu a {
@@ -78,3 +77,28 @@ header div div img:hover {
   .dropdown-menu a:hover {
     background-color: #f0f0f0;
   }
+  
+  .cesta {
+    position: relative;
+  }
+  
+  .cesta img:hover {
+    filter: drop-shadow(0 0 10px aqua);
+    border: 0px transparent;
+  }
+  
+  .carrito-count {
+    position: absolute;
+    top: 55px;
+    right: 100px; 
+    background-color: rgb(247, 247, 247);
+    color: black;
+    border-radius: 100%;
+    padding: 5px;
+    width: 10px;
+    height: 10px;
+    font-size: 0.8em;
+    text-align: center;
+    font-weight: 900;
+  }
+  
