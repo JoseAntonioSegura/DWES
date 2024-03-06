@@ -81,6 +81,9 @@ function EditarPerfil(){
                     <Link to="#" onClick={() => navigate(-1)}>X</Link>
                 </div>
                 <form onSubmit={handleSubmit}>
+                    <div className="editarImagen">
+                        <img src={user.usernameImage}/>
+                    </div>
                     <div>
                         <label htmlFor="username">Nombre de usuario:</label>
                         <input type="text" id="username" name="username" value={user.username} onChange={handleChange} />
