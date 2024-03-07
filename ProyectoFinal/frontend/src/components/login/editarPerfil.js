@@ -45,6 +45,16 @@ function EditarPerfil(){
         }));
     };
 
+    const handleImageClick = () => {
+        const imageUrl = prompt("Por favor, ingresa la URL de la nueva imagen:");
+        if (imageUrl) {
+            setUser(prevUser => ({
+                ...prevUser,
+                usernameImage: imageUrl
+            }));
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -81,8 +91,8 @@ function EditarPerfil(){
                     <Link to="#" onClick={() => navigate(-1)}>X</Link>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <div className="editarImagen">
-                        <img src={user.usernameImage}/>
+                    <div className="editarImagen" onClick={handleImageClick}>
+                        <img src={user.usernameImage} alt="Imagen de perfil"/>
                     </div>
                     <div>
                         <label htmlFor="username">Nombre de usuario:</label>
@@ -99,10 +109,6 @@ function EditarPerfil(){
                     <div>
                         <label htmlFor="country">País:</label>
                         <input type="text" id="country" name="country" value={user.country} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="usernameImage">URL de la imagen:</label>
-                        <input type="text" id="usernameImage" name="usernameImage" value={user.usernameImage} onChange={handleChange} />
                     </div>
                     <div>
                         <label htmlFor="email">Correo electrónico:</label>

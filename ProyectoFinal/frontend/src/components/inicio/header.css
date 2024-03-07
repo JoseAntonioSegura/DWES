@@ -13,6 +13,7 @@ header {
     color: white;
   }
   
+
   header div {
     margin-right: 3%;
     display: flex;
@@ -47,9 +48,13 @@ header {
   }
   
   header div div img:hover {
-    border: 2px solid aqua;
     transform: scale(1.1);
   }
+
+  .cesta:hover .carrito-count {
+    transform: scale(1.1);
+  }
+  
   
   .user-profile {
     position: relative;
@@ -80,25 +85,35 @@ header {
   
   .cesta {
     position: relative;
+    width: 50%;
   }
   
   .cesta img:hover {
     filter: drop-shadow(0 0 10px aqua);
-    border: 0px transparent;
   }
+
   
   .carrito-count {
-    position: absolute;
-    top: 55px;
-    right: 100px; 
     background-color: rgb(247, 247, 247);
     color: black;
+    position: absolute;
+    top: 60px;
+    right: 30%;
     border-radius: 100%;
     padding: 5px;
     width: 10px;
     height: 10px;
     font-size: 0.8em;
     text-align: center;
+    justify-content: center;
     font-weight: 900;
+    transition: 0.3s;
+    
   }
-  
+
+  .user-profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10%;
+  }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './iniciarSesion.css';
+import Header from '../inicio/header';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -66,6 +67,8 @@ function Login() {
   };
 
   return (
+    <>
+    <Header />
     <div className="login-container">
       <div className="login-form">
         <h2>Iniciar Sesión</h2>
@@ -85,6 +88,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './registro.css';
+import Header from '../inicio/header';
 
 function Registro() {
   const [username, setUsername] = useState('');
@@ -83,71 +84,70 @@ function Registro() {
         },
         body: JSON.stringify(userData)
       });
-
-      // Verificar el estado de la respuesta
       if (response.ok) {
-        // Si la solicitud fue exitosa, redirigir al usuario a otra página
-        navigate('/');
+        alert('Usuario registrado con éxito');
+        navigate('/login');
       } else {
-        // Si la solicitud no fue exitosa, mostrar un mensaje de error
         setErrorMessage('Error al registrarse. Por favor, inténtalo de nuevo.');
       }
     } catch (error) {
-      // Manejar errores de red u otros errores
       console.error('Error:', error);
       setErrorMessage('Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.');
     }
   };
 
   return (
+    <>
+    <Header />
     <div className='registro'>
-    <div className="registro-container">
-      <h2>Registrarse</h2>
-      <form onSubmit={handleSubmit}>
-        <div className={`form-group ${formSubmitted && !username ? 'error' : ''}`}>
-          <label>Usuario:</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
-          {formSubmitted && !username && <span className="error-indicator">*</span>}
-        </div>
-        <div className={`form-group ${formSubmitted && !email ? 'error' : ''}`}>
-          <label>Correo Electrónico:</label>
-          <input type="text" value={email} onChange={handleEmailChange} />
-          {formSubmitted && !email && <span className="error-indicator">*</span>}
-        </div>
-        <div className="form-group">
-          <label>Número de Teléfono:</label>
-          <input type="number" value={phone} onChange={handlePhoneChange} />
-        </div>
-        <div className={`form-group ${formSubmitted && !password ? 'error' : ''}`}>
-          <label>Contraseña:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
-          {formSubmitted && !password && <span className="error-indicator">*</span>}
-        </div>
-        <div className={`form-group ${formSubmitted && !confirmPassword ? 'error' : ''}`}>
-          <label>Confirmar Contraseña:</label>
-          <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
-          {formSubmitted && !confirmPassword && <span className="error-indicator">*</span>}
-        </div>
-        <div className={`form-group ${formSubmitted && !name ? 'error' : ''}`}>
-          <label>Nombre:</label>
-          <input type="text" value={name} onChange={handleNameChange} />
-          {formSubmitted && !name && <span className="error-indicator">*</span>}
-        </div>
-        <div className={`form-group ${formSubmitted && !lastname ? 'error' : ''}`}>
-          <label>Apellido:</label>
-          <input type="text" value={lastname} onChange={handleLastnameChange} />
-          {formSubmitted && !lastname && <span className="error-indicator">*</span>}
-        </div>
-        <div className={`form-group ${formSubmitted && !country ? 'error' : ''}`}>
-          <label>País:</label>
-          <input type="text" value={country} onChange={handleCountryChange} />
-          {formSubmitted && !country && <span className="error-indicator">*</span>}
-        </div>
-        <button type="submit">Registrarse</button>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-      </form>
+      <div className="registro-container">
+        <h2>Registrarse</h2>
+        <form onSubmit={handleSubmit}>
+          <div className={`form-group ${formSubmitted && !username ? 'error' : ''}`}>
+            <label>Usuario:</label>
+            <input type="text" value={username} onChange={handleUsernameChange} />
+            {formSubmitted && !username && <span className="error-indicator">*</span>}
+          </div>
+          <div className={`form-group ${formSubmitted && !email ? 'error' : ''}`}>
+            <label>Correo Electrónico:</label>
+            <input type="text" value={email} onChange={handleEmailChange} />
+            {formSubmitted && !email && <span className="error-indicator">*</span>}
+          </div>
+          <div className="form-group">
+            <label>Número de Teléfono:</label>
+            <input type="number" value={phone} onChange={handlePhoneChange} />
+          </div>
+          <div className={`form-group ${formSubmitted && !password ? 'error' : ''}`}>
+            <label>Contraseña:</label>
+            <input type="password" value={password} onChange={handlePasswordChange} />
+            {formSubmitted && !password && <span className="error-indicator">*</span>}
+          </div>
+          <div className={`form-group ${formSubmitted && !confirmPassword ? 'error' : ''}`}>
+            <label>Confirmar Contraseña:</label>
+            <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
+            {formSubmitted && !confirmPassword && <span className="error-indicator">*</span>}
+          </div>
+          <div className={`form-group ${formSubmitted && !name ? 'error' : ''}`}>
+            <label>Nombre:</label>
+            <input type="text" value={name} onChange={handleNameChange} />
+            {formSubmitted && !name && <span className="error-indicator">*</span>}
+          </div>
+          <div className={`form-group ${formSubmitted && !lastname ? 'error' : ''}`}>
+            <label>Apellido:</label>
+            <input type="text" value={lastname} onChange={handleLastnameChange} />
+            {formSubmitted && !lastname && <span className="error-indicator">*</span>}
+          </div>
+          <div className={`form-group ${formSubmitted && !country ? 'error' : ''}`}>
+            <label>País:</label>
+            <input type="text" value={country} onChange={handleCountryChange} />
+            {formSubmitted && !country && <span className="error-indicator">*</span>}
+          </div>
+          <button type="submit">Registrarse</button>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+        </form>
+      </div>
     </div>
-    </div>
+    </>
   );
 }
 

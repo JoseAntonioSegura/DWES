@@ -116,7 +116,7 @@ function Header() {
             </Link>
             <span className="carrito-count">{sumaTotal}</span>
           </div>
-          {user.usernameImage && <img onClick={handleProfileClick} src={user.usernameImage} alt="User Avatar" />}
+          {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><Link to="/mis-facturas">Mis facturas</Link></div>
@@ -129,6 +129,12 @@ function Header() {
     } else {
       return (
         <div>
+           <div className="cesta">
+            <Link to="/carrito">
+              <img src={cesta} alt="Carrito" />
+            </Link>
+            <span className="carrito-count">{sumaTotal}</span>
+          </div>
           <Link to="/login">Iniciar Sesión</Link>
         </div>
       );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import Header from '../inicio/header.js';
 import './detallesProducto.css';
@@ -9,6 +9,7 @@ function DetallesProducto() {
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const obtenerDetallesProducto = async () => {
@@ -48,16 +49,17 @@ function DetallesProducto() {
 
   const agregarAlCarrito = async () => {
     try {
-      // Obtener el token del Local Storage
+      // Obtener el token y el usuario del Local Storage
       const token = localStorage.getItem('token');
-      // Obtener el usuario del Local Storage
       const user = JSON.parse(localStorage.getItem('user'));
   
       // Verificar si hay un token y un usuario almacenados en el Local Storage
       if (!token || !user) {
-        throw new Error('Token de autorización o usuario no encontrado');
+        // Si no hay un token o un usuario, redirigir al usuario al inicio de sesión
+        navigate('/login');
+        return;
       }
-  
+
       // Construir el cuerpo de la solicitud para agregar al carrito
       const carritoBody = JSON.stringify({
         userId: user._id,
@@ -73,49 +75,18 @@ function DetallesProducto() {
           'Authorization': `Bearer ${token}`
         },
         body: carritoBody
-      });
+      });    
   
       // Verificar si la respuesta para agregar al carrito fue exitosa
       if (!carritoResponse.ok) {
         throw new Error('Error al agregar producto al carrito');
       }
   
-      // Obtener el producto actualizado con la cantidad reducida de unidades
-      const updatedProduct = { ...producto[0], unidades: producto[0].unidades - 1 };
-  
-      // Construir el cuerpo de la solicitud para actualizar las unidades del producto
-      const productoBody = JSON.stringify({
-        unidades: updatedProduct.unidades
-      });
-  
-      // Enviar la solicitud al backend para actualizar las unidades del producto
-      const productoResponse = await fetch(`http://localhost:3000/games/${titulo}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: productoBody
-      });
-  
-      // Verificar si la respuesta para actualizar las unidades del producto fue exitosa
-      if (!productoResponse.ok) {
-        throw new Error('Error al actualizar las unidades del producto');
-      }
-  
-      // Volver a cargar los detalles del producto actualizados
-      window.location.reload();
-  
-      // Mostrar mensaje de éxito
-      alert('Producto agregado al carrito correctamente.');
-  
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
       alert('Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.');
     }
   };
-  
-  
 
   if (loading) {
     return <div>Cargando detalles del producto...</div>;
@@ -150,12 +121,12 @@ function DetallesProducto() {
             <p className='precioDatos'>Precio: {producto[0].precio}€</p>
           </div>
           <div className='contenedorCompraBotones'>
-          <button className='carritoBtn' onClick={agregarAlCarrito} disabled={unidadesDisponibles === 0}>
-            <strong>Agregar al Carrito</strong>
-          </button>
-          <button className='compraBtn' disabled={unidadesDisponibles === 0}>
-            <strong>Comprar Ahora</strong>
-          </button>
+            <button className='carritoBtn' onClick={agregarAlCarrito} disabled={unidadesDisponibles === 0}>
+              <strong>Agregar al Carrito</strong>
+            </button>
+            <button className='compraBtn' disabled={unidadesDisponibles === 0}>
+              <strong>Comprar Ahora</strong>
+            </button>
           </div>
         </div>
       </div>

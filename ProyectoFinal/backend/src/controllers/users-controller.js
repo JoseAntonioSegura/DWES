@@ -50,7 +50,7 @@ export async function deleteUserController(req, res, next){
 export async function updateUserController(req, res, next) {
   try {
     const { username } = req.params;
-    const updatedUserInfo = req.body; 
+    const updatedUserInfo = req.body;
 
     // Si el usuario está actualizando la contraseyia, hasheala antes de guardarla
     if (updatedUserInfo.password) {
