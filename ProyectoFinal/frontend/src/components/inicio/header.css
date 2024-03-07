@@ -34,7 +34,8 @@ header {
   
   header .logo {
     border-radius: 100%;
-    width: 30%;
+    width: 75px;
+    margin: 20px;
   }
   
   header div div img {
