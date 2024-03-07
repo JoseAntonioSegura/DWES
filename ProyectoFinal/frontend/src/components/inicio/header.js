@@ -4,6 +4,7 @@ import './header.css';
 import logo from '../../resources/logoHeader.jpeg';
 import cesta from '../../resources/cesta.png';
 
+
 function Header() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); 
@@ -11,6 +12,27 @@ function Header() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 10) {
+        header.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+        header.style.height = '70px';
+        header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
+        header.style.height = '100px';
+      } else {
+        header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        header.style.height = '120px';
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -133,7 +155,9 @@ function Header() {
             <Link to="/carrito">
               <img src={cesta} alt="Carrito" />
             </Link>
-            <span className="carrito-count">{sumaTotal}</span>
+            <div className="carrito-count">
+              <span>{sumaTotal}</span>
+            </div>
           </div>
           <Link to="/login">Iniciar Sesión</Link>
         </div>

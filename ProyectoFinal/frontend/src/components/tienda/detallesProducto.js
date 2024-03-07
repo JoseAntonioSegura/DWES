@@ -81,6 +81,8 @@ function DetallesProducto() {
       if (!carritoResponse.ok) {
         throw new Error('Error al agregar producto al carrito');
       }
+
+      window.location.reload();
   
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
@@ -110,7 +112,6 @@ function DetallesProducto() {
           </div>
         </div>
         <div className='contenedorCompra'>
-          <h1></h1>
           <img src={producto[0].imagen} alt={titulo}/>
           <div className='contenedorCompraDatos'>
             <p>Unidades disponibles: {producto[0].unidades}</p>

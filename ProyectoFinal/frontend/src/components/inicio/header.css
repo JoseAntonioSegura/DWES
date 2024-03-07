@@ -52,11 +52,6 @@ header {
     transform: scale(1.1);
   }
 
-  .cesta:hover .carrito-count {
-    transform: scale(1.1);
-  }
-  
-  
   .user-profile {
     position: relative;
     cursor: pointer;
@@ -97,14 +92,14 @@ header {
   .carrito-count {
     background-color: rgb(247, 247, 247);
     color: black;
-    position: absolute;
-    top: 60px;
-    right: 30%;
+    position: relative;
+    top: 15px;
+    right: 10%;
     border-radius: 100%;
     padding: 5px;
     width: 10px;
     height: 10px;
-    font-size: 0.8em;
+    font-size: 12px;
     text-align: center;
     justify-content: center;
     font-weight: 900;
