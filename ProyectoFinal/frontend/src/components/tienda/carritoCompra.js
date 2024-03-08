@@ -57,7 +57,7 @@ const CarritoCompra = () => {
     try {
       const carritoId = producto._id;
   
-      // Eliminar el producto del carrito
+      // Eliminar el producto del carrito en el backend
       await fetch(`http://localhost:3000/carrito/${carritoId}`, {
         method: 'DELETE',
         headers: {
@@ -65,16 +65,17 @@ const CarritoCompra = () => {
         }
       });
   
+      // Actualizar el estado local de los productos en el carrito eliminando el producto
+      setProductos(prevProductos => prevProductos.filter(item => item._id !== carritoId));
+  
       // Actualizar las unidades del juego
       await actualizarUnidadesDelJuego(producto);
-      
-      // Actualizar la lista de productos en el carrito
-      obtenerProductosDelCarrito(JSON.parse(localStorage.getItem('user'))._id);
     } catch (error) {
       console.error('Error al eliminar producto del carrito:', error);
       setError('Error al eliminar producto del carrito');
     }
   };
+  
   
   const actualizarUnidadesDelJuego = async (producto) => {
     try {
@@ -86,12 +87,27 @@ const CarritoCompra = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ unidades: nuevasUnidades })
+        body: JSON.stringify({ unidades: nuevasUnidades }) // Actualizar las unidades en el backend
       });
+  
+      // Actualizar el estado local de los productos para reflejar los cambios en las unidades
+      setProductos(prevProductos => prevProductos.map(item => {
+        if (item._id === producto._id) {
+          return {
+            ...item,
+            productId: {
+              ...item.productId,
+              unidades: nuevasUnidades
+            }
+          };
+        }
+        return item;
+      }));
     } catch (error) {
       console.error('Error al actualizar las unidades del juego:', error);
     }
   };
+  
   
   const modificarCantidad = async (carritoId, cantidadActual, incremento) => {
     try {
@@ -126,7 +142,7 @@ const CarritoCompra = () => {
           body: JSON.stringify({ carritoId, cantidad: nuevaCantidad })
         });
         await modificarCantidadJuegos(carritoId, nuevaCantidad, incremento);
-        obtenerProductosDelCarrito(user._id); // Actualizar productos en el carrito
+        obtenerProductosDelCarrito(user._id);
       }
     } catch (error) {
       console.error('Error al modificar la cantidad del producto:', error);
@@ -157,9 +173,8 @@ const CarritoCompra = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
-          body: JSON.stringify({ unidades: nuevasUnidades }) // Envía las nuevas unidades del producto
+          body: JSON.stringify({ unidades: nuevasUnidades })
         });
-        window.location.reload();
       }
     } catch (error) {
       console.error('Error al modificar la cantidad del producto:', error);
