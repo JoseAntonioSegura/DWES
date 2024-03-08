@@ -3,26 +3,40 @@ import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import logo from '../../resources/logoHeader.jpeg';
 import cesta from '../../resources/cesta.png';
-
+import SearchBar from '../tienda/barraBusqueda.js';
 
 function Header() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); 
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
+  const [showSearchBar, setShowSearchBar] = useState(false); 
+  const [showImage, setShowImage] = useState(true);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    let lastScrollPosition = window.pageYOffset;
+
     const handleScroll = () => {
+      const currentScrollPosition = window.pageYOffset;
+      if (currentScrollPosition > lastScrollPosition) {
+        setShowImage(false);
+      } else {
+        setShowImage(true);
+      }
+      lastScrollPosition = currentScrollPosition;
+      
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
         header.style.backgroundColor = 'rgba(0, 0, 0, 1)';
         header.style.height = '70px';
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
         header.style.height = '100px';
+        setShowSearchBar(true);
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
         header.style.height = '120px';
+        setShowSearchBar(false);
       }
     };
   
@@ -169,6 +183,7 @@ function Header() {
     <>
       <header>
         <Link to="/"><img className='logo' src={logo} alt="Logo"/></Link>
+        {showSearchBar && <SearchBar />}
         <div>
           {renderUserOrLoginLink()}
         </div>

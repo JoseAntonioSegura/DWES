@@ -79,15 +79,15 @@ const CarritoCompra = () => {
   
   const actualizarUnidadesDelJuego = async (producto) => {
     try {
-      const unidadesEliminadas = producto.cantidad; // Obtener la cantidad de productos eliminados
-      const nuevasUnidades = producto.productId.unidades + unidadesEliminadas; // Restar las unidades eliminadas
+      const unidadesEliminadas = producto.cantidad;
+      const nuevasUnidades = producto.productId.unidades + unidadesEliminadas;
       await fetch(`http://localhost:3000/games/${producto.productId.titulo}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ unidades: nuevasUnidades }) // Actualizar las unidades en el backend
+        body: JSON.stringify({ unidades: nuevasUnidades })
       });
   
       // Actualizar el estado local de los productos para reflejar los cambios en las unidades
@@ -191,7 +191,7 @@ const CarritoCompra = () => {
 
   return (
     <>
-      <Header />
+      <Header mostrarCarrito={false} />
       <div className="container-center">
         <div className="carrito-container">
           {error && <div>{error}</div>}
