@@ -52,6 +52,19 @@
 .contenedorProductoInterior {
     width: 33.33%;
     display: inline-flex;
-    margin: 0px;
+    margin: auto;
     margin-top: 5%;
+}
+
+@media (max-width: 1300px) {
+    .contenedorProductoInterior {
+        width: 50%;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .contenedorProductoInterior {
+        width: 80%;
+    }
 }
