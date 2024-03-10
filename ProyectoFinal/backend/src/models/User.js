@@ -19,10 +19,4 @@ const userSchema = new Schema({
   }
 }, { timestamps: true});
 
-// Método para comparar contraseñas
-userSchema.methods.comparePassword = function(newPassword) {
-  return bcrypt.compare(newPassword, this.password);
-};
-
-
 export default model('User', userSchema);
