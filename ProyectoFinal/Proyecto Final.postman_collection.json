@@ -1,19 +1,42 @@
 {
 	"info": {
-		"_postman_id": "c2e4445d-19c7-401b-b869-d42f2344f82a",
+		"_postman_id": "4c9f8e07-77c8-4b3b-97f9-3e1418c772bf",
 		"name": "Proyecto Final",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31433931"
+		"_exporter_id": "32377730"
 	},
 	"item": [
 		{
 			"name": "Games",
 			"item": [
 				{
-					"name": "Obtener Juegos",
+					"name": "Crear Videojuegos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 201', function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"prueba1\",\r\n  \"descripcion\": \"prueba1\",\r\n  \"unidades\": 1,\r\n  \"categoria\": [\"supervivencia\", \"disparos\"],\r\n  \"precio\": 49.99,\r\n  \"imagen\": \"https://insider-gaming.com/wp-content/uploads/2024/01/tarkov-cheaters-feature-top.webp\",\r\n  \"trailer\": \"https://www.youtube.com/watch?v=IPlnHe9l34E&ab_channel=Battlestate\",\r\n  \"fechaLanzamiento\": \"2017-07-27\",\r\n  \"pegi\": 18,\r\n  \"desarrollador\": \"Battlestate\",\r\n  \"plataforma\": \"Launcher\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:3000/games",
 							"protocol": "http",
@@ -30,6 +53,20 @@
 				},
 				{
 					"name": "Obtener Juego",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -49,39 +86,24 @@
 					"response": []
 				},
 				{
-					"name": "Obtener Juego por ID",
+					"name": "Obtener Juegos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/games/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"games",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear Videojuegos",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Escape From Tarkov\",\r\n  \"descripcion\": \"Escape from Tarkov es un videojuego de acción bélica multijugador en primera persona para PC desarrollado por Developer Battlestate Games que nos trasladará a la abandonada ciudad de Tarkov, en Rusia, en una lucha sin cuartel entre facciones, guerrillas locales y otros enemigos.\",\r\n  \"unidades\": 9351,\r\n  \"categoria\": \"[supervivencia, disparos]\",\r\n  \"precio\": 49.99,\r\n  \"imagen\": \"https://insider-gaming.com/wp-content/uploads/2024/01/tarkov-cheaters-feature-top.webp\",\r\n  \"trailer\": \"https://www.youtube.com/watch?v=IPlnHe9l34E&ab_channel=Battlestate\",\r\n  \"fechaLanzamiento\": \"2017-07-27\",\r\n  \"pegi\": 18,\r\n  \"desarrollador\": \"Battlestate\",\r\n  \"plataforma\": \"Launcher\"\r\n}\r\n\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://localhost:3000/games",
 							"protocol": "http",
@@ -97,13 +119,48 @@
 					"response": []
 				},
 				{
+					"name": "Obtener Juego por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/games/id/65ccb4d38f4108f29b26c0bc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"games",
+								"id",
+								"65ccb4d38f4108f29b26c0bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Actualizar Juego",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n      \"trailer\": \"https://mxwebnuxtprod01.blob.core.windows.net/media/images/News/_800x418_crop_center-center_82_none/201108_DeusEx_01.jpg?mtime=1655819887\"\r\n}",
+							"raw": "{\r\n     \"titulo\": \"prueba2\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -111,7 +168,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/games/Deus Ex: Human Revolution",
+							"raw": "http://localhost:3000/games/prueba1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -119,7 +176,7 @@
 							"port": "3000",
 							"path": [
 								"games",
-								"Deus Ex: Human Revolution"
+								"prueba1"
 							]
 						}
 					},
@@ -127,11 +184,25 @@
 				},
 				{
 					"name": "Eliminar Juego",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/games/Sida",
+							"raw": "http://localhost:3000/games/prueba2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -139,7 +210,7 @@
 							"port": "3000",
 							"path": [
 								"games",
-								"Sida"
+								"prueba2"
 							]
 						}
 					},
@@ -151,10 +222,33 @@
 			"name": "Usuarios",
 			"item": [
 				{
-					"name": "Obtener Usuarios",
+					"name": "Crear Usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 201', function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"prueba1\",\r\n    \"name\": \"prueba\",\r\n    \"lastname\": \"1\",\r\n    \"password\": \"prueba1\",\r\n    \"email\": \"prueba1@gmail.com\",\r\n    \"country\": \"Spain\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:3000/users",
 							"protocol": "http",
@@ -170,7 +264,67 @@
 					"response": []
 				},
 				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = pm.response.json();\r",
+									"const { token } = body;\r",
+									"pm.collectionVariables.set('token', token);\r",
+									"\r",
+									"pm.test('Status is 201', function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"prueba1\",\r\n    \"password\": \"prueba1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Obtener Usuario Actual",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -196,19 +350,24 @@
 					"response": []
 				},
 				{
-					"name": "Crear Usuarios",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"rol\": \"Admin\",\r\n    \"username\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+					"name": "Obtener Usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
 							}
-						},
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "http://localhost:3000/users",
 							"protocol": "http",
@@ -225,12 +384,26 @@
 				},
 				{
 					"name": "Actualizar Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"username\": \"prueba2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -238,7 +411,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/Paco",
+							"raw": "http://localhost:3000/users/prueba1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -246,48 +419,7 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"Paco"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"const body = pm.response.json();\r",
-									"const { token } = body;\r",
-									"pm.collectionVariables.set('token', token);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Jose\",\r\n    \"password\": \"1234\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"login"
+								"prueba1"
 							]
 						}
 					},
@@ -300,9 +432,10 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const body = pm.response.json();\r",
-									"const { token } = body;\r",
-									"pm.collectionVariables.set('token', token);"
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -313,7 +446,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Jose\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -321,14 +454,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users",
+							"raw": "http://localhost:3000/users/prueba2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"users"
+								"users",
+								"prueba2"
 							]
 						}
 					},
@@ -370,7 +504,64 @@
 			"name": "Carrito",
 			"item": [
 				{
+					"name": "Anadir Carrito del Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 201', function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"65cf834bbd53e27c8d59a495\",\r\n    \"productId\": \"65ccb4ab8f4108f29b26c0b8\",\r\n    \"cantidad\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/carrito/agregar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"carrito",
+								"agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Obtener Carrito del Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -387,7 +578,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/carrito/65d49514174979577591096c",
+							"raw": "http://localhost:3000/carrito/65cf834bbd53e27c8d59a495",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -395,7 +586,7 @@
 							"port": "3000",
 							"path": [
 								"carrito",
-								"65d49514174979577591096c"
+								"65cf834bbd53e27c8d59a495"
 							]
 						}
 					},
@@ -403,40 +594,26 @@
 				},
 				{
 					"name": "Obtener Carrito del Usuario Copy",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"\",\r\n    \"productId\": \"\",\r\n    \"cantidad\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
 							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/carrito",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"carrito"
-							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Carrito del Usuario",
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"carritoId\": \"65d8ebff59f866fa4c1e7372\",\r\n    \"cantidad\": 1\r\n}",
+							"raw": "{\r\n    \"carritoId\": \"65edfc07bf943459ba61a6de\",\r\n    \"cantidad\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -459,11 +636,25 @@
 				},
 				{
 					"name": "Eliminar un Producto del Carrito del Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/carrito/65d8ebff59f866fa4c1e7372",
+							"raw": "http://localhost:3000/carrito/id....",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -471,7 +662,7 @@
 							"port": "3000",
 							"path": [
 								"carrito",
-								"65d8ebff59f866fa4c1e7372"
+								"id...."
 							]
 						}
 					},
@@ -483,18 +674,99 @@
 			"name": "Facturas",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Agregar Factura",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 201', function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"65cf834bbd53e27c8d59a495\",\r\n    \"productos\": [\r\n        {\r\n            \"productId\": \"65ccb4ab8f4108f29b26c0b8\",\r\n            \"cantidad\": 2,\r\n            \"precioOriginal\": 10.99\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/factura/agregar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"factura",
+								"agregar"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request Copy",
+					"name": "Obtener Facturas",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/factura/65cf834bbd53e27c8d59a495",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"factura",
+								"65cf834bbd53e27c8d59a495"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Facturas Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/factura/65edff23bf943459ba61a6fc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"factura",
+								"65edff23bf943459ba61a6fc"
+							]
+						}
 					},
 					"response": []
 				}

@@ -39,3 +39,8 @@
     - MONGODB_PORT=27017
     - MONGODB_DBNAME=test
 
+  ### ◽◾TESTS:
+
+- **POSTMAN** 
+    - Todos los test funcionan y pasan correctamente, los resultados exportados marcan dos errores en los DELETE de Carrito y Facturas. Si funcionan pero no he puesto los datos necesarios ya que da una pereza horrible tener que volver a buscar los ID (Se que los puedo recoger como en el token al hacer login pero me dio peresha :/ )
+
