@@ -14,7 +14,7 @@ services:
       - MONGODB_PASSWORD=Ja1977-1980
     ports:
       - "3000:3000"
-  frontend:
+  frontend:  
     build:
       context: ./frontend
       dockerfile: Dockerfile
