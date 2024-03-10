@@ -4,10 +4,16 @@ import { checkToken } from '../middlewares/auth-middleware.js'
 
 const router = Router();
 
+// Rutas para los usuarios
+// Obtener los datos del usuario logueado
 router.get('/me',checkToken,  getUserMe);
+// Obtener todos los usuarios
 router.get('/', getUsersController);
+// Crear un usuario
 router.post('/', createUsersController);
-router.delete('/:username', deleteUserController);
+// Actualizar un usuario
 router.patch('/:username', checkToken, updateUserController);
+// Eliminar un usuario
+router.delete('/:username', deleteUserController);
 
 export default router;
