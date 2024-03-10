@@ -36,7 +36,9 @@ export async function getAllGames(req, res, next){
 export async function getGame(req, res, next){
   try {
     const game = await gameService.getGameByTitle(req.params.title);
-    if (!game) throw new HttpStatusError(404, 'El juego no existe');
+    if (!game || game.length === 0) {
+      throw new HttpStatusError(404, 'El juego no existe');
+    }
     return res.send(game);
   } catch (error){
     next(error);
@@ -47,7 +49,9 @@ export async function getGame(req, res, next){
 export async function getGameById(req, res, next) {
   try {
     const game = await gameService.getGameById(req.params.id);
-    if (!game) throw new HttpStatusError(404, 'El juego no existe');
+    if (!game) {
+      throw new HttpStatusError(404, 'El juego no existe');
+    }
     return res.send(game);
   } catch (error) {
     next(error);
@@ -69,7 +73,9 @@ export async function createGame(req, res, next){
 export async function updateGame(req, res, next){
   try {
     const updatedGame = await gameService.updateGameByTitle(req.params.title, req.body);
-    if (!updatedGame) throw new HttpStatusError(404, 'El juego no existe');
+    if (!updatedGame) {
+      throw new HttpStatusError(404, 'El juego no existe');
+    }
     return res.send(updatedGame);
   } catch (error){
     next(error);
@@ -80,7 +86,9 @@ export async function updateGame(req, res, next){
 export async function deleteGame(req, res, next){
   try {
     const game = await gameService.deleteGameByTitle(req.params.title);
-    if (!game) throw new HttpStatusError(404, 'El juego no existe');
+    if (!game) {
+      throw new HttpStatusError(404, 'El juego no existe');
+    }
     return res.status(200).send(game);
   } catch (error){
     next(error);
