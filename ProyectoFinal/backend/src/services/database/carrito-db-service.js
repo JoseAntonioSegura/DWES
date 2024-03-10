@@ -1,5 +1,6 @@
 import Carrito from '../../models/Carrito.js';
 
+// Agregar producto al carrito
 export async function agregarProductoAlCarrito(userId, productId, cantidad) {
   try {
     // Verificar si ya existe un producto del mismo tipo en el carrito del usuario
@@ -21,8 +22,10 @@ export async function agregarProductoAlCarrito(userId, productId, cantidad) {
   }
 }
 
+// Obtener productos del carrito
 export async function obtenerProductosDelCarrito(userId) {
   try {
+    // Buscar los productos del carrito por el ID del usuario
     const productos = await Carrito.find({ userId }).populate('productId');
     return productos;
   } catch (error) {
@@ -30,6 +33,7 @@ export async function obtenerProductosDelCarrito(userId) {
   }
 }
 
+// Modificar cantidad de producto en el carrito
 export async function modificarCantidadProductoEnCarrito(carritoId, cantidad) {
   try {
     // Buscar el producto en el carrito por su ID
@@ -49,6 +53,7 @@ export async function modificarCantidadProductoEnCarrito(carritoId, cantidad) {
   }
 }
 
+// Eliminar producto del carrito
 export async function eliminarProductoDelCarrito(carritoId) {
   try {
     // Buscar y eliminar el producto del carrito por su ID
