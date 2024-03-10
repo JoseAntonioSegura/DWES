@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getAllGames, getGame,createGame,getGameById , deleteGame, updateGame } from '../controllers/game-controller.js';
-//import { checkToken } from '../middlewares/auth-middleware.js'
+import { checkToken } from '../middlewares/auth-middleware.js'
 
 const router = Router();
 
