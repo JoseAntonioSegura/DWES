@@ -1,31 +1,50 @@
 import * as FacturaService from '../services/database/factura-db-service.js';
+import { HttpStatusError } from 'common-errors';
 
+// Agregar una factura
 export const agregarFactura = async (req, res) => {
   const { userId, productos } = req.body;
   try {
+    // Agregar la factura a la base de datos y devolver la factura creada
     const result = await FacturaService.agregarFactura(userId, productos);
-    res.json(result);
+    res.status(201).json(result); 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // Manejar errores
+    if (error instanceof HttpStatusError) {
+      res.status(error.status).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: error.message });
+    }
   }
 };
 
+// Obtener todas las facturas de la base de datos
 export const obtenerFacturasPorUsuario = async (req, res) => {
   const { userId } = req.params;
   try {
+    // Obtener las facturas de la base de datos y devolverlas
     const facturas = await FacturaService.obtenerFacturasPorUsuario(userId);
     res.json(facturas);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    if (error instanceof HttpStatusError) {
+      res.status(error.status).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: error.message });
+    }
   }
 };
 
+// Eliminar una factura (Solo lo uso para pruebas, no debería estar en la API pública)
 export const eliminarFactura = async (req, res) => {
   const { facturaId } = req.params;
   try {
     const result = await FacturaService.eliminarFactura(facturaId);
     res.json(result);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    if (error instanceof HttpStatusError) {
+      res.status(error.status).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: error.message });
+    }
   }
 };

@@ -4,6 +4,7 @@ const { Schema, model } = mongoose;
 
 const facturaSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  // Array de objetos con los productos comprados
   datosProducto: [{
     productoId: { type: Schema.Types.ObjectId, ref: 'Game', required: true },
     unidades: { type: Number, required: true },
