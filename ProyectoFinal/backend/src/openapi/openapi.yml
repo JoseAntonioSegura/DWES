@@ -245,7 +245,6 @@ paths:
               lastname: "Rodriguez"	
               email: "manolo@gmail.com"
               country: "Spain"
-              phoneNumber: "666 66 66 66"
       responses:
         '201':
           description: Usuario creado
