@@ -1,0 +1,493 @@
+openapi: 3.0.0
+info:
+  title: API
+  description: 
+  version: 1.0.0
+components:
+  definitions:
+    Game:
+      type: object
+      properties:
+        _id:
+          type: string
+        titulo:
+          type: string
+        descripcion:
+          type: string
+        unidades:
+          type: integer
+        categoria:
+          type: array
+          items:
+            type: string
+        precio:
+          type: number
+        imagen:
+          type: string
+        trailer:
+          type: string
+        pegi:
+          type: integer
+        desarrollador:
+          type: string
+        plataforma:
+          type: string
+        fechaLanzamiento:
+          type: string
+          format: date
+    User:
+        type: object
+        properties:
+          _id:
+            type: string
+          username:
+            type: string
+          name:
+            type: string
+          lastname:
+            type: string
+          country:
+            type: string
+          usernameImage:
+            type: string
+          email:
+            type: string
+          phoneNumber:
+            type: number
+          password:
+            type: string
+          rol:
+            type: string
+            enum:
+              - Admin
+              - User
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /notes:
+    schemes:
+      - http
+  /games:
+    get:
+      summary: Obtener todos los juegos
+      tags: 
+        - Games
+      responses:
+        200:
+          description: Lista de juegos
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Game'
+    post:
+      summary: Crear un juego
+      tags: 
+        - Games
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+            example:
+              titulo: "Ejemplo de título"
+              descripcion: "Ejemplo de descripción"
+              unidades: 10
+              categoria: ["acción", "aventura"]
+              precio: 19.99
+              imagen: "https://ejemplo.com/imagen.jpg"
+              trailer: "https://ejemplo.com/trailer.mp4"
+              pegi: 18
+              desarrollador: "Desarrollador"
+              plataforma: "Steam"
+              fechaLanzamiento: "2024-03-11"
+      responses:
+        201:
+          description: Juego creado
+          schema:
+            $ref: '#/definitions/Game'
+  /games/{title}:
+    get:
+      summary: Obtener un juego por título
+      tags: 
+        - Games
+      parameters:
+        - name: title
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Detalles del juego
+          schema:
+            $ref: '#/definitions/Game'
+    patch:
+      summary: Actualizar un juego por título
+      tags: 
+        - Games
+      parameters:
+        - name: title
+          in: path
+          required: true
+          type: string
+        - name: game
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Game'
+      responses:
+        200:
+          description: Juego actualizado
+          schema:
+            $ref: '#/definitions/Game'
+    delete:
+      summary: Eliminar un juego por título
+      tags: 
+        - Games
+      parameters:
+        - name: title
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Juego eliminado
+          schema:
+            $ref: '#/definitions/Game'
+  /games/id/{id}:
+    get:
+      summary: Obtener un juego por ID
+      tags: 
+        - Games
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Detalles del juego
+          schema:
+            $ref: '#/definitions/Game'
+  /login:
+    post:
+      summary: Iniciar sesión
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: Token generado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Credenciales inválidas
+  /users/me:
+    get:
+      summary: Obtener datos del usuario actual
+      tags: 
+        - Users
+      security:
+        - jwt: []
+      responses:
+        '200':
+          description: Datos del usuario actual
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users:
+    get:
+      summary: Obtener todos los usuarios
+      tags: 
+        - Users
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Crear un usuario
+      tags: 
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              username: "usuario"
+              password: "jajajaSouyUnAContraseñaSegura123"
+              name: "Manolo"
+              lastname: "Rodriguez"	
+              email: "manolo@gmail.com"
+              country: "Spain"
+              phoneNumber: "666 66 66 66"
+      responses:
+        '201':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{username}:
+    patch:
+      summary: Actualizar un usuario por nombre de usuario
+      tags: 
+        - Users
+      security:
+        - jwt: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Usuario actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Usuario no encontrado
+          content:
+            application/json:
+              example: { error: 'El usuario no existe' }
+    delete:
+      summary: Eliminar un usuario por nombre de usuario
+      tags: 
+        - Users
+      security:
+        - jwt: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuario eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Usuario no encontrado
+          content:
+            application/json:
+              example: { error: 'El usuario no existe' }
+  /carrito/{userId}:
+    get:
+      summary: Obtener productos del carrito
+      tags:
+        - Carrito
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Productos del carrito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '404':
+          description: No se encontraron productos en el carrito
+  /carrito/agregar:
+    post:
+      summary: Añadir producto al carrito
+      tags:
+        - Carrito
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                productId:
+                  type: string
+                cantidad:
+                  type: integer
+      responses:
+        '201':
+          description: Producto añadido al carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /carrito/modificar:
+    patch:
+      summary: Modificar cantidad de producto en el carrito
+      tags:
+        - Carrito
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                carritoId:
+                  type: string
+                cantidad:
+                  type: integer
+      responses:
+        '200':
+          description: Cantidad de producto en el carrito modificada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /carrito/eliminar/{carritoId}:
+    delete:
+      summary: Eliminar producto del carrito
+      tags:
+        - Carrito
+      parameters:
+        - name: carritoId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto eliminado del carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /facturas/agregar:
+    post:
+      summary: Agregar una factura
+      tags:
+        - Facturas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productoId:
+                        type: string
+                      unidades:
+                        type: integer
+                      precio:
+                        type: number
+      responses:
+        '201':
+          description: Factura agregada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Algo ha fallado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /facturas/{userId}:
+    get:
+      summary: Obtener todas las facturas de un usuario
+      tags:
+        - Facturas
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Todas las facturas del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Factura'
+  /facturas/eliminar/{facturaId}:
+    delete:
+      summary: Eliminar una factura
+      tags:
+        - Facturas
+      parameters:
+        - name: facturaId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Factura eliminada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
