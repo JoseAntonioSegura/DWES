@@ -240,12 +240,12 @@ paths:
               $ref: '#/components/schemas/User'
             example:
               username: "usuario"
+              password: "jajajaSouyUnAContraseñaSegura123"
               name: "Manolo"
               lastname: "Rodriguez"	
               email: "manolo@gmail.com"
               country: "Spain"
               phoneNumber: "666 66 66 66"
-              password: "jajajaSouyUnAContraseñaSegura123"
       responses:
         '201':
           description: Usuario creado
