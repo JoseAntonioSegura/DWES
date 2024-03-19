@@ -2,7 +2,7 @@ import { User } from '../../models/index.js';
 
 //Obtener usuario por nombre
 export async function getUserByName(username){
-  const user = await User.findOne({ username});
+  const user = await User.findOne({ username });
 
   return user;
 }
@@ -34,13 +34,13 @@ export async function createUser(user){
 }
 
 //Eliminar usuario
-export async function deleteUser(username) {
-  return User.findOneAndDelete({ username: username });
+export async function deleteUser(id) {
+  return User.findByIdAndDelete(id);
 }
 
 // Actualizar usuario
-export async function updateUser(username, updatedUserInfo) {
-  const updatedUser = await User.findOneAndUpdate({ username }, updatedUserInfo, { new: true });
+export async function updateUser(id, updatedUserInfo) {
+  const updatedUser = await User.findByIdAndUpdate(id, updatedUserInfo, { new: true });
 
   return updatedUser;
 }

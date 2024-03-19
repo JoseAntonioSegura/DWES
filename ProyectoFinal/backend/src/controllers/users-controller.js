@@ -48,7 +48,7 @@ export async function createUsersController(req, res, next) {
 // Eliminar un usuario
 export async function deleteUserController(req, res, next) {
   try {
-    const user = await deleteUser(req.params.username);
+    const user = await deleteUser(req.params.id);
     if (!user) {
       throw new HttpStatusError(404, 'El usuario no existe');
     }
@@ -62,7 +62,7 @@ export async function deleteUserController(req, res, next) {
 export async function updateUserController(req, res, next) {
   try {
     // Recoge el nombre del usuario
-    const { username } = req.params;
+    const { id } = req.params;
     // Recoge la información actualizada del usuario
     const updatedUserInfo = req.body;
 
@@ -73,7 +73,7 @@ export async function updateUserController(req, res, next) {
     }
 
     // Llma a la función que actualiza el usuario actualizando los datos que sean distintos a los que ya tiene
-    const updatedUser = await updateUser(username, updatedUserInfo);
+    const updatedUser = await updateUser(id, updatedUserInfo);
 
     if (!updatedUser) {
       throw new HttpStatusError(404, 'El usuario no existe');

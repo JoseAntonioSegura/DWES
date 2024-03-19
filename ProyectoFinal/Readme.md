@@ -67,8 +67,8 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 
 - `/users/me`: Obtener los datos del usuario logueado.
 - `/users`: Obtener todos los usuarios.
-- `/users/:username`: Actualizar un usuario.
-- `/users/:username`: Eliminar un usuario.
+- `/users/:id`: Actualizar un usuario.
+- `/users/:id`: Eliminar un usuario.
 
 #### 🎮 Juegos:
 
@@ -108,3 +108,7 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 - Puedes acceder a los tests generados con la configuración de SonarQube realizando el siguiente comando:
   - `docker-compose -f docker-compose.test.yml up`.
 - Posteriormente, en el `package.json`, encontrarás todos los scripts necesarios para verificar cada apartado.
+
+## 🧾 Correciones;
+  - `Ahora los usuarios se actualizan y eliminan mediante la ID.`.
+

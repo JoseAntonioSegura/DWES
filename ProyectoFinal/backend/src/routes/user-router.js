@@ -12,8 +12,8 @@ router.get('/', getUsersController);
 // Crear un usuario
 router.post('/', createUsersController);
 // Actualizar un usuario
-router.patch('/:username', checkToken, updateUserController);
+router.patch('/:id', checkToken, updateUserController);
 // Eliminar un usuario
-router.delete('/:username', deleteUserController);
+router.delete('/:id', deleteUserController);
 
 export default router;

@@ -59,7 +59,7 @@ function EditarPerfil(){
         e.preventDefault();
         try {
             // Enviar solicitud PATCH al servidor para actualizar los datos del usuario
-            const response = await fetch(`http://localhost:3000/users/${userOriginal.username}`, {
+            const response = await fetch(`http://localhost:3000/users/${userOriginal._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
