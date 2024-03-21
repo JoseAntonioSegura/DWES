@@ -1,4 +1,5 @@
 import Carrito from '../../models/Carrito.js';
+import { agregarFactura } from './factura-db-service.js';
 
 // Agregar producto al carrito
 export async function agregarProductoAlCarrito(userId, productId, cantidad) {
@@ -68,3 +69,19 @@ export async function eliminarProductoDelCarrito(carritoId) {
     throw new Error('Error al eliminar producto del carrito');
   }
 }
+
+export async function confirmarCompra(userId, carritoId, productos) {
+  try {
+    if (productos.length === 0) {
+      throw new Error('No hay productos en el carrito');
+    }
+    
+    agregarFactura(userId, productos);
+    
+    await Carrito.findByIdAndDelete(carritoId);
+    
+    return { message: 'Compra confirmada', productos };
+  } catch (error) {
+    throw new Error('Error al confirmar la compra');
+  }
+}	

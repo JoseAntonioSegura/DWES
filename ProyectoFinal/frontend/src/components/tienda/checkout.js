@@ -95,16 +95,31 @@ const Checkout = () => {
     setTotalCompra(total);
   };
 
-  const eliminarDelCarrito = async (producto) => {
+  const confirmarCompra = async (producto) => {
     try {
+      const userId = JSON.parse(localStorage.getItem('user'))._id;
+
+      // Construir la lista de productos para la factura
+      const productosParaFactura = productos.map(producto => ({
+        productId: producto.productId._id,
+        cantidad: producto.cantidad,
+        precioOriginal: producto.productId.precio
+      }));
+
       const carritoId = producto._id;
 
       // Eliminar el producto del carrito
-      await fetch(`http://localhost:3000/carrito/${carritoId}`, {
-        method: 'DELETE',
+      await fetch(`http://localhost:3000/carrito/confirmar-compra`, {
+        method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+        },
+        body: JSON.stringify({
+          userId,
+          carritoId,
+          productos: productosParaFactura
+        })
       });
       // Actualizar la lista de productos en el carrito
       obtenerProductosDelCarrito(JSON.parse(localStorage.getItem('user'))._id);
@@ -141,7 +156,7 @@ const Checkout = () => {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user && user._id) {
         for (const producto of productos) {
-          await eliminarDelCarrito(producto);
+          await confirmarCompra(producto);
         }
         setProductos([]);
         setTotalCompra(0);
@@ -183,9 +198,6 @@ const Checkout = () => {
   }
 
   try {
-    // Agregar la factura a la base de datos
-    await agregarFacturaYProductos();
-
     // Eliminar Productos del carrito
     await eliminarTodosLosProductos();
 
@@ -196,42 +208,6 @@ const Checkout = () => {
     console.error('Error al procesar la compra:', error);
   }
 };
-
-const agregarFacturaYProductos = async () => {
-  try {
-    const userId = JSON.parse(localStorage.getItem('user'))._id;
-
-    // Construir la lista de productos para la factura
-    const productosParaFactura = productos.map(producto => ({
-      productId: producto.productId._id,
-      cantidad: producto.cantidad,
-      precioOriginal: producto.productId.precio
-    }));
-
-    // Enviar la solicitud para agregar la factura con los productos al servidor
-    const response = await fetch('http://localhost:3000/factura/agregar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        userId,
-        productos: productosParaFactura
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error('Error al agregar factura y productos');
-    }
-  } catch (error) {
-    console.error('Error al agregar factura y productos:', error);
-    throw error;
-  }
-};
-
-
-
 
   return (
     <>

@@ -66,3 +66,15 @@ export const eliminarProductoDelCarrito = async (req, res) => {
     res.status(error.status || 500).json({ message: error.message || 'Error al eliminar producto del carrito' });
   }
 };
+
+
+export const confirmarCompra = async (req, res) => {
+  const { carritoId, userId, productos } = req.body;
+  try {
+    console.log('confirmarCompra', req.body);
+    const result = await CarritoService.confirmarCompra(userId, carritoId, productos);
+    res.json(result);
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message || 'Error al confirmar la compra' });
+  }
+}

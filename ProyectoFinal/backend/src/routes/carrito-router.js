@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { agregarProductoAlCarrito, modificarCantidadProductoEnCarrito, eliminarProductoDelCarrito, obtenerProductosCarrito } from '../controllers/carrito-controller.js';
+import { agregarProductoAlCarrito, modificarCantidadProductoEnCarrito, eliminarProductoDelCarrito, obtenerProductosCarrito, confirmarCompra } from '../controllers/carrito-controller.js';
 import { checkToken } from '../middlewares/auth-middleware.js';
 
 const router = Router();
@@ -13,5 +13,7 @@ router.post('/agregar', checkToken, agregarProductoAlCarrito);
 router.patch('/', checkToken, modificarCantidadProductoEnCarrito);
 // Eliminar producto del carrito
 router.delete('/:carritoId', checkToken, eliminarProductoDelCarrito);
+
+router.post('/confirmar-compra', checkToken, confirmarCompra);
 
 export default router;
