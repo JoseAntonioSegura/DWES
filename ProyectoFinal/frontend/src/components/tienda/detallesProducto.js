@@ -82,6 +82,29 @@ function DetallesProducto() {
         throw new Error('Error al agregar producto al carrito');
       }
 
+      // Obtener el producto actualizado con la cantidad reducida de unidades
+      const updatedProduct = { ...producto[0], unidades: producto[0].unidades - 1 };
+  
+      // Construir el cuerpo de la solicitud para actualizar las unidades del producto
+      const productoBody = JSON.stringify({
+        unidades: updatedProduct.unidades
+      });
+  
+      // Enviar la solicitud al backend para actualizar las unidades del producto
+      const productoResponse = await fetch(`http://localhost:3000/games/${titulo}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: productoBody
+      });
+  
+      // Verificar si la respuesta para actualizar las unidades del producto fue exitosa
+      if (!productoResponse.ok) {
+        throw new Error('Error al actualizar las unidades del producto');
+      }
+
       window.location.reload();
   
     } catch (error) {
