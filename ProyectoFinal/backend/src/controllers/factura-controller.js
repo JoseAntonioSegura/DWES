@@ -1,6 +1,7 @@
 import * as FacturaService from '../services/database/factura-db-service.js';
 import { HttpStatusError } from 'common-errors';
 
+
 // Agregar una factura
 export const agregarFactura = async (req, res) => {
   const { userId, productos } = req.body;
