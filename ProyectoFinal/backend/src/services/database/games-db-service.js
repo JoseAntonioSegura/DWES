@@ -10,6 +10,7 @@ export async function createGame(data){
 export async function getGameByTitle(titulo) {
   return Game.find({ titulo: { $regex: titulo, $options: 'i' } });
 }
+
 // Obtener un juego por id
 export async function getGameById(id) {
   return Game.findById(id);
@@ -34,13 +35,14 @@ export async function getGames(filters = {}) {
   return gamesQuery.exec();
 }
 
-// Eliminar un juego por el título del juego
-export async function deleteGameByTitle(titulo) {
-  return Game.findOneAndDelete({ titulo: titulo });
+// Eliminar un juego
+export async function deleteGameByID(id) {
+  return Game.findByIdAndDelete(id);
 }
 
-// Actualizar un juego por el título del juego
-export async function updateGameByTitle(title, newData) {
-  const game = await Game.findOneAndUpdate({ titulo: title }, newData, { new: true });
-  return game;
+
+// Actualizar un juego
+export async function updateGameByID(id, newData) {
+  return Game.findByIdAndUpdate(id, newData, { new: true });
 }
+

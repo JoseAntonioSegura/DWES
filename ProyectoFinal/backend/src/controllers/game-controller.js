@@ -72,7 +72,7 @@ export async function createGame(req, res, next){
 // Actualizar un juego
 export async function updateGame(req, res, next){
   try {
-    const updatedGame = await gameService.updateGameByTitle(req.params.title, req.body);
+    const updatedGame = await gameService.updateGameByID(req.params.id, req.body);
     if (!updatedGame) {
       throw new HttpStatusError(404, 'El juego no existe');
     }
@@ -85,7 +85,7 @@ export async function updateGame(req, res, next){
 // Eliminar un juego
 export async function deleteGame(req, res, next){
   try {
-    const game = await gameService.deleteGameByTitle(req.params.title);
+    const game = await gameService.deleteGameByID(req.params.id);
     if (!game) {
       throw new HttpStatusError(404, 'El juego no existe');
     }

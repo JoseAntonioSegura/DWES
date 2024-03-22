@@ -6,7 +6,7 @@ import config from "../config.js";
 
 // Middleware para comprobar el token
 export function checkToken(req, res, next){
-    console.log(req.headers.authorization)
+    //console.log(req.headers.authorization)
 
     // Comprobar si el token está en la cabecera
     const {authorization} = req.headers;

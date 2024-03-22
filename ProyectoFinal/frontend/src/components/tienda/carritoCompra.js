@@ -81,7 +81,7 @@ const CarritoCompra = () => {
     try {
       const unidadesEliminadas = producto.cantidad;
       const nuevasUnidades = producto.productId.unidades + unidadesEliminadas;
-      await fetch(`http://localhost:3000/games/${producto.productId.titulo}`, {
+      await fetch(`http://localhost:3000/games/${producto.productId._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -122,14 +122,15 @@ const CarritoCompra = () => {
           throw new Error('Producto no encontrado en el carrito');
         }
   
-        const response = await fetch(`http://localhost:3000/games/${productoEnCarrito.productId.titulo}`);
+        const response = await fetch(`http://localhost:3000/games/${productoEnCarrito.productId._id}`);
         
         if (!response.ok) {
           throw new Error('Error al obtener información del juego');
         }
 
         const juego = await response.json();
-        if (juego[0].unidades <= 0 && incremento === 1) {
+
+        if (juego.unidades <= 0 && incremento === 1) {
           throw new Error('No hay suficientes unidades disponibles');
         }
   
@@ -167,7 +168,7 @@ const CarritoCompra = () => {
         const nuevasUnidades = productoEnCarrito.productId.unidades - diferencia;
         
         // Envía una solicitud PATCH al backend para actualizar las unidades del juego
-        await fetch(`http://localhost:3000/games/${productoEnCarrito.productId.titulo}`, {
+        await fetch(`http://localhost:3000/games/${productoEnCarrito.productId._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

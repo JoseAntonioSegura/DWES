@@ -8,15 +8,15 @@ const router = Router();
 // Obtener todos los juegos
 router.get('/', getAllGames );
 // Obtener un juego por título
-router.get('/:title', getGame);
+router.get('/titulo/:title', getGame);
 // Obtener un juego por id
-router.get('/id/:id', getGameById);
+router.get('/:id', getGameById);
 // Crear un juego
 router.post('/', createGame);
 // Actualizar un juego
-router.patch('/:title', updateGame);
+router.patch('/:id', updateGame);
 // Eliminar un juego
-router.delete('/:title', deleteGame);
+router.delete('/:id', deleteGame);
 
 
 export default router;

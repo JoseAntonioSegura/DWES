@@ -14,7 +14,7 @@ function DetallesProducto() {
   useEffect(() => {
     const obtenerDetallesProducto = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/games/${titulo}`);
+        const response = await fetch(`http://localhost:3000/games/titulo/${titulo}`);
         if (!response.ok) {
           throw new Error('Error al obtener los detalles del producto');
         }
@@ -91,7 +91,7 @@ function DetallesProducto() {
       });
   
       // Enviar la solicitud al backend para actualizar las unidades del producto
-      const productoResponse = await fetch(`http://localhost:3000/games/${titulo}`, {
+      const productoResponse = await fetch(`http://localhost:3000/games/${producto[0]._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
