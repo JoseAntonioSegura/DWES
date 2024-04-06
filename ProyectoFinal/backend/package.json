@@ -19,7 +19,7 @@
     "dotenv": "^16.3.1",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.2",
-    "sonarqube-scanner": "^3.3.0",
+    "sonarqube-scanner": "^3.4.0",
     "supertest": "^6.3.4"
   },
   "dependencies": {
