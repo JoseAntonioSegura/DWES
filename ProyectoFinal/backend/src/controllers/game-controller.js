@@ -58,16 +58,23 @@ export async function getGameById(req, res, next) {
   }
 }
 
-// crear un juego
+// Crear un juego
 export async function createGame(req, res, next){
   try {
     const body = req.body;
+
+    // Realizar la validación de los datos del juego aquí
+    if (!body.titulo || !body.descripcion || !body.unidades || !body.categoria || !body.precio || !body.imagen || !body.trailer || !body.pegi || !body.desarrollador || !body.plataforma || !body.fechaLanzamiento) {
+      throw new HttpStatusError(400, 'Los datos del juego son incorrectos');
+    }
+
     const game = await gameService.createGame(body);
     return res.status(201).send(game);
   } catch (error){
     next(error);
   }
 }
+
 
 // Actualizar un juego
 export async function updateGame(req, res, next){
