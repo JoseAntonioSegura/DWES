@@ -6,6 +6,11 @@ export async function agregarFactura(userId, productos) {
       // Crear un nuevo objeto de factura
       const nuevaFactura = new Factura({ userId });
 
+      if (!productos || productos.length === 0) {
+        throw new Error('La factura no puede estar vacía');
+      }
+      
+
       // Crear un objeto con los datos de los productos
       nuevaFactura.datosProducto = productos.map(({ productId, cantidad, precioOriginal }) => ({ productoId: productId, unidades: cantidad, precio: precioOriginal }));
 

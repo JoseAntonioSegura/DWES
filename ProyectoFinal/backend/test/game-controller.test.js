@@ -4,7 +4,6 @@ import supertest from 'supertest';
 
 const request = supertest(app);
 
-let nombreJuego = 'Nuevo Juego';
 let ID = null;
 
 const newGame = {

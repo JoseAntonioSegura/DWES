@@ -1,4 +1,3 @@
-
 import test from 'ava';
 import app from '../src/app.js';
 import supertest from 'supertest';
@@ -178,6 +177,103 @@ test.serial('DELETE /factura/:facturaId elimina una factura por ID', async t => 
     const res = await request.delete(`/factura/${facturaId}`).set('Authorization', `Bearer ${token}`);
 
     t.is(res.status, 200);
+    t.truthy(res.body);
+});
+
+// Pruebas de ERROR //////////////////////////////////////////////////
+// Prueba para agregar un producto al carrito con datos incorrectos
+test.serial('POST /carrito/agregar - Debería devolver un error si los datos del producto son incorrectos', async t => {
+    const invalidProduct = {
+        userId: newUser._id,
+        productId: 'SADASDASDASD'
+    };
+
+
+    const res = await request.post('/carrito/agregar').set('Authorization', `Bearer ${token}`)
+        .send(invalidProduct);
+
+
+    t.is(res.status, 400);
+    t.truthy(res.body);
+});
+
+// Prueba para modificar la cantidad de un producto en el carrito con datos incorrectos
+test.serial('PATCH /carrito - Debería devolver un error si los datos de la modificación son incorrectos', async t => {
+    const modificaciones = {
+        carritoId: 'SADASDASDASD',
+        unidades: 2
+    };
+
+
+    const res = await request.patch('/carrito').set('Authorization', `Bearer ${token}`)
+        .send(modificaciones);
+
+
+    t.is(res.status, 400);
+    t.truthy(res.body);
+});
+
+test.serial('DELETE /carrito/:carritoId - Debería devolver un error si el carritoId es incorrecto', async t => {
+    const res = await request.delete('/carrito/129834901283812dasd')
+        .set('Authorization', `Bearer ${token}`);
+
+
+    t.is(res.status, 500);
+    t.truthy(res.body);
+});
+
+test.serial('POST /carrito/confirmar-compra - Debería devolver un error si los datos de la compra son incorrectos', async t => {
+    const compra = {
+        carritoId: carritoID,
+        userId: "asdasdasdasd",
+        productos: []
+    };
+
+
+    const res = await request.post('/carrito/confirmar-compra').set('Authorization', `Bearer ${token}`)
+        .send(compra);
+
+
+    t.is(res.status, 500);
+    t.truthy(res.body);
+});
+
+
+// Prueba para agregar una factura con datos incorrectos
+test.serial('POST /factura/agregar - Debería devolver un error si los datos de la factura son incorrectos', async t => {
+    const newFactura = {
+        carritoId: 'asdalksd,asd,',
+        userId: "asdasdasdasd",
+        productos: []
+    };
+
+
+    const res = await request.post('/factura/agregar').set('Authorization', `Bearer ${token}`)
+        .send(newFactura);
+
+
+    t.is(res.status, 500);
+    t.truthy(res.body);
+});
+
+// Prueba para obtener facturas por usuario con datos incorrectos
+test.serial('GET /factura/:userId - Debería devolver un error si el userId es incorrecto', async t => {
+    const res = await request.get('/factura/123')
+        .set('Authorization', `Bearer ${token}`);
+
+
+    t.is(res.status, 500);
+    t.truthy(res.body);
+});
+
+
+// Prueba para eliminar una factura con datos incorrectos
+test.serial('DELETE /factura/:facturaId - Debería devolver un error si el facturaId es incorrecto', async t => {
+    const res = await request.delete('/factura/123').set
+    ('Authorization', `Bearer ${token}`);
+
+
+    t.is(res.status, 500);
     t.truthy(res.body);
 });
 

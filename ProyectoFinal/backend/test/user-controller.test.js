@@ -84,3 +84,41 @@ test.serial('DELETE /:id elimina un usuario por ID', async t => {
     t.truthy(res.body);
 });
 
+// Casos de prueba adicionales errores
+
+test.serial('POST /login - Inicio de sesión con credenciales incorrectas', async t => {
+    const credentials = {
+        username: 'fdsdfsdf',
+        password: 'sdfsdfsdfsdfsdfsdf'
+    };
+
+    const res = await request(app)
+        .post('/login')
+        .send(credentials);
+
+    t.is(res.status, 401);
+});
+
+test.serial('PATCH /users/:id - Intento de actualizar un usuario con datos no válidos', async t => {
+    const invalidUserData = {
+        sadasdasdas: '',
+    };
+
+    const res = await request(app)
+        .patch(`/users/${newUser._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send(invalidUserData);
+
+    t.is(res.status, 404);
+});
+
+test.serial('DELETE /users/:id - Intento de eliminar un usuario inexistente', async t => {
+    const nonExistentUserId = 'nonexistentuserid';
+
+    const res = await request(app)
+        .delete(`/users/${nonExistentUserId}`)
+        .set('Authorization', `Bearer ${token}`);
+
+    t.is(res.status, 500);
+});
+
