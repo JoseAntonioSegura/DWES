@@ -1,0 +1,87 @@
+#administrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+}
+
+#columnaIzquierda {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 10%;
+    height: 60%;
+    background-color: #5e5e5e;
+    border: 2px solid #000;
+}
+
+#columnaDerecha {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 60%;
+    background-color: #5e5e5e;
+    border: 2px solid #000;
+}
+
+#columnaIzquierda #titulo ,#apartado1, #apartado2, #apartado3 {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #000;
+}
+
+#columnaDerecha #apartado1, #apartado2, #apartado3 {
+    font-size: 20px;
+}
+
+.subapartado {
+    opacity: 0;
+    max-height: 0;
+    width: 100%;
+    height: 30%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+  
+.subapartado.visible {
+    opacity: 1;
+    max-height: 1000px;
+}
+
+#titulo {
+    margin: 0;
+    padding: 0;
+    min-height: 20%;
+    display: flex;
+    justify-content: start;
+}
+
+.subapartado div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #000;
+}
+
+.subapartado div:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.productosVisible::after,
+.usuariosVisible::after,
+.facturasVisible::after {
+    transform: rotate(90deg);
+}
