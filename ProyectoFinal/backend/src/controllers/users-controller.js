@@ -58,7 +58,7 @@ export async function deleteUserController(req, res, next) {
   }
 }
 
-//actualizar un usuario por nombre
+//actualizar un usuario por ID
 export async function updateUserController(req, res, next) {
   try {
     // Recoge el nombre del usuario

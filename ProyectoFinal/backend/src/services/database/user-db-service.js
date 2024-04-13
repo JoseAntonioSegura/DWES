@@ -36,6 +36,7 @@ export async function createUser(user){
 //Eliminar usuario
 export async function deleteUser(id) {
   return User.findByIdAndDelete(id);
+  
 }
 
 // Actualizar usuario
