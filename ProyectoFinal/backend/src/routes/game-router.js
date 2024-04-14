@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { getAllGames, getGame,createGame,getGameById , deleteGame, updateGame } from '../controllers/game-controller.js';
 //import { checkToken } from '../middlewares/auth-middleware.js'
+import  isAdmin  from '../middlewares/admin-middleware.js'
 
 const router = Router();
 
@@ -10,13 +11,13 @@ router.get('/', getAllGames );
 // Obtener un juego por título
 router.get('/titulo/:title', getGame);
 // Obtener un juego por id
-router.get('/:id', getGameById);
+router.get('/:id',isAdmin, getGameById);
 // Crear un juego
-router.post('/', createGame);
+router.post('/',isAdmin, createGame);
 // Actualizar un juego
-router.patch('/:id', updateGame);
+router.patch('/:id',isAdmin, updateGame);
 // Eliminar un juego
-router.delete('/:id', deleteGame);
+router.delete('/:id',isAdmin, deleteGame);
 
 
 export default router;

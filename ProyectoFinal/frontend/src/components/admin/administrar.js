@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './administrar.css';
 import Header from '../inicio/header';
+import BuscarProducto from './buscarProducto';
+import CrearProducto from './crearProducto';
+import EditarProductos from './editarProducto';
+import EliminarProducto from './eliminarProducto';
 
 function Administrar() {
   const [productosVisible, setProductosVisible] = useState(false);
@@ -30,16 +34,16 @@ function Administrar() {
   const handleSeleccionSubapartado = (subapartado) => {
     switch (subapartado) {
       case 'Buscar Producto':
-        setContenidoDerecha(<p>Hola</p>);
+        setContenidoDerecha(<BuscarProducto/>);
         break;
       case 'Agregar Producto':
-        setContenidoDerecha(null); 
+        setContenidoDerecha(<CrearProducto/>); 
         break;
       case 'Actualizar Producto':
-        setContenidoDerecha(null); 
+        setContenidoDerecha(<EditarProductos/>); 
         break;
       case 'Eliminar Producto':
-        setContenidoDerecha(null);
+        setContenidoDerecha(<EliminarProducto/>);
         break;
       case 'Buscar Usuario':
         setContenidoDerecha();
@@ -80,7 +84,7 @@ function Administrar() {
             <div id='subApartado1' onClick={() => handleSeleccionSubapartado('Buscar Producto')}>Buscar Producto</div>
             <div id='subApartado2' onClick={() => handleSeleccionSubapartado('Agregar Producto')}>Agregar Producto</div>
             <div id='subApartado3' onClick={() => handleSeleccionSubapartado('Actualizar Producto')}>Actualizar Producto</div>
-            <div id='subApartado4'>Eliminar Producto</div>
+            <div id='subApartado4' onClick={() => handleSeleccionSubapartado('Eliminar Producto')}>Eliminar Producto</div>
           </div>
           <div id='apartado2' onClick={() => {toggleUsuarios(); handleSeleccionSubapartado('Buscar Usuario')}}>Usuarios</div>
           <div className={usuariosVisible ? 'subapartado visible' : 'subapartado'}>
@@ -97,7 +101,6 @@ function Administrar() {
           </div>
         </div>
         <div id='columnaDerecha'>
-          <h1>Contenido</h1>
           {contenidoDerecha} 
         </div>
       </div>

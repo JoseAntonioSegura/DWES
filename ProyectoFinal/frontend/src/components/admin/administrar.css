@@ -13,7 +13,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 10%;
-    height: 60%;
+    height: 70%;
     background-color: #5e5e5e;
     border: 2px solid #000;
 }
@@ -23,8 +23,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 60%;
+    width: 70%;
+    height: 70%;
     background-color: #5e5e5e;
     border: 2px solid #000;
 }

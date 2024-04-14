@@ -1,0 +1,51 @@
+.crearProducto {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    padding-right: 0px;
+    overflow: auto;
+    max-height: 80vh; 
+  }
+  
+  .crearProducto h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .crearProducto label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .crearProducto input[type="text"],
+  .crearProducto input[type="number"],
+  .crearProducto select,
+  .crearProducto button,
+  .crearProducto input[type="date"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .crearProducto select {
+    appearance: none;
+    padding-right: 25px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23000000' d='M14.8 7.6L10 12.4 5.2 7.6l-.8.8 5.6 5.6c.4.4 1 .4 1.4 0l5.6-5.6-.8-.8z'/%3E%3C/svg%3E") no-repeat right 10px center/15px 15px;
+  }
+  
+  .crearProducto button {
+    width: calc(100% - 20px);
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .crearProducto button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,0 +1,59 @@
+.eliminarProducto-container {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .eliminarProducto-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .eliminarProducto-container label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .eliminarProducto-container input[type="text"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .eliminarProducto-container button[type="submit"],
+  .eliminarProducto-container button {
+    padding: 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .eliminarProducto-container button[type="submit"] {
+    margin-top: 10px;
+  }
+  
+  .eliminarProducto-container button:hover {
+    background-color: #c82333;
+  }
+  
+  .eliminarProducto-container .confirmacion {
+    margin-top: 20px;
+  }
+  
+  .eliminarProducto-container .confirmacion p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff; 
+  }
+  
+  .eliminarProducto-container .confirmacion button {
+    margin-right: 10px; 
+  }
