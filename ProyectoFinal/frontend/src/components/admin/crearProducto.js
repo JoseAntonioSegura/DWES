@@ -21,11 +21,15 @@ function CrearProducto() {
       return;
     }
 
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user.rol);
+
     try {
       const response = await fetch('http://localhost:3000/games', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+            'rol': user.rol
         },
         body: JSON.stringify({
           titulo,
@@ -66,7 +70,7 @@ function CrearProducto() {
     const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
     setCategoria(selectedOptions);
   };
-  
+
   return (
     <div className="crearProducto">
       <h1>Crear Producto</h1>

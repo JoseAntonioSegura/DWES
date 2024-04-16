@@ -29,7 +29,7 @@ function EditarProducto() {
     try {
       const response = await fetch(`http://localhost:3000/games/${productId}`, {
         headers: {
-            'user': user.rol
+            'rol': user.rol
         }
       });
       if (!response.ok) {
@@ -62,14 +62,14 @@ function EditarProducto() {
   
 
   const handleActualizarProducto = async () => {
-    const user = JSON.parse(localStorage.getItem('usuario'));
-    console.log(user);
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user.rol);
     try {
       const response = await fetch(`http://localhost:3000/games/${productId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'user': user
+          'rol': user.rol
         },
         
         

@@ -13,8 +13,15 @@ function EliminarProducto() {
   };
 
   const handleEliminar = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user.rol);
+
     try {
-      const response = await fetch(`http://localhost:3000/games/${idJuego}`, {
+      const response = await fetch(`http://localhost:3000/games/${idJuego}`,
+     {
+        headers: {
+            'rol': user.rol
+        },
         method: 'DELETE'
       });
       if (response.ok) {
