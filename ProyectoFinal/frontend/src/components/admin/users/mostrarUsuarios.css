@@ -1,0 +1,28 @@
+.user-container {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+  
+  .user-image {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    object-fit: cover;
+  }
+  
+  .user-details {
+    flex-grow: 1;
+    margin: auto 10px;
+    
+  }
+  
+  .user-details p {
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+  }
+
+  

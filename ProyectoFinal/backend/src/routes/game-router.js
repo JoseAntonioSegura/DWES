@@ -11,11 +11,11 @@ router.get('/', getAllGames );
 // Obtener un juego por título
 router.get('/titulo/:title', getGame);
 // Obtener un juego por id
-router.get('/:id',isAdmin, getGameById);
+router.get('/:id', getGameById);
 // Crear un juego
 router.post('/',isAdmin, createGame);
 // Actualizar un juego
-router.patch('/:id',isAdmin, updateGame);
+router.patch('/:id', updateGame);
 // Eliminar un juego
 router.delete('/:id',isAdmin, deleteGame);
 

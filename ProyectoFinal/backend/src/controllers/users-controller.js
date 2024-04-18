@@ -1,8 +1,8 @@
 import { HttpStatusError } from 'common-errors';
-import { getUsers, createUser, getUserByName, deleteUser, updateUser } from "../services/database/user-db-service.js";
+import { getUsers, createUser, getUserByName, deleteUser,getUserByID, updateUser, getUserByNameAdmin } from "../services/database/user-db-service.js";
 import { encryptPassword } from "../utils/encrypt.js";
 
-// Obtener un usuario por nombre
+// Obtener un usuario por nombre actualmente logueado
 export async function getUserMe(req, res, next) {
   try {
     const user = await getUserByName(req.user.username);
@@ -11,6 +11,38 @@ export async function getUserMe(req, res, next) {
     }
     return res.send(user);
   } catch (error) {
+    next(error);
+  }
+}
+
+// Obtener un usuario por su ID
+export async function getUserByIdController(req, res, next) {
+  try {
+    const { id } = req.params;
+    const user = await getUserByID(id);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
+    next(error);
+  }
+}
+
+// Obtener un usuario por su nombre de usuario
+export async function getUserByNameForAdmin(req, res, next) {
+  try {
+    const { name } = req.params;
+    const user = await getUserByNameAdmin(name);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
     next(error);
   }
 }

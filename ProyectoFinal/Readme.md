@@ -16,12 +16,17 @@
   - Buscador de productos y filtros.
   - Footer básico.
 - **💡 Por hacer:** 
-  - Usuario Admin que tenga la posibilidad de editar productos.
   - Una página inicio y contacto.
   - Poder comprar un producto directamente.
   - Aceptar términos y condiciones generado.
   - Desplegar y no usar el localhost.
   - Mejoras de CSS.
+  - Más test que abarquen más errores.
+  - Probar una API que permite la implementación de un chatBot.
+- **💡Arreglos:** 
+  - Busqueda de usuarios y productos ahora por ID.
+  - Rol Admin y Middleware Admin.
+  - Más test para SonarQube usando ava.
 
 ## 🧾 Documentación
 
@@ -73,11 +78,11 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 #### 🎮 Juegos:
 
 - `/games`: Obtener todos los juegos.
-- `/games/:title`: Obtener un juego por título.
+- `/games/name/:title`: Obtener un juego por título.
 - `/games/id/:id`: Obtener un juego por ID.
 - `/games`: Crear un juego.
-- `/games/:title`: Actualizar un juego.
-- `/games/:title`: Eliminar un juego.
+- `/games/:id`: Actualizar un juego.
+- `/games/:id`: Eliminar un juego.
 
 #### 🛒 Carrito:
 
@@ -95,6 +100,8 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 ### 🗝️ Middleware Utilizado:
 
 - `checkToken`: Middleware para verificar el token de autenticación en las rutas protegidas.
+- `isAdmin`: Middleware para el rol del usuario a la hora de loguearse.
+
 
 
 ## Middleware

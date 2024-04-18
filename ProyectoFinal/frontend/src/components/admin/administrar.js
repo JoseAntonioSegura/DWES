@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './administrar.css';
 import Header from '../inicio/header';
-import BuscarProducto from './buscarProducto';
-import CrearProducto from './crearProducto';
-import EditarProductos from './editarProducto';
-import EliminarProducto from './eliminarProducto';
+import BuscarProducto from './games/buscarProducto';
+import CrearProducto from './games/crearProducto';
+import EditarProductos from './games/editarProducto';
+import EliminarProducto from './games/eliminarProducto';
+import MostrarUsuarios from './users/mostrarUsuarios';
+import BuscarUsuario from './users/buscarUsuario';
+import EliminarUsuario from './users/eliminarUsuario';
+import EditarUsuario from './users/editarUsuario';
+import MostrarFacturas from './facturas/mostrarFacturas';
+import MostrarFactura from './facturas/mostrarFactura';
+import EliminarFactura from './facturas/eliminarFactura';
 
 function Administrar() {
   const [productosVisible, setProductosVisible] = useState(false);
@@ -46,25 +53,25 @@ function Administrar() {
         setContenidoDerecha(<EliminarProducto/>);
         break;
       case 'Buscar Usuario':
-        setContenidoDerecha();
+        setContenidoDerecha(<BuscarUsuario/>);
         break;
-      case 'Agregar Usuario':
-        setContenidoDerecha(null);
+      case 'Mostrar Usuarios':
+        setContenidoDerecha(< MostrarUsuarios/>);
         break;
-      case 'Actualizar Usuario':
-        setContenidoDerecha(null);
+      case 'Editar Usuario':
+        setContenidoDerecha(<EditarUsuario/>);
         break;
       case 'Eliminar Usuario':
-        setContenidoDerecha(null);
+        setContenidoDerecha(<EliminarUsuario/>);
         break;
-      case 'Buscar Factura':
-        setContenidoDerecha();
+      case 'Buscar Facturas':
+        setContenidoDerecha(<MostrarFacturas/>);
         break;
-      case 'Agregar Factura':
-        setContenidoDerecha(null);
-        break;
+        case 'Buscar Factura':
+          setContenidoDerecha(<MostrarFactura/>);
+          break;
       case 'Eliminar Factura':
-        setContenidoDerecha(null);
+        setContenidoDerecha(<EliminarFactura/>);
         break;
       default:
         setContenidoDerecha(null);
@@ -88,15 +95,15 @@ function Administrar() {
           </div>
           <div id='apartado2' onClick={() => {toggleUsuarios(); handleSeleccionSubapartado('Buscar Usuario')}}>Usuarios</div>
           <div className={usuariosVisible ? 'subapartado visible' : 'subapartado'}>
-            <div id='subApartado5' onClick={() => handleSeleccionSubapartado('Buscar Usuario')}>Buscar Usuario</div>
-            <div id='subApartado6' onClick={() => handleSeleccionSubapartado('Agregar Usuario')}>Agregar Usuario</div>
-            <div id='subApartado7' onClick={() => handleSeleccionSubapartado('Actualizar Usuario')}>Actualizar Usuario</div>
-            <div id='subApartado8'>Eliminar Usuario</div>
+            <div id='subApartado5' onClick={() => handleSeleccionSubapartado('Mostrar Usuarios')}>Mostrar Usuarios</div>
+            <div id='subApartado6' onClick={() => handleSeleccionSubapartado('Buscar Usuario')}>Buscar Usuario</div>
+            <div id='subApartado7' onClick={() => handleSeleccionSubapartado('Editar Usuario')}>Editar Usuario</div>
+            <div id='subApartado8' onClick={() => handleSeleccionSubapartado('Eliminar Usuario')}>Eliminar Usuario</div>
           </div>
           <div id='apartado3' onClick={() => {toggleFacturas(); handleSeleccionSubapartado('Buscar Factura')}}>Facturas</div>
           <div className={facturasVisible ? 'subapartado visible' : 'subapartado'}>
-            <div id='subApartado9' onClick={() => handleSeleccionSubapartado('Buscar Factura')}>Buscar Factura</div>
-            <div id='subApartado10' onClick={() => handleSeleccionSubapartado('Agregar Factura')}>Agregar Factura</div>
+            <div id='subApartado9' onClick={() => handleSeleccionSubapartado('Buscar Facturas')}>Buscar Facturas</div>
+            <div id='subApartado10' onClick={() => handleSeleccionSubapartado('Buscar Factura')}>Buscar Factura</div>
             <div id='subApartado12' onClick={() => handleSeleccionSubapartado('Eliminar Factura')}>Eliminar Factura</div>
           </div>
         </div>

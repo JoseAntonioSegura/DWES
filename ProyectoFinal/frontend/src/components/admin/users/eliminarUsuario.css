@@ -1,0 +1,61 @@
+.eliminarUsuario-container {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .eliminarUsuario-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .eliminarUsuario-container label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .eliminarUsuario-container input[type="text"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .eliminarUsuario-container button[type="submit"],
+  .eliminarUsuario-container button {
+    padding: 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .eliminarUsuario-container button[type="submit"] {
+    margin-top: 10px;
+  }
+  
+  .eliminarUsuario-container button:hover {
+    background-color: #c82333;
+  }
+  
+  .eliminarUsuario-container .confirmacion {
+    margin-top: 20px;
+  }
+  
+  .eliminarUsuario-container .confirmacion p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff; 
+  }
+  
+  .eliminarUsuario-container .confirmacion button {
+    margin-right: 10px; 
+  }
+  

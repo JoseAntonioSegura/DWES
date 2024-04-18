@@ -43,3 +43,17 @@ export async function eliminarFactura(facturaId) {
       throw new Error('Error al eliminar factura');
     }
 };
+
+// Obtener una factura por su ID
+export async function obtenerFacturaID(facturaId) {
+    try {
+      const factura = await Factura.findById(facturaId);
+      if (!factura) {
+        throw new Error('Factura no encontrada');
+      }
+      return factura;
+    }
+    catch (error) {
+      throw new Error('Error al obtener la factura por ID');
+    }
+};

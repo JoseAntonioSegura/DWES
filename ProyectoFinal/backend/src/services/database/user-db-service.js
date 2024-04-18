@@ -7,6 +7,29 @@ export async function getUserByName(username){
   return user;
 }
 
+// Obtener un usuario por su nombre de usuario desde la base de datos
+export async function getUserByNameAdmin(name) {
+  try {
+    const user = await User.findOne({ username: { $regex: new RegExp(`^${name}$`, 'i') } });
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error al obtener el usuario por nombre');
+  }
+}
+
+// Obtener un usuario por su ID desde la base de datos
+export async function getUserByID(id) {
+  try {
+    const user = await User.findById(id);
+    return user;
+  }
+  catch (error) {
+    console.error(error);
+    throw new Error('Error al obtener el usuario por ID');
+  }
+}
+
 //Obtener usuarios segun los filtros
 export async function getUsers(filters){
   const { name } = filters;

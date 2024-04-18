@@ -49,3 +49,18 @@ export const eliminarFactura = async (req, res) => {
     }
   }
 };
+
+// Obtener una factura por su ID
+export const obtenerFacturaPorId = async (req, res) => {
+  const { facturaId } = req.params;
+  try {
+    const factura = await FacturaService.obtenerFacturaPorId(facturaId);
+    res.json(factura);
+  } catch (error) {
+    if (error instanceof HttpStatusError) {
+      res.status(error.status).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: error.message });
+    }
+  }
+};
