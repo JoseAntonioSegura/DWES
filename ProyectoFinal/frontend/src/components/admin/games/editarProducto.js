@@ -53,7 +53,7 @@ function EditarUsuario() {
     const user = JSON.parse(localStorage.getItem('user'));
     console.log(user.rol);
     try {
-      const response = await fetch(`http://localhost:3000/users/${userId}`, {
+      const response = await fetch(`http://localhost:3000/users/admin/${userId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

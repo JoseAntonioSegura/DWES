@@ -48,7 +48,7 @@ function Productos({ cantidad, ordenar }) {
   }
 
   return (
-    <div>
+    <>
       {productos.map(producto => (
         <Link key={producto.id} to={`/producto/${producto.titulo}`}>
           <Producto
@@ -59,7 +59,7 @@ function Productos({ cantidad, ordenar }) {
           />
         </Link>
       ))}
-    </div>
+    </>
   );
 }
 

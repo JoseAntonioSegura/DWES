@@ -54,7 +54,7 @@ export const eliminarFactura = async (req, res) => {
 export const obtenerFacturaPorId = async (req, res) => {
   const { facturaId } = req.params;
   try {
-    const factura = await FacturaService.obtenerFacturaPorId(facturaId);
+    const factura = await FacturaService.obtenerFacturaID(facturaId);
     res.json(factura);
   } catch (error) {
     if (error instanceof HttpStatusError) {
