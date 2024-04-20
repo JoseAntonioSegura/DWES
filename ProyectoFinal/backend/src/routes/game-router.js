@@ -17,7 +17,7 @@ router.post('/',isAdmin, createGame);
 // Actualizar un juego
 router.patch('/:id', updateGame);
 // Actualizar un juego desde el admin
-router.put('/admin/:id',isAdmin, updateGame);
+router.patch('/admin/:id',isAdmin, updateGame);
 // Eliminar un juego
 router.delete('/:id',isAdmin, deleteGame);
 

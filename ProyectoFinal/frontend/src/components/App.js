@@ -10,6 +10,7 @@ import CarritoCompra from './tienda/carritoCompra.js';
 import Checkout from './tienda/checkout';
 import Facturas from './facturas/facturas.js';
 import Administrar from './admin/administrar.js';
+import Navegar from './tienda/navegar.js';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path='/mis-facturas' element={<Facturas />}/>
         <Route path="/administrador" element={<Administrar />} />
+        <Route path="/navegar" element={<Navegar />} />
       </Routes>
   );
 }

@@ -18,7 +18,7 @@ export async function getGameById(id) {
 
 // Obtener todos los juegos con filtros
 export async function getGames(filters = {}) {
-  const { sort, offset, limit, ...query } = filters;
+  const { sort, offset, limit, title, pegi, plataforma, precio, categoria, ...query } = filters;
   const gamesQuery = Game.find(query);
 
   // Aplicar los filtros
@@ -30,6 +30,21 @@ export async function getGames(filters = {}) {
   }
   if (limit) {
     gamesQuery.limit(limit);
+  }
+  if (title) {
+    gamesQuery.where('titulo').regex(new RegExp(title, 'i'));
+  }
+  if (categoria) {
+    gamesQuery.where('categoria').equals(categoria);
+  }
+  if (plataforma) {
+    gamesQuery.where('plataforma').equals(plataforma);
+  }
+  if (precio) {
+    gamesQuery.where('precio').lte(precio);
+  }
+  if (pegi) {
+    gamesQuery.where('pegi').lte(pegi);
   }
 
   return gamesQuery.exec();
