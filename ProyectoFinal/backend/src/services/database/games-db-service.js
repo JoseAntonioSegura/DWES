@@ -16,20 +16,36 @@ export async function getGameById(id) {
   return Game.findById(id);
 }
 
-// Obtener todos los juegos con filtros
 export async function getGames(filters = {}) {
-  const { sort, offset, limit, title, pegi, plataforma, precio, categoria, ...query } = filters;
+  const { sort, title, pegi, plataforma, precioMin, precioMax, categoria, ...query } = filters;
   const gamesQuery = Game.find(query);
 
   // Aplicar los filtros
-  if (sort) {
+  if (sort !== undefined) {
+    switch (sort) {
+      case 'precio':
+        gamesQuery.sort({ precio: 1 });
+        break;
+      case '-precio':
+        gamesQuery.sort({ precio: -1 });
+        break;
+      case 'titulo':
+        gamesQuery.sort({ titulo: 1 });
+        break;
+      case '-titulo':
+        gamesQuery.sort({ titulo: -1 });
+        break;
+      case 'fechaLanzamiento':
+        gamesQuery.sort({ fechaLanzamiento: 1 });
+        break;
+      case '-fechaLanzamiento':
+        gamesQuery.sort({ fechaLanzamiento: -1 });
+        break;
+      default:
+        break;
+    }
+  } else {
     gamesQuery.sort(sort);
-  }
-  if (offset) {
-    gamesQuery.skip(offset);
-  }
-  if (limit) {
-    gamesQuery.limit(limit);
   }
   if (title) {
     gamesQuery.where('titulo').regex(new RegExp(title, 'i'));
@@ -40,19 +56,17 @@ export async function getGames(filters = {}) {
   if (plataforma) {
     gamesQuery.where('plataforma').equals(plataforma);
   }
-  if (precio) {
-    gamesQuery.where('precio').lte(precio);
+  if (precioMin !== undefined) {
+    gamesQuery.where('precio').gte(precioMin);
   }
+  if (precioMax !== undefined) {
+    gamesQuery.where('precio').lte(precioMax);
+  }  
   if (pegi) {
     gamesQuery.where('pegi').lte(pegi);
   }
 
   return gamesQuery.exec();
-}
-
-// Eliminar un juego
-export async function deleteGameByID(id) {
-  return Game.findByIdAndDelete(id);
 }
 
 

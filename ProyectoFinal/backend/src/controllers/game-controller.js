@@ -1,11 +1,11 @@
 import { HttpStatusError } from 'common-errors';
 import * as gameService from '../services/database/games-db-service.js';
 
-// Controlador para obtener todos los juegos con filtros y ordenamiento
+// Obtener todos los juegos con filtros
 export async function getAllGames(req, res, next) {
   try {
     // Obtener los parámetros de consulta de la URL
-    const { sort, limit, plataforma, title, categoria, precio, pegi } = req.query;
+    const { sort, plataforma, title, categoria, precioMin, precioMax, pegi } = req.query;
 
     // Construir el objeto de filtros
     const filters = {};
@@ -14,17 +14,17 @@ export async function getAllGames(req, res, next) {
     if (sort) {
       filters.sort = sort;
     }
-    if (limit) {
-      filters.limit = parseInt(limit); // Convertir a entero si es necesario
-    }
     if (plataforma) {
       filters.plataforma = plataforma;
     }
     if (categoria) {
       filters.categoria = categoria;
     }
-    if (precio) {
-      filters.precio = precio;
+    if (precioMin) {
+      filters.precioMin = parseInt(precioMin);
+    }
+    if (precioMax) {
+      filters.precioMax = parseInt(precioMax);
     }
     if (pegi) {
       filters.pegi = pegi;
@@ -36,7 +36,6 @@ export async function getAllGames(req, res, next) {
     // Llamar a la función getGames con los filtros
     const games = await gameService.getGames(filters);
     console.log(filters);
-    console.log(games);
     // Enviar la respuesta
     return res.send(games);
   } catch (error) {

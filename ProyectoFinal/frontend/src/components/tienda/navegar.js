@@ -16,6 +16,9 @@ function Index() {
   const [categoria, setCategoria] = useState('');
   const [precio, setPrecio] = useState('');
   const [pegi, setPegi] = useState('');
+  const [minPrecio, setMinPrecio] = useState('');
+  const [maxPrecio, setMaxPrecio] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
 
   useEffect(() => {
     let lastScrollPosition = window.pageYOffset;
@@ -55,22 +58,42 @@ function Index() {
     setPegi(event.target.value);
   };
 
-  const buildQueryUrl = () => {
+  const handleMinPrecioChange = (event) => {
+    setMinPrecio(event.target.value);
+  };
+  
+  const handleMaxPrecioChange = (event) => {
+    setMaxPrecio(event.target.value);
+  };
 
+  const handleSortOrderChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  const buildQueryUrl = () => {
+    let queryUrl = '';
+  
     if (plataforma) {
-      query += `&plataforma=${plataforma}`;
+      queryUrl += `&plataforma=${plataforma}`;
     }
     if (categoria) {
-      query += `&categoria=${categoria}`;
+      queryUrl += `&categoria=${categoria}`;
     }
-    if (precio) {
-      query += `&precio=${precio}`;
+    if (minPrecio) {
+      queryUrl += `&precioMin=${minPrecio}`;
+    }
+    if (maxPrecio) {
+      queryUrl += `&precioMax=${maxPrecio}`;
     }
     if (pegi) {
-      query += `&pegi=${pegi}`;
+      queryUrl += `&pegi=${pegi}`;
     }
-
-    return query;
+    if (sortOrder) {
+      queryUrl += `&sort=${sortOrder}`;
+    }
+  
+    console.log(queryUrl);
+    return queryUrl;
   };
 
   return (
@@ -86,15 +109,19 @@ function Index() {
           <div className='filtros'>
             <div className='filtroPlataforma'>
               <select onChange={handlePlataformaChange}>
-                <option value="">Seleccionar plataforma</option>
-                <option value="ps4">PS4</option>
-                <option value="xbox">Xbox</option>
-                <option value="switch">Switch</option>
+                <option value="">Todas las plataformas</option>
+                <option value="Steam">Steam</option>
+                <option value="EpicGames">EpicGames</option>
+                <option value="Windows">Windows</option>
+                <option value="Launcher">Launcher</option>
+                <option value="PlayStation">PlayStation</option>
+                <option value="Xbox">Xbox</option>
+                <option value="Nintendo">Nintendo</option>
               </select>
             </div>
             <div className='filtroCategoria'>
               <select onChange={handleCategoriaChange}>
-                <option value="">Seleccionar categoría</option>
+                <option value="">Todas las categorias</option>
                 <option value="accion">Acción</option>
                 <option value="aventura">Aventura</option>
                 <option value="estrategia">Estrategia</option>
@@ -113,21 +140,28 @@ function Index() {
               </select>
             </div>
             <div className='filtroPrecio'>
-              <select onChange={handlePrecioChange}>
-                <option value="">Seleccionar rango de precios</option>
-                <option value="0-20">$0 - $20</option>
-                <option value="20-50">$20 - $50</option>
-                <option value="50-100">$50 - $100</option>
-              </select>
+                <input type="number" placeholder="Precio mínimo" onChange={handleMinPrecioChange} />
+                <input type="number" placeholder="Precio máximo" onChange={handleMaxPrecioChange} />
             </div>
             <div className='filtroPegi'>
               <select onChange={handlePegiChange}>
-                <option value="">Seleccionar rango de PEGI</option>
+                <option value="">Cualquier Edad</option>
                 <option value="4">+4</option>
                 <option value="7">+7</option>
                 <option value="12">+12</option>
                 <option value="16">+16</option>
                 <option value="18">+18</option>
+              </select>
+            </div>
+            <div className='filtroOrden'>
+              <select onChange={handleSortOrderChange}>
+                <option value="">Ordenar por</option>
+                <option value="precio">Precio</option>
+                <option value="-precio">Precio (alto a bajo)</option>
+                <option value="titulo">Título</option>
+                <option value="-titulo">Título (Z-A)</option>
+                <option value="fechaLanzamiento">Fecha de lanzamiento</option>
+                <option value="-fechaLanzamiento">Fecha de lanzamiento (más reciente primero)</option>
               </select>
             </div>
           </div>

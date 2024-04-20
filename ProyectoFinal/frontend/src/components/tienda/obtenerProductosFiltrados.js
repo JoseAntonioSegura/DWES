@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './obtenerProductos.css';
 
-function Productos({ cantidad, ordenar, consulta }) {
+function Productos({consulta }) {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ function Productos({ cantidad, ordenar, consulta }) {
   useEffect(() => {
     const obtenerProductos = async () => {
       try {
-        let url = `http://localhost:3000/games?sort=${ordenar}&limit=${cantidad}`;
+        let url = `http://localhost:3000/games?limit=undefined`;
         if (consulta) {
           url += `&title=${consulta}`;
         }
@@ -34,7 +34,7 @@ function Productos({ cantidad, ordenar, consulta }) {
 
     const interval = setInterval(obtenerProductos, 300000);
     return () => clearInterval(interval);
-  }, [cantidad, ordenar, consulta]);
+  }, [consulta]);
 
   if (loading) {
     return <div>Cargando productos...</div>;
