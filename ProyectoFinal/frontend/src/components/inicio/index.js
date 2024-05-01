@@ -49,7 +49,7 @@ function Index() {
         <div className='separador'></div>
         <div className='ListaDeProductos'>
           <h1 className='titulos'>Catálogo:</h1>
-          <Productos />
+          <Productos ordenar={ "-fechaLanzamiento" }/>
         </div>
       </main>
       <Footer />

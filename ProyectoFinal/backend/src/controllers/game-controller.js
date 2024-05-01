@@ -1,12 +1,12 @@
 import { HttpStatusError } from 'common-errors';
+import mongoosePaginate from 'mongoose-paginate-v2';
 import * as gameService from '../services/database/games-db-service.js';
 
 // Obtener todos los juegos con filtros
 export async function getAllGames(req, res, next) {
   try {
     // Obtener los parámetros de consulta de la URL
-    const { sort, plataforma, title, categoria, precioMin, precioMax, pegi } = req.query;
-
+    const { sort, plataforma, titulo, categoria, precioMin, precioMax, pegi, page, limit = 2 } = req.query;
     // Construir el objeto de filtros
     const filters = {};
 
@@ -29,15 +29,14 @@ export async function getAllGames(req, res, next) {
     if (pegi) {
       filters.pegi = pegi;
     }
-    if (title) {
-      filters.titulo = { $regex: title, $options: 'i' }; 
-    }
+    if (titulo) {
+      filters.titulo = titulo; 
+   }
 
-    // Llamar a la función getGames con los filtros
-    const games = await gameService.getGames(filters);
-    console.log(filters);
+    const games = await gameService.getGames(filters, { page, limit });
+    const { paginatedResults, totalPages } = await gameService.getGames(filters, { page, limit });
     // Enviar la respuesta
-    return res.send(games);
+    return res.send({ games: paginatedResults, totalPages });
   } catch (error) {
     // Manejar errores
     next(error);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
-import logo from '../../resources/logoHeader.jpeg';
+import logo from '../../resources/logoHeader.png';
 import cesta from '../../resources/cesta.png';
 
 function Header() {

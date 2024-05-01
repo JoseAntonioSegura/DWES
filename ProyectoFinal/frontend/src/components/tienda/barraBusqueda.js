@@ -12,10 +12,7 @@ const SearchBar = () => {
   };
 
   const navegar = () => {
-    if (query.trim() === '') {
-      return;
-    }
-    navigate(`/navegar?buscar=${encodeURIComponent(query)}`);
+    navigate(`/navegar?titulo=${encodeURIComponent(query)}`);
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import ProductosFiltrados from './obtenerProductosFiltrados.js'; 
 import Header from '../inicio/headerHome.js';
 import Footer from '../inicio/footer.js';
@@ -10,7 +10,8 @@ function Index() {
   const [showImage, setShowImage] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(true);
   const location = useLocation();
-  let query = new URLSearchParams(location.search).get('buscar');
+  let query = new URLSearchParams(location.search).get('titulo');
+  let page = parseInt(new URLSearchParams(location.search).get('page')) || 1;
 
   const [plataforma, setPlataforma] = useState('');
   const [categoria, setCategoria] = useState('');
@@ -19,6 +20,7 @@ function Index() {
   const [minPrecio, setMinPrecio] = useState('');
   const [maxPrecio, setMaxPrecio] = useState('');
   const [sortOrder, setSortOrder] = useState('');
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     let lastScrollPosition = window.pageYOffset;
@@ -41,6 +43,28 @@ function Index() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const obtenerTotalPaginas = async () => {
+      try {
+        let url = `http://localhost:3000/games?`;
+        if (query) {
+          url += `titulo=${query}`;
+        }
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Error al obtener los productos');
+        }
+        const data = await response.json();
+        setTotalPages(data.totalPages);
+        console.log(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    obtenerTotalPaginas();
+  }, [query]);
 
   const handlePlataformaChange = (event) => {
     setPlataforma(event.target.value);
@@ -70,31 +94,59 @@ function Index() {
     setSortOrder(event.target.value);
   };
 
-  const buildQueryUrl = () => {
+  const buildQueryUrl = (pageNumber) => {
     let queryUrl = '';
   
+    if (query) {
+      queryUrl += `titulo=${query}&`;
+    }
     if (plataforma) {
-      queryUrl += `&plataforma=${plataforma}`;
+      queryUrl += `plataforma=${plataforma}&`;
     }
     if (categoria) {
-      queryUrl += `&categoria=${categoria}`;
+      queryUrl += `categoria=${categoria}&`;
     }
     if (minPrecio) {
-      queryUrl += `&precioMin=${minPrecio}`;
+      queryUrl += `precioMin=${minPrecio}&`;
     }
     if (maxPrecio) {
-      queryUrl += `&precioMax=${maxPrecio}`;
+      queryUrl += `precioMax=${maxPrecio}&`;
     }
     if (pegi) {
-      queryUrl += `&pegi=${pegi}`;
+      queryUrl += `pegi=${pegi}&`;
     }
     if (sortOrder) {
-      queryUrl += `&sort=${sortOrder}`;
+      queryUrl += `sort=${sortOrder}&`;
+    }
+    if (pageNumber) {
+      queryUrl += `page=${pageNumber}&`;
     }
   
-    console.log(queryUrl);
     return queryUrl;
   };
+
+const renderPagination = () => {
+  const items = [];
+  if (page > 1) {
+    items.push(
+      <Link key="prev" to={`?${query ? `titulo=${query}&` : ''}page=${page - 1}`}>&lt;</Link>
+    );
+  }
+  
+  for (let i = 1; i <= totalPages; i++) {
+    items.push(
+      <Link key={i} to={`?${query ? `titulo=${query}&` : ''}page=${i}`} className={page === i ? 'active' : ''}>{i}</Link>
+    );
+  }
+
+  if (page < totalPages) {
+    items.push(
+      <Link key="next" to={`?${query ? `titulo=${query}&` : ''}page=${page + 1}`}>&gt;</Link>
+    );
+  }
+
+  return items;
+};
 
   return (
     <>
@@ -169,7 +221,10 @@ function Index() {
         <div className='separador'></div>
         <div className='ListaDeProductos'>
           <h1 className='titulos'>Catálogo:</h1>
-          <ProductosFiltrados consulta={buildQueryUrl()} />
+          <ProductosFiltrados consulta={buildQueryUrl(page)} />
+          <div className="pagination">
+            {renderPagination()}
+          </div>
         </div>
       </main>
       <Footer />

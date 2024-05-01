@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './obtenerProductos.css';
 
-function Productos({consulta }) {
+function ProductosFiltrados({ consulta }) {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,16 +12,12 @@ function Productos({consulta }) {
   useEffect(() => {
     const obtenerProductos = async () => {
       try {
-        let url = `http://localhost:3000/games?limit=undefined`;
-        if (consulta) {
-          url += `&title=${consulta}`;
-        }
-        const response = await fetch(url);
+        const response = await fetch(`http://localhost:3000/games?${consulta}`);
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }
         const data = await response.json();
-        setProductos(data);
+        setProductos(data.games);
         setLoading(false);
       } catch (error) {
         setError('Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.');
@@ -74,4 +70,4 @@ function Producto({ titulo, precio, imagen }) {
   );
 }
 
-export default Productos;
+export default ProductosFiltrados;
