@@ -45,26 +45,8 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    const obtenerTotalPaginas = async () => {
-      try {
-        let url = `http://localhost:3000/games?`;
-        if (query) {
-          url += `titulo=${query}`;
-        }
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Error al obtener los productos');
-        }
-        const data = await response.json();
-        setTotalPages(data.totalPages);
-        console.log(data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
     obtenerTotalPaginas();
-  }, [query]);
+  }, [query, plataforma, categoria, minPrecio, maxPrecio, pegi, sortOrder]);
 
   const handlePlataformaChange = (event) => {
     setPlataforma(event.target.value);
@@ -125,28 +107,72 @@ function Index() {
     return queryUrl;
   };
 
-const renderPagination = () => {
-  const items = [];
-  if (page > 1) {
-    items.push(
-      <Link key="prev" to={`?${query ? `titulo=${query}&` : ''}page=${page - 1}`}>&lt;</Link>
-    );
-  }
+  const obtenerTotalPaginas = async () => {
+    try {
+      let url = `http://localhost:3000/games?`;
   
-  for (let i = 1; i <= totalPages; i++) {
-    items.push(
-      <Link key={i} to={`?${query ? `titulo=${query}&` : ''}page=${i}`} className={page === i ? 'active' : ''}>{i}</Link>
-    );
-  }
+      // Agregar los filtros a la URL de consulta
+      if (query) {
+        url += `titulo=${query}`;
+      }
+      if (plataforma) {
+        url += `&plataforma=${plataforma}`;
+      }
+      if (categoria) {
+        url += `&categoria=${categoria}`;
+      }
+      if (minPrecio) {
+        url += `&precioMin=${minPrecio}`;
+      }
+      if (maxPrecio) {
+        url += `&precioMax=${maxPrecio}`;
+      }
+      if (pegi) {
+        url += `&pegi=${pegi}`;
+      }
+      if (sortOrder) {
+        url += `&sort=${sortOrder}`;
+      }
+  
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Error al obtener los productos');
+      }
+      const data = await response.json();
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
 
-  if (page < totalPages) {
-    items.push(
-      <Link key="next" to={`?${query ? `titulo=${query}&` : ''}page=${page + 1}`}>&gt;</Link>
-    );
-  }
-
-  return items;
-};
+  const renderPagination = () => {
+    if (totalPages <= 1) {
+      return null; // No muestra la paginación si hay una sola página o ninguna página
+    }
+  
+    const items = [];
+    if (page > 1) {
+      items.push(
+        <Link key="prev" to={`?${query ? `titulo=${query}&` : ''}page=${page - 1}`}>&lt;</Link>
+      );
+    }
+    
+    for (let i = 1; i <= totalPages; i++) {
+      items.push(
+        <Link key={i} to={`?${query ? `titulo=${query}&` : ''}page=${i}`} className={page === i ? 'active' : ''}>{i}</Link>
+      );
+    }
+  
+    if (page < totalPages) {
+      items.push(
+        <Link key="next" to={`?${query ? `titulo=${query}&` : ''}page=${page + 1}`}>&gt;</Link>
+      );
+    }
+  
+    return items;
+  };
+  
 
   return (
     <>

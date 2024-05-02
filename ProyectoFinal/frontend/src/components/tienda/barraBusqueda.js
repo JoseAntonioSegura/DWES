@@ -8,11 +8,11 @@ const SearchBar = () => {
   const [query, setQuery] = useState('');
 
   const handleInputChange = (event) => {
-    setQuery(event.target.value);
-  };
+    const newQuery = event.target.value;
+    setQuery(newQuery);
 
-  const navegar = () => {
-    navigate(`/navegar?titulo=${encodeURIComponent(query)}`);
+    // Navegar cuando se ingresa texto y hay un cambio en la búsqueda
+    navigate(`/navegar?titulo=${encodeURIComponent(newQuery)}`);
   };
 
   return (
@@ -24,7 +24,7 @@ const SearchBar = () => {
         value={query}
         onChange={handleInputChange}
       />
-      <img src={lupa} alt="Icono de búsqueda" className="search-icon" onClick={navegar} />
+      <img src={lupa} alt="Icono de búsqueda" className="search-icon" />
     </div>
   );
 };
