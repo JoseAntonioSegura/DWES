@@ -46,7 +46,12 @@ function Index() {
 
   useEffect(() => {
     obtenerTotalPaginas();
-  }, [query, plataforma, categoria, minPrecio, maxPrecio, pegi, sortOrder]);
+  }, []);
+
+  useEffect(() => {
+    const queryParams = buildQueryUrl(page);
+    window.history.pushState(null, '', `?${queryParams}`);
+  }, [query, plataforma, categoria, minPrecio, maxPrecio, pegi, sortOrder, page]);
 
   const handlePlataformaChange = (event) => {
     setPlataforma(event.target.value);
@@ -76,65 +81,10 @@ function Index() {
     setSortOrder(event.target.value);
   };
 
-  const buildQueryUrl = (pageNumber) => {
-    let queryUrl = '';
-  
-    if (query) {
-      queryUrl += `titulo=${query}&`;
-    }
-    if (plataforma) {
-      queryUrl += `plataforma=${plataforma}&`;
-    }
-    if (categoria) {
-      queryUrl += `categoria=${categoria}&`;
-    }
-    if (minPrecio) {
-      queryUrl += `precioMin=${minPrecio}&`;
-    }
-    if (maxPrecio) {
-      queryUrl += `precioMax=${maxPrecio}&`;
-    }
-    if (pegi) {
-      queryUrl += `pegi=${pegi}&`;
-    }
-    if (sortOrder) {
-      queryUrl += `sort=${sortOrder}&`;
-    }
-    if (pageNumber) {
-      queryUrl += `page=${pageNumber}&`;
-    }
-  
-    return queryUrl;
-  };
-
   const obtenerTotalPaginas = async () => {
     try {
-      let url = `http://localhost:3000/games?`;
-  
-      // Agregar los filtros a la URL de consulta
-      if (query) {
-        url += `titulo=${query}`;
-      }
-      if (plataforma) {
-        url += `&plataforma=${plataforma}`;
-      }
-      if (categoria) {
-        url += `&categoria=${categoria}`;
-      }
-      if (minPrecio) {
-        url += `&precioMin=${minPrecio}`;
-      }
-      if (maxPrecio) {
-        url += `&precioMax=${maxPrecio}`;
-      }
-      if (pegi) {
-        url += `&pegi=${pegi}`;
-      }
-      if (sortOrder) {
-        url += `&sort=${sortOrder}`;
-      }
-  
-      const response = await fetch(url);
+      const queryParams = buildQueryUrl(page);
+      const response = await fetch(`http://localhost:3000/games?${queryParams}`);
       if (!response.ok) {
         throw new Error('Error al obtener los productos');
       }
@@ -144,11 +94,31 @@ function Index() {
       console.error('Error:', error);
     }
   };
+
+  const buildQueryUrl = (pageNumber) => {
+    let queryUrl = '';
+  
+    if (query) queryUrl += `titulo=${query}&`;
+    if (plataforma) queryUrl += `plataforma=${plataforma}&`;
+    if (categoria) queryUrl += `categoria=${categoria}&`;
+    if (minPrecio) queryUrl += `precioMin=${minPrecio}&`;
+    if (maxPrecio) queryUrl += `precioMax=${maxPrecio}&`;
+    if (pegi) queryUrl += `pegi=${pegi}&`;
+    if (sortOrder) queryUrl += `sort=${sortOrder}&`;
+    if (pageNumber) queryUrl += `page=${pageNumber}`;
+  
+    // Eliminar el último '&' si existe
+    if (queryUrl.endsWith('&')) {
+      queryUrl = queryUrl.slice(0, -1);
+    }
+  
+    return queryUrl;
+  };
   
 
   const renderPagination = () => {
     if (totalPages <= 1) {
-      return null; // No muestra la paginación si hay una sola página o ninguna página
+      return null;
     }
   
     const items = [];
@@ -172,7 +142,6 @@ function Index() {
   
     return items;
   };
-  
 
   return (
     <>
