@@ -6,7 +6,7 @@ import * as gameService from '../services/database/games-db-service.js';
 export async function getAllGames(req, res, next) {
   try {
     // Obtener los parámetros de consulta de la URL
-    const { sort, plataforma, titulo, categoria, precioMin, precioMax, pegi, page, limit = 2 } = req.query;
+    const { sort, plataforma, titulo, categoria, precioMin, precioMax, pegi, page, limit = 15 } = req.query;
     // Construir el objeto de filtros
     const filters = {};
 

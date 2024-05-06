@@ -133,9 +133,11 @@ function Header() {
 
     if (user && isAdmin) {
       return (
-        <div className="user-profile">
+        <div className="infoUser">
           <Link to="/administrador">Administrar Productos</Link>
-          {user.usernameImage && <img onClick={handleProfileClick} src={user.usernameImage} alt="User Avatar" />}
+          <div className='user-profile'>
+            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
+            </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><button onClick={handleLogout}>Logout</button></div>
@@ -145,26 +147,30 @@ function Header() {
       );
     } else if (user) {
       return (
-        <div className="user-profile">
+        <div className="infoUser">
           <div className="cesta">
             <Link to="/carrito">
               <img src={cesta} alt="Carrito" />
             </Link>
-            <span className="carrito-count">{sumaTotal}</span>
-          </div>
-          {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
+            <div className="carrito-count">
+              <span>{sumaTotal}</span>
+            </div>          
+            </div>
+            <div className='user-profile'>
+            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
+            </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><Link to="/mis-facturas">Mis facturas</Link></div>
               <div><Link to="/editar-perfil">Editar Perfil</Link></div>
-              <div><button onClick={handleLogout}>Logout</button></div>
+              <div><button onClick={handleLogout}>Cerrar Sesión</button></div>
             </div>
           )}
         </div>
       );
     } else {
       return (
-        <div>
+        <div className='infoUser'>
            <div className="cesta">
             <Link to="/carrito">
               <img src={cesta} alt="Carrito" />
@@ -173,7 +179,7 @@ function Header() {
               <span>{sumaTotal}</span>
             </div>
           </div>
-          <Link to="/login">Iniciar Sesión</Link>
+          <Link className='login' to="/login">Iniciar Sesión</Link>
         </div>
       );
     }
