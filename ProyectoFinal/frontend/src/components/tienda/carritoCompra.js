@@ -192,7 +192,7 @@ const CarritoCompra = () => {
 
   return (
     <>
-      <Header mostrarCarrito={false} />
+      <Header/>
       <div className="container-center">
         <div className="carrito-container">
           {error && <div>{error}</div>}

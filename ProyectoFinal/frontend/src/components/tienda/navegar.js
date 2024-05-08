@@ -152,7 +152,6 @@ function Index() {
       <div className='contenedorTransicion'></div>
       <main>
         <div className='contenedorFiltros'>
-          <div className='barraDeBusqueda'><SearchBar /></div>
           <div className='filtros'>
             <div className='filtroPlataforma'>
               <select onChange={handlePlataformaChange}>

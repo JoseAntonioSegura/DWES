@@ -3,8 +3,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
-  padding-left: 1%;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,28 +15,27 @@ header {
 }
 
 .infoUser {
-  width: 30%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  margin-right: 15vw;
 }
 
 .cesta {
-  width: 40%;
+  width: 50%;
   position: relative;
-  margin-right: 100%;
 }
 
 .user-profile {
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  margin: 10%;
   cursor: pointer;
+  padding-right: 15vw;
+  padding-left: 100px;
 }
 
 header h1 {
@@ -45,16 +43,15 @@ header h1 {
 }
 
 header .logo {
-  width: 150px;
+  width: 200px;
   border-radius: 20px;
-  margin-left: 10vw;
+  padding-left: 15vw;
 }
 
 header div div img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin-left: 15%;
   object-fit: cover;
   border: 2px solid transparent;
   transition: transform 0.3s;
@@ -65,7 +62,7 @@ header div div img:hover {
 }
 
 .cesta {
-  width: 40%;
+  width: 10%;
   position: relative;
 }
 
@@ -76,7 +73,6 @@ header div div img:hover {
 .carrito-count {
   position: absolute;
   top: 60%;
-  right: -1vw;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -99,7 +95,7 @@ header div div img:hover {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  right: -50%;
+  right: 15%;
   background-color: white;
   border-radius: 10px;
 }
@@ -138,4 +134,14 @@ header div div img:hover {
 
 .dropdown-menu a:hover {
   color: aqua;
+}
+
+.header-hidden {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.header-visible {
+  opacity: 1;
+  transition: opacity 0.2s ease;
 }

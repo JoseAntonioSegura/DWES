@@ -9,6 +9,7 @@ function DetallesProducto() {
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [productoAgregado, setProductoAgregado] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +30,17 @@ function DetallesProducto() {
     };
   
     obtenerDetallesProducto();
-  }, [titulo]);
+  }, [titulo, productoAgregado]);
+
+  useEffect(() => {
+    if (productoAgregado) {
+      const timeout = setTimeout(() => {
+        setProductoAgregado(false);
+      }, 1000);
+  
+      return () => clearTimeout(timeout);
+    }
+  }, [productoAgregado]);
 
   function extractVideoId(url) {
     const patterns = [
@@ -49,25 +60,20 @@ function DetallesProducto() {
 
   const agregarAlCarrito = async () => {
     try {
-      // Obtener el token y el usuario del Local Storage
       const token = localStorage.getItem('token');
       const user = JSON.parse(localStorage.getItem('user'));
   
-      // Verificar si hay un token y un usuario almacenados en el Local Storage
       if (!token || !user) {
-        // Si no hay un token o un usuario, redirigir al usuario al inicio de sesión
         navigate('/login');
         return;
       }
 
-      // Construir el cuerpo de la solicitud para agregar al carrito
       const carritoBody = JSON.stringify({
         userId: user._id,
         productId: producto[0]._id,
         cantidad: 1
       });
   
-      // Enviar la solicitud al backend para agregar al carrito
       const carritoResponse = await fetch('http://localhost:3000/carrito/agregar', {
         method: 'POST',
         headers: {
@@ -77,20 +83,16 @@ function DetallesProducto() {
         body: carritoBody
       });    
   
-      // Verificar si la respuesta para agregar al carrito fue exitosa
       if (!carritoResponse.ok) {
         throw new Error('Error al agregar producto al carrito');
       }
 
-      // Obtener el producto actualizado con la cantidad reducida de unidades
       const updatedProduct = { ...producto[0], unidades: producto[0].unidades - 1 };
   
-      // Construir el cuerpo de la solicitud para actualizar las unidades del producto
       const productoBody = JSON.stringify({
         unidades: updatedProduct.unidades
       });
   
-      // Enviar la solicitud al backend para actualizar las unidades del producto
       const productoResponse = await fetch(`http://localhost:3000/games/${producto[0]._id}`, {
         method: 'PATCH',
         headers: {
@@ -100,12 +102,11 @@ function DetallesProducto() {
         body: productoBody
       });
   
-      // Verificar si la respuesta para actualizar las unidades del producto fue exitosa
       if (!productoResponse.ok) {
         throw new Error('Error al actualizar las unidades del producto');
       }
 
-      window.location.reload();
+      setProductoAgregado(true);
   
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
@@ -115,25 +116,20 @@ function DetallesProducto() {
 
   const comprarAhora = async () => {
     try {
-      // Obtener el token y el usuario del Local Storage
       const token = localStorage.getItem('token');
       const user = JSON.parse(localStorage.getItem('user'));
   
-      // Verificar si hay un token y un usuario almacenados en el Local Storage
       if (!token || !user) {
-        // Si no hay un token o un usuario, redirigir al usuario al inicio de sesión
         navigate('/login');
         return;
       }
 
-      // Construir el cuerpo de la solicitud para agregar al carrito
       const carritoBody = JSON.stringify({
         userId: user._id,
         productId: producto[0]._id,
         cantidad: 1
       });
   
-      // Enviar la solicitud al backend para agregar al carrito
       const carritoResponse = await fetch('http://localhost:3000/carrito/agregar', {
         method: 'POST',
         headers: {
@@ -143,20 +139,16 @@ function DetallesProducto() {
         body: carritoBody
       });    
   
-      // Verificar si la respuesta para agregar al carrito fue exitosa
       if (!carritoResponse.ok) {
         throw new Error('Error al agregar producto al carrito');
       }
 
-      // Obtener el producto actualizado con la cantidad reducida de unidades
       const updatedProduct = { ...producto[0], unidades: producto[0].unidades - 1 };
   
-      // Construir el cuerpo de la solicitud para actualizar las unidades del producto
       const productoBody = JSON.stringify({
         unidades: updatedProduct.unidades
       });
   
-      // Enviar la solicitud al backend para actualizar las unidades del producto
       const productoResponse = await fetch(`http://localhost:3000/games/${producto[0]._id}`, {
         method: 'PATCH',
         headers: {
@@ -166,12 +158,12 @@ function DetallesProducto() {
         body: productoBody
       });
   
-      // Verificar si la respuesta para actualizar las unidades del producto fue exitosa
       if (!productoResponse.ok) {
         throw new Error('Error al actualizar las unidades del producto');
       }
 
-      // navegar a la página de carrito
+      setProductoAgregado(true);
+  
       navigate('/carrito');
   
     } catch (error) {
@@ -188,11 +180,14 @@ function DetallesProducto() {
     return <div>{error}</div>;
   }
   
+  
   const unidadesDisponibles = producto[0].unidades;
+
+  
 
   return (
     <>
-      <Header />
+      <Header productoAgregado={productoAgregado} mostrarCarrito={true} />
       <div className="contenedorProducto">
         <div className='contenedorDatos'>
           <YouTube  iframeClassName="youtubeContainer" videoId={extractVideoId(producto[0].trailer) } opts={{ playerVars: { autoplay: 1 }}}  /> 

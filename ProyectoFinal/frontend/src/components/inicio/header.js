@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
-import logo from '../../resources/logoHeader.png';
+import logo from '../../resources/nombre mas logo linea blanco.png';
 import cesta from '../../resources/cesta.png';
 
-function Header() {
+function Header({ productoAgregado , mostrarCarrito }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); 
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
@@ -33,6 +33,10 @@ function Header() {
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
         header.style.height = '120px';
+      }
+
+      if(mostrarCarrito === false){
+
       }
     };
   
@@ -87,8 +91,7 @@ function Header() {
     };
 
     obtenerProductosDelCarrito();
-  }, []);
-  
+  }, [productoAgregado]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -145,17 +148,19 @@ function Header() {
     } else if (user) {
       return (
         <div className="infoUser">
-          <div className="cesta">
-            <Link to="/carrito">
-              <img src={cesta} alt="Carrito" />
-            </Link>
-            <div className="carrito-count">
-              <span>{sumaTotal}</span>
-            </div>          
+          { mostrarCarrito && (
+            <div className="cesta">
+              <Link to="/carrito">
+                <img src={cesta} alt="Carrito" />
+              </Link>
+              <div className="carrito-count">
+                <span>{sumaTotal}</span>
+              </div>
             </div>
-            <div className='user-profile'>
+          )}
+          <div className='user-profile'>
             {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
-            </div>
+          </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><Link to="/mis-facturas">Mis facturas</Link></div>
@@ -168,14 +173,16 @@ function Header() {
     } else {
       return (
         <div className='infoUser'>
-           <div className="cesta">
-            <Link to="/carrito">
-              <img src={cesta} alt="Carrito" />
-            </Link>
-            <div className="carrito-count">
-              <span>{sumaTotal}</span>
+          { mostrarCarrito && (
+            <div className="cesta">
+              <Link to="/carrito">
+                <img src={cesta} alt="Carrito" />
+              </Link>
+              <div className="carrito-count">
+                <span>{sumaTotal}</span>
+              </div>
             </div>
-          </div>
+          )}
           <Link className='login' to="/login">Iniciar Sesión</Link>
         </div>
       );
