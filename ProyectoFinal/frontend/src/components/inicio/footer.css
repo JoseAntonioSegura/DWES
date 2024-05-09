@@ -1,6 +1,34 @@
 footer{
-    background-color: black;
-    color: white;
+    background-color: #0a0a0a;
+    color: #707070;
     width: 100%;
     height: 400px;
+}
+
+.containerFooterTop {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    height: 90%;
+    margin: auto;
+}
+
+.containerFooterTop div {
+    height: 50%;
+    display: flex;
+    padding-top: 10%;
+    justify-content: space-around;
+}
+
+.containerFooterBottom {
+    border-top: 1px solid #707070;
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    height: 10%;
+    justify-content: start;
+    align-items: center;
+    padding-left: 2%;
+    margin: auto;
+    padding: auto;
 }

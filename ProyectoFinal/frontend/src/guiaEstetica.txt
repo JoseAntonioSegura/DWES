@@ -1,0 +1,10 @@
+blanco: #d5d5d5
+negro: #1a1a1a
+cian destacado: #24ffba
+cian base: #00ad93
+
+text:
+precios de la portada: 32px
+
+titulos: 24px
+

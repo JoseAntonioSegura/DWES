@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './obtenerProductos.css';
+import './newProduct.css';
 
-function Productos({ cantidad, ordenar }) {
+
+
+function NewProduct({ cantidad, ordenar }) {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -37,7 +39,6 @@ function Productos({ cantidad, ordenar }) {
   }
 
 
-
   return (
     <div>
       {productos.map(producto => (
@@ -51,21 +52,23 @@ function Productos({ cantidad, ordenar }) {
       ))}
     </div>
   );
+
+
 }
 
-function Producto({ titulo, precio, imagen }) {
 
+
+function Producto({ titulo, precio, imagen }) {
   return (
-    <div className='contenedorProductoInterior'>
-      <div className="producto-container">
-        <img src={imagen} alt={titulo} className="producto-image" />
-        <div className="producto-info">
-          <div className="titulo">{titulo}</div>
-          <div className="precio">{precio}€</div>
+    <div className='containerNewProduct'>
+        <img src={imagen} alt={titulo} className="imageNewProduct" />
+        <div className="cotainerTextNewProduct">
+          <div className="titleNewProduct">Último lanzamiento:</div>
+          <div className="nameNewProduct">{titulo}</div>
+          <div className="priceNewProduct">{precio}€</div>
         </div>
-      </div>
     </div>
   );
 }
 
-export default Productos;
+export default NewProduct;

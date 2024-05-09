@@ -1,0 +1,42 @@
+.containerNewProduct {
+  height: 700px;
+}
+
+.containerNewProduct img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 0%, black 80%, transparent 100%);
+}
+
+.cotainerTextNewProduct {
+    position: relative;
+    top: -25%;
+    width: 15%;
+    left: 75%;
+    background: linear-gradient(to right, #65d7c62d, #00ad93, #65d7c62d);
+    color: #c1c1c1;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.5);
+    text-shadow: 4px 1.5px 1px rgba(0, 0, 0, 0.5);
+}
+
+.titleNewProduct {
+    display: none;
+}
+
+.nameNewProduct {
+    display: none;
+}
+
+.priceNewProduct {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.containerNewProduct:hover {
+    cursor: pointer;
+
+}
