@@ -3,7 +3,6 @@ import { useLocation, Link } from 'react-router-dom';
 import ProductosFiltrados from './obtenerProductosFiltrados.js'; 
 import Header from '../inicio/headerHome.js';
 import Footer from '../inicio/footer.js';
-import SearchBar from './barraBusqueda.js';
 import './navegar.css';
 
 function Index() {
@@ -147,7 +146,6 @@ function Index() {
     <>
       <Header showImage={showImage} />
       <div className={`imagenContenedor ${showImage ? 'show' : 'hide'}`}>
-        {showSearchBar && <SearchBar />}
       </div>
       <div className='contenedorTransicion'></div>
       <main>
@@ -213,8 +211,8 @@ function Index() {
           </div>
         </div>
         <div className='separador'></div>
+        <h1 className='titulos'>Catálogo:</h1>
         <div className='ListaDeProductos'>
-          <h1 className='titulos'>Catálogo:</h1>
           <ProductosFiltrados consulta={buildQueryUrl(page)} />
           <div className="pagination">
             {renderPagination()}
