@@ -5,30 +5,119 @@ footer{
     height: 400px;
 }
 
+footer ul {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+footer ul li {
+    flex-direction: row;
+}
+
 .containerFooterTop {
     display: flex;
     justify-content: space-around;
-    width: 70%;
-    height: 90%;
+    width: 80%;
+    height: 80%;
     margin: auto;
+    
+
 }
 
 .containerFooterTop div {
     height: 50%;
     display: flex;
-    padding-top: 10%;
+    padding-top: 5%;
     justify-content: space-around;
 }
 
-.containerFooterBottom {
+.containerFooterTop div>ul>li>a {
+    color: #707070;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.containerFooterBottom  {
     border-top: 1px solid #707070;
     display: flex;
     justify-content: space-around;
     width: 70%;
-    height: 10%;
-    justify-content: start;
+    height: 20%;
     align-items: center;
-    padding-left: 2%;
     margin: auto;
     padding: auto;
+}
+
+.footerColumn {
+    flex-direction: column;
+    margin-top: -20px;
+}
+
+footer img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.containerFooterBottom div:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: start;
+}
+
+footer img:hover {
+    transform: scale(1.1);
+}
+
+.social {
+    width: 30px;
+    height: 30px;
+    background-color: #d5d5d5;
+    padding: 4px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: right;
+    margin-left: 20px;
+}
+
+.social:hover, .imgFooter:hover {
+    background-color: #00ad93;
+}
+
+.titleFooter {
+    font-size: 32px;
+    font-weight: bold;
+    color: #d5d5d5;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #707070;
+
+}
+
+.imgFooter {
+    width: 25px;
+    height: 25px;
+    padding: 4px;
+    border-radius: 10px;
+    background-color: #707070;
+    object-fit: cover;
+    transition: transform 0.3s;
+    margin-right: 10px;
+    display: inli; /* Add flex display */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.imgFooter img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
