@@ -116,6 +116,25 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
   - `docker-compose -f docker-compose.test.yml up`.
 - Posteriormente, en el `package.json`, encontrarás todos los scripts necesarios para verificar cada apartado.
 
-## 🧾 Correciones;
-  - `Ahora los usuarios se actualizan y eliminan mediante la ID.`.
+## 📋 Correcciones y nuevas características de la primera entrega:
+- `Correcciones realizadas:`
+  - Ahora la actualización y eliminación de usuarios se realiza mediante la ID correspondiente.
+  - La actualización y eliminación de productos ahora se realiza mediante la ID asociada.
+- `Nuevas características implementadas:`
+  - Se ha desarrollado un Panel de Administrador completamente funcional. Para acceder, es necesario iniciar sesión como usuario "admin" con la contraseña "admin". El acceso está disponible en el encabezado.
+  - Se han realizado mejoras estéticas en toda la aplicación, sobre todo en la vista inicial del usuario con un producto.
+  - Implementación de paginación de productos por categoría y orden, además de la capacidad de desplazarse fácilmente entre las páginas.
+  - El footer ha sido prácticamente finalizado e incluye la documentación correspondiente.
+  - Se han realizado pruebas utilizando AVA, principalmente enfocadas en los controladores.
+  - Se ha agregado la funcionalidad de visualizar facturas y administrarlas por usuario. La parte estética de esta función está pendiente.
+- `Próximas actualizaciones:`
+  - Mejoras estéticas en toda la aplicación, así como su adaptación a dispositivos móviles.
+  - Se implementarán más filtros para evitar errores por parte del usuario.
+  - Mejora de los iconos, logotipos y otros elementos visuales como botones, imágenes y la vista de productos.
+  - El despliegue de la aplicación web sin una urgencia inmediata.
+  - La documentación, al menos del apartado 4, será completada y se corregirá el apartado 3.
+
+
+
+
 
