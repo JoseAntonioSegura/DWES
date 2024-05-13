@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './registro.css';
-import Header from '../inicio/header';
 
 function Registro() {
   const [username, setUsername] = useState('');
@@ -52,19 +51,16 @@ function Registro() {
     event.preventDefault();
     setFormSubmitted(true);
 
-    // Campos de verificacion
     if (!username || !password || !confirmPassword || !email || !name || !lastname || !country) {
       setErrorMessage('Por favor, completa todos los campos.');
       return;
     }
 
-    // Verificar que las contraseñas coincidan
     if (password !== confirmPassword) {
       setErrorMessage('Las contraseñas no coinciden');
       return;
     }
 
-    // Objeto con los datos del usuario
     const userData = {
       username: username,
       password: password,
@@ -76,7 +72,6 @@ function Registro() {
     };
 
     try {
-      // Enviar la solicitud POST al servidor
       const response = await fetch('http://localhost:3000/users', {
         method: 'POST',
         headers: {
@@ -98,7 +93,6 @@ function Registro() {
 
   return (
     <>
-    <Header />
     <div className='registro'>
       <div className="registro-container">
         <h2>Registrarse</h2>

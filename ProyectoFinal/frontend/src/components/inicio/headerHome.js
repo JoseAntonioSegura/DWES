@@ -179,7 +179,7 @@ function Header() {
               <span>{sumaTotal}</span>
             </div>
           </div>
-          <Link className='user-profile' to="/login">Iniciar Sesión</Link>
+          <Link className='user-profile link' to="/login">Iniciar Sesión</Link>
         </div>
       );
     }

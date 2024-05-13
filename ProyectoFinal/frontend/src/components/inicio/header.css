@@ -43,7 +43,7 @@ header h1 {
 }
 
 header .logo {
-  width: 200px;
+  width: 250px;
   border-radius: 20px;
   padding-left: 15vw;
 }
@@ -67,7 +67,7 @@ header div div img:hover {
 }
 
 .cesta img:hover {
-  filter: drop-shadow(0 0 10px aqua);
+  filter: drop-shadow(0 0 10px #00ad93);
 }
 
 .carrito-count {
@@ -77,6 +77,9 @@ header div div img:hover {
   height: 10px;
   border-radius: 50%;
   background-color: #f2f2f2;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   color: black;
   padding: 3px;
   font-size: 12px;
@@ -133,7 +136,7 @@ header div div img:hover {
 }
 
 .dropdown-menu a:hover {
-  color: aqua;
+  color: #00ad93;
 }
 
 .header-hidden {

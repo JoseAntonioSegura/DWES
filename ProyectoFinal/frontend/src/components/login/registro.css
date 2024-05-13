@@ -1,58 +1,75 @@
-.registro-container {
-    position: relative;
-    vertical-align: middle;
-    justify-content: center;
-    margin: auto;
-    padding: 20px;
-    width: 20%;
-    background-color: hsla(208, 100%, 97%, 0.956); /* Cyan claro */
-    border-radius: 10px;
-    border: 2px solid #333; /* Gris oscuro */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Efecto de sombra */
-  
-    color: #000000; /* Gris oscuro */
-  }
-  
-  .registro {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    height: 100vh; /* Utiliza toda la altura de la ventana del navegador */
-    margin: 0; /* Elimina el margen predeterminado del body */
+.registro-container-custom {
+  position: relative;
+  padding: 20px;
+  width: 18%;
+  color: #d5d5d5;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #1a1a1a;
+  border-radius: 20px;
+  background-color: #333232;
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input {
-    width: calc(100% - 10px); /* Ajuste para evitar desbordamiento */
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd; /* Gris claro */
-  }
+.registro-container-custom h2 {
+  margin-bottom: 20px;
+}
 
-  .registro-container button {
-    border-radius: 10px;
-    background-color: aqua;
-  }
-  
-  .form-group.error input {
-    border-color: red; /* Rojo para errores */
-  }
-  
-  .error-indicator {
-    color: red;
-    margin-left: 5px;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-  }
-  
+.registro-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.registro-form-group label {
+  margin-bottom: 5px;
+}
+
+.registro-form-group input {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #b3aeae;
+  border: none;
+  outline: none;
+}
+
+.registro-button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: gray;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.registro-button:hover {
+  background-color: aqua;
+  transform: scale(1.02);
+}
+
+.registro-form-group.error input {
+  border-color: red;
+}
+
+.registro-error-indicator {
+  color: red;
+  margin-left: 5px;
+}
+
+.registro-error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.registro-button:not([disabled]):hover {
+  background-color: #00ad93;
+  transform: scale(1.02);
+}
+
+.registro-button[disabled]:hover {
+  background-color: gray;
+  transform: none;
+  scale: 1;
+  cursor: not-allowed;
+}

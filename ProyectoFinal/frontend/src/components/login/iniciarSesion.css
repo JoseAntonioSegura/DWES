@@ -1,44 +1,88 @@
 .login-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
+
+.login-container .logo {
+    width: 90%;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
 
 .login-form {
     position: relative;
     padding: 20px;
-    width: 20%;
-    background-color: hsla(208, 100%, 97%, 0.956); /* Cyan claro */
-    border-radius: 10px;
-    border: 2px solid #333; /* Gris oscuro */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Efecto de sombra */
-    color: #000000; /* Gris oscuro */
+    width: 18%;
+    color: #d5d5d5;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    background-color: #333232;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
-.login-form label {
-    display: block;
-    margin-bottom: 5px;
+.form-group {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    height: 45px;
 }
 
-.login-form input {
-    width: calc(100% - 10px);
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd; /* Gris claro */
+.imgLogin {
+    width: 15%;
+    height: 100%;
+    margin: 0px;
+    background-color: #00ad93;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px 0 0 5px ;
+}
+
+.imgLogin img {
+    width: 30px;
+    margin: auto;
+    height: 30px;
+    background-color: #00ad93;
+    object-fit: cover;
+}
+
+
+.login-form .form-group input {
+    width: 85%;
+    padding: 10px;
+    border-radius: 0px;
+    background-color: #b3aeae;
+    border: none;
+    outline: none; 
+    border-radius: 0 5px 5px 0;
 }
 
 .login-form button {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     margin-top: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
+    background-color: gray;
+    transition: 0.3s;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.login-form button:hover {
     background-color: aqua;
+    scale: 1.02;
 }
 
 .login-form .form-group.error input {
-    border-color: red; /* Rojo para errores */
+    border-color: red;
 }
 
 .error-indicator {
@@ -49,4 +93,45 @@
 .error-message {
     color: red;
     margin-top: 10px;
+}
+
+.login-form .form-group input:focus {
+    border: 2px solid #00ad93;
+}
+
+.login-form button:not([disabled]):hover {
+    background-color: #00ad93;
+    transform: scale(1.02);
+}
+
+.login-form button[disabled]:hover {
+    background-color: gray;
+    transform: none;
+    scale: 1;
+    cursor: not-allowed;
+}
+
+  
+.login-form .form-group.error .imgLogin{
+    background-color: red;
+  }
+  
+  .login-form .form-group.error input {
+    border-color: red;
+  }
+  
+@media screen and (max-width: 1168px) {
+    .login-form {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login-form {
+        width: 90%;
+    }
+
+    .logo {
+        width: 80%;
+    }
 }

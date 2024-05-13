@@ -42,7 +42,17 @@ footer ul li {
     justify-content: center;
     align-items: center;
     display: flex;
+    cursor: pointer;
 }
+
+footer a:hover {
+    color: #00ad93;
+}	
+
+.containerFooterTop div>ul>li>a:hover {
+    color: #00ad93;
+}
+    
 
 .containerFooterBottom  {
     border-top: 1px solid #707070;
@@ -71,6 +81,10 @@ footer img {
     display: flex;
     justify-content: flex-end;
     align-items: start;
+}
+
+.containerFooterBottom a, .social {
+    cursor: pointer;
 }
 
 footer img:hover {
@@ -111,9 +125,8 @@ footer img:hover {
     object-fit: cover;
     transition: transform 0.3s;
     margin-right: 10px;
-    display: inli; /* Add flex display */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
 }
 
 .imgFooter img {
