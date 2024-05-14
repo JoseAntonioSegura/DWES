@@ -95,6 +95,10 @@
     margin-top: 10px;
 }
 
+.login-form .form-group input {
+    border: 2px solid transparent;
+  }
+
 .login-form .form-group input:focus {
     border: 2px solid #00ad93;
 }

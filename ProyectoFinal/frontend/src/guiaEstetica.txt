@@ -1,5 +1,6 @@
 blanco: #d5d5d5
 negro: #1a1a1a
+gris claro: 
 cian destacado: #24ffba
 cian base: #00ad93
 

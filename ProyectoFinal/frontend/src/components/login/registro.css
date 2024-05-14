@@ -1,7 +1,27 @@
-.registro-container-custom {
+/* Estilos para los elementos de registro */
+.registro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registro .logo {
+  width: 40%;
+  margin-bottom: 20px;
+  margin-left: 25%;
+  transition: 0.3s;
+}
+
+.registro h2 {
+  margin-bottom: 20px;
+}
+
+.register-form {
   position: relative;
   padding: 20px;
-  width: 18%;
+  width: 50%;
   color: #d5d5d5;
   display: flex;
   flex-direction: column;
@@ -11,29 +31,81 @@
   box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
-.registro-container-custom h2 {
-  margin-bottom: 20px;
+.form-container {
+  display: flex;
+  flex-direction: row;
 }
 
-.registro-form-group {
+.form-column {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.registro-form-group label {
-  margin-bottom: 5px;
-}
-
-.registro-form-group input {
+  flex: 1;
   padding: 10px;
-  border-radius: 5px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  height: 45px;
+}
+
+.imgLogin {
+  width: 15%;
+  height: 100%;
+  margin: 0px;
+  background-color: #00ad93;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px 0 0 5px;
+}
+
+.imgLogin img {
+  width: 30px;
+  margin: auto;
+  height: 30px;
+  background-color: #00ad93;
+  object-fit: cover;
+}
+
+.register-form .form-group input {
+  width: 85%;
+  padding: 10px;
+  border-radius: 0px;
   background-color: #b3aeae;
   border: none;
   outline: none;
+  border-radius: 0 5px 5px 0;
 }
 
-.registro-button {
+.register-form .form-container .form-column .form-group.error input {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.register-form .form-container .form-column .form-group.error .imgLogin {
+  background-color: red;
+}
+
+.register-form .form-container .form-column .form-group.error .imgLogin {
+  border-color: red;
+}
+
+.register-form .form-group input {
+  border: 2px solid transparent;
+}
+
+.register-form .form-group input:focus {
+  border: 2px solid #00ad93;
+}
+
+.register-form button {
   width: 100%;
   padding: 15px;
   margin-top: 10px;
@@ -41,35 +113,38 @@
   background-color: gray;
   transition: 0.3s;
   font-weight: 600;
+  margin-bottom: 15px;
 }
 
-.registro-button:hover {
+.register-form button:hover {
   background-color: aqua;
-  transform: scale(1.02);
+  scale: 1.01;
 }
 
-.registro-form-group.error input {
-  border-color: red;
-}
-
-.registro-error-indicator {
-  color: red;
-  margin-left: 5px;
-}
-
-.registro-error-message {
-  color: red;
-  margin-top: 10px;
-}
-
-.registro-button:not([disabled]):hover {
+.register-form button:not([disabled]):hover {
   background-color: #00ad93;
   transform: scale(1.02);
 }
 
-.registro-button[disabled]:hover {
+.register-form button[disabled]:hover {
   background-color: gray;
   transform: none;
   scale: 1;
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 1168px) {
+  .register-form {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .register-form {
+    width: 90%;
+  }
+
+  .logo {
+    width: 80%;
+  }
 }
