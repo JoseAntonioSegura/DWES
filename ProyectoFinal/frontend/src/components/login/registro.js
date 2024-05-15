@@ -13,7 +13,7 @@ function Registro() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phoneNumber, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
@@ -90,7 +90,7 @@ function Registro() {
       setErrorField(['email']);
       return 'El email no es válido.';
     }
-    if (phone.length !== 9 && phone.length !== 0) {
+    if (phoneNumber.length !== 9 && phoneNumber.length !== 0) {
       setErrorField(['phone']);
       return 'El número de teléfono debe tener 9 dígitos.';
     }
@@ -134,7 +134,7 @@ function Registro() {
     const userData = {
       username: username,
       password: password,
-      phone: phone,
+      phoneNumber: phoneNumber,
       email: email,
       name: name,
       lastname: lastname,
@@ -191,7 +191,7 @@ function Registro() {
                 <div className="imgLogin">
                   <img className="imgLogin" src={telefono} alt="User Login" />
                 </div>
-                <input type="number" value={phone} placeholder='Número de teléfono' onChange={handlePhoneChange} />
+                <input type="number" value={phoneNumber} placeholder='Número de teléfono' onChange={handlePhoneChange} />
               </div>
               <div className={`form-group ${errorField.includes('country') ? 'error' : ''}`}>
                 <div className="imgLogin">
