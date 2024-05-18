@@ -71,6 +71,12 @@ export async function getGames(filters = {}, options = {}) {
       case '-fechaLanzamiento':
         gamesQuery.sort({ fechaLanzamiento: -1 });
         break;
+        case 'unidades':
+          gamesQuery.sort({ unidades: 1 });
+          break;
+        case '-unidades':
+          gamesQuery.sort({ unidades: -1 });
+          break;
       default:
         break;
     }

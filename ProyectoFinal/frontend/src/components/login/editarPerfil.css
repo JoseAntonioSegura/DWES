@@ -9,15 +9,17 @@
 .user-image {
     width: 150px;
     height: 150px;
-    margin-bottom: 20px;
-    justify-content: center;
-    align-items: center;
     background-color: #00ad93;
     border-radius: 5px;
-    margin-left: 25%;
     cursor: pointer;
     transition: 0.3s;
     border: 2px solid ;
+}
+
+.containerImageProfile {
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .user-image:hover {
@@ -44,9 +46,9 @@
     color: #ffffff;
 }
 
-.contenedorEditarPerfil input {
+.contenedorEditarPerfil input, .modal input{
     width: calc(100% - 10px);
-    height: 25px;
+    height: 21px;
     padding: 10px;
     margin-bottom: 10px; 
     border-radius: 0 5px 5px 0;
@@ -56,10 +58,10 @@
     color: #000000; 
 }
 
-.contenedorEditarPerfil button {
+.contenedorEditarPerfil button, .modal button{
     width: 100%;
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 0px;
     border-radius: 5px;
     background-color: gray;
     transition: 0.3s;
@@ -67,6 +69,15 @@
     margin-bottom: 15px;
     color: #ffffff; 
 }
+
+.contenedorEditarPerfil input {
+    border: 2px solid transparent;
+  }
+  
+  .contenedorEditarPerfil input:focus {
+    border: 2px solid #00ad93;
+  }
+  
 
 .editarImagen {
     display: flex;
@@ -152,7 +163,7 @@
 .exitProfile:not([disabled]):hover{
     transform: scale(1.02);
 }
-
+  
 
 @media screen and (max-width: 1168px) {
     .contenedorEditarPerfil {
@@ -164,5 +175,21 @@
     .contenedorEditarPerfil {
       width: 90%;
     }
+  }
+  
+.error input {
+    border: 2px solid red;
+}
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.error .imgLogin, .error .imgLogin img {
+    background-color: red;
+  }
+  
+.error .imgLogin {
+    border-color: red;
   }
   

@@ -119,6 +119,7 @@ function EditarPerfil(){
     
             if (response.ok) {
                 localStorage.setItem('user', JSON.stringify(user));
+                setErrorMessage("");
             } else {
                 const data = await response.json();
                 throw new Error(data.message);
@@ -130,45 +131,40 @@ function EditarPerfil(){
     };
     
     
-    
     const validateForm = () => {
         const { username, email, phoneNumber, country, password, confirmPassword, name, lastname } = user;
+        let errors = {};
         if (!username || username.length < 3) {
-          setErrors(prevErrors => ({ ...prevErrors, username: true }));
-          return 'El nombre de usuario debe tener al menos 3 caracteres.';
+            errors.username = true;
         }
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          setErrors(prevErrors => ({ ...prevErrors, email: true }));
-          return 'El email no es válido.';
+            errors.email = true;
         }
         if (!country || country.length < 3) {
-          setErrors(prevErrors => ({ ...prevErrors, country: true }));
-          return 'El país debe tener al menos 3 caracteres.';
+            errors.country = true;
         }
         if (password && (password.length < 7 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[^A-Za-z0-9]/.test(password))) {
-            setErrors(prevErrors => ({ ...prevErrors, password: true }));
-            return 'La contraseña debe tener al menos 7 caracteres, incluyendo una letra mayúscula, una letra minúscula y un carácter especial.';
-            
+            errors.password = true;
         }
         if (password !== confirmPassword && password.length > 0) {
-            setErrors(prevErrors => ({ ...prevErrors, confirmPassword: true, password: true }));
-            return 'Las contraseñas no coinciden.';
-          }
+            errors.password = true;
+            errors.confirmPassword = true;
+        }
         if (!name || name.length < 3) {
-          setErrors(prevErrors => ({ ...prevErrors, name: true }));
-          return 'El nombre debe tener al menos 3 caracteres.';
+            errors.name = true;
         }
         if (!lastname || lastname.length < 3) {
-          setErrors(prevErrors => ({ ...prevErrors, lastname: true }));
-          return 'El apellido debe tener al menos 3 caracteres.';
+            errors.lastname = true;
         }
-        return '';
-      };
-      
+
+        setErrors(errors);
+        return Object.keys(errors).length === 0 ? '' : 'Por favor, corrige los errores en el formulario.';
+    };
+
     return (
         <div className="contenedorPrincipalEditarPerfil">
             <div className="contenedorEditarPerfil">
-                <div className="header">
+                <div className="containerImageProfile">
                     <img className="user-image" src={user.usernameImage} alt="User Image" onClick={handleImageClick} />
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -229,14 +225,15 @@ function EditarPerfil(){
                         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                             <span className="close" onClick={handleModalClose}>&times;</span>
                             <h2>Actualizar imagen de usuario</h2>
-                            <input type="text" placeholder="Ingresa la URL de la nueva imagen" value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} />
-                            <button onClick={handleSaveImageUrl}>Guardar</button>
-                        </div>
+                        <input type="text" placeholder="Ingresa la URL de la nueva imagen" value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} />
+                        <button onClick={handleSaveImageUrl}>Guardar</button>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
-    );
+    </div>
+);
+
 }
 
 export default EditarPerfil;

@@ -11,16 +11,74 @@
   width: 80%;
   height: 100%;
   margin: auto;
+  display: flex;
+  gap: 10px; 
+  width: 80%;
+  margin-top: 120px;
 }
 
 .filtros div {
   display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
-  align-items: center;
-  width: 20%;
-  height: 30%;
-  background-color: beige;
+  flex-direction: row;
+  gap: 10px; 
+  width: calc(25% - 20px);
+  margin: auto;
+  justify-content: center;
+}
+
+ .filtros div select {
+  width: 100%;
+  color: #d5d5d5;
+  padding: 10px;
+  background-color: rgb(34, 34, 34);
+  border: 2px solid transparent;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.filtros div input {
+  width: 150px;
+  color: #d5d5d5;
+  padding: 10px;
+  background-color: rgb(34, 34, 34);
+  border: 2px solid transparent;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-size: 16px;
+  font-weight: 700;
+} 
+
+.filtros div select:hover, .filtros div input:hover{
+  border: 2px solid #00ad93;
+
+}
+
+.filtros div input:focus, .filtros div select:focus {
+  border-color: #00ad93;
+  box-shadow: 0 0 20px #00ad93;
+  outline: none; 
+}
+
+.filtros select option {
+  color: #d5d5d5;
+  background-color: #1A1A1A;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.filtros div select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+  padding-right: 30px; 
 }
 
 .pagination {
@@ -30,15 +88,21 @@
 }
 
 .pagination a {
-  color: black;
+  color: #d5d5d5;
   padding: 8px 16px;
   text-decoration: none;
-  border: 1px solid #ddd;
+  border: 2px solid #585858;
   margin: 0 4px;
+  transition: background-color 0.3s ease; 
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
 }
 
 .pagination a.active {
-  background-color: #007bff;
+  background-color: #00ad93;
   color: white;
-  border: 1px solid #007bff;
+  border: 1px solid #00ad93;
 }

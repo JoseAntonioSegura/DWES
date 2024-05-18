@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import ProductosFiltrados from './obtenerProductosFiltrados.js'; 
 import Header from '../inicio/headerHome.js';
 import Footer from '../inicio/footer.js';
@@ -9,17 +9,18 @@ function Index() {
   const [showImage, setShowImage] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(true);
   const location = useLocation();
+  const history = useNavigate();
   let query = new URLSearchParams(location.search).get('titulo');
-  let page = parseInt(new URLSearchParams(location.search).get('page')) || 1;
-
+  let initialPage = parseInt(new URLSearchParams(location.search).get('page')) || 1;
+  
+  const [page, setPage] = useState(initialPage);
   const [plataforma, setPlataforma] = useState('');
   const [categoria, setCategoria] = useState('');
-  const [precio, setPrecio] = useState('');
-  const [pegi, setPegi] = useState('');
   const [minPrecio, setMinPrecio] = useState('');
   const [maxPrecio, setMaxPrecio] = useState('');
+  const [pegi, setPegi] = useState('');
   const [sortOrder, setSortOrder] = useState('');
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
 
   useEffect(() => {
     let lastScrollPosition = window.pageYOffset;
@@ -45,7 +46,7 @@ function Index() {
 
   useEffect(() => {
     obtenerTotalPaginas();
-  }, []);
+  }, [query, plataforma, categoria, minPrecio, maxPrecio, pegi, sortOrder, page]);
 
   useEffect(() => {
     const queryParams = buildQueryUrl(page);
@@ -54,30 +55,32 @@ function Index() {
 
   const handlePlataformaChange = (event) => {
     setPlataforma(event.target.value);
+    setPage(1); // Reset page to 1 on filter change
   };
 
   const handleCategoriaChange = (event) => {
     setCategoria(event.target.value);
-  };
-
-  const handlePrecioChange = (event) => {
-    setPrecio(event.target.value);
-  };
-
-  const handlePegiChange = (event) => {
-    setPegi(event.target.value);
+    setPage(1); // Reset page to 1 on filter change
   };
 
   const handleMinPrecioChange = (event) => {
     setMinPrecio(event.target.value);
+    setPage(1); // Reset page to 1 on filter change
   };
-  
+
   const handleMaxPrecioChange = (event) => {
     setMaxPrecio(event.target.value);
+    setPage(1); // Reset page to 1 on filter change
+  };
+
+  const handlePegiChange = (event) => {
+    setPegi(event.target.value);
+    setPage(1); // Reset page to 1 on filter change
   };
 
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);
+    setPage(1); // Reset page to 1 on filter change
   };
 
   const obtenerTotalPaginas = async () => {
@@ -89,6 +92,9 @@ function Index() {
       }
       const data = await response.json();
       setTotalPages(data.totalPages);
+      if (page > data.totalPages) {
+        setPage(data.totalPages || 1);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -106,14 +112,12 @@ function Index() {
     if (sortOrder) queryUrl += `sort=${sortOrder}&`;
     if (pageNumber) queryUrl += `page=${pageNumber}`;
   
-    // Eliminar el último '&' si existe
     if (queryUrl.endsWith('&')) {
       queryUrl = queryUrl.slice(0, -1);
     }
   
     return queryUrl;
   };
-  
 
   const renderPagination = () => {
     if (totalPages <= 1) {
@@ -123,19 +127,19 @@ function Index() {
     const items = [];
     if (page > 1) {
       items.push(
-        <Link key="prev" to={`?${query ? `titulo=${query}&` : ''}page=${page - 1}`}>&lt;</Link>
+        <Link key="prev" to={`?${query ? `titulo=${query}&` : ''}page=${page - 1}`} onClick={() => setPage(page - 1)}>&lt;</Link>
       );
     }
     
     for (let i = 1; i <= totalPages; i++) {
       items.push(
-        <Link key={i} to={`?${query ? `titulo=${query}&` : ''}page=${i}`} className={page === i ? 'active' : ''}>{i}</Link>
+        <Link key={i} to={`?${query ? `titulo=${query}&` : ''}page=${i}`} className={page === i ? 'active' : ''} onClick={() => setPage(i)}>{i}</Link>
       );
     }
   
     if (page < totalPages) {
       items.push(
-        <Link key="next" to={`?${query ? `titulo=${query}&` : ''}page=${page + 1}`}>&gt;</Link>
+        <Link key="next" to={`?${query ? `titulo=${query}&` : ''}page=${page + 1}`} onClick={() => setPage(page + 1)}>&gt;</Link>
       );
     }
   
@@ -151,71 +155,70 @@ function Index() {
       <main>
         <div className='contenedorFiltros'>
           <div className='filtros'>
-            <div className='filtroPlataforma'>
-              <select onChange={handlePlataformaChange}>
-                <option value="">Todas las plataformas</option>
-                <option value="Steam">Steam</option>
-                <option value="EpicGames">EpicGames</option>
-                <option value="Windows">Windows</option>
-                <option value="Launcher">Launcher</option>
-                <option value="PlayStation">PlayStation</option>
-                <option value="Xbox">Xbox</option>
-                <option value="Nintendo">Nintendo</option>
-              </select>
-            </div>
-            <div className='filtroCategoria'>
-              <select onChange={handleCategoriaChange}>
-                <option value="">Todas las categorias</option>
-                <option value="accion">Acción</option>
-                <option value="aventura">Aventura</option>
-                <option value="estrategia">Estrategia</option>
-                <option value="rol">Rol</option>
-                <option value="deportes">Deportes</option>
-                <option value="carreras">Carreras</option>
-                <option value="puzzle">Puzzle</option>
-                <option value="sandbox">Sandbox</option>
-                <option value="terror">Terror</option>
-                <option value="plataforma">Plataforma</option>
-                <option value="lucha">Lucha</option>
-                <option value="mundo abierto">Mundo abierto</option>
-                <option value="simulacion">Simulación</option>
-                <option value="supervivencia">Supervivencia</option>
-                <option value="otros">Otros</option>
-              </select>
-            </div>
-            <div className='filtroPrecio'>
+              <div className='filtroPlataforma'>
+                <select onChange={handlePlataformaChange}>
+                  <option value="">Todas las plataformas</option>
+                  <option value="Steam">Steam</option>
+                  <option value="EpicGames">EpicGames</option>
+                  <option value="Windows">Windows</option>
+                  <option value="Launcher">Launcher</option>
+                  <option value="PlayStation">PlayStation</option>
+                  <option value="Xbox">Xbox</option>
+                  <option value="Nintendo">Nintendo</option>
+                </select>
+              </div>
+              <div className='filtroCategoria'>
+                <select onChange={handleCategoriaChange}>
+                  <option value="">Todas las categorias</option>
+                  <option value="accion">Acción</option>
+                  <option value="aventura">Aventura</option>
+                  <option value="estrategia">Estrategia</option>
+                  <option value="rol">Rol</option>
+                  <option value="deportes">Deportes</option>
+                  <option value="carreras">Carreras</option>
+                  <option value="puzzle">Puzzle</option>
+                  <option value="sandbox">Sandbox</option>
+                  <option value="terror">Terror</option>
+                  <option value="plataforma">Plataforma</option>
+                  <option value="lucha">Lucha</option>
+                  <option value="mundo abierto">Mundo abierto</option>
+                  <option value="simulacion">Simulación</option>
+                  <option value="supervivencia">Supervivencia</option>
+                  <option value="otros">Otros</option>
+                </select>
+              </div>
+              <div className='filtroPegi'>
+                <select onChange={handlePegiChange}>
+                  <option value="">Cualquier Edad</option>
+                  <option value="4">+4</option>
+                  <option value="7">+7</option>
+                  <option value="12">+12</option>
+                  <option value="16">+16</option>
+                  <option value="18">+18</option>
+                </select>
+              </div>
+              <div className='filtroOrden'>
+                <select onChange={handleSortOrderChange}>
+                  <option value="">Ordenar por</option>
+                  <option value="precio">Precio</option>
+                  <option value="-precio">Precio (alto a bajo)</option>
+                  <option value="titulo">Título</option>
+                  <option value="-titulo">Título (Z-A)</option>
+                  <option value="fechaLanzamiento">Fecha de lanzamiento</option>
+                  <option value="-fechaLanzamiento">Fecha de lanzamiento (más reciente primero)</option>
+                </select>
+              </div>
+              <div className='filtroPrecio'>
                 <input type="number" placeholder="Precio mínimo" onChange={handleMinPrecioChange} />
                 <input type="number" placeholder="Precio máximo" onChange={handleMaxPrecioChange} />
-            </div>
-            <div className='filtroPegi'>
-              <select onChange={handlePegiChange}>
-                <option value="">Cualquier Edad</option>
-                <option value="4">+4</option>
-                <option value="7">+7</option>
-                <option value="12">+12</option>
-                <option value="16">+16</option>
-                <option value="18">+18</option>
-              </select>
-            </div>
-            <div className='filtroOrden'>
-              <select onChange={handleSortOrderChange}>
-                <option value="">Ordenar por</option>
-                <option value="precio">Precio</option>
-                <option value="-precio">Precio (alto a bajo)</option>
-                <option value="titulo">Título</option>
-                <option value="-titulo">Título (Z-A)</option>
-                <option value="fechaLanzamiento">Fecha de lanzamiento</option>
-                <option value="-fechaLanzamiento">Fecha de lanzamiento (más reciente primero)</option>
-              </select>
-            </div>
+              </div>
+              </div>
           </div>
-        </div>
         <div className='separador'></div>
-        <h1 className='titulos'>Catálogo:</h1>
         <div className='ListaDeProductos'>
           <ProductosFiltrados consulta={buildQueryUrl(page)} />
           <div className="pagination">
-            {renderPagination()}
+            {totalPages && renderPagination()}
           </div>
         </div>
       </main>

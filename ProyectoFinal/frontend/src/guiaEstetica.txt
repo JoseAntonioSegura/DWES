@@ -9,3 +9,4 @@ precios de la portada: 32px
 
 titulos: 24px
 
+selects e inputs #d9d9d9

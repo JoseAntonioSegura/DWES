@@ -36,7 +36,7 @@ function CrearProducto() {
           descripcion,
           unidades: parseInt(unidades),
           categoria,
-          precio: parseInt(precio),
+          precio: parseFloat(precio),
           imagen,
           trailer,
           pegi: parseInt(pegi),
