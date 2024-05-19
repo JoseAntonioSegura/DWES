@@ -28,7 +28,7 @@ function DetallesProducto() {
         console.error('Error:', error);
       }
     };
-  
+
     obtenerDetallesProducto();
   }, [titulo, productoAgregado]);
 
@@ -37,7 +37,7 @@ function DetallesProducto() {
       const timeout = setTimeout(() => {
         setProductoAgregado(false);
       }, 1000);
-  
+
       return () => clearTimeout(timeout);
     }
   }, [productoAgregado]);
@@ -47,14 +47,14 @@ function DetallesProducto() {
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
       /^([a-zA-Z0-9_-]{11})$/,
     ];
-  
+
     for (let pattern of patterns) {
       const match = url.match(pattern);
       if (match) {
         return match[1];
       }
     }
-  
+
     return null; 
   }
 
@@ -62,7 +62,7 @@ function DetallesProducto() {
     try {
       const token = localStorage.getItem('token');
       const user = JSON.parse(localStorage.getItem('user'));
-  
+
       if (!token || !user) {
         navigate('/login');
         return;
@@ -73,7 +73,7 @@ function DetallesProducto() {
         productId: producto[0]._id,
         cantidad: 1
       });
-  
+
       const carritoResponse = await fetch('http://localhost:3000/carrito/agregar', {
         method: 'POST',
         headers: {
@@ -82,17 +82,17 @@ function DetallesProducto() {
         },
         body: carritoBody
       });    
-  
+
       if (!carritoResponse.ok) {
         throw new Error('Error al agregar producto al carrito');
       }
 
       const updatedProduct = { ...producto[0], unidades: producto[0].unidades - 1 };
-  
+
       const productoBody = JSON.stringify({
         unidades: updatedProduct.unidades
       });
-  
+
       const productoResponse = await fetch(`http://localhost:3000/games/${producto[0]._id}`, {
         method: 'PATCH',
         headers: {
@@ -101,13 +101,13 @@ function DetallesProducto() {
         },
         body: productoBody
       });
-  
+
       if (!productoResponse.ok) {
         throw new Error('Error al actualizar las unidades del producto');
       }
 
       setProductoAgregado(true);
-  
+
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
       alert('Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.');
@@ -118,7 +118,7 @@ function DetallesProducto() {
     try {
       const token = localStorage.getItem('token');
       const user = JSON.parse(localStorage.getItem('user'));
-  
+
       if (!token || !user) {
         navigate('/login');
         return;
@@ -129,7 +129,7 @@ function DetallesProducto() {
         productId: producto[0]._id,
         cantidad: 1
       });
-  
+
       const carritoResponse = await fetch('http://localhost:3000/carrito/agregar', {
         method: 'POST',
         headers: {
@@ -138,17 +138,17 @@ function DetallesProducto() {
         },
         body: carritoBody
       });    
-  
+
       if (!carritoResponse.ok) {
         throw new Error('Error al agregar producto al carrito');
       }
 
       const updatedProduct = { ...producto[0], unidades: producto[0].unidades - 1 };
-  
+
       const productoBody = JSON.stringify({
         unidades: updatedProduct.unidades
       });
-  
+
       const productoResponse = await fetch(`http://localhost:3000/games/${producto[0]._id}`, {
         method: 'PATCH',
         headers: {
@@ -157,15 +157,15 @@ function DetallesProducto() {
         },
         body: productoBody
       });
-  
+
       if (!productoResponse.ok) {
         throw new Error('Error al actualizar las unidades del producto');
       }
 
       setProductoAgregado(true);
-  
+
       navigate('/carrito');
-  
+
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
       alert('Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.');
@@ -179,40 +179,68 @@ function DetallesProducto() {
   if (error) {
     return <div>{error}</div>;
   }
-  
-  
-  const unidadesDisponibles = producto[0].unidades;
 
-  
+  const formatFecha = (fecha) => {
+    const date = new Date(fecha);
+    return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  };
+
+  const getStockMessage = (unidades) => {
+    if (unidades > 10) return "Stock";
+    if (unidades > 0 && unidades <= 10) return "Pocas unidades";
+    return "Sin stock";
+  };
+
+  const getStockClass = (unidades) => {
+    if (unidades > 10) return "stock-alto";
+    if (unidades > 0 && unidades <= 10) return "stock-bajo";
+    return "sin-stock";
+  };
+
+  const getCategoriaClass = (pegi) => {
+    switch (pegi) {
+      case 4: return 'pegi pegi-4';
+      case 7: return 'pegi pegi-7';
+      case 12: return 'pegi pegi-12';
+      case 16: return 'pegi pegi-16';
+      case 18: return 'pegi pegi-18';
+      default: return 'pegi';
+    }
+  };
 
   return (
     <>
       <Header productoAgregado={productoAgregado} mostrarCarrito={true} />
       <div className="contenedorProducto">
         <div className='contenedorDatos'>
-          <YouTube  iframeClassName="youtubeContainer" videoId={extractVideoId(producto[0].trailer) } opts={{ playerVars: { autoplay: 1 }}}  /> 
+          <YouTube iframeClassName="youtubeContainer" videoId={extractVideoId(producto[0].trailer)} opts={{ playerVars: { autoplay: 1 } }} />
           <div className='contenedorDatosInfo'>
-            <h1>{producto[0].titulo}</h1>
-            <p>Descripción: {producto[0].descripcion}</p>
+            <p className='productDescriptionTitle'>Descripción:</p>
+            <p className='productDescription'>{producto[0].descripcion}</p>
           </div>
         </div>
         <div className='contenedorCompra'>
-          <img src={producto[0].imagen} alt={titulo}/>
+          <img src={producto[0].imagen} alt={titulo} />
           <div className='contenedorCompraDatos'>
-            <p>Unidades disponibles: {producto[0].unidades}</p>
-            <p>Desarrolladora: {producto[0].desarrollador}</p>
-            <p>Géneros: {producto[0].categoria}</p>
-            <p>categoria: {producto[0].pegi}</p>
-            <p>Fecha Lanzamiento: {producto[0].fechaLanzamiento}</p>
-            <p className='precioDatos'>Precio: {producto[0].precio}€</p>
+            <h1>{producto[0].titulo} <span className={getStockClass(producto[0].unidades)}>({getStockMessage(producto[0].unidades)})</span></h1>
+            <p className='genre'>Géneros:</p>
+            <div className="generos">
+              {producto[0].categoria.map((genero, index) => (
+                <span key={index} className="tag">{genero}</span>
+              ))}
+            </div>
+            <strong>Clasificación:</strong><p className={getCategoriaClass(producto[0].pegi)}>PEGI: {producto[0].pegi}</p>
+            <p><a className='developer'>Desarrolladora: </a>{producto[0].desarrollador}</p>
+            <p><a className='lanzamiento'>Fecha de Lanzamiento: </a>{formatFecha(producto[0].fechaLanzamiento)}</p>
           </div>
           <div className='contenedorCompraBotones'>
-            <button className='carritoBtn' onClick={agregarAlCarrito} disabled={unidadesDisponibles === 0}>
+            <button className='carritoBtn' onClick={agregarAlCarrito} disabled={producto[0].unidades === 0}>
               <strong>Agregar al Carrito</strong>
             </button>
-            <button className='compraBtn' onClick={comprarAhora} disabled={unidadesDisponibles === 0}>
+            <button className='compraBtn' onClick={comprarAhora} disabled={producto[0].unidades === 0}>
               <strong>Comprar Ahora</strong>
             </button>
+            <p className='precioDatos'>{producto[0].precio}€</p>
           </div>
         </div>
       </div>

@@ -19,7 +19,15 @@ const SearchBar = () => {
     const newQuery = event.target.value;
     setQuery(newQuery);
 
-    navigate(`/navegar?titulo=${encodeURIComponent(newQuery)}`);
+    if (newQuery) {
+      navigate(`/navegar?titulo=${encodeURIComponent(newQuery)}`);
+    } else {
+      navigate('/navegar');
+    }
+  };
+
+  const handleSearchClick = () => {
+    navigate(`/navegar?titulo=${encodeURIComponent(query)}`);
   };
   
   return (
@@ -31,7 +39,12 @@ const SearchBar = () => {
         value={query}
         onChange={handleInputChange}
       />
-      <img src={lupa} alt="Icono de búsqueda" className="search-icon" />
+      <img 
+        src={lupa} 
+        alt="Icono de búsqueda" 
+        className="search-icon" 
+        onClick={handleSearchClick} 
+      />
     </div>
   );
 };

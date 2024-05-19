@@ -9,8 +9,7 @@ function Header() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); 
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
-  const [showSearchBar, setShowSearchBar] = useState(false); 
-  const [showImage, setShowImage] = useState(true);
+  const [showSearchBar, setShowSearchBar] = useState(true);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -20,23 +19,19 @@ function Header() {
     const handleScroll = () => {
       const currentScrollPosition = window.pageYOffset;
       if (currentScrollPosition > lastScrollPosition) {
-        setShowImage(false);
+        setShowSearchBar(false);
       } else {
-        setShowImage(true);
+        setShowSearchBar(true);
       }
       lastScrollPosition = currentScrollPosition;
       
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
-        header.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-        header.style.height = '70px';
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
-        header.style.height = '100px';
-        setShowSearchBar(true);
+        header.style.height = '80px';
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-        header.style.height = '120px';
-        setShowSearchBar(false);
+        header.style.height = '100px';
       }
     };
   
@@ -122,13 +117,8 @@ function Header() {
     const user = JSON.parse(localStorage.getItem('user'));
     let sumaTotal = 0;
 
-    for(let i = 0; i < productosEnCarrito.length; i++) {
-      console.log(productosEnCarrito);
-      if(productosEnCarrito[i].cantidad > 1){
-        sumaTotal += productosEnCarrito[i].cantidad;
-      }else{
-        sumaTotal += 1;
-      }
+    for (let i = 0; i < productosEnCarrito.length; i++) {
+      sumaTotal += productosEnCarrito[i].cantidad > 1 ? productosEnCarrito[i].cantidad : 1;
     }
 
     if (user && isAdmin) {
@@ -136,8 +126,8 @@ function Header() {
         <div className="infoUser">
           <Link to="/administrador">Administrar Productos</Link>
           <div className='user-profile'>
-            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
-            </div>
+            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage} />}
+          </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><button onClick={handleLogout}>Logout</button></div>
@@ -155,10 +145,10 @@ function Header() {
             <div className="carrito-count">
               <span>{sumaTotal}</span>
             </div>          
-            </div>
-            <div className='user-profile'>
-            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
-            </div>
+          </div>
+          <div className='user-profile'>
+            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage} />}
+          </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><Link to="/mis-facturas">Mis facturas</Link></div>
@@ -171,7 +161,7 @@ function Header() {
     } else {
       return (
         <div className='infoUser'>
-           <div className="cesta">
+          <div className="cesta">
             <Link to="/carrito">
               <img src={cesta} alt="Carrito" />
             </Link>
@@ -188,8 +178,10 @@ function Header() {
   return (
     <>
       <header>
-        <Link to="/"><img className='logo' src={logo} alt="Logo"/></Link>
-        {showSearchBar && <SearchBar />}
+        <Link to="/"><img className='logo' src={logo} alt="Logo" /></Link>
+        <div className={`search-bar-container ${showSearchBar ? 'large' : 'small'}`}>
+          <SearchBar />
+        </div>
         <div>
           {renderUserOrLoginLink()}
         </div>

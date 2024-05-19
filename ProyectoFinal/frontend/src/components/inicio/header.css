@@ -14,6 +14,22 @@ header {
   margin: 0;
 }
 
+.search-bar-container {
+  transition: width 0.3s, padding 0.3s;
+}
+
+.search-bar-container.large .barraBusqueda input{
+  width: 100%;
+  padding: 0 20px;
+  height: 20px;
+}
+
+.search-bar-container.small .barraBusqueda input {
+  width: 100%;
+  padding: 0 20px;
+  height: 20px;
+}
+
 .infoUser {
   width: 100%;
   height: 100%;
