@@ -8,6 +8,7 @@ const Checkout = () => {
   const [totalCompra, setTotalCompra] = useState(0);
   const [sesionIniciada, setSesionIniciada] = useState(false);
   const [error, setError] = useState('');
+  const [carritoIDdefinitivo, setCarritoIDdefinitivo] = useState(''); // State to store carritoId
   const navigate = useNavigate();
   const [datosUsuario, setDatosUsuario] = useState({
     nombre: '',
@@ -64,7 +65,6 @@ const Checkout = () => {
     }
   }, []);
 
-  // Función para obtener productos del carrito
   const obtenerProductosDelCarrito = async (userId) => {
     try {
       const response = await fetch(`http://localhost:3000/carrito/${userId}`, {
@@ -77,6 +77,9 @@ const Checkout = () => {
         throw new Error('Error al obtener productos del carrito');
       }
       const data = await response.json();
+      console.log("datosss");
+      console.log(data);
+      setCarritoIDdefinitivo(data);
       calcularTotalCompra(data);
       setProductos(data);
     } catch (error) {
@@ -90,25 +93,21 @@ const Checkout = () => {
     productos.forEach(producto => {
       total += producto.cantidad * producto.productId.precio;
     });
-    // Redondear el total a dos decimales
     total = parseFloat(total.toFixed(2));
     setTotalCompra(total);
   };
 
-  const confirmarCompra = async (producto) => {
+  const confirmarCompra = async (productos) => {
     try {
       const userId = JSON.parse(localStorage.getItem('user'))._id;
-
-      // Construir la lista de productos para la factura
       const productosParaFactura = productos.map(producto => ({
         productId: producto.productId._id,
         cantidad: producto.cantidad,
         precioOriginal: producto.productId.precio
       }));
 
-      const carritoId = producto._id;
+      const carritoId = carritoIDdefinitivo;
 
-      // Eliminar el producto del carrito
       await fetch(`http://localhost:3000/carrito/confirmar-compra`, {
         method: 'POST',
         headers: {
@@ -121,8 +120,7 @@ const Checkout = () => {
           productos: productosParaFactura
         })
       });
-      // Actualizar la lista de productos en el carrito
-      obtenerProductosDelCarrito(JSON.parse(localStorage.getItem('user'))._id);
+      obtenerProductosDelCarrito(userId);
     } catch (error) {
       console.error('Error al eliminar producto del carrito:', error);
       setError('Error al eliminar producto del carrito');
@@ -155,9 +153,7 @@ const Checkout = () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user && user._id) {
-        for (const producto of productos) {
-          await confirmarCompra(producto);
-        }
+        await confirmarCompra(productos);
         setProductos([]);
         setTotalCompra(0);
       }
@@ -168,11 +164,9 @@ const Checkout = () => {
   };
 
  const procesarCompra = async () => {
-  // Validar campos de usuario
   const camposUsuarioRellenados = Object.values(datosUsuario).every(valor => valor !== '');
   const camposPagoRellenados = Object.values(datosPago).every(valor => valor !== '');
 
-  // Establecer estados de error
   setErroresUsuario({
     nombre: !datosUsuario.nombre,
     apellido: !datosUsuario.apellido,
@@ -189,7 +183,6 @@ const Checkout = () => {
     cvv: !datosPago.cvv
   });
 
-  // Verificar si hay campos incompletos
   const camposRellenados = camposUsuarioRellenados && camposPagoRellenados;
   setCamposRellenados(camposRellenados);
 
@@ -198,17 +191,13 @@ const Checkout = () => {
   }
 
   try {
-    // Eliminar Productos del carrito
     await eliminarTodosLosProductos();
-
-    // Redirigir a la página principal y mostrar la alerta
     navigate('/');
     alert('La compra se ha realizado correctamente.');
   } catch (error) {
     console.error('Error al procesar la compra:', error);
   }
 };
-
   return (
     <>
       <Header />

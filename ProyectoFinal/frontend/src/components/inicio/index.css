@@ -38,11 +38,3 @@ body {
     height: 5%;
 }
 
-.link {
-    color: #00ad93;
-    transition: 0.3s;
-}
-
-.link:hover {
-    color: #24ffba;
-}

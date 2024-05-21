@@ -4,12 +4,14 @@ import './header.css';
 import logo from '../../resources/nombre mas logo linea blanco.png';
 import cesta from '../../resources/cesta.png';
 import SearchBar from '../tienda/barraBusqueda.js';
+import FacturasModal from '../facturas/facturas.js';
 
 function Header() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); 
+  const [isAdmin, setIsAdmin] = useState(false);
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
   const [showSearchBar, setShowSearchBar] = useState(true);
+  const [showFacturasModal, setShowFacturasModal] = useState(false); 
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ function Header() {
         setShowSearchBar(true);
       }
       lastScrollPosition = currentScrollPosition;
-      
+
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
@@ -34,14 +36,14 @@ function Header() {
         header.style.height = '100px';
       }
     };
-  
+
     window.addEventListener('scroll', handleScroll);
-  
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -151,7 +153,7 @@ function Header() {
           </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
-              <div><Link to="/mis-facturas">Mis facturas</Link></div>
+              <div><button className='primerBoton' onClick={() => setShowFacturasModal(true)}>Mis facturas</button></div>
               <div><Link to="/editar-perfil">Editar Perfil</Link></div>
               <div><button onClick={handleLogout}>Cerrar Sesión</button></div>
             </div>
@@ -186,6 +188,7 @@ function Header() {
           {renderUserOrLoginLink()}
         </div>
       </header>
+      {showFacturasModal && <FacturasModal onClose={() => setShowFacturasModal(false)} />}
     </>
   );
 }

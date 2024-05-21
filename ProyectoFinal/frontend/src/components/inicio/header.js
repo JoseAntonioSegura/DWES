@@ -3,12 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import logo from '../../resources/nombre mas logo linea blanco.png';
 import cesta from '../../resources/cesta.png';
+import FacturasModal from '../facturas/facturas.js';
 
 function Header({ productoAgregado , mostrarCarrito }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); 
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
   const [showImage, setShowImage] = useState(true);
+  const [showFacturasModal, setShowFacturasModal] = useState(false); 
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -23,30 +25,28 @@ function Header({ productoAgregado , mostrarCarrito }) {
         setShowImage(true);
       }
       lastScrollPosition = currentScrollPosition;
-      
+
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
-        header.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-        header.style.height = '70px';
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
-        header.style.height = '100px';
+        header.style.height = '80px';
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-        header.style.height = '120px';
+        header.style.height = '100px';
       }
 
       if(mostrarCarrito === false){
 
       }
     };
-  
+
     window.addEventListener('scroll', handleScroll);
-  
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -122,11 +122,10 @@ function Header({ productoAgregado , mostrarCarrito }) {
     const user = JSON.parse(localStorage.getItem('user'));
     let sumaTotal = 0;
 
-    for(let i = 0; i < productosEnCarrito.length; i++) {
-      console.log(productosEnCarrito);
-      if(productosEnCarrito[i].cantidad > 1){
+    for (let i = 0; i < productosEnCarrito.length; i++) {
+      if (productosEnCarrito[i].cantidad > 1) {
         sumaTotal += productosEnCarrito[i].cantidad;
-      }else{
+      } else {
         sumaTotal += 1;
       }
     }
@@ -136,8 +135,8 @@ function Header({ productoAgregado , mostrarCarrito }) {
         <div className="infoUser">
           <Link to="/administrador">Administrar Productos</Link>
           <div className='user-profile'>
-            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
-            </div>
+            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage} />}
+          </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><button onClick={handleLogout}>Logout</button></div>
@@ -148,7 +147,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
     } else if (user) {
       return (
         <div className="infoUser">
-          { mostrarCarrito && (
+          {mostrarCarrito && (
             <div className="cesta">
               <Link to="/carrito">
                 <img src={cesta} alt="Carrito" />
@@ -159,11 +158,11 @@ function Header({ productoAgregado , mostrarCarrito }) {
             </div>
           )}
           <div className='user-profile'>
-            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage}/>}
+            {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage} />}
           </div>
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
-              <div><Link to="/mis-facturas">Mis facturas</Link></div>
+              <div><button className='primerBoton' onClick={() => setShowFacturasModal(true)}>Mis facturas</button></div>
               <div><Link to="/editar-perfil">Editar Perfil</Link></div>
               <div><button onClick={handleLogout}>Cerrar Sesión</button></div>
             </div>
@@ -173,7 +172,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
     } else {
       return (
         <div className='infoUser'>
-          { mostrarCarrito && (
+          {mostrarCarrito && (
             <div className="cesta">
               <Link to="/carrito">
                 <img src={cesta} alt="Carrito" />
@@ -192,11 +191,12 @@ function Header({ productoAgregado , mostrarCarrito }) {
   return (
     <>
       <header>
-        <Link to="/"><img className='logo' src={logo} alt="Logo"/></Link>
+        <Link to="/"><img className='logo' src={logo} alt="Logo" /></Link>
         <div>
           {renderUserOrLoginLink()}
         </div>
       </header>
+      {showFacturasModal && <FacturasModal onClose={() => setShowFacturasModal(false)} />}
     </>
   );
 }
