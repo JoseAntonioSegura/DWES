@@ -55,32 +55,32 @@ function Index() {
 
   const handlePlataformaChange = (event) => {
     setPlataforma(event.target.value);
-    setPage(1); // Reset page to 1 on filter change
+    setPage(1); 
   };
 
   const handleCategoriaChange = (event) => {
     setCategoria(event.target.value);
-    setPage(1); // Reset page to 1 on filter change
+    setPage(1);
   };
 
   const handleMinPrecioChange = (event) => {
     setMinPrecio(event.target.value);
-    setPage(1); // Reset page to 1 on filter change
+    setPage(1); 
   };
 
   const handleMaxPrecioChange = (event) => {
     setMaxPrecio(event.target.value);
-    setPage(1); // Reset page to 1 on filter change
+    setPage(1); 
   };
 
   const handlePegiChange = (event) => {
     setPegi(event.target.value);
-    setPage(1); // Reset page to 1 on filter change
+    setPage(1);
   };
 
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);
-    setPage(1); // Reset page to 1 on filter change
+    setPage(1); 
   };
 
   const obtenerTotalPaginas = async () => {
