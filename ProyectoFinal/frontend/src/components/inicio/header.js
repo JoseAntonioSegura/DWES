@@ -4,6 +4,7 @@ import './header.css';
 import logo from '../../resources/nombre mas logo linea blanco.png';
 import cesta from '../../resources/cesta.png';
 import FacturasModal from '../facturas/facturas.js';
+import EditarPerfilModal from '../login/editarPerfil.js';
 
 function Header({ productoAgregado , mostrarCarrito }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -11,6 +12,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
   const [showImage, setShowImage] = useState(true);
   const [showFacturasModal, setShowFacturasModal] = useState(false); 
+  const [showEditarPerfilModal, setShowEditarPerfilModal] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -29,10 +31,10 @@ function Header({ productoAgregado , mostrarCarrito }) {
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
-        header.style.height = '80px';
+        header.style.height = '90px';
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-        header.style.height = '100px';
+        header.style.height = '110px';
       }
 
       if(mostrarCarrito === false){
@@ -163,7 +165,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><button className='primerBoton' onClick={() => setShowFacturasModal(true)}>Mis facturas</button></div>
-              <div><Link to="/editar-perfil">Editar Perfil</Link></div>
+              <div><button className='primerBoton' onClick={() => setShowEditarPerfilModal(true)}>Mis facturas</button></div>
               <div><button onClick={handleLogout}>Cerrar Sesión</button></div>
             </div>
           )}
@@ -197,6 +199,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
         </div>
       </header>
       {showFacturasModal && <FacturasModal onClose={() => setShowFacturasModal(false)} />}
+      {showFacturasModal && <EditarPerfilModal onClose={() => setShowEditarPerfilModal(false)} />}
     </>
   );
 }

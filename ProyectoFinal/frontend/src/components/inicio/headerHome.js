@@ -5,6 +5,7 @@ import logo from '../../resources/nombre mas logo linea blanco.png';
 import cesta from '../../resources/cesta.png';
 import SearchBar from '../tienda/barraBusqueda.js';
 import FacturasModal from '../facturas/facturas.js';
+import EditarPerfilModal from '../login/editarPerfil.js';
 
 function Header() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -12,6 +13,7 @@ function Header() {
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
   const [showSearchBar, setShowSearchBar] = useState(true);
   const [showFacturasModal, setShowFacturasModal] = useState(false); 
+  const [showEditarPerfilModal, setShowEditarPerfilModal] = useState(false); 
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -30,10 +32,10 @@ function Header() {
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
-        header.style.height = '80px';
+        header.style.height = '90px';
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-        header.style.height = '100px';
+        header.style.height = '110px';
       }
     };
 
@@ -154,7 +156,7 @@ function Header() {
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><button className='primerBoton' onClick={() => setShowFacturasModal(true)}>Mis facturas</button></div>
-              <div><Link to="/editar-perfil">Editar Perfil</Link></div>
+              <div><button className='primerBoton' onClick={() => setShowEditarPerfilModal(true)}>Editar Perfil</button></div>
               <div><button onClick={handleLogout}>Cerrar Sesión</button></div>
             </div>
           )}
@@ -189,6 +191,7 @@ function Header() {
         </div>
       </header>
       {showFacturasModal && <FacturasModal onClose={() => setShowFacturasModal(false)} />}
+      {showEditarPerfilModal && <EditarPerfilModal onClose={() => setShowEditarPerfilModal(false)} />}
     </>
   );
 }

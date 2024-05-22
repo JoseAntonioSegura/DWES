@@ -52,6 +52,7 @@ header {
   cursor: pointer;
   padding-right: 15vw;
   padding-left: 100px;
+  
 }
 
 header h1 {
@@ -190,6 +191,12 @@ header div div img:hover {
   transition: 0.3s;
 }
 
-.user-profile:hover {
-  color: #24ffba;
+.user-profile img {
+  border: 2px solid #464D56;
 }
+
+.user-profile img:hover {
+  box-shadow: #00ad93 0 0 10px;
+  border: #24ffba 2px solid;
+}
+

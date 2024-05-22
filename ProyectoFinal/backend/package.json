@@ -37,6 +37,7 @@
     "mongoose-paginate-v2": "^1.8.0",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
+    "react-toastify": "^10.0.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "winston": "^3.11.0"

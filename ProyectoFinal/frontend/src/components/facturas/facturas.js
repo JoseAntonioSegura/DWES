@@ -78,7 +78,7 @@ const FacturasModal = ({ onClose }) => {
                     <div key={index} className="factura-item">
                         <div className="factura-header">
                             <span>Índice: {index + 1}</span>
-                            <span>Nombre: {user.username}</span>
+                            <span>{factura._id}</span>
                             <span>Fecha: {formatearFecha(factura.timestamp)}</span>
                             <span>Total: {calcularTotalFactura(factura)}€</span>
                         </div>
@@ -94,7 +94,7 @@ const FacturasModal = ({ onClose }) => {
                                 <span className="close" onClick={() => setSelectedFactura(null)}>&times;</span>
                             </div>
                             <div className="factura-detalle">
-                              <div className="factura-header">
+                              <div className="datosFacturas">
                                     <p><strong>Fecha:</strong> {formatearFecha(selectedFactura.timestamp)}</p>
                                     <p><strong>Total:</strong> {calcularTotalFactura(selectedFactura)}€</p>
                                 </div>

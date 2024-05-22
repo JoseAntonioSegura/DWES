@@ -8,8 +8,10 @@ import telefono from '../../resources/telefono.png';
 import nombre from '../../resources/nombre.png';
 import pais from '../../resources/country.png';
 import Header from '../inicio/header.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function EditarPerfil(){
+const EditarPerfilModal = ({ onClose }) => {
 
     const [user, setUser] = useState({
         username: "",
@@ -120,6 +122,7 @@ function EditarPerfil(){
             if (response.ok) {
                 localStorage.setItem('user', JSON.stringify(user));
                 setErrorMessage("");
+                toast.success('Datos actualizados correctamente');
             } else {
                 const data = await response.json();
                 throw new Error(data.message);
@@ -150,6 +153,9 @@ function EditarPerfil(){
             errors.password = true;
             errors.confirmPassword = true;
         }
+        if (phoneNumber && phoneNumber.length < 9) {
+            errors.phoneNumber = true;
+        }
         if (!name || name.length < 3) {
             errors.name = true;
         }
@@ -161,9 +167,14 @@ function EditarPerfil(){
         return Object.keys(errors).length === 0 ? '' : 'Por favor, corrige los errores en el formulario.';
     };
 
+    const closeModal = () => {
+        onClose();
+    };
+
     return (
-        <div className="contenedorPrincipalEditarPerfil">
-            <div className="contenedorEditarPerfil">
+        <div className="contenedorPrincipalEditarPerfil" onClick={closeModal}>
+            <div className="contenedorEditarPerfil" onClick={(e) => e.stopPropagation()}>
+            <ToastContainer />
                 <div className="containerImageProfile">
                     <img className="user-image" src={user.usernameImage} alt="User Image" onClick={handleImageClick} />
                 </div>
@@ -218,7 +229,7 @@ function EditarPerfil(){
                     </div>
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <button className="confirmProfile" type="submit" disabled={!formChanged}>Guardar cambios</button>
-                    <button className="exitProfile" onClick={() => navigate(-1)}>Salir</button>
+                    <button className="exitProfile" onClick={closeModal}>Salir</button>
                 </form>
                 {modalOpen && (
                     <div className="modal" onClick={handleModalClose}>
@@ -236,4 +247,4 @@ function EditarPerfil(){
 
 }
 
-export default EditarPerfil;
+export default EditarPerfilModal;
