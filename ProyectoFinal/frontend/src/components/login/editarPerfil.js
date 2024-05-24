@@ -155,7 +155,7 @@ const EditarPerfilModal = ({ onClose }) => {
         }
         if (phoneNumber && phoneNumber.length < 9) {
             errors.phoneNumber = true;
-        }
+                    }
         if (!name || name.length < 3) {
             errors.name = true;
         }
@@ -174,6 +174,7 @@ const EditarPerfilModal = ({ onClose }) => {
     return (
         <div className="contenedorPrincipalEditarPerfil" onClick={closeModal}>
             <div className="contenedorEditarPerfil" onClick={(e) => e.stopPropagation()}>
+            <span className="close" onClick={closeModal}>&times;</span>
             <ToastContainer />
                 <div className="containerImageProfile">
                     <img className="user-image" src={user.usernameImage} alt="User Image" onClick={handleImageClick} />
@@ -236,15 +237,15 @@ const EditarPerfilModal = ({ onClose }) => {
                         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                             <span className="close" onClick={handleModalClose}>&times;</span>
                             <h2>Actualizar imagen de usuario</h2>
-                        <input type="text" placeholder="Ingresa la URL de la nueva imagen" value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} />
-                        <button onClick={handleSaveImageUrl}>Guardar</button>
+                            <input type="text" placeholder="Ingresa la URL de la nueva imagen" value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} />
+                            <button onClick={handleSaveImageUrl}>Guardar</button>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
-    </div>
-);
-
+    );
 }
 
 export default EditarPerfilModal;
+

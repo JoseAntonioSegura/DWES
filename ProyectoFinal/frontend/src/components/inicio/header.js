@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
-import logo from '../../resources/nombre mas logo linea blanco.png';
+import logoLarge from '../../resources/nombre mas logo linea blanco.png';
+import logoSmall from '../../resources/logo solo.png';
 import cesta from '../../resources/cesta.png';
 import FacturasModal from '../facturas/facturas.js';
 import EditarPerfilModal from '../login/editarPerfil.js';
@@ -13,8 +14,18 @@ function Header({ productoAgregado , mostrarCarrito }) {
   const [showImage, setShowImage] = useState(true);
   const [showFacturasModal, setShowFacturasModal] = useState(false); 
   const [showEditarPerfilModal, setShowEditarPerfilModal] = useState(false);
+  const [logoSrc, setLogoSrc] = useState(logoLarge);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/carrito");
+    }
+  };
 
   useEffect(() => {
     let lastScrollPosition = window.pageYOffset;
@@ -113,6 +124,23 @@ function Header({ productoAgregado , mostrarCarrito }) {
     setDropdownVisible(!dropdownVisible);
   };
 
+  useEffect(() => {
+    const updateLogo = () => {
+      if (window.innerWidth < 768) {
+        setLogoSrc(logoSmall);
+      } else {
+        setLogoSrc(logoLarge);
+      }
+    };
+
+    updateLogo(); // Initial check
+    window.addEventListener('resize', updateLogo);
+
+    return () => {
+      window.removeEventListener('resize', updateLogo);
+    };
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
@@ -150,9 +178,9 @@ function Header({ productoAgregado , mostrarCarrito }) {
       return (
         <div className="infoUser">
           {mostrarCarrito && (
-            <div className="cesta">
+            <div className="cesta" onClick={handleCartClick}>
               <Link to="/carrito">
-                <img src={cesta} alt="Carrito" />
+                <img src={cesta} alt="Carrito"  />
               </Link>
               <div className="carrito-count">
                 <span>{sumaTotal}</span>
@@ -165,7 +193,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
           {dropdownVisible && (
             <div ref={dropdownRef} className="dropdown-menu">
               <div><button className='primerBoton' onClick={() => setShowFacturasModal(true)}>Mis facturas</button></div>
-              <div><button className='primerBoton' onClick={() => setShowEditarPerfilModal(true)}>Mis facturas</button></div>
+              <div><button className='primerBoton' onClick={() => setShowEditarPerfilModal(true)}>Editar Perfil</button></div>
               <div><button onClick={handleLogout}>Cerrar Sesión</button></div>
             </div>
           )}
@@ -175,7 +203,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
       return (
         <div className='infoUser'>
           {mostrarCarrito && (
-            <div className="cesta">
+            <div className="cesta" onClick={handleCartClick}>
               <Link to="/carrito">
                 <img src={cesta} alt="Carrito" />
               </Link>
@@ -193,13 +221,13 @@ function Header({ productoAgregado , mostrarCarrito }) {
   return (
     <>
       <header>
-        <Link to="/"><img className='logo' src={logo} alt="Logo" /></Link>
+      <Link to="/"><img className='logo' src={logoSrc} alt="Logo" /></Link>
         <div>
           {renderUserOrLoginLink()}
         </div>
       </header>
       {showFacturasModal && <FacturasModal onClose={() => setShowFacturasModal(false)} />}
-      {showFacturasModal && <EditarPerfilModal onClose={() => setShowEditarPerfilModal(false)} />}
+      {showEditarPerfilModal && <EditarPerfilModal onClose={() => setShowEditarPerfilModal(false)} />}
     </>
   );
 }

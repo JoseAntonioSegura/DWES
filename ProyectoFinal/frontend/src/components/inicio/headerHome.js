@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
-import logo from '../../resources/nombre mas logo linea blanco.png';
+import logoLarge from '../../resources/nombre mas logo linea blanco.png';
+import logoSmall from '../../resources/logo solo.png';
 import cesta from '../../resources/cesta.png';
 import SearchBar from '../tienda/barraBusqueda.js';
 import FacturasModal from '../facturas/facturas.js';
@@ -12,10 +13,20 @@ function Header() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [productosEnCarrito, setProductosEnCarrito] = useState([]);
   const [showSearchBar, setShowSearchBar] = useState(true);
-  const [showFacturasModal, setShowFacturasModal] = useState(false); 
-  const [showEditarPerfilModal, setShowEditarPerfilModal] = useState(false); 
+  const [showFacturasModal, setShowFacturasModal] = useState(false);
+  const [showEditarPerfilModal, setShowEditarPerfilModal] = useState(false);
+  const [logoSrc, setLogoSrc] = useState(logoLarge);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/carrito");
+    }
+  };
 
   useEffect(() => {
     let lastScrollPosition = window.pageYOffset;
@@ -106,6 +117,23 @@ function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    const updateLogo = () => {
+      if (window.innerWidth < 768) {
+        setLogoSrc(logoSmall);
+      } else {
+        setLogoSrc(logoLarge);
+      }
+    };
+
+    updateLogo(); // Initial check
+    window.addEventListener('resize', updateLogo);
+
+    return () => {
+      window.removeEventListener('resize', updateLogo);
+    };
+  }, []);
+
   const handleProfileClick = () => {
     setDropdownVisible(!dropdownVisible);
   };
@@ -142,7 +170,7 @@ function Header() {
     } else if (user) {
       return (
         <div className="infoUser">
-          <div className="cesta">
+          <div className="cesta" onClick={handleCartClick}>
             <Link to="/carrito">
               <img src={cesta} alt="Carrito" />
             </Link>
@@ -165,7 +193,7 @@ function Header() {
     } else {
       return (
         <div className='infoUser'>
-          <div className="cesta">
+          <div className="cesta" onClick={handleCartClick}>
             <Link to="/carrito">
               <img src={cesta} alt="Carrito" />
             </Link>
@@ -182,7 +210,7 @@ function Header() {
   return (
     <>
       <header>
-        <Link to="/"><img className='logo' src={logo} alt="Logo" /></Link>
+        <Link to="/"><img className='logo' src={logoSrc} alt="Logo" /></Link>
         <div className={`search-bar-container ${showSearchBar ? 'large' : 'small'}`}>
           <SearchBar />
         </div>

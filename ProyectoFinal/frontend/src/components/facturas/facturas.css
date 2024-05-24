@@ -27,14 +27,14 @@
 
 .modal .modal-content button {
     margin-top: 20px;
-    background-color: white;
+    background-color: #00AD93;
     color: #1a1a1a;
 }
 
 .modal .modal-content button:hover {
     margin-top: 20px;
-    background-color: #00AD93;
-    color: white ;
+    background-color: #24ffba;
+    color: #000000da ;
 }
 
 .close {
@@ -46,6 +46,9 @@
     color: #bebebe;
     cursor: pointer;
     transition: color 0.3s ease;
+    background-color: #1a1a1a;
+    padding: 0px 10px 6px 10px;
+    border-radius: 100%;
 }
 
 .close:hover {

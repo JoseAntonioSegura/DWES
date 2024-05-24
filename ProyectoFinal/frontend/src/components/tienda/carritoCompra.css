@@ -1,5 +1,5 @@
 .carrito-container {
-  position: relative; /* Establecer posición relativa */
+  position: relative; 
   width: 100%;
   padding: 12% 0px 0px 10%;
   color: rgb(255, 255, 255);
@@ -77,6 +77,8 @@
 .tituloContenedorDerecho{
   padding-left: 20px;
   padding-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .contenedorDerechoTitulo{
@@ -111,7 +113,7 @@
 .botonEliminar{
   background-color: rgb(213, 28, 28);
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   transition: 0.3s;
 }
@@ -123,17 +125,19 @@
 }
 
 .totalCompra .botonProcesarCompra {
-  background-color: rgb(1, 241, 229);
-  padding: 10px;
-  border-radius: 10px;
+  background-color: #00ad93;
+  padding: 15px;
+  border-radius: 5px;
   color: rgb(0, 0, 0);
   transition: 0.3s;
   font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
 }
 
 .botonProcesarCompra:hover { 
   background-color: rgb(0, 255, 242);
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .totalCompra {
@@ -141,13 +145,3 @@
   margin: 10px;
 }
 
-.totalCompra .botonProcesarCompra {
-  padding: 10px;
-  font-size: 16px;
-  width: 80%;
-  display: flex;
-  margin: auto;
-  text-align: center;
-  vertical-align: middle;
-  justify-content: center;
-}

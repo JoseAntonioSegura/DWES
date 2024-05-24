@@ -8,6 +8,8 @@ import telefono from '../../resources/telefono.png';
 import nombre from '../../resources/nombre.png';
 import pais from '../../resources/country.png';
 import logo from '../../resources/nombre mas logo linea blanco.png';
+import Header from '../inicio/header';
+import Footer from '../inicio/footer';
 
 function Registro() {
   const [username, setUsername] = useState('');

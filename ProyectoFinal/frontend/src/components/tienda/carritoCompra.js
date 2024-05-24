@@ -57,7 +57,6 @@ const CarritoCompra = () => {
     try {
       const carritoId = producto._id;
   
-      // Eliminar el producto del carrito en el backend
       await fetch(`http://localhost:3000/carrito/${carritoId}`, {
         method: 'DELETE',
         headers: {
@@ -65,10 +64,8 @@ const CarritoCompra = () => {
         }
       });
   
-      // Actualizar el estado local de los productos en el carrito eliminando el producto
       setProductos(prevProductos => prevProductos.filter(item => item._id !== carritoId));
   
-      // Actualizar las unidades del juego
       await actualizarUnidadesDelJuego(producto);
     } catch (error) {
       console.error('Error al eliminar producto del carrito:', error);
@@ -90,7 +87,6 @@ const CarritoCompra = () => {
         body: JSON.stringify({ unidades: nuevasUnidades })
       });
   
-      // Actualizar el estado local de los productos para reflejar los cambios en las unidades
       setProductos(prevProductos => prevProductos.map(item => {
         if (item._id === producto._id) {
           return {
@@ -151,7 +147,6 @@ const CarritoCompra = () => {
   };
   
 
-  // Función para modificar la cantidad de un producto en el carrito y actualizar la cantidad en el backend
   const modificarCantidadJuegos = async (carritoId, nuevaCantidad, incremento) => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -161,13 +156,10 @@ const CarritoCompra = () => {
           throw new Error('Producto no encontrado en el carrito');
         }
         
-        // Calcula la diferencia entre la nueva cantidad y la cantidad anterior
         const diferencia = nuevaCantidad - productoEnCarrito.cantidad;
         
-        // Actualiza las unidades del producto en el inventario
         const nuevasUnidades = productoEnCarrito.productId.unidades - diferencia;
         
-        // Envía una solicitud PATCH al backend para actualizar las unidades del juego
         await fetch(`http://localhost:3000/games/${productoEnCarrito.productId._id}`, {
           method: 'PATCH',
           headers: {
@@ -247,7 +239,7 @@ const CarritoCompra = () => {
               </div>
               <div className='totalCompra'>
                 <p>Total de la compra: {totalCompra}€</p>
-                <Link to="/checkout"><button className='botonProcesarCompra' onClick={procesarCompra}>Realizar el pago</button></Link>
+                <Link to="/checkout"><button className='botonProcesarCompra' onClick={procesarCompra}><a>Realizar pago</a></button></Link>
               </div>
             </div>
           )}

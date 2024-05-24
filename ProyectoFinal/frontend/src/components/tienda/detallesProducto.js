@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import Header from '../inicio/header.js';
+import Footer from '../inicio/footer.js';
 import './detallesProducto.css';
 
 function DetallesProducto() {
@@ -217,19 +218,20 @@ function DetallesProducto() {
           <div className='contenedorDatosInfo'>
             <p className='productDescriptionTitle'>Descripción:</p>
             <p className='productDescription'>{producto[0].descripcion}</p>
+            <p className='productDescriptionTitle'>Géneros:</p>
+            <div className="generos">
+              {producto[0].categoria.map((genero, index) => (
+                <span key={index} className="tag">{genero}</span>
+              ))}
+            </div>
           </div>
         </div>
         <div className='contenedorCompra'>
           <img src={producto[0].imagen} alt={titulo} />
           <div className='contenedorCompraDatos'>
             <h1>{producto[0].titulo} <span className={getStockClass(producto[0].unidades)}>({getStockMessage(producto[0].unidades)})</span></h1>
-            <p className='genre'>Géneros:</p>
-            <div className="generos">
-              {producto[0].categoria.map((genero, index) => (
-                <span key={index} className="tag">{genero}</span>
-              ))}
-            </div>
             <strong>Clasificación:</strong><p className={getCategoriaClass(producto[0].pegi)}>PEGI: {producto[0].pegi}</p>
+            <p><a className='developer'>Plataforma: </a>{producto[0].plataforma}</p>
             <p><a className='developer'>Desarrolladora: </a>{producto[0].desarrollador}</p>
             <p><a className='lanzamiento'>Fecha de Lanzamiento: </a>{formatFecha(producto[0].fechaLanzamiento)}</p>
           </div>
@@ -244,6 +246,7 @@ function DetallesProducto() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -200,3 +200,110 @@ header div div img:hover {
   border: #24ffba 2px solid;
 }
 
+@media screen and (max-width: 1300px) {
+  header .logo {
+    margin: 0;
+    padding: 20px;
+  }
+
+  .user-profile {
+    padding-left: 50px;
+    padding-right: 20px;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    right: 0px;
+  }
+
+  .dropdown-menu div {
+    width: 33.33%;
+  }
+
+  .dropdown-menu button {
+    width: 100%;
+    border-radius: 0px 10px 10px 0px;
+  }
+
+}
+
+/* Media Queries */
+@media screen and (max-width: 780px) {
+  header .logo {
+    width: 60px;
+  }
+
+  header .barraBusqueda {
+    position: relative;
+    justify-content: center;
+    margin: auto;
+    height: auto;
+    margin-top: 40px;
+    width: 80%;
+    margin-left: -10px;
+  }
+
+  .cesta {
+    width: 60px;
+    margin-left: 20px;
+  }
+
+  .cesta img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 0%;
+  }
+
+  .dropdown-menu div {
+    width: 33.33%;
+  }
+
+  .dropdown-menu button {
+    width: 100%;
+    border-radius: 0%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .user-profile {
+    padding: 20% 50px 20% 20%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  header .logo {
+    width: 50px;
+    padding: 10px;
+  }
+
+  header .barraBusqueda {
+   height: 30px;
+  }
+
+  .cesta {
+    width: 50px;
+    margin: 0%;
+  }
+
+  .cesta img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .user-profile {
+    padding: 20px;
+  }
+
+  .user-profile img {
+    width: 50px;
+    height: 50px;
+  }
+}

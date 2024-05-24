@@ -3,7 +3,6 @@
   display: block;
   width: 100%;
   padding: 5% 0px 0px 5%;
-  color: rgb(255, 255, 255);
   font-size: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -16,7 +15,7 @@
   background-color: rgb(56, 56, 56);
   border-radius: 10px;
   width: 50%;
-  border-radius: 10px;
+  padding-left: 20px;
 }
 
 .contenedorIzquierdoUsuario form,
@@ -28,53 +27,38 @@
 
 .contenedorIzquierdoUsuario label,
 .contenedorIzquierdoPago label {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .contenedorIzquierdoUsuario div label,
 .contenedorIzquierdoPago div label {
-    margin-left: 20px;
-    color: rgba(255, 255, 255, 0.558);
+  margin-left: 20px;
+  color: #1a1a1a;
 }
+
 .contenedorIzquierdoUsuario input,
 .contenedorIzquierdoPago input {
-  padding: 8px;
-  border-radius: 5px;
-  margin: 0px 10px 20px 10px;
-  border: 1px solid #ccc;
+  width: 85%;
+  padding: 10px;
+  background-color: #b3aeae;
+  border: none;
+  outline: none;
+  border-radius: 0 5px 5px 0;
+  border: 2px solid transparent;
 }
 
 .contenedorIzquierdoUsuario input:focus,
 .contenedorIzquierdoPago input:focus {
-  outline: none;
-  border-color: #1e90ff;
+  border: 2px solid #00ad93;
 }
 
-.contenedorDerecho {
-  position: fixed;
-  top: 20%;
-  right: 10%;
-  width: 25%;
-  overflow-y: auto;
-  background-color: rgb(56, 56, 56);
-  border-radius: 10px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.resumen {
-  padding-left: 5%;
-  padding-right: 5%;
-  margin: 0px;
-  font-size: 16px;
+.contenedorIzquierdoUsuario div, .contenedorIzquierdoPago div {
   display: flex;
-  justify-content: space-between;
-  opacity: 0.5;
-}
-
-.contenedorDerechoContenido {
-  background-color: rgba(85, 85, 85, 0.966);
-  border-radius: 10px;
+  flex-direction: row;
+  margin: 10px 0 10px 10px;
+  justify-content: left;
+  align-items: center;
+  text-align: center;
 }
 
 .tituloContenedorDerecho {
@@ -84,17 +68,16 @@
 
 .contenedorDerechoTitulo {
   position: fixed;
-  top: 12%;
-  right: 28%;
+  top: 5vw;
+  right: 27vw;
 }
 
 .modificar-cantidad-btn,
 .botonEliminar,
-.botonProcesarCompra,
 .totalCompra button {
   background-color: #ddd;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px 8px;
   cursor: pointer;
   padding: 10px;
@@ -102,10 +85,18 @@
   transition: 0.3s;
 }
 
-.modificar-cantidad-btn:hover,
-.botonEliminar:hover,
+.botonProcesarCompra {
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.3s;
+}
+
 .botonProcesarCompra:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+  background-color: #24ffba;
 }
 
 .botonEliminar {
@@ -119,7 +110,7 @@
 
 .botonProcesarCompra {
   display: flex;
-  background-color: rgb(1, 241, 229);
+  background-color: #00ad93;
   color: rgb(0, 0, 0);
   font-weight: bold;
   width: 90%;
@@ -141,22 +132,95 @@
 
 .mensaje-error {
   color: red;
-  margin-left: 20px;
+  padding-left: 10px;
+  font-size: 16px;
 }
 
-#nombre, #correo {
-    width: 30%;
+#nombre, #correo, #pais {
+  width: 25%;
 }
 
-#apellido, #telefono, #cvv, #fechaExpiracion {
-    width: 20%;
+#apellido, #telefono, #cvv, #fechaExpiracion, #codigoPostal {
+  width: 20%;
 }
 
 #direccionFacturacion {
-    width: 70%;
+  width: 56%;
 }
 
 #nombreTarjeta,#numeroTarjeta {
-    width: 40%;
+  width: 20%;
 }
 
+.imgLoginCheckout {
+  width: 8%;
+  height: 39px;
+  margin: 0px;
+  background-color: #00ad93;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px 0 0 5px;
+}
+
+.imgLoginCheckout img{
+  width: 30px;
+  margin: auto;
+  height: 30px;
+  background-color: #00ad93;
+  object-fit: cover;
+}
+
+.contenedorIzquierdoUsuario label {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.form-group.error input,
+.form-group.error select {
+  border-color: red;
+}
+
+.form-group.error .imgLoginCheckout {
+  background-color: red;
+}
+
+input.error {
+  border: 2px solid red;
+  margin-bottom: 0px;
+}
+
+.container-checkout input.error {
+  border-color: red;
+  color: #1a1a1a;
+}
+
+.imgLoginCheckout.error {
+  background-color: red;
+  border: 2px solid red;
+}
+
+
+.imgLoginCheckout.error img {
+  background-color: red;
+}
+
+
+.mensaje-error {
+  color: red;
+  padding-left: 10px;
+  font-size: 16px;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.aceptarCondiciones label {
+  font-size: 16px;
+}
+
+.aceptarCondiciones input {
+  margin-right: 10px;
+  margin-left: 10px;
+}

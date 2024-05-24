@@ -138,7 +138,19 @@
     margin: auto;
     display: flex;
     max-width: 90%;
-    color: rgb(255, 255, 255);
+    color: rgb(226, 226, 226);
+}
+
+.generos {
+    max-width: 90%;
+    margin: auto;
+    margin-top: 1%;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.generos span {
+    margin-right: 20px;
 }
 
 .productDescriptionTitle {
@@ -160,11 +172,6 @@
     cursor: pointer;
 }
 
-.generos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
 
 .tag {
     background-color: #00ad93;
@@ -287,3 +294,73 @@
 .link:hover {
     color: #24ffba;
 }
+
+@media screen and (max-width: 768px) {
+    .contenedorProducto {
+      display: block;
+      margin-left: 5%;
+      margin-right: 5%;
+      width: 90%;
+      padding: 10px;
+    }
+  
+    .contenedorDatos, .contenedorCompra {
+      width: 100%;
+      height: auto;
+      margin: 10px 0;
+    }
+  
+    .youtubeContainer {
+      height: 50vw;
+    }
+  
+    .contenedorCompra img {
+      height: auto;
+    }
+  
+    .contenedorCompraDatos {
+      margin: 10px 0;
+      padding: 5px;
+    }
+  
+    .contenedorCompraBotones {
+      position: relative;
+      bottom: auto;
+      margin-top: 10px;
+      display: block;
+      text-align: center;
+    }
+  
+    .contenedorCompraBotones button {
+      width: 80%;
+      margin: 10px 0;
+    }
+  
+    .precioDatos {
+      font-size: 28px;
+      text-align: center;
+      margin-top: 10px;
+    }
+  
+    .productDescription {
+      font-size: 14px;
+    }
+  
+    .productDescriptionTitle {
+      font-size: 18px;
+    }
+  
+    .tag {
+      font-size: 10px;
+      padding: 3px 7px;
+    }
+  
+    .generos {
+      gap: 3px;
+    }
+  
+    .contenedorDatosInfo p {
+      padding: 5px;
+    }
+  }
+  
