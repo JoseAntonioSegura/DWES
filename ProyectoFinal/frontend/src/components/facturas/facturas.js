@@ -78,7 +78,7 @@ const FacturasModal = ({ onClose }) => {
                 {facturas.length > 0 && facturas.map((factura, index) => (
                     <div key={index} className="factura-item">
                         <div className="factura-header">
-                            <span>Índice: {index + 1}</span>
+                            <span>{index + 1}</span>
                             <span>{factura._id}</span>
                             <span>Fecha: {formatearFecha(factura.timestamp)}</span>
                             <span>Total: {calcularTotalFactura(factura)}€</span>

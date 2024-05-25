@@ -44,10 +44,10 @@ function Header() {
       const header = document.querySelector('header');
       if (window.scrollY > 10) {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
-        header.style.height = '90px';
+        header.style.height = window.innerWidth < 780 ? '70px' : '90px';
       } else {
         header.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-        header.style.height = '110px';
+        header.style.height = window.innerWidth < 780 ? '80px' : '110px';
       }
     };
 

@@ -230,8 +230,8 @@ function Registro() {
               </div>
             </div>
           </div>
-          <button type="submit" disabled={!formFilled}>Registrarse</button>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
+          <button type="submit" disabled={!formFilled}>Registrarse</button>
         </form>
       </div>
     </div>

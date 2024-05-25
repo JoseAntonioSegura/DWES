@@ -113,6 +113,7 @@
   transition: 0.3s;
   font-weight: 600;
   margin-bottom: 15px;
+  border: 0px;
 }
 
 .register-form button:hover {
@@ -134,16 +135,38 @@
 
 @media screen and (max-width: 1168px) {
   .register-form {
-    width: 80%;
+    width: 89%;
+    overflow: auto;
   }
 }
 
 @media screen and (max-width: 480px) {
   .register-form {
-    width: 90%;
+    height: 100% auto;
+    border-radius: 0px;
+    padding-top: 15vw;
+}
+
+  .registro .logo {
+    width: 80%;
+    margin-left: 10%;
   }
 
-  .logo {
-    width: 80%;
+  .form-container {
+    flex-direction: column;
+  }
+
+  .register-form button {
+    margin-bottom: 20px;
+  }
+
+  .form-column {
+    width: 100%;
+    padding: 0;
+  }
+
+  .form-group {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }

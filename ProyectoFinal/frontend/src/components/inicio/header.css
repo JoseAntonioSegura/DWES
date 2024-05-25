@@ -234,6 +234,10 @@ header div div img:hover {
   header .logo {
     width: 60px;
   }
+ 
+  header {
+    height: 80px;
+  }
 
   header .barraBusqueda {
     position: relative;
@@ -294,16 +298,16 @@ header div div img:hover {
   }
 
   .cesta img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 
   .user-profile {
-    padding: 20px;
+    padding: 10px;
   }
 
   .user-profile img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 }

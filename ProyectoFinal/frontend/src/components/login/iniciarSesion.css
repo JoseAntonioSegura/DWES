@@ -132,7 +132,11 @@
 
 @media screen and (max-width: 480px) {
     .login-form {
-        width: 90%;
+        width: 88%;
+        height: 100%;
+        border-radius: 0px;
+        padding-top: 15vw;
+        overflow: auto;
     }
 
     .logo {
