@@ -4,10 +4,11 @@ import "./facturasUsuarios.css";
 const FacturasUsuarios = () => {
     const [facturas, setFacturas] = useState([]);
     const [userID, setUserID] = useState(""); 
+    const url = process.env.REACT_APP_URL;
 
     const cargarFacturas = () => {
         const token = localStorage.getItem('token');
-        fetch(`http://localhost:3000/factura/${userID}`, {
+        fetch(`${url}/factura/${userID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

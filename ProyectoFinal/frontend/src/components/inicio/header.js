@@ -17,6 +17,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
   const [logoSrc, setLogoSrc] = useState(logoLarge);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   const handleCartClick = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -63,7 +64,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userResponse = await fetch('http://localhost:3000/users/me', {
+        const userResponse = await fetch(`${url}/users/me`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -87,7 +88,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
     const obtenerProductosDelCarrito = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
       try {
-        const response = await fetch(`http://localhost:3000/carrito/${user._id}`, {
+        const response = await fetch(`${url}/carrito/${user._id}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -133,7 +134,7 @@ function Header({ productoAgregado , mostrarCarrito }) {
       }
     };
 
-    updateLogo(); // Initial check
+    updateLogo();
     window.addEventListener('resize', updateLogo);
 
     return () => {

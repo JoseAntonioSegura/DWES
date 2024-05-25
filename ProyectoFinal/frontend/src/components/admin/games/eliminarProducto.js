@@ -5,6 +5,7 @@ function EliminarProducto() {
   const [idJuego, setIdJuego] = useState('');
   const [confirmado, setConfirmado] = useState(false);
   const [error, setError] = useState('');
+  const url = process.env.REACT_APP_URL;
 
   const resetState = () => {
     setIdJuego('');
@@ -17,7 +18,7 @@ function EliminarProducto() {
     console.log(user.rol);
 
     try {
-      const response = await fetch(`http://localhost:3000/games/${idJuego}`,
+      const response = await fetch(`${url}/games/${idJuego}`,
      {
         headers: {
             'rol': user.rol

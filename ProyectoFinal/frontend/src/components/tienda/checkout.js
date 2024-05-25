@@ -54,6 +54,7 @@ const Checkout = () => {
     fechaExpiracion: false,
     cvv: false
   });
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -79,7 +80,7 @@ const Checkout = () => {
 
   const obtenerProductosDelCarrito = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3000/carrito/${userId}`, {
+      const response = await fetch(`${url}/carrito/${userId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -120,7 +121,7 @@ const Checkout = () => {
 
       const carritoId = carritoIDdefinitivo;
 
-      await fetch(`http://localhost:3000/carrito/confirmar-compra`, {
+      await fetch(`${url}/carrito/confirmar-compra`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

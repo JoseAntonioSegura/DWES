@@ -6,11 +6,12 @@ function Productos({ cantidad, ordenar }) {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     const obtenerProductos = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/games?sort=${ordenar}`);
+        const response = await fetch(`${url}/games?sort=${ordenar}`);
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }

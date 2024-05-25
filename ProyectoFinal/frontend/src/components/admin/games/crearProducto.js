@@ -14,6 +14,7 @@ function CrearProducto() {
   const [plataforma, setPlataforma] = useState('');
   const [fechaLanzamiento, setFechaLanzamiento] = useState('');
   const [error, setError] = useState('');
+  const url = process.env.REACT_APP_URL;
 
   const handleGuardarProducto = async () => {
     if (!titulo.trim() || !descripcion.trim() || !unidades || !categoria.length || !precio || !imagen || !trailer || !pegi || !desarrollador || !plataforma || !fechaLanzamiento) {
@@ -25,7 +26,7 @@ function CrearProducto() {
     console.log(user.rol);
 
     try {
-      const response = await fetch('http://localhost:3000/games', {
+      const response = await fetch(`${url}/games`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

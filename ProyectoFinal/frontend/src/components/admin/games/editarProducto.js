@@ -17,6 +17,7 @@ function EditarProducto() {
     plataforma: '',
     fechaLanzamiento: ''
   });
+  const url = process.env.REACT_APP_URL;
 
   const handleProductIdChange = (e) => {
     setProductId(e.target.value);
@@ -24,7 +25,7 @@ function EditarProducto() {
 
   const handleBuscarProducto = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/games/${productId}`);
+      const response = await fetch(`${url}/games/${productId}`);
       if (!response.ok) {
         throw new Error('Producto no encontrado');
       }
@@ -61,7 +62,7 @@ function EditarProducto() {
     const usuario = JSON.parse(localStorage.getItem('user'));
 
     try {
-      const response = await fetch(`http://localhost:3000/games/admin/${productId}`, {
+      const response = await fetch(`${url}/games/admin/${productId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

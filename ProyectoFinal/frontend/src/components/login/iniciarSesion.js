@@ -12,6 +12,7 @@ function Login() {
   const [formFilled, setFormFilled] = useState(false);
   const [isError, setIsError] = useState(false); 
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -40,7 +41,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch(`${url}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -51,7 +52,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        const userResponse = await fetch('http://localhost:3000/users/me', {
+        const userResponse = await fetch(`${url}/users/me`, {
           headers: {
             Authorization: `Bearer ${data.token}`
           }

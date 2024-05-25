@@ -4,6 +4,7 @@ function EliminarFactura() {
   const [facturaID, setFacturaID] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const url = process.env.REACT_APP_URL;
 
   const handleFacturaIDChange = (event) => {
     setFacturaID(event.target.value);
@@ -14,7 +15,7 @@ function EliminarFactura() {
     setLoading(true);
     try {
       const user = JSON.parse(localStorage.getItem('user'));
-      const response = await fetch(`http://localhost:3000/factura/${facturaID}`, {
+      const response = await fetch(`${url}/factura/${facturaID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

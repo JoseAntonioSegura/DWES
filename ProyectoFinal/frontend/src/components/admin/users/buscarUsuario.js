@@ -6,13 +6,14 @@ function BuscarUsuario() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const url = process.env.REACT_APP_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     try {
       const user = JSON.parse(localStorage.getItem('user'));
-      const response = await fetch(`http://localhost:3000/users/name/${name}`, {
+      const response = await fetch(`${url}/users/name/${name}`, {
         headers: {
           'Content-Type': 'application/json',
           'rol': user.rol

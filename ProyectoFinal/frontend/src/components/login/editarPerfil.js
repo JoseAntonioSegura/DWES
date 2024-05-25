@@ -31,6 +31,7 @@ const EditarPerfilModal = ({ onClose }) => {
     const [modalOpen, setModalOpen] = useState(false); 
     const [newImageUrl, setNewImageUrl] = useState(""); 
     const navigate = useNavigate();
+    const url = process.env.REACT_APP_URL;
 
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
@@ -69,7 +70,7 @@ const EditarPerfilModal = ({ onClose }) => {
         setModalOpen(false);
     
         try {
-            const response = await fetch(`http://localhost:3000/users/${user._id}`, {
+            const response = await fetch(`${url}/users/${user._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,7 +111,7 @@ const EditarPerfilModal = ({ onClose }) => {
         const userDataToSend = password ? user : userDataWithoutPassword;
     
         try {
-            const response = await fetch(`http://localhost:3000/users/${user._id}`, {
+            const response = await fetch(`${url}/users/${user._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

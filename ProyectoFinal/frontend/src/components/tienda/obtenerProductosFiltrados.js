@@ -8,11 +8,12 @@ function ProductosFiltrados({ consulta }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     const obtenerProductos = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/games?${consulta}`);
+        const response = await fetch(`${url}/games?${consulta}`);
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }

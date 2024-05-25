@@ -21,6 +21,7 @@ function Index() {
   const [pegi, setPegi] = useState('');
   const [sortOrder, setSortOrder] = useState('');
   const [totalPages, setTotalPages] = useState(null);
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     let lastScrollPosition = window.pageYOffset;
@@ -86,7 +87,7 @@ function Index() {
   const obtenerTotalPaginas = async () => {
     try {
       const queryParams = buildQueryUrl(page);
-      const response = await fetch(`http://localhost:3000/games?${queryParams}`);
+      const response = await fetch(`${url}/games?${queryParams}`);
       if (!response.ok) {
         throw new Error('Error al obtener los productos');
       }

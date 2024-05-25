@@ -24,6 +24,7 @@ function Registro() {
   const [formFilled, setFormFilled] = useState(false);
   const [errorField, setErrorField] = useState([]);
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -144,7 +145,7 @@ function Registro() {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch(`${url}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

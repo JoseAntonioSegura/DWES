@@ -5,10 +5,11 @@ const FacturasUsuarios = () => {
     const [factura, setFactura] = useState(null);
     const [facturaID, setFacturaID] = useState(""); 
     const [error, setError] = useState(null);
+    const url = process.env.REACT_APP_URL;
 
     const obtenerFacturaPorID = () => {
         const user = JSON.parse(localStorage.getItem('user'));
-        fetch(`http://localhost:3000/factura/admin/${facturaID}`, {
+        fetch(`${url}/factura/admin/${facturaID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

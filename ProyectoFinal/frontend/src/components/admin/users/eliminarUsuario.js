@@ -5,6 +5,7 @@ function EliminarUsuario() {
   const [userId, setUserId] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [error, setError] = useState('');
+  const url = process.env.REACT_APP_URL;
 
   const resetState = () => {
     setUserId('');
@@ -16,7 +17,7 @@ function EliminarUsuario() {
     const user = JSON.parse(localStorage.getItem('user'));
 
     try {
-      const response = await fetch(`http://localhost:3000/users/${userId}`, {
+      const response = await fetch(`${url}/users/${userId}`, {
         headers: {
           'rol': user.rol
         },

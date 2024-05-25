@@ -3,7 +3,8 @@ import './mostrarUsuarios.css';
 
 function MostrarUsuarios() {
   const [users, setUsers] = useState([]);
-
+  const url = process.env.REACT_APP_URL;
+  
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -12,7 +13,7 @@ function MostrarUsuarios() {
     const user = JSON.parse(localStorage.getItem('user'));
 
     try {
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch(`${url}/users`, {
         headers: {
           'Content-Type': 'application/json',
           'rol': user.rol

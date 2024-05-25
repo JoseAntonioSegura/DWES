@@ -17,6 +17,7 @@ function EditarUsuario() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const url = process.env.REACT_APP_URL;
 
   const handleUserIdChange = (event) => {
     setUserId(event.target.value);
@@ -27,7 +28,7 @@ function EditarUsuario() {
     console.log(user.rol);
 
     try {
-      const response = await fetch(`http://localhost:3000/users/admin/${userId}`, {
+      const response = await fetch(`${url}/users/admin/${userId}`, {
         headers: {
             'rol': user.rol
         }
@@ -61,7 +62,7 @@ function EditarUsuario() {
         }
       });
 
-      const response = await fetch(`http://localhost:3000/users/admin/${userId}`, {
+      const response = await fetch(`${url}/users/admin/${userId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

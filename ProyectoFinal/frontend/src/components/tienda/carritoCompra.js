@@ -8,7 +8,8 @@ const CarritoCompra = () => {
   const [totalCompra, setTotalCompra] = useState(0);
   const [sesionIniciada, setSesionIniciada] = useState(false);
   const [error, setError] = useState('');
-
+  const url = process.env.REACT_APP_URL;
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -24,7 +25,7 @@ const CarritoCompra = () => {
 
   const obtenerProductosDelCarrito = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3000/carrito/${userId}`, {
+      const response = await fetch(`${url}/carrito/${userId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -57,7 +58,7 @@ const CarritoCompra = () => {
     try {
       const carritoId = producto._id;
   
-      await fetch(`http://localhost:3000/carrito/${carritoId}`, {
+      await fetch(`${url}/carrito/${carritoId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -78,7 +79,7 @@ const CarritoCompra = () => {
     try {
       const unidadesEliminadas = producto.cantidad;
       const nuevasUnidades = producto.productId.unidades + unidadesEliminadas;
-      await fetch(`http://localhost:3000/games/${producto.productId._id}`, {
+      await fetch(`${url}/games/${producto.productId._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +119,7 @@ const CarritoCompra = () => {
           throw new Error('Producto no encontrado en el carrito');
         }
   
-        const response = await fetch(`http://localhost:3000/games/${productoEnCarrito.productId._id}`);
+        const response = await fetch(`${url}/games/${productoEnCarrito.productId._id}`);
         
         if (!response.ok) {
           throw new Error('Error al obtener información del juego');
@@ -130,7 +131,7 @@ const CarritoCompra = () => {
           throw new Error('No hay suficientes unidades disponibles');
         }
   
-        await fetch(`http://localhost:3000/carrito`, {
+        await fetch(`${url}/carrito`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -160,7 +161,7 @@ const CarritoCompra = () => {
         
         const nuevasUnidades = productoEnCarrito.productId.unidades - diferencia;
         
-        await fetch(`http://localhost:3000/games/${productoEnCarrito.productId._id}`, {
+        await fetch(`${url}/games/${productoEnCarrito.productId._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

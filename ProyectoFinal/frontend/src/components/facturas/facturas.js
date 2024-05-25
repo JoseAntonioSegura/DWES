@@ -6,13 +6,14 @@ const FacturasModal = ({ onClose }) => {
     const [selectedFactura, setSelectedFactura] = useState(null);
     const [user, setUser] = useState(null);
     const [productosDetalles, setProductosDetalles] = useState([]);
+    const url = process.env.REACT_APP_URL;
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
         setUser(user);
         const token = localStorage.getItem('token');
         if (user && token) {
-            fetch(`http://localhost:3000/factura/${user._id}`, {
+            fetch(`${url}/factura/${user._id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ const FacturasModal = ({ onClose }) => {
     const mostrarDetallesFactura = async (factura) => {
         const token = localStorage.getItem('token');
         const detalles = await Promise.all(factura.datosProducto.map(async (producto) => {
-            const response = await fetch(`http://localhost:3000/games/${producto.productoId}`, {
+            const response = await fetch(`${url}/games/${producto.productoId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

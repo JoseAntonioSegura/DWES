@@ -5,6 +5,7 @@ function BuscarProducto() {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [productoEncontrado, setProductoEncontrado] = useState(null);
   const [error, setError] = useState('');
+  const url = process.env.REACT_APP_URL;
 
   const buscarProducto = async () => {
     if (!productoBuscado.trim()) {
@@ -13,7 +14,7 @@ function BuscarProducto() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/games/titulo/${productoBuscado}`);
+      const response = await fetch(`${url}/games/titulo/${productoBuscado}`);
       if (!response.ok) {
         throw new Error('Producto no encontrado');
       }

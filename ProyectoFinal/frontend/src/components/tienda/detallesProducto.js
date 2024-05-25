@@ -12,11 +12,12 @@ function DetallesProducto() {
   const [error, setError] = useState(null);
   const [productoAgregado, setProductoAgregado] = useState(false);
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     const obtenerDetallesProducto = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/games/titulo/${titulo}`);
+        const response = await fetch(`${url}/games/titulo/${titulo}`);
         if (!response.ok) {
           throw new Error('Error al obtener los detalles del producto');
         }
@@ -75,7 +76,7 @@ function DetallesProducto() {
         cantidad: 1
       });
 
-      const carritoResponse = await fetch('http://localhost:3000/carrito/agregar', {
+      const carritoResponse = await fetch(`${url}/carrito/agregar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +95,7 @@ function DetallesProducto() {
         unidades: updatedProduct.unidades
       });
 
-      const productoResponse = await fetch(`http://localhost:3000/games/${producto[0]._id}`, {
+      const productoResponse = await fetch(`${url}/games/${producto[0]._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +132,7 @@ function DetallesProducto() {
         cantidad: 1
       });
 
-      const carritoResponse = await fetch('http://localhost:3000/carrito/agregar', {
+      const carritoResponse = await fetch(`${url}/carrito/agregar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,7 +151,7 @@ function DetallesProducto() {
         unidades: updatedProduct.unidades
       });
 
-      const productoResponse = await fetch(`http://localhost:3000/games/${producto[0]._id}`, {
+      const productoResponse = await fetch(`${url}/games/${producto[0]._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
