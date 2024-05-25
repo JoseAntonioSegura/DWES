@@ -218,7 +218,7 @@ function DetallesProducto() {
           <div className='contenedorDatosInfo'>
             <p className='productDescriptionTitle'>Descripción:</p>
             <p className='productDescription'>{producto[0].descripcion}</p>
-            <p className='productDescriptionTitle'>Géneros:</p>
+            <p className='productDescriptionTitle2'>Géneros:</p>
             <div className="generos">
               {producto[0].categoria.map((genero, index) => (
                 <span key={index} className="tag">{genero}</span>

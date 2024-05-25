@@ -37,7 +37,7 @@ body {
     height: 5%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
     .ListaDeProductos {
         width: 100%;
         display: block;
