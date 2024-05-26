@@ -201,7 +201,7 @@
 @media screen and (max-width: 780px) {
     .contenedorEditarPerfil {
         width: 90%;
-        height: 100% auto;
+        height: 100%;
         border-radius: 0px;
     }
 
@@ -211,21 +211,13 @@
     }
 
     .close {
-        top: 10vw;
+        top: 30px;
+        right: 10px;
     }
+
 
     .contenedorEditarPerfil .user-image {
         margin-top: 15vw;
-    }
-}
-
-@media screen and (max-height: 900px) and (max-width: 780px){
-    .close {
-        top: 20vw; 
-    }
-
-    .user-image {
-        margin-top: 40px;
     }
 }
 

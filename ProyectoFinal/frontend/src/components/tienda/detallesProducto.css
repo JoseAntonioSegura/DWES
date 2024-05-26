@@ -389,8 +389,10 @@
     }
   
     .contenedorCompraBotones button {
-      width: 80%;
-      margin: 10px;
+      width: 35%;
+      margin: 5px;
+      padding: auto;
+      font-size: 12px;
     }
   
     .precioDatos {
@@ -409,13 +411,16 @@
     }
   
     .tag {
-      font-size: 10px;
-      padding: 3px 7px;
+      font-size: 11px;
       margin-bottom: 10px;
+      font-size: 12px;
+
     }
   
     .generos {
       gap: 3px;
+      padding: 6px 8px;
+
     }
   
     .contenedorDatosInfo p {

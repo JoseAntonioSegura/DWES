@@ -103,7 +103,7 @@ const FacturasModal = ({ onClose }) => {
                                     {productosDetalles.map((producto, index) => (
                                         <div key={index} className="producto-detalle">
                                             <img src={producto.detalles.imagen} alt={producto.detalles.titulo} className="producto-imagen" />
-                                            <p><strong>Producto:</strong> {producto.detalles.titulo}</p>
+                                            <p>{producto.detalles.titulo}</p>
                                             <p><strong>Cantidad:</strong> {producto.unidades}</p>
                                             <p><strong>Precio:</strong> {producto.precio}€</p>
                                             <p><strong>Total:</strong> {Math.round(producto.precio * producto.unidades * 100) / 100}€</p>
