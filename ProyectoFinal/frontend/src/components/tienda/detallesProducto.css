@@ -406,7 +406,6 @@
     }
   
     .productDescriptionTitle2 {
-      margin-top: 20px;
       margin-bottom: 10px;
     }
   
@@ -420,6 +419,7 @@
     .generos {
       gap: 3px;
       padding: 6px 8px;
+      padding-bottom: 20px;
 
     }
   
@@ -430,6 +430,11 @@
     .youtubeContainer {
       height: 60vw;
     }
+
+    .contenedorCompraDatos p {
+        padding-top: 10px;
+    }
+
 
 
   }
