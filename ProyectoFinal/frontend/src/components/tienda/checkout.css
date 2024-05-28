@@ -137,19 +137,19 @@
 }
 
 #nombre, #correo, #pais {
-  width: 25%;
+  width: 35%;
 }
 
 #apellido, #telefono, #cvv, #fechaExpiracion, #codigoPostal {
-  width: 20%;
+  width: 30%;
 }
 
 #direccionFacturacion {
-  width: 56%;
+  width: 78%;
 }
 
 #nombreTarjeta,#numeroTarjeta {
-  width: 20%;
+  width: 30%;
 }
 
 .imgLoginCheckout {
@@ -223,4 +223,81 @@ input.error {
 .aceptarCondiciones input {
   margin-right: 10px;
   margin-left: 10px;
+}
+
+
+@media (max-width: 1450px) {
+  .container-checkout {
+    padding: 0px;
+    margin-top: 120px;
+  }
+
+  .container-checkout .contenedorDerecho {
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+  }
+
+  .container-checkout .tituloCheckout {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+  .container-checkout .tituloCheckout2 {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .contenedorIzquierdoUsuario, .contenedorIzquierdoPago  {
+    width: 90%;
+    padding: 0%;
+    margin: auto;
+
+  }
+
+  .contenedorIzquierdoUsuario div {
+    margin: 0;
+  }
+
+  #nombre, #correo, #pais, #apellido, #telefono, #cvv, #fechaExpiracion, #codigoPostal,#nombreTarjeta, #numeroTarjeta {
+    width: 35%;
+    margin-right: 10px;
+  }
+
+  #direccionFacturacion {
+    width: 85%;
+    margin-right: 10px;
+    
+  }
+
+  .contenedorIzquierdoPago div {
+    margin: 0;
+  }
+}
+
+
+@media (max-width: 550px) {
+  .contenedorIzquierdoUsuario form, .contenedorIzquierdoPago form {
+    padding: 15px;
+  }
+
+  .imgLoginCheckout {
+    width: 15%;
+  }
+
+  .contenedorIzquierdoUsuario label, .contenedorIzquierdoPago label {
+    margin: 0px;
+  }
+
+  .contenedorIzquierdoUsuario label h2, .contenedorIzquierdoPago label h2 {
+    font-size: 20px;
+  }
+  
+}
+
+@media (max-width: 500px) {
+
 }

@@ -20,27 +20,27 @@ function Index() {
       <div className='contenedorTransicion'>
       </div>
       <main>
-      <div className='titulos'><h1>Últimas Unidades:</h1></div>
+      <div className='titulos'><h1>Últimas Unidades</h1></div>
         <div className='ListaDeProductos'>
           <Productos cantidad={6} ordenar={ "unidades" } />
         </div>
         <div className='separador'></div>
-        <div className='titulos'><h1>Últimos lanzamientos:</h1></div>
+        <div className='titulos'><h1>Últimos lanzamientos</h1></div>
         <div className='ListaDeProductos'>
           <Productos cantidad={6} ordenar={ "-fechaLanzamiento" } />
         </div>
-        <div className='titulos'><h1>Clásicos:</h1></div>
+        <div className='titulos'><h1>Clásicos</h1></div>
         <div className='separador'></div>
         <div className='ListaDeProductos'>
           <Productos cantidad={6} ordenar={ "fechaLanzamiento" } />
         </div>
         <div className='separador'></div>
-        <div className='titulos'><h1>Catálogo:</h1></div>
+        <div className='titulos'><h1>Catálogo</h1></div>
         <div className='ListaDeProductos'>
           <Productos ordenar={ "-fechaLanzamiento" }/>
         </div>
       </main>
-      <Footer />
+      <Footer/>
     </>
   );
 }

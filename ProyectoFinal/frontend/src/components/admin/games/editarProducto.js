@@ -43,17 +43,14 @@ function EditarProducto() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
   
-    // Si el campo es la fecha de lanzamiento, formatear la fecha
     const formattedValue = name === 'fechaLanzamiento' ? formatDate(value) : value;
   
     setFormData({ ...formData, [name]: formattedValue });
   };
   
   const formatDate = (dateString) => {
-    // Obtener los componentes de la fecha
     const [year, month, day] = dateString.split('-');
   
-    // Formatear la fecha en el formato año-mes-día
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   };
   

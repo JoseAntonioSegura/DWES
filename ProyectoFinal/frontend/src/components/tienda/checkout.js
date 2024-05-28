@@ -258,7 +258,7 @@ const Checkout = () => {
       <Header />
       <ToastContainer />
       <div className="container-checkout">
-        <h2>Datos del Usuario</h2>
+        <h2 className='tituloCheckout'>Datos del Usuario</h2>
         <div className='contenedorIzquierdoUsuario'>
           <form>
             <label htmlFor="datosPersonales"><h2>Datos Personales:</h2></label>
@@ -311,10 +311,10 @@ const Checkout = () => {
           </form>
         </div>
   
-        <h2>Datos de Pago</h2>
+        <h2 className='tituloCheckout2'>Datos de Pago</h2>
         <div className='contenedorIzquierdoPago'>
           <form>
-            <label><h2>Datos de la tarjeta:</h2></label>
+            <label><h2 >Datos de la tarjeta:</h2></label>
             <div>
               <div className={`imgLoginCheckout ${erroresPago.nombreTarjeta ? 'error' : ''}`}>
                 <img src={userLogin} alt="Nombre en la Tarjeta" />

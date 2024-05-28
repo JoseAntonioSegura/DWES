@@ -215,11 +215,10 @@ const CarritoCompra = () => {
                           value="+"
                           onClick={() => modificarCantidad(producto._id, producto.cantidad, 1)}
                         />
+                                                <button className='botonEliminar' onClick={() => eliminarDelCarrito(producto)}>Eliminar</button>
                       </div>
                     </div>
-                    <div className='productosCarritoInfo'>
-                      <button className='botonEliminar' onClick={() => eliminarDelCarrito(producto)}>Eliminar</button>
-                    </div>
+
                   </div>
                 ))}
               </div>
