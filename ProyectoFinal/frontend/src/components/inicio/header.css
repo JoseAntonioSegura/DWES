@@ -112,7 +112,7 @@ header div div img:hover {
   text-align: center;
 }
 
-.dropdown-menu {
+.dropdown-menu, .dropdown-menu-admin {
   position: absolute;
   top: 100%;
   right: 15%;
@@ -120,7 +120,7 @@ header div div img:hover {
   border-radius: 10px;
 }
 
-.dropdown-menu button {
+.dropdown-menu button , .dropdown-menu-admin button{
   position: relative;
   display: flex;
   flex-direction: column;
@@ -134,7 +134,7 @@ header div div img:hover {
   cursor: pointer;
 }
 
-.dropdown-menu a {
+.dropdown-menu a , .dropdown-menu-admin a{
   font-size: 14px;
   position: relative;
   display: flex;
@@ -148,7 +148,7 @@ header div div img:hover {
   font-weight: 900;
 }
 
-.dropdown-menu .primerBoton {
+.dropdown-menu .primerBoton  {
   position: relative;
   font-size: 14px;
   display: flex;
@@ -162,19 +162,24 @@ header div div img:hover {
   background-color: #2e2e2e;
 }
 
-.dropdown-menu button:hover {
+.dropdown-menu button:hover , .dropdown-menu-admin button:hover{
   background-color: rgb(139, 3, 3);
   color: white;
 }
 
-.dropdown-menu a:hover {
+.dropdown-menu a:hover , .dropdown-menu-admin a:hover{
   color: #00ad93;
 }
 
-.dropdown-menu .primerBoton:hover {
+.dropdown-menu .primerBoton:hover , .dropdown-menu-admin .primerBoton:hover{
   color: #00ad93;
   background-color: #2e2e2e;
 }
+
+ .dropdown-menu-admin {
+  right: 17%;
+
+ }
 
 .header-hidden {
   opacity: 0;
@@ -200,6 +205,11 @@ header div div img:hover {
   border: #24ffba 2px solid;
 }
 
+.linkAdmin {
+  width: 100%;
+  color: #24ffba;
+}
+
 @media screen and (max-width: 1300px) {
   header .logo {
     margin: 0;
@@ -211,13 +221,14 @@ header div div img:hover {
     padding-right: 20px;
   }
 
-  .dropdown-menu {
+  .dropdown-menu, .dropdown-menu-admin {
     width: 100%;
     display: flex;
     flex-direction: row;
     right: 0px;
   }
- 
+
+
   header {
     height: 80px;
   }
@@ -242,19 +253,16 @@ header div div img:hover {
     height: 60px;
   }
 
-  .dropdown-menu {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    border-radius: 0%;
-  }
-
-  .dropdown-menu div {
+  .dropdown-menu div{
     width: 33.33%;
     
   }
 
-  .dropdown-menu button {
+  .dropdown-menu-admin div{
+    width: 100%;
+  }
+
+  .dropdown-menu button, .dropdown-menu-admin button{
     width: 100%;
     border-radius: 0%;
     justify-content: center;
@@ -324,6 +332,10 @@ header div div img:hover {
   header .logo {
     width: 50px;
     padding: 10px;
+  }
+
+  .linkAdmin {
+   font-size: 14px;
   }
 
   header .barraBusqueda {

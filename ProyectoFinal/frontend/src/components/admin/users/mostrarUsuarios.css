@@ -1,8 +1,10 @@
 .user-container {
     display: flex;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    text-align: ;
   }
   
   .user-image {
@@ -10,6 +12,11 @@
     height: 150px;
     margin-right: 20px;
     object-fit: cover;
+  }
+
+  .user-image:hover {
+    box-shadow: #00ad93 0 0 10px;
+    border: #24ffba 2px solid;
   }
   
   .user-details {
@@ -24,5 +31,6 @@
     white-space: nowrap;
 
   }
+  
 
   

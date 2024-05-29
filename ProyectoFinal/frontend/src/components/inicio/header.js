@@ -164,13 +164,13 @@ function Header({ productoAgregado , mostrarCarrito }) {
     if (user && isAdmin) {
       return (
         <div className="infoUser">
-          <Link to="/administrador">Administrar Productos</Link>
+          <Link className='linkAdmin' to="/administrador">Administrar</Link>
           <div className='user-profile'>
             {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage} />}
           </div>
           {dropdownVisible && (
-            <div ref={dropdownRef} className="dropdown-menu">
-              <div><button onClick={handleLogout}>Logout</button></div>
+            <div ref={dropdownRef} className="dropdown-menu-admin">
+              <div><button className='buttonLogoutAdmin' onClick={handleLogout}>Logout</button></div>
             </div>
           )}
         </div>

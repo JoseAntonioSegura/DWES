@@ -86,25 +86,25 @@ function Administrar() {
       <div id="administrar">
         <div id='columnaIzquierda'>
           <div id='titulo'><h1>Lista</h1></div>
-          <div id='apartado1' onClick={() => {toggleProductos(); handleSeleccionSubapartado('Buscar Producto')}}>Productos</div>
+          <div id='apartado2' onClick={() => {toggleProductos(); handleSeleccionSubapartado('Buscar Producto')}}>Productos</div>
           <div className={productosVisible ? 'subapartado visible' : 'subapartado'}>
-            <div id='subApartado1' onClick={() => handleSeleccionSubapartado('Buscar Producto')}>Buscar Producto</div>
-            <div id='subApartado2' onClick={() => handleSeleccionSubapartado('Agregar Producto')}>Agregar Producto</div>
-            <div id='subApartado3' onClick={() => handleSeleccionSubapartado('Actualizar Producto')}>Actualizar Producto</div>
-            <div id='subApartado4' onClick={() => handleSeleccionSubapartado('Eliminar Producto')}>Eliminar Producto</div>
+            <div className='buscar' id='subApartado1' onClick={() => handleSeleccionSubapartado('Buscar Producto')}>Buscar Producto</div>
+            <div className='agregar' id='subApartado2' onClick={() => handleSeleccionSubapartado('Agregar Producto')}>Agregar Producto</div>
+            <div className='editar' id='subApartado3' onClick={() => handleSeleccionSubapartado('Actualizar Producto')}>Actualizar Producto</div>
+            <div className='eliminar' id='subApartado4' onClick={() => handleSeleccionSubapartado('Eliminar Producto')}>Eliminar Producto</div>
           </div>
           <div id='apartado2' onClick={() => {toggleUsuarios(); handleSeleccionSubapartado('Buscar Usuario')}}>Usuarios</div>
           <div className={usuariosVisible ? 'subapartado visible' : 'subapartado'}>
-            <div id='subApartado5' onClick={() => handleSeleccionSubapartado('Mostrar Usuarios')}>Mostrar Usuarios</div>
-            <div id='subApartado6' onClick={() => handleSeleccionSubapartado('Buscar Usuario')}>Buscar Usuario</div>
-            <div id='subApartado7' onClick={() => handleSeleccionSubapartado('Editar Usuario')}>Editar Usuario</div>
-            <div id='subApartado8' onClick={() => handleSeleccionSubapartado('Eliminar Usuario')}>Eliminar Usuario</div>
+            <div className='buscar' id='subApartado5' onClick={() => handleSeleccionSubapartado('Mostrar Usuarios')}>Mostrar Usuarios</div>
+            <div className='buscar' id='subApartado6' onClick={() => handleSeleccionSubapartado('Buscar Usuario')}>Buscar Usuario</div>
+            <div className='editar' id='subApartado7' onClick={() => handleSeleccionSubapartado('Editar Usuario')}>Editar Usuario</div>
+            <div className='eliminar' id='subApartado8' onClick={() => handleSeleccionSubapartado('Eliminar Usuario')}>Eliminar Usuario</div>
           </div>
           <div id='apartado3' onClick={() => {toggleFacturas(); handleSeleccionSubapartado('Buscar Factura')}}>Facturas</div>
           <div className={facturasVisible ? 'subapartado visible' : 'subapartado'}>
-            <div id='subApartado9' onClick={() => handleSeleccionSubapartado('Buscar Facturas')}>Buscar Facturas</div>
-            <div id='subApartado10' onClick={() => handleSeleccionSubapartado('Buscar Factura')}>Buscar Factura</div>
-            <div id='subApartado12' onClick={() => handleSeleccionSubapartado('Eliminar Factura')}>Eliminar Factura</div>
+            <div className='buscar' id='subApartado9' onClick={() => handleSeleccionSubapartado('Buscar Facturas')}>Buscar Facturas</div>
+            <div className='buscar' id='subApartado10' onClick={() => handleSeleccionSubapartado('Buscar Factura')}>Buscar Factura</div>
+            <div className='eliminar' id='subApartado12' onClick={() => handleSeleccionSubapartado('Eliminar Factura')}>Eliminar Factura</div>
           </div>
         </div>
         <div id='columnaDerecha'>

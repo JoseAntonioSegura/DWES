@@ -14,8 +14,10 @@
     align-items: flex-start;
     width: 10%;
     height: 70%;
-    background-color: #5e5e5e;
-    border: 2px solid #000;
+    background-color: #212121;
+    border: 2px solid #212121;
+    border-right: 2px solid #3a3a3a;
+    border-radius: 5px 0 0 5px;
 }
 
 #columnaDerecha {
@@ -24,9 +26,10 @@
     align-items: center;
     width: 70%;
     height: 70%;
-    background-color: #5e5e5e;
-    border: 2px solid #000;
+    background-color: #212121;
+    border: 2px solid #212121;
     overflow: auto;
+    border-radius: 0 5px 5px 0;
 }
 
 #columnaIzquierda #titulo ,#apartado1, #apartado2, #apartado3 {
@@ -35,11 +38,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #3a3a3a;
 }
 
 #columnaDerecha #apartado1, #apartado2, #apartado3 {
     font-size: 20px;
+    cursor: pointer;
 }
 
 .subapartado {
@@ -72,16 +76,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #3a3a3a;
 }
 
-.subapartado div:hover {
-    background-color: #000;
-    color: #fff;
-}
 
 .productosVisible::after,
 .usuariosVisible::after,
 .facturasVisible::after {
     transform: rotate(90deg);
+}
+
+#columnaDerecha button{
+    background-color: #00ad93;
+    color: #000;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#columnaDerecha button:hover{
+    background-color: #24ffba;
+    scale: 1.03;
+}
+
+#columnaDerecha input {
+    background-color: #b3aeae;
+    border: 0px;
+}
+
+#columnaDerecha input:focus {
+    border: 0px solid #00ad93;
+    outline: 1px solid #00ad93;
+}
+
+#columnaDerecha h1 {
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+.buscar {
+    background-color: #00ad93c5;
+    color: #000;
+    font-weight: bold;
+}
+
+.buscar:hover {
+    background-color: #04875d;
+    cursor: pointer;
+}
+
+.agregar {
+    background-color: #0ac300a7;
+    color: #000;
+    font-weight: bold;
+}
+
+.agregar:hover {
+    background-color: #087f01;
+    cursor: pointer;
+}
+
+.editar {
+    background-color: #ffbb00b3;
+    color: #000;
+    font-weight: bold;
+}
+
+.editar:hover {
+    background-color: #8e7202;
+    cursor: pointer;
+}
+
+.eliminar {
+    background-color: #ff0000bb;
+    font-weight: bold;
+    color: #000;
+}
+
+.eliminar:hover {
+    background-color: #990505;
+    cursor: pointer;
 }
