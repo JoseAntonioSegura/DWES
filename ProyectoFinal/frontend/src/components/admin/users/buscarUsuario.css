@@ -63,10 +63,7 @@
   margin-top: 20px;
 }
 
-.error {
-  color: #ff0000;
-  margin-top: 20px;
-}
+
 
 .user-container {
   display: flex;
@@ -107,4 +104,22 @@
 
 .user-details p span {
   font-weight: bold;
+}
+
+@media screen and (max-width: 1500px) {
+
+  .containerSearchUser {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .user-container {
+    width: 80%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .user-container .user-image {
+    margin: auto;
+  }
 }

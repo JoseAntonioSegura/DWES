@@ -58,11 +58,7 @@
   .editarUsuario button:hover {
     background-color: #04875d;
   }
-  
-  .error-message {
-    color: #ff0000;
-    margin-top: 20px;
-  }
+
   
   .user-details {
     display: flex;
@@ -98,3 +94,8 @@
     background-color: #2c2c2c;
   }
   
+  @media screen and (max-width: 1500px) {
+    .editarUsuario {
+      width: 100%;
+    }
+  }

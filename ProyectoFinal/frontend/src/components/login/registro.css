@@ -104,6 +104,10 @@
   border: 2px solid #00ad93;
 }
 
+.form-froup .error {
+  margin-top: 0px;
+}
+
 .register-form button {
   width: 100%;
   padding: 15px;

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './eliminarFactura.css'; // Importa el archivo CSS de estilo
+import './eliminarFactura.css';
 
 function EliminarFactura() {
   const [facturaID, setFacturaID] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [confirmado, setConfirmado] = useState(false); // Nuevo estado para la confirmación
+  const [confirmado, setConfirmado] = useState(false);
   const url = process.env.REACT_APP_URL;
 
   const handleFacturaIDChange = (event) => {
@@ -28,7 +28,7 @@ function EliminarFactura() {
         throw new Error('Error al eliminar la factura');
       }
       setError(null);
-      setConfirmado(false); // Reinicia el estado de confirmación después de eliminar con éxito
+      setConfirmado(false);
       alert('Factura eliminada correctamente');
     } catch (error) {
       console.error(error);

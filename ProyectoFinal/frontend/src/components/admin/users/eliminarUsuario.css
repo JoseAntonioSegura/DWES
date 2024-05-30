@@ -54,12 +54,6 @@
   background-color: #04875d;
 }
 
-.error-message {
-  color: #ff0000;
-  margin-top: 20px;
-  text-align: center;
-}
-
 .confirmacion {
   display: flex;
   flex-direction: column;
@@ -96,3 +90,9 @@
   background-color: #04875d;
 }
 
+@media screen and (max-width: 1500px) {
+
+  .eliminarUsuario-container {
+    width: 100%;
+  }
+}

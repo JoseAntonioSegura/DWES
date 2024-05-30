@@ -49,7 +49,7 @@ function BuscarUsuario() {
         <button type="submit" disabled={loading}>Buscar</button>
       </form>
       {loading && <div className="loading">Cargando...</div>}
-      {error && <div className="error">{error}</div>}
+      {error && <p className="error-message">{error}</p>}
       {user && (
         <div className="user-container">
           <div className="user-image">

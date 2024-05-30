@@ -15,25 +15,29 @@ function EliminarProducto() {
 
   const handleEliminar = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user.rol);
 
     try {
-      const response = await fetch(`${url}/games/${idJuego}`,
-     {
+      const response = await fetch(`${url}/games/${idJuego}`, {
         headers: {
-            'rol': user.rol
+          'rol': user.rol,
+          'Content-Type': 'application/json'
         },
         method: 'DELETE'
       });
-      if (response.ok) {
-        console.log('Juego eliminado correctamente');
-        resetState();
-      } else {
-        throw new Error('Error al eliminar el juego');
+
+      if (response.status === 404) {
+        throw new Error('Producto no encontrado');
+      } else if (response.status === 403) {
+        throw new Error('No tienes permiso para eliminar este producto');
+      } else if (!response.ok) {
+        throw new Error('Error al eliminar el producto');
       }
+
+      console.log('Juego eliminado correctamente');
+      resetState();
     } catch (error) {
       console.error('Error al eliminar el juego:', error.message);
-      setError('No se pudo eliminar el juego. Inténtalo de nuevo más tarde.');
+      setError(error.message);
     }
   };
 
@@ -42,22 +46,28 @@ function EliminarProducto() {
     if (idJuego.trim() === '') {
       setError('Por favor, introduce un ID de juego válido.');
     } else {
+      setError('');
       setConfirmado(true);
     }
   };
 
   const handleCancelar = () => {
-    resetState(); 
+    resetState();
   };
 
   return (
     <div className="eliminarProducto-container">
       <h2>Eliminar Producto</h2>
-      <div onSubmit={handleSubmit} > 
+      <form onSubmit={handleSubmit}> 
         <p>Ingrese la ID del producto que desea eliminar.</p>
-        <input type="text" placeholder='Ingrese la ID del producto' value={idJuego} onChange={(e) => setIdJuego(e.target.value)} />
+        <input
+          type="text"
+          placeholder='Ingrese la ID del producto'
+          value={idJuego}
+          onChange={(e) => setIdJuego(e.target.value)}
+        />
         <button type="submit">Eliminar</button>
-      </div>
+      </form>
       {error && <p className="error-message">{error}</p>}
       {confirmado && (
         <div className="confirmacion">

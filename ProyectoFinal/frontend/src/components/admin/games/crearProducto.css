@@ -1,6 +1,7 @@
 .crearProducto {
     width: 60%;
     margin: auto;
+    margin-top: 20px;
     padding: 20px;
     padding-right: 0px;
     max-height: 80vh; 
@@ -48,3 +49,15 @@
     background-color: #0056b3;
   }
   
+  @media screen and (max-width: 1500px) {
+    .crearProducto {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .columnaDerecha {
+      
+    }
+
+    
+  }

@@ -1,12 +1,16 @@
 .actualizarProducto {
-    width: 60%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
   }
   
   .actualizarProducto h2 {
+    margin-bottom: 10px;
   }
 
   .actualizarProducto input[type="text"],
@@ -68,3 +72,8 @@
     box-sizing: border-box;
   }
   
+  @media screen and (max-width: 1500px) {
+    .actualizarProducto {
+      width: 100%;
+    }
+  } 

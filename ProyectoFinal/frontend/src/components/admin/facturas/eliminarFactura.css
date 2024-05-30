@@ -45,3 +45,9 @@
   color: red;
   margin-top: 10px;
 }
+
+@media screen and (max-width: 1500px) {
+  .eliminarFactura-container {
+    width: 100%;
+  }
+}

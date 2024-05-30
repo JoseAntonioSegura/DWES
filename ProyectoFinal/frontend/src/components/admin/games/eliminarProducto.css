@@ -1,6 +1,12 @@
 .eliminarProducto-container {
   width: 60%;
+  margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
 }
 
 .eliminarProducto-container .formUser {
@@ -55,4 +61,14 @@
 
 .eliminarProducto-container .confirmacion button {
   margin-right: 10px; 
+}
+
+@media screen and (max-width: 1500px) {
+  .eliminarProducto-container {
+    width: 100%;
+  }
+
+  .eliminarProducto-container form {
+    width: 100%;
+  }
 }

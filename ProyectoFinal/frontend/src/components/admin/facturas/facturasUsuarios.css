@@ -84,3 +84,9 @@
   .productos-list {
     margin-bottom: 60px;
   }
+
+  @media screen and (max-width: 1500px) {
+    .facturas-container {
+      width: 100%;
+    }
+  }

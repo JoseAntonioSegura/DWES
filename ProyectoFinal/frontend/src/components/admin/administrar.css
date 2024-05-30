@@ -1,10 +1,9 @@
 #administrar {
     display: flex;
+    padding-top: 10vw;
     justify-content: center;
-    align-items: center;
     height: 100vh;
     width: 100%;
-    margin: 0;
 }
 
 #columnaIzquierda {
@@ -13,7 +12,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 10%;
-    height: 70%;
+    height: 100%;
     background-color: #212121;
     border: 2px solid #212121;
     border-right: 2px solid #3a3a3a;
@@ -25,7 +24,7 @@
     flex-direction: column;
     align-items: center;
     width: 70%;
-    height: 70%;
+    height: 100%;
     background-color: #212121;
     border: 2px solid #212121;
     overflow: auto;
@@ -55,6 +54,8 @@
     display: flex;
     flex-direction: column;
     transition: max-height 0.3s ease, opacity 0.3s ease;
+    text-align: center;
+
   }
   
 .subapartado.visible {
@@ -117,7 +118,7 @@
 .buscar {
     background-color: #00ad93c5;
     color: #000;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .buscar:hover {
@@ -128,7 +129,7 @@
 .agregar {
     background-color: #0ac300a7;
     color: #000;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .agregar:hover {
@@ -139,7 +140,7 @@
 .editar {
     background-color: #ffbb00b3;
     color: #000;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .editar:hover {
@@ -149,7 +150,7 @@
 
 .eliminar {
     background-color: #ff0000bb;
-    font-weight: bold;
+    font-weight: 600;
     color: #000;
 }
 
@@ -160,26 +161,52 @@
 
 
 @media screen and (max-width: 1500px) {
+    #administrar {
+        padding-top: 110px;
+    }
+
     #columnaIzquierda {
-        width: 20%;
+        width: 30%;
     }
     #columnaDerecha {
-        width: 80%;
+        width: 70%;
     }
+    #columnaDerecha h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    #columnaDerecha h3 {
+        font-size: 16px;
+    }
+
+    #columnaDerecha p {
+        font-size: 12px;
+    }
+
+    #columnaDerecha button {
+        padding: 10px;
+    }
+
+    #columnaDerecha input {
+        padding: 10px;
+    }
+    
     
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 750px) {
     #administrar {
-        margin-bottom: -80px;
-        margin-top: -20px;
-        height: 150vw;
+        padding-top: 80px;
+    }
+
+    #columnaIzquierda  h1{
+        font-size: 24px;
         
     }
 
-    #columnaDerecha .buscarProducto{
-        width: 100%;
-        height: 100%;
+    #columnaIzquierda div {
+        font-size: 16px;
     }
-    
 }
+

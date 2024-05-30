@@ -48,7 +48,7 @@ const FacturasUsuarios = () => {
 
     return (
         <div className="facturas-container">
-            <h2>Facturas: Introduzca su ID de usuario</h2>
+            <h2>Buscar Facturas</h2>
             <p>Ingrese su ID de usuario para cargar sus facturas.</p>
             <input 
                 type="text"
