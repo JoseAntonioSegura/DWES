@@ -1,61 +1,98 @@
 .eliminarUsuario-container {
-    max-width: 100%;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .eliminarUsuario-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .eliminarUsuario-container label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
-  
-  .eliminarUsuario-container input[type="text"] {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .eliminarUsuario-container button[type="submit"],
-  .eliminarUsuario-container button {
-    padding: 12px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .eliminarUsuario-container button[type="submit"] {
-    margin-top: 10px;
-  }
-  
-  .eliminarUsuario-container button:hover {
-    background-color: #c82333;
-  }
-  
-  .eliminarUsuario-container .confirmacion {
-    margin-top: 20px;
-  }
-  
-  .eliminarUsuario-container .confirmacion p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #ffffff; 
-  }
-  
-  .eliminarUsuario-container .confirmacion button {
-    margin-right: 10px; 
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.eliminarUsuario-container form {
+  min-width: 100%;
+}
+
+.eliminarUsuario-container p {
+  text-align: center;
+}
+
+.eliminarUsuario-container label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+}
+
+.eliminarUsuario-container input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #2c2c2c;
+}
+
+.eliminarUsuario-container input[type="text"]:focus {
+  outline: 2px solid #00ad93;
+}
+
+.eliminarUsuario-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #00ad93;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.eliminarUsuario-container button:hover {
+  background-color: #04875d;
+}
+
+.error-message {
+  color: #ff0000;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.confirmacion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #212121;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.confirmacion p {
+  color: #ffffff;
+  text-align: center;
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.confirmacion button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #00ad93;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #ffffff;
+}
+
+.confirmacion button:hover {
+  background-color: #04875d;
+}
+

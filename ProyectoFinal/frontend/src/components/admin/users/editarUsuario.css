@@ -1,0 +1,100 @@
+.editarUsuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .editarUsuario h1 {
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .editarUsuario label {
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+  }
+  
+  .editarUsuario input[type="text"],
+  .editarUsuario input[type="email"],
+  .editarUsuario input[type="password"],
+  .editarUsuario select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #2c2c2c;
+  }
+  
+  .editarUsuario input[type="text"]:focus,
+  .editarUsuario input[type="email"]:focus,
+  .editarUsuario input[type="password"]:focus,
+  .editarUsuario select:focus {
+    outline: 2px solid #00ad93;
+  }
+  
+  .editarUsuario button {
+    width: 100%;
+    padding: 10px;
+    background-color: #00ad93;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+  }
+  
+  .editarUsuario button:hover {
+    background-color: #04875d;
+  }
+  
+  .error-message {
+    color: #ff0000;
+    margin-top: 20px;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #212121;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .user-details p {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  .user-details label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .editarUsuario select {
+    padding: 8px;
+    background-color: #2c2c2c;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .editarUsuario select option {
+    background-color: #2c2c2c;
+  }
+  

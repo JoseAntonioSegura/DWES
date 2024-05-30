@@ -1,10 +1,15 @@
 .user-container {
     display: flex;
-    margin-bottom: 20px;
-    padding: 20px;
+    margin: auto;
+    margin-bottom: 50px;
     box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    text-align: ;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .listaUsuariosContainer h2, .listaUsuariosContainer p{
+      text-align: center;
   }
   
   .user-image {

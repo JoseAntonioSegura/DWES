@@ -35,7 +35,8 @@ function BuscarProducto() {
 
   return (
     <div className="buscarProducto">
-      <h1>Buscar Producto</h1>
+      <h2>Buscar Producto</h2>
+      <p>Ingrese el nombre del producto que desea buscar.</p>
       <input 
         type="text" 
         value={productoBuscado} 

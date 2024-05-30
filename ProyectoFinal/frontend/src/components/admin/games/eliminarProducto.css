@@ -1,59 +1,58 @@
 .eliminarProducto-container {
-    width: 60%;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  .eliminarProducto-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .eliminarProducto-container label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
-  
-  .eliminarProducto-container input[type="text"] {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .eliminarProducto-container button[type="submit"],
-  .eliminarProducto-container button {
-    padding: 12px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .eliminarProducto-container button[type="submit"] {
-    margin-top: 10px;
-  }
-  
-  .eliminarProducto-container button:hover {
-    background-color: #c82333;
-  }
-  
-  .eliminarProducto-container .confirmacion {
-    margin-top: 20px;
-  }
-  
-  .eliminarProducto-container .confirmacion p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #ffffff; 
-  }
-  
-  .eliminarProducto-container .confirmacion button {
-    margin-right: 10px; 
-  }
+  width: 60%;
+  padding: 20px;
+}
+
+.eliminarProducto-container .formUser {
+  width: 100%;
+}
+.eliminarProducto-container p {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.eliminarProducto-container h2 {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.eliminarProducto-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.eliminarProducto-container button[type="submit"],
+.eliminarProducto-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+.eliminarProducto-container button:hover {
+  background-color: #c82333;
+}
+
+.eliminarProducto-container .confirmacion {
+  margin-top: 20px;
+}
+
+.eliminarProducto-container .confirmacion p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ffffff; 
+}
+
+.eliminarProducto-container .confirmacion button {
+  margin-right: 10px; 
+}

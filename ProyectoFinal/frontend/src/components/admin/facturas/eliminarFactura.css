@@ -1,0 +1,47 @@
+.eliminarFactura-container {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eliminarFactura-container form {
+    min-width: 100%;
+  }
+
+  .eliminarFactura-container p {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.eliminarFactura-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.eliminarFactura-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.eliminarFactura-container button:hover {
+  background-color: #0056b3;
+}
+
+.eliminarFactura-container .error-message {
+  color: red;
+  margin-top: 10px;
+}

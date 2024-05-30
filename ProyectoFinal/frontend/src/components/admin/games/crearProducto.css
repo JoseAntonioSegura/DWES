@@ -6,9 +6,8 @@
     max-height: 80vh; 
   }
   
-  .crearProducto h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
+  .crearProducto h2, .crearProducto p{
+    text-align: center;
   }
   
   .crearProducto label {

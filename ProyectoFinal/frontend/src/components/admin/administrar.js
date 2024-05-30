@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './administrar.css';
 import Header from '../inicio/header';
+import Footer from '../inicio/footer';
 import BuscarProducto from './games/buscarProducto';
 import CrearProducto from './games/crearProducto';
 import EditarProductos from './games/editarProducto';
@@ -111,6 +112,7 @@ function Administrar() {
           {contenidoDerecha} 
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -34,9 +34,9 @@ function BuscarUsuario() {
   };
 
   return (
-    <div className="container">
-      <h1>Buscar Usuario</h1>
-      <label htmlFor="nameInput">Nombre de Usuario:</label>
+    <div className="containerSearchUser">
+      <h2>Buscar Usuario</h2>
+      <p htmlFor="nameInput">Nombre de Usuario que desea buscar.</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -44,6 +44,7 @@ function BuscarUsuario() {
           value={name}
           onChange={(event) => setName(event.target.value)}
           required
+          placeholder='Ingrese el nombre del usuario'
         />
         <button type="submit" disabled={loading}>Buscar</button>
       </form>
@@ -55,9 +56,13 @@ function BuscarUsuario() {
             <img src={user.usernameImage} alt="Avatar" className="user-image" />
           </div>
           <div className="user-details">
-            <p>Nombre de Usuario: {user.username}</p>
-            <p>Correo Electrónico: {user.email}</p>
-            <p>ID: {user._id}</p>
+            <p><strong>Usuario:</strong> {user.username}</p>
+            <p><strong>Nombre:</strong> {user.name}</p>
+            <p><strong>Apellidos:</strong> {user.lastname}</p>
+            <p><strong>País:</strong> {user.country}</p>
+            <p><strong>Correo Electrónico:</strong> {user.email}</p>
+            <p><strong>ID:</strong> {user._id}</p>
+            <p><strong>Rol:</strong> {user.rol}</p>
           </div>
         </div>
       )}

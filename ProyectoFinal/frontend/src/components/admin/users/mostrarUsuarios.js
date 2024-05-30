@@ -31,15 +31,16 @@ function MostrarUsuarios() {
   };
 
   return (
-    <div>
-      <h1>Lista de Usuarios</h1>
+    <div className='listaUsuariosContainer'>
+      <h2>Lista de Usuarios</h2>
+      <p>A continuación, se muestra la lista de todos los usuarios.</p>
       {users.map(user => (
         <div key={user._id} className="user-container">
           <img src={user.usernameImage} alt="Avatar" className="user-image" />
           <div className="user-details">
-            <p>Username: {user.username}</p>
-            <p>Email: {user.email}</p>
-            <p>ID: {user._id}</p>
+            <p><strong>Username:</strong> {user.username}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>ID:</strong> {user._id}</p>
           </div>
         </div>
       ))}

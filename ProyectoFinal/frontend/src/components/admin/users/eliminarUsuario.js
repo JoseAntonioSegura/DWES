@@ -32,7 +32,6 @@ function EliminarUsuario() {
     } catch (error) {
       console.error('Error al eliminar el usuario:', error.message);
       setError('No se pudo eliminar el usuario. Inténtalo de nuevo más tarde.');
-      // Volvemos atrás y mostramos el mensaje de error
       setConfirmed(false);
     }
   };
@@ -52,17 +51,17 @@ function EliminarUsuario() {
 
   return (
     <div className="eliminarUsuario-container">
-      <h1>Eliminar Usuario</h1>
+      <h2>Eliminar Usuario</h2>
       <form onSubmit={handleSubmit}>
-        <label>ID del usuario:</label>
-        <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
+        <p>Ingrese ID del usuario que desea eliminar.</p>
+        <input placeholder='Ingrese la ID del usuario' type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
         <button type="submit">Eliminar</button>
       </form>
       {error && <p className="error-message">{error}</p>}
       {confirmed && (
         <div className="confirmacion">
           <p>¿Estás seguro de que deseas eliminar el usuario con ID {userId}?</p>
-          <button onClick={handleDelete}>Sí</button>
+          <button className onClick={handleDelete}>Sí</button>
           <button onClick={handleCancel}>No</button>
         </div>
       )}

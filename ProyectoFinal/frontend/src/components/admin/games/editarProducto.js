@@ -78,34 +78,104 @@ function EditarProducto() {
 
   return (
     <div className="actualizarProducto">
-      <h1>Actualizar Producto</h1>
-      <label>Ingrese el ID del producto:</label>
-      <input type="text" value={productId} onChange={handleProductIdChange} />
+      <h2>Actualizar Producto</h2>
+      <p>Ingrese el ID del producto que desea editar.</p>
+      <input
+        type="text"
+        value={productId}
+        onChange={handleProductIdChange}
+        placeholder="Ingrese el ID del producto"
+      />
       <button onClick={handleBuscarProducto}>Buscar</button>
       {productData && (
         <div className="product-details">
           <label>Título:</label>
-          <input type="text" name="titulo" value={formData.titulo} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="titulo"
+            value={formData.titulo}
+            onChange={handleInputChange}
+            placeholder="Ingrese el título del producto"
+          />
           <label>Descripción:</label>
-          <input type="text" name="descripcion" value={formData.descripcion} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="descripcion"
+            value={formData.descripcion}
+            onChange={handleInputChange}
+            placeholder="Ingrese una descripción del producto"
+          />
           <label>Unidades:</label>
-          <input type="number" name="unidades" value={formData.unidades} onChange={handleInputChange} />
+          <input
+            type="number"
+            name="unidades"
+            value={formData.unidades}
+            onChange={handleInputChange}
+            placeholder="Ingrese el número de unidades disponibles"
+          />
           <label>Categoría:</label>
-          <input type="text" name="categoria" value={formData.categoria} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="categoria"
+            value={formData.categoria}
+            onChange={handleInputChange}
+            placeholder="Ingrese la categoría del producto"
+          />
           <label>Precio:</label>
-          <input type="number" name="precio" value={formData.precio} onChange={handleInputChange} />
+          <input
+            type="number"
+            name="precio"
+            value={formData.precio}
+            onChange={handleInputChange}
+            placeholder="Ingrese el precio del producto"
+          />
           <label>Imagen:</label>
-          <input type="text" name="imagen" value={formData.imagen} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="imagen"
+            value={formData.imagen}
+            onChange={handleInputChange}
+            placeholder="Ingrese la URL de la imagen"
+          />
           <label>Tráiler:</label>
-          <input type="text" name="trailer" value={formData.trailer} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="trailer"
+            value={formData.trailer}
+            onChange={handleInputChange}
+            placeholder="Ingrese la URL del tráiler"
+          />
           <label>PEGI:</label>
-          <input type="number" name="pegi" value={formData.pegi} onChange={handleInputChange} />
+          <input
+            type="number"
+            name="pegi"
+            value={formData.pegi}
+            onChange={handleInputChange}
+            placeholder="Ingrese la clasificación PEGI"
+          />
           <label>Desarrollador:</label>
-          <input type="text" name="desarrollador" value={formData.desarrollador} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="desarrollador"
+            value={formData.desarrollador}
+            onChange={handleInputChange}
+            placeholder="Ingrese el nombre del desarrollador"
+          />
           <label>Plataforma:</label>
-          <input type="text" name="plataforma" value={formData.plataforma} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="plataforma"
+            value={formData.plataforma}
+            onChange={handleInputChange}
+            placeholder="Ingrese la plataforma del producto"
+          />
           <label>Fecha de Lanzamiento:</label>
-          <input type="date" name="fechaLanzamiento" value={formData.fechaLanzamiento} onChange={handleInputChange} />
+          <input
+            type="date"
+            name="fechaLanzamiento"
+            value={formData.fechaLanzamiento}
+            onChange={handleInputChange}
+          />
           {error && <p className="error-message">{error}</p>}
           <button onClick={handleActualizarProducto}>Actualizar Producto</button>
         </div>
@@ -113,5 +183,6 @@ function EditarProducto() {
     </div>
   );
 }
+
 
 export default EditarProducto;

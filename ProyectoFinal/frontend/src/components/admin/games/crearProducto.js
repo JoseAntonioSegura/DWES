@@ -74,13 +74,29 @@ function CrearProducto() {
 
   return (
     <div className="crearProducto">
-      <h1>Crear Producto</h1>
+      <h2>Crear Producto</h2>
+      <p>A continuación rellene todos los campos correspondientes.</p>
       <label>Título:</label>
-      <input type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
+      <input
+        type="text"
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
+        placeholder="Ingrese el título del producto"
+      />
       <label>Descripción:</label>
-      <input type="text" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+      <input
+        type="text"
+        value={descripcion}
+        onChange={(e) => setDescripcion(e.target.value)}
+        placeholder="Ingrese una descripción del producto"
+      />
       <label>Unidades:</label>
-      <input type="number" value={unidades} onChange={(e) => setUnidades(e.target.value)} />
+      <input
+        type="number"
+        value={unidades}
+        onChange={(e) => setUnidades(e.target.value)}
+        placeholder="Ingrese el número de unidades disponibles"
+      />
       <label>Categoría:</label>
       <select multiple value={categoria} onChange={handleCategoriaChange}>
         <option value="acción">Acción</option>
@@ -101,14 +117,29 @@ function CrearProducto() {
         <option value="supervivencia">Supervivencia</option>
       </select>
       <label>Precio:</label>
-      <input type="number" value={precio} onChange={(e) => setPrecio(e.target.value)} />
+      <input
+        type="number"
+        value={precio}
+        onChange={(e) => setPrecio(e.target.value)}
+        placeholder="Ingrese el precio del producto"
+      />
       <label>Imagen:</label>
-      <input type="text" value={imagen} onChange={(e) => setImagen(e.target.value)} />
+      <input
+        type="text"
+        value={imagen}
+        onChange={(e) => setImagen(e.target.value)}
+        placeholder="Ingrese la URL de la imagen"
+      />
       <label>Tráiler:</label>
-      <input type="text" value={trailer} onChange={(e) => setTrailer(e.target.value)} />
+      <input
+        type="text"
+        value={trailer}
+        onChange={(e) => setTrailer(e.target.value)}
+        placeholder="Ingrese la URL del tráiler"
+      />
       <label>PEGI:</label>
       <select value={pegi} onChange={(e) => setPegi(e.target.value)}>
-        <option></option>
+        <option value="">Seleccione una clasificación PEGI</option>
         <option value="4">PEGI 4</option>
         <option value="7">PEGI 7</option>
         <option value="12">PEGI 12</option>
@@ -116,10 +147,15 @@ function CrearProducto() {
         <option value="18">PEGI 18</option>
       </select>
       <label>Desarrollador:</label>
-      <input type="text" value={desarrollador} onChange={(e) => setDesarrollador(e.target.value)} />
+      <input
+        type="text"
+        value={desarrollador}
+        onChange={(e) => setDesarrollador(e.target.value)}
+        placeholder="Ingrese el nombre del desarrollador"
+      />
       <label>Plataforma:</label>
       <select value={plataforma} onChange={(e) => setPlataforma(e.target.value)}>
-        <option></option>
+        <option value="">Seleccione una plataforma</option>
         <option value="Steam">Steam</option>
         <option value="EpicGames">EpicGames</option>
         <option value="Xbox">Xbox</option>
@@ -130,7 +166,11 @@ function CrearProducto() {
         <option value="Launcher">Launcher</option>
       </select>
       <label>Fecha de Lanzamiento:</label>
-      <input type="date" value={fechaLanzamiento} onChange={(e) => setFechaLanzamiento(e.target.value)} />
+      <input
+        type="date"
+        value={fechaLanzamiento}
+        onChange={(e) => setFechaLanzamiento(e.target.value)}
+      />
       <button onClick={handleGuardarProducto}>Guardar</button>
       {error && <p className="error-message">{error}</p>}
     </div>

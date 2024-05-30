@@ -52,12 +52,12 @@ function EliminarProducto() {
 
   return (
     <div className="eliminarProducto-container">
-      <h1>Eliminar Producto</h1>
-      <form onSubmit={handleSubmit}>
-        <label>ID del producto:</label>
-        <input type="text" value={idJuego} onChange={(e) => setIdJuego(e.target.value)} />
+      <h2>Eliminar Producto</h2>
+      <div onSubmit={handleSubmit} > 
+        <p>Ingrese la ID del producto que desea eliminar.</p>
+        <input type="text" placeholder='Ingrese la ID del producto' value={idJuego} onChange={(e) => setIdJuego(e.target.value)} />
         <button type="submit">Eliminar</button>
-      </form>
+      </div>
       {error && <p className="error-message">{error}</p>}
       {confirmado && (
         <div className="confirmacion">

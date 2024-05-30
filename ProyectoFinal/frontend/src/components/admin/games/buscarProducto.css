@@ -1,5 +1,5 @@
 .buscarProducto {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
@@ -14,7 +14,7 @@
   }
   
   .buscarProducto input[type="text"] {
-    width: 60%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -23,7 +23,7 @@
   }
   
   .buscarProducto button {
-    width: 60%;
+    width: 100%;
     padding: 12px;
     background-color: #007bff;
     color: #fff;

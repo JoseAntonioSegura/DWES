@@ -25,12 +25,11 @@ function EditarUsuario() {
 
   const handleBuscarUsuario = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user.rol);
 
     try {
       const response = await fetch(`${url}/users/admin/${userId}`, {
         headers: {
-            'rol': user.rol
+          'rol': user.rol
         }
       });
       if (!response.ok) {
@@ -39,10 +38,10 @@ function EditarUsuario() {
 
       const data = await response.json();
       setUserData(data);
-      setFormData(data); 
-      console.log(data);
+      setFormData(data);
     } catch (error) {
       console.error('Error al buscar el usuario:', error.message);
+      setError('Error al buscar el usuario');
     }
   };
 
@@ -53,7 +52,6 @@ function EditarUsuario() {
 
   const handleActualizarUsuario = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user.rol);
     try {
       const modifiedData = {};
       Object.keys(formData).forEach(key => {
@@ -75,35 +73,89 @@ function EditarUsuario() {
       }
     } catch (error) {
       console.error('Error al actualizar el usuario:', error.message);
+      setError('Error al actualizar el usuario');
     }
   };
 
+
   return (
     <div className="editarUsuario">
-      <h1>Editar Usuario</h1>
-      <label>Ingrese el ID del usuario:</label>
-      <input type="text" value={userId} onChange={handleUserIdChange} />
+      <h2>Editar Usuario</h2>
+      <p>Ingrese el ID del usuario que desea editar.</p>
+      <input
+        type="text"
+        value={userId}
+        onChange={handleUserIdChange}
+        placeholder="Ingrese el ID del usuario"
+      />
       <button onClick={handleBuscarUsuario}>Buscar</button>
+      {error && <p className="error-message">{error}</p>}
       {userData && (
-        <div>
-          <h2>Usuario</h2>
-          <p>ID: {userData._id}</p>
-          <label>Imagen de Usuario</label>
-          <input type="text" name="usernameImage" value={formData.usernameImage} onChange={handleInputChange} />
+        <div className="user-details">
+          <label>Imagen de Usuario:</label>
+          <input
+            type="text"
+            name="usernameImage"
+            value={formData.usernameImage}
+            onChange={handleInputChange}
+            placeholder="Ingrese la URL de la imagen de usuario"
+          />
           <label>Nombre de Usuario:</label>
-          <input type="text" name="username" value={formData.username} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+            placeholder="Ingrese el nombre de usuario"
+          />
           <label>Nombre:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Ingrese el nombre"
+          />
           <label>Apellido:</label>
-          <input type="text" name="lastname" value={formData.lastname} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="lastname"
+            value={formData.lastname}
+            onChange={handleInputChange}
+            placeholder="Ingrese el apellido"
+          />
           <label>País:</label>
-          <input type="text" name="country" value={formData.country} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="country"
+            value={formData.country}
+            onChange={handleInputChange}
+            placeholder="Ingrese el país"
+          />
           <label>Correo Electrónico:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Ingrese el correo electrónico"
+          />
           <label>Número de Teléfono:</label>
-          <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+            placeholder="Ingrese el número de teléfono"
+          />
           <label>Contraseña:</label>
-          <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            placeholder="Ingrese la contraseña"
+          />
           <label>Rol:</label>
           <select name="rol" value={formData.rol} onChange={handleInputChange}>
             <option value="Admin">Admin</option>
