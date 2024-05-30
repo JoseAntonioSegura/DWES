@@ -35,7 +35,7 @@ function DetallesProducto() {
     obtenerDetallesProducto();
 
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user && user.rol === 'dmin') {
+    if (user && user.rol === 'Admin') {
       setIsAdmin(true);
     }
   }, [titulo, productoAgregado]);
