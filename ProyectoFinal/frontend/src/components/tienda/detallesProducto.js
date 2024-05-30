@@ -11,6 +11,7 @@ function DetallesProducto() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [productoAgregado, setProductoAgregado] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const url = process.env.REACT_APP_URL;
 
@@ -32,6 +33,11 @@ function DetallesProducto() {
     };
 
     obtenerDetallesProducto();
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.rol === 'dmin') {
+      setIsAdmin(true);
+    }
   }, [titulo, productoAgregado]);
 
   useEffect(() => {
@@ -237,10 +243,10 @@ function DetallesProducto() {
             <p><a className='lanzamiento'>Fecha de Lanzamiento: </a>{formatFecha(producto[0].fechaLanzamiento)}</p>
           </div>
           <div className='contenedorCompraBotones'>
-            <button className='carritoBtn' onClick={agregarAlCarrito} disabled={producto[0].unidades === 0}>
+            <button className='carritoBtn' onClick={agregarAlCarrito} disabled={producto[0].unidades === 0 || isAdmin}>
               <strong>Agregar al Carrito</strong>
             </button>
-            <button className='compraBtn' onClick={comprarAhora} disabled={producto[0].unidades === 0}>
+            <button className='compraBtn' onClick={comprarAhora} disabled={producto[0].unidades === 0 || isAdmin}>
               <strong>Comprar Ahora</strong>
             </button>
             <p className='precioDatos'>{producto[0].precio}€</p>
