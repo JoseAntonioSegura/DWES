@@ -125,8 +125,13 @@
   scale: 1.01;
 }
 
-.register-form button:not([disabled]):hover {
+.register-form button:not([disabled]) {
   background-color: #00ad93;
+  transform: scale(1.02);
+}
+
+.register-form button:not([disabled]):hover {
+  background-color: #24ffba;
   transform: scale(1.02);
 }
 
