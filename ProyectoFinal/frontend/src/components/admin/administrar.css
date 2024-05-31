@@ -1,6 +1,7 @@
 #administrar {
     display: flex;
     padding-top: 10vw;
+    padding-bottom: 10vw;
     justify-content: center;
     height: 100vh;
     width: 100%;
@@ -163,6 +164,7 @@
 @media screen and (max-width: 1500px) {
     #administrar {
         padding-top: 110px;
+        padding-bottom: 0px;
     }
 
     #columnaIzquierda {
