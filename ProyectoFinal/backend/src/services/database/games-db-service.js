@@ -99,3 +99,7 @@ export async function updateGameByID(id, newData) {
   return Game.findByIdAndUpdate(id, newData, { new: true });
 }
 
+// Eliminar un juego
+export async function deleteGameByID(id) {
+  return Game.findByIdAndDelete(id);
+}
