@@ -19,18 +19,29 @@
 									"pm.test('Status is 201', function(){\r",
 									"    pm.response.to.have.status(201);\r",
 									"})\r",
-									""
+									"\r",
+									"const body = pm.response.json();\r",
+									"const { _id } = body;\r",
+									"pm.collectionVariables.set('id', _id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "rol",
+								"value": "Admin",
+								"description": "Admin",
+								"uuid": "221cd4fa-7ed4-458b-84a6-0c2098187df2"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"prueba1\",\r\n  \"descripcion\": \"prueba1\",\r\n  \"unidades\": 1,\r\n  \"categoria\": [\"supervivencia\", \"disparos\"],\r\n  \"precio\": 49.99,\r\n  \"imagen\": \"https://insider-gaming.com/wp-content/uploads/2024/01/tarkov-cheaters-feature-top.webp\",\r\n  \"trailer\": \"https://www.youtube.com/watch?v=IPlnHe9l34E&ab_channel=Battlestate\",\r\n  \"fechaLanzamiento\": \"2017-07-27\",\r\n  \"pegi\": 18,\r\n  \"desarrollador\": \"Battlestate\",\r\n  \"plataforma\": \"Launcher\"\r\n}\r\n\r\n",
+							"raw": "{\r\n  \"titulo\": \"PruebaProducto\",\r\n  \"descripcion\": \"PruebaProducto\",\r\n  \"unidades\": 1000,\r\n  \"categoria\": [\"supervivencia\", \"disparos\"],\r\n  \"precio\": 29.99,\r\n  \"imagen\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-Rhg67a684JTkQ0KAqBOR7ACMsiq7K5tDmmOm6RjWrw&s\",\r\n  \"trailer\": \"https://youtu.be/3Bx6A80vsGo\",\r\n  \"fechaLanzamiento\": \"2024-02-08\",\r\n  \"pegi\": 18,\r\n  \"desarrollador\": \"PruebaProducto\",\r\n  \"plataforma\": \"Launcher\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,7 +74,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -71,7 +83,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/games/Sekiro",
+							"raw": "http://localhost:3000/games/titulo/PruebaProducto",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -79,7 +91,8 @@
 							"port": "3000",
 							"path": [
 								"games",
-								"Sekiro"
+								"titulo",
+								"PruebaProducto"
 							]
 						}
 					},
@@ -120,27 +133,6 @@
 				},
 				{
 					"name": "Obtener Juego por ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/games/id/65ccb4d38f4108f29b26c0bc",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"games",
-								"id",
-								"65ccb4d38f4108f29b26c0bc"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Juego",
 					"event": [
 						{
 							"listen": "test",
@@ -151,7 +143,43 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/games/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"games",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Juego por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -160,7 +188,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"titulo\": \"prueba2\" \r\n}",
+							"raw": "{\r\n        \"unidades\": 900\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,7 +196,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/games/prueba1",
+							"raw": "http://localhost:3000/games/{{id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -176,14 +204,14 @@
 							"port": "3000",
 							"path": [
 								"games",
-								"prueba1"
+								"{{id}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Eliminar Juego",
+					"name": "Eliminar Juego por ID",
 					"event": [
 						{
 							"listen": "test",
@@ -194,15 +222,22 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "rol",
+								"value": "Admin",
+								"uuid": "fb43e195-8021-4bfd-a6f6-0d6e87b0c9bc"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:3000/games/prueba2",
+							"raw": "http://localhost:3000/games/{{id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -210,7 +245,7 @@
 							"port": "3000",
 							"path": [
 								"games",
-								"prueba2"
+								"{{id}}"
 							]
 						}
 					},
@@ -231,9 +266,13 @@
 									"pm.test('Status is 201', function(){\r",
 									"    pm.response.to.have.status(201);\r",
 									"})\r",
-									""
+									"\r",
+									"const body = pm.response.json();\r",
+									"const { _id } = body;\r",
+									"pm.collectionVariables.set('id', _id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -242,7 +281,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"prueba1\",\r\n    \"name\": \"prueba\",\r\n    \"lastname\": \"1\",\r\n    \"password\": \"prueba1\",\r\n    \"email\": \"prueba1@gmail.com\",\r\n    \"country\": \"Spain\"\r\n}",
+							"raw": "{\r\n    \"_id\": \"661170da18faf206fdb14901\",\r\n    \"username\": \"PruebaUsuario\",\r\n    \"name\": \"prueba\",\r\n    \"lastname\": \"1\",\r\n    \"password\": \"prueba1\",\r\n    \"email\": \"prueba1@gmail.com\",\r\n    \"country\": \"Spain\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -279,7 +318,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -288,7 +328,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"prueba1\",\r\n    \"password\": \"prueba1\"\r\n}",
+							"raw": "{\r\n    \"username\": \"PruebaUsuario\",\r\n    \"password\": \"prueba1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -331,7 +371,8 @@
 							{
 								"key": "token",
 								"value": "{{token}}",
-								"type": "text"
+								"type": "text",
+								"uuid": "69960e52-41f8-47a3-959f-8c32a3d179e6"
 							}
 						],
 						"url": {
@@ -361,13 +402,22 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "rol",
+								"value": "Admin",
+								"description": "Admin",
+								"type": "text",
+								"uuid": "43b98f42-ac06-418f-ac26-0329f78aed7d"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:3000/users",
 							"protocol": "http",
@@ -383,7 +433,7 @@
 					"response": []
 				},
 				{
-					"name": "Actualizar Usuario",
+					"name": "Actualizar Usuario por ID",
 					"event": [
 						{
 							"listen": "test",
@@ -394,7 +444,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -403,7 +454,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"prueba2\"\r\n}",
+							"raw": "{\r\n    \"lastname\": \"GabriHermosoReyApruebame\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -411,7 +462,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/prueba1",
+							"raw": "http://localhost:3000/users/{{id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -419,14 +470,14 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"prueba1"
+								"{{id}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Borrar Usuario",
+					"name": "Borrar Usuario por ID",
 					"event": [
 						{
 							"listen": "test",
@@ -437,13 +488,22 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "rol",
+								"value": "Admin",
+								"description": "Admin",
+								"type": "text",
+								"uuid": "0ae7bdd4-5012-4951-a27c-29b30470e2b6"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -454,7 +514,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/prueba2",
+							"raw": "http://localhost:3000/users/{{id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -462,7 +522,7 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"prueba2"
+								"{{id}}"
 							]
 						}
 					},
@@ -513,9 +573,13 @@
 									"pm.test('Status is 201', function(){\r",
 									"    pm.response.to.have.status(201);\r",
 									"})\r",
-									""
+									"\r",
+									"const body = pm.response.json();\r",
+									"const { _id } = body.carrito;\r",
+									"pm.collectionVariables.set('id', _id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -558,7 +622,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -578,7 +643,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/carrito/65cf834bbd53e27c8d59a495",
+							"raw": "http://localhost:3000/carrito/665c9f7d88d87b6a2bb34e9e",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -586,14 +651,14 @@
 							"port": "3000",
 							"path": [
 								"carrito",
-								"65cf834bbd53e27c8d59a495"
+								"665c9f7d88d87b6a2bb34e9e"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Obtener Carrito del Usuario Copy",
+					"name": "Actualizar Carrito del Usuario",
 					"event": [
 						{
 							"listen": "test",
@@ -604,7 +669,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -613,7 +679,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"carritoId\": \"65edfc07bf943459ba61a6de\",\r\n    \"cantidad\": 1\r\n}",
+							"raw": "{\r\n    \"carritoId\": \"{{id}}\",\r\n    \"cantidad\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -646,7 +712,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -654,7 +721,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/carrito/id....",
+							"raw": "http://localhost:3000/carrito/{{id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -662,7 +729,7 @@
 							"port": "3000",
 							"path": [
 								"carrito",
-								"id...."
+								"{{id}}"
 							]
 						}
 					},
@@ -683,9 +750,13 @@
 									"pm.test('Status is 201', function(){\r",
 									"    pm.response.to.have.status(201);\r",
 									"})\r",
-									""
+									"\r",
+									"const body = pm.response.json();\r",
+									"const { _id } = body.factura;\r",
+									"pm.collectionVariables.set('id', _id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -717,7 +788,22 @@
 					"response": []
 				},
 				{
-					"name": "Obtener Facturas",
+					"name": "Obtener Facturas por usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -737,7 +823,7 @@
 					"response": []
 				},
 				{
-					"name": "Obtener Facturas Copy",
+					"name": "Eliminar Factura Por su ID",
 					"event": [
 						{
 							"listen": "test",
@@ -748,15 +834,23 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "rol",
+								"value": "Admin",
+								"description": "Admin",
+								"uuid": "21e47022-ee64-48e8-9677-2c9fc5b5eb31"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:3000/factura/65edff23bf943459ba61a6fc",
+							"raw": "http://localhost:3000/factura/{{id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -764,7 +858,7 @@
 							"port": "3000",
 							"path": [
 								"factura",
-								"65edff23bf943459ba61a6fc"
+								"{{id}}"
 							]
 						}
 					},
@@ -797,6 +891,7 @@
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
+				"packages": {},
 				"exec": [
 					""
 				]
@@ -807,6 +902,11 @@
 		{
 			"key": "token",
 			"value": ""
+		},
+		{
+			"key": "id",
+			"value": "",
+			"type": "string"
 		}
 	]
 }

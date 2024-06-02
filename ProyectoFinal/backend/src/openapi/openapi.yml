@@ -78,20 +78,23 @@ paths:
       responses:
         200:
           description: Lista de juegos
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Game'
     post:
       summary: Crear un juego
       tags: 
         - Games
+      parameters:
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
+      security:
+        - rol: Admin
       requestBody:
         required: true
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Game'
             example:
               titulo: "Ejemplo de título"
               descripcion: "Ejemplo de descripción"
@@ -107,9 +110,7 @@ paths:
       responses:
         201:
           description: Juego creado
-          schema:
-            $ref: '#/definitions/Game'
-  /games/{title}:
+  /games/titulo/{title}:
     get:
       summary: Obtener un juego por título
       tags: 
@@ -122,42 +123,7 @@ paths:
       responses:
         200:
           description: Detalles del juego
-          schema:
-            $ref: '#/definitions/Game'
-    patch:
-      summary: Actualizar un juego por título
-      tags: 
-        - Games
-      parameters:
-        - name: title
-          in: path
-          required: true
-          type: string
-        - name: game
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Game'
-      responses:
-        200:
-          description: Juego actualizado
-          schema:
-            $ref: '#/definitions/Game'
-    delete:
-      summary: Eliminar un juego por título
-      tags: 
-        - Games
-      parameters:
-        - name: title
-          in: path
-          required: true
-          type: string
-      responses:
-        200:
-          description: Juego eliminado
-          schema:
-            $ref: '#/definitions/Game'
-  /games/id/{id}:
+  /games/{id}:
     get:
       summary: Obtener un juego por ID
       tags: 
@@ -170,8 +136,63 @@ paths:
       responses:
         200:
           description: Detalles del juego
+    delete:
+      summary: Eliminar un juego por ID
+      tags: 
+        - Games
+      security:
+        - rol: Admin
+      parameters:
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Juego eliminado
+  /games/admin/{id}:
+    patch:
+      summary: Actualizar un juego por ID
+      tags:
+        - Games
+      security:
+        - rol: Admin
+      parameters:
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
+        - name: id
+          in: path
+          description: ID del juego que se desea actualizar
+          required: true
+          type: string
+        - name: game
+          in: body
+          description: Datos actualizados del juego
+          required: true
           schema:
-            $ref: '#/definitions/Game'
+            type: object
+            properties:
+              unidades:
+                type: integer
+      responses:
+        200:
+          description: Juego actualizado
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+                example: Juego actualizado correctamente
   /login:
     post:
       summary: Iniciar sesión
@@ -191,13 +212,6 @@ paths:
       responses:
         '201':
           description: Token generado
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
         '401':
           description: Credenciales inválidas
   /users/me:
@@ -210,24 +224,23 @@ paths:
       responses:
         '200':
           description: Datos del usuario actual
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
   /users:
     get:
       summary: Obtener todos los usuarios
       tags: 
         - Users
+      parameters:
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
+      security:
+        - rol: Admin
       responses:
         '200':
           description: Lista de usuarios
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
     post:
       summary: Crear un usuario
       tags: 
@@ -236,8 +249,6 @@ paths:
         required: true
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/User'
             example:
               username: "usuario"
               password: "jajajaSouyUnAContraseñaSegura123"
@@ -248,65 +259,60 @@ paths:
       responses:
         '201':
           description: Usuario creado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-  /users/{username}:
+  /users/admin/{id}:
     patch:
-      summary: Actualizar un usuario por nombre de usuario
+      summary: Actualizar un usuario por ID
       tags: 
         - Users
       security:
-        - jwt: []
+        - rol: Admin
       parameters:
-        - name: username
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
+        - name: id
           in: path
           required: true
+          type: string
+        - name: user
+          in: body
+          required: true
           schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
+            type: object
+            properties:
+              lastname:
+                type: string
       responses:
         '200':
           description: Usuario actualizado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
         '404':
           description: Usuario no encontrado
-          content:
-            application/json:
-              example: { error: 'El usuario no existe' }
+  /users/{id}:
     delete:
-      summary: Eliminar un usuario por nombre de usuario
+      summary: Eliminar un usuario por ID
       tags: 
         - Users
       security:
-        - jwt: []
+        - rol: Admin
       parameters:
-        - name: username
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
+        - name: id
           in: path
           required: true
-          schema:
-            type: string
+          type: string
       responses:
         '200':
           description: Usuario eliminado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
         '404':
           description: Usuario no encontrado
-          content:
-            application/json:
-              example: { error: 'El usuario no existe' }
   /carrito/{userId}:
     get:
       summary: Obtener productos del carrito
@@ -318,22 +324,24 @@ paths:
           required: true
           schema:
             type: string
+      security:
+        - jwt: []
       responses:
         '200':
           description: Productos del carrito
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
-        '404':
-          description: No se encontraron productos en el carrito
-  /carrito/agregar:
     post:
       summary: Añadir producto al carrito
       tags:
         - Carrito
+      security:
+        - jwt: []
+      parameters:
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
       requestBody:
         required: true
         content:
@@ -350,18 +358,13 @@ paths:
       responses:
         '201':
           description: Producto añadido al carrito
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
   /carrito/modificar:
     patch:
       summary: Modificar cantidad de producto en el carrito
       tags:
         - Carrito
+      security:
+        - jwt: []
       requestBody:
         required: true
         content:
@@ -376,18 +379,13 @@ paths:
       responses:
         '200':
           description: Cantidad de producto en el carrito modificada
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-  /carrito/eliminar/{carritoId}:
+  /carrito/{carritoId}:
     delete:
       summary: Eliminar producto del carrito
       tags:
         - Carrito
+      security:
+        - jwt: []
       parameters:
         - name: carritoId
           in: path
@@ -397,18 +395,13 @@ paths:
       responses:
         '200':
           description: Producto eliminado del carrito
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-  /facturas/agregar:
+  /factura/agregar:
     post:
       summary: Agregar una factura
       tags:
         - Facturas
+      security:
+        - rol: Admin
       requestBody:
         required: true
         content:
@@ -432,23 +425,9 @@ paths:
       responses:
         '201':
           description: Factura agregada correctamente
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
         '400':
           description: Algo ha fallado
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-  /facturas/{userId}:
+  /factura/{userId}:
     get:
       summary: Obtener todas las facturas de un usuario
       tags:
@@ -457,36 +436,52 @@ paths:
         - name: userId
           in: path
           required: true
-          schema:
-            type: string
+          schema:  
       responses:
         '200':
           description: Todas las facturas del usuario
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Factura'
-  /facturas/eliminar/{facturaId}:
+  /factura/admin/{facturaId}:
+      get:
+        summary: Obtener una factura por ID
+        tags:
+          - Facturas
+        parameters:
+          - name: rol
+            in: header
+            description: El rol del usuario
+            required: true
+            type: string
+            default: Admin
+          - name: facturaId
+            in: path
+            required: true
+            schema:
+              type: string
+        security:
+          - rol: Admin
+        responses:
+          '200':
+            description: Detalles de la factura
+  /factura/{facturaId}:
     delete:
       summary: Eliminar una factura
       tags:
         - Facturas
       parameters:
+        - name: rol
+          in: header
+          description: El rol del usuario
+          required: true
+          type: string
+          default: Admin
         - name: facturaId
           in: path
           required: true
           schema:
             type: string
+      security:
+        - rol: Admin
       responses:
         '200':
           description: Factura eliminada correctamente
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
 
