@@ -157,7 +157,7 @@ Asegúrate de configurar las variables de entorno necesarias en Postman. Las var
 
 Puedes acceder a la documentación de la API utilizando Swagger. Primero de todo, deberemos clonar y desplegar el backend como se ve en los ejemplos anteriores, tras realizar dichos pasos sigue estos:
 
-1. Abre tu navegador web y visita la URL siguiente: `http://localhost:3000/api-docs/`.
+1. Abre tu navegador web y visita la URL siguiente: `https://dwes.onrender.com/api-docs/`.
 
 2. Se abrirá la interfaz de Swagger, donde encontrarás una lista de todos los endpoints disponibles en tu API.
 

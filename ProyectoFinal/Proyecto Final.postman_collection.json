@@ -35,8 +35,7 @@
 							{
 								"key": "rol",
 								"value": "Admin",
-								"description": "Admin",
-								"uuid": "221cd4fa-7ed4-458b-84a6-0c2098187df2"
+								"description": "Admin"
 							}
 						],
 						"body": {
@@ -49,14 +48,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/games",
-							"protocol": "http",
+							"raw": "{{url}}games",
 							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"games"
+								"{{url}}games"
 							]
 						}
 					},
@@ -83,14 +77,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/games/titulo/PruebaProducto",
-							"protocol": "http",
+							"raw": "{{url}}games/titulo/PruebaProducto",
 							"host": [
-								"localhost"
+								"{{url}}games"
 							],
-							"port": "3000",
 							"path": [
-								"games",
 								"titulo",
 								"PruebaProducto"
 							]
@@ -110,7 +101,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -118,14 +110,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/games",
-							"protocol": "http",
+							"raw": "{{url}}games",
 							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"games"
+								"{{url}}games"
 							]
 						}
 					},
@@ -152,14 +139,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/games/{{id}}",
-							"protocol": "http",
+							"raw": "{{url}}games/{{id}}",
 							"host": [
-								"localhost"
+								"{{url}}games"
 							],
-							"port": "3000",
 							"path": [
-								"games",
 								"{{id}}"
 							]
 						}
@@ -196,14 +180,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/games/{{id}}",
-							"protocol": "http",
+							"raw": "{{url}}games/{{id}}",
 							"host": [
-								"localhost"
+								"{{url}}games"
 							],
-							"port": "3000",
 							"path": [
-								"games",
 								"{{id}}"
 							]
 						}
@@ -232,19 +213,15 @@
 						"header": [
 							{
 								"key": "rol",
-								"value": "Admin",
-								"uuid": "fb43e195-8021-4bfd-a6f6-0d6e87b0c9bc"
+								"value": "Admin"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/games/{{id}}",
-							"protocol": "http",
+							"raw": "{{url}}games/{{id}}",
 							"host": [
-								"localhost"
+								"{{url}}games"
 							],
-							"port": "3000",
 							"path": [
-								"games",
 								"{{id}}"
 							]
 						}
@@ -289,14 +266,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
+							"raw": "{{url}}users",
 							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users"
+								"{{url}}users"
 							]
 						}
 					},
@@ -336,14 +308,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/login",
-							"protocol": "http",
+							"raw": "{{url}}login",
 							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"login"
+								"{{url}}login"
 							]
 						}
 					},
@@ -361,7 +328,8 @@
 									"})\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -370,20 +338,15 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "{{token}}",
-								"type": "text",
-								"uuid": "69960e52-41f8-47a3-959f-8c32a3d179e6"
+								"value": "{{token}}"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/users/me",
-							"protocol": "http",
+							"raw": "{{url}}users/me",
 							"host": [
-								"localhost"
+								"{{url}}users"
 							],
-							"port": "3000",
 							"path": [
-								"users",
 								"me"
 							]
 						}
@@ -413,20 +376,13 @@
 							{
 								"key": "rol",
 								"value": "Admin",
-								"description": "Admin",
-								"type": "text",
-								"uuid": "43b98f42-ac06-418f-ac26-0329f78aed7d"
+								"description": "Admin"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
+							"raw": "{{url}}users",
 							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users"
+								"{{url}}users"
 							]
 						}
 					},
@@ -462,14 +418,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/{{id}}",
-							"protocol": "http",
+							"raw": "{{url}}users/{{id}}",
 							"host": [
-								"localhost"
+								"{{url}}users"
 							],
-							"port": "3000",
 							"path": [
-								"users",
 								"{{id}}"
 							]
 						}
@@ -499,9 +452,7 @@
 							{
 								"key": "rol",
 								"value": "Admin",
-								"description": "Admin",
-								"type": "text",
-								"uuid": "0ae7bdd4-5012-4951-a27c-29b30470e2b6"
+								"description": "Admin"
 							}
 						],
 						"body": {
@@ -514,14 +465,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/{{id}}",
-							"protocol": "http",
+							"raw": "{{url}}users/{{id}}",
 							"host": [
-								"localhost"
+								"{{url}}users"
 							],
-							"port": "3000",
 							"path": [
-								"users",
 								"{{id}}"
 							]
 						}
@@ -596,14 +544,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/carrito/agregar",
-							"protocol": "http",
+							"raw": "{{url}}carrito/agregar",
 							"host": [
-								"localhost"
+								"{{url}}carrito"
 							],
-							"port": "3000",
 							"path": [
-								"carrito",
 								"agregar"
 							]
 						}
@@ -643,15 +588,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/carrito/665c9f7d88d87b6a2bb34e9e",
-							"protocol": "http",
+							"raw": "{{url}}carrito/65cf834bbd53e27c8d59a495",
 							"host": [
-								"localhost"
+								"{{url}}carrito"
 							],
-							"port": "3000",
 							"path": [
-								"carrito",
-								"665c9f7d88d87b6a2bb34e9e"
+								"65cf834bbd53e27c8d59a495"
 							]
 						}
 					},
@@ -687,14 +629,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/carrito",
-							"protocol": "http",
+							"raw": "{{url}}carrito",
 							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"carrito"
+								"{{url}}carrito"
 							]
 						}
 					},
@@ -721,14 +658,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/carrito/{{id}}",
-							"protocol": "http",
+							"raw": "{{url}}carrito/{{id}}",
 							"host": [
-								"localhost"
+								"{{url}}carrito"
 							],
-							"port": "3000",
 							"path": [
-								"carrito",
 								"{{id}}"
 							]
 						}
@@ -773,14 +707,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/factura/agregar",
-							"protocol": "http",
+							"raw": "{{url}}factura/agregar",
 							"host": [
-								"localhost"
+								"{{url}}factura"
 							],
-							"port": "3000",
 							"path": [
-								"factura",
 								"agregar"
 							]
 						}
@@ -808,14 +739,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/factura/65cf834bbd53e27c8d59a495",
-							"protocol": "http",
+							"raw": "{{url}}factura/65cf834bbd53e27c8d59a495",
 							"host": [
-								"localhost"
+								"{{url}}factura"
 							],
-							"port": "3000",
 							"path": [
-								"factura",
 								"65cf834bbd53e27c8d59a495"
 							]
 						}
@@ -845,19 +773,15 @@
 							{
 								"key": "rol",
 								"value": "Admin",
-								"description": "Admin",
-								"uuid": "21e47022-ee64-48e8-9677-2c9fc5b5eb31"
+								"description": "Admin"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/factura/{{id}}",
-							"protocol": "http",
+							"raw": "{{url}}factura/{{id}}",
 							"host": [
-								"localhost"
+								"{{url}}factura"
 							],
-							"port": "3000",
 							"path": [
-								"factura",
 								"{{id}}"
 							]
 						}
@@ -906,6 +830,17 @@
 		{
 			"key": "id",
 			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "http://localhost:3000/",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "https://dwes.onrender.com/",
 			"type": "string"
 		}
 	]
