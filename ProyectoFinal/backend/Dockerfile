@@ -1,21 +1,15 @@
-# Dockerfile del backend
-# Utiliza una imagen base con Node.js
-FROM node:18
+ARG NODE_VERSION=18.0.0
 
-# Establece el directorio de trabajo dentro del contenedor
-WORKDIR /app/backend
+FROM node:${NODE_VERSION}-alpine
 
-# Copia los archivos de configuración y dependencias del backend
-COPY ./package.json ./package-lock.json ./
+WORKDIR /app
 
-# Instala las dependencias del backend
-RUN npm install --production
+COPY package*.json ./
 
-# Copia el resto de los archivos del backend
+RUN npm install
+
 COPY . .
 
-# Expone el puerto en el que se ejecutará el backend
 EXPOSE 3000
 
-# Comando para iniciar el backend
 CMD ["npm", "start"]
