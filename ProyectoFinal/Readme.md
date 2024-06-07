@@ -1,62 +1,46 @@
-# Proyecto Final
+# Manual de uso - Proyecto Final
 
 ## 🔎 Conceptos
 
-### 🕹️ Página Web de venta de productos/videojuegos:
-- **Objetivo:** Desarrollar una aplicación con los siguientes apartados.
-
-- **💻 Hecho/Realizando:** 
-  - Sistema de Inicio de Sesión y Registro.
-  - Edición de Datos Personales y logout.
-  - Añadir productos al carrito, modificar carrito, simular checkout y confirmar pago.
-  - Listar facturas de pagos realizados anteriormente.
-  - Listar productos, limitar el número de productos que aparecen, y poder ordenarlos o filtrarlos en la página inicio.
-  - Usuario admin con diferentes apartados.
-  - Vista de los datos de un producto.
-  - Buscador de productos y filtros.
-  - Footer básico.
-- **💡 Por hacer:** 
-  - Una página inicio y contacto.
-  - Poder comprar un producto directamente.
-  - Aceptar términos y condiciones generado.
-  - Desplegar y no usar el localhost.
-  - Mejoras de CSS.
-  - Más test que abarquen más errores.
-  - Probar una API que permite la implementación de un chatBot.
-- **💡Arreglos:** 
-  - Busqueda de usuarios y productos ahora por ID.
-  - Rol Admin y Middleware Admin.
-  - Más test para SonarQube usando ava.
+### 🕹️ Ninja Games:
 
 ## 🧾 Documentación
 
 ### Configuración del entorno
 Para instalar y ejecutar el proyecto, asegúrate de tener Node.js y npm instalados en tu sistema.
 
-#### Instalación usando npm
+#### Instalación usando npm (NO RECOMENDADO)
 1. Clona este repositorio.
-2. Navega a la carpeta del proyecto en tu terminal.
-3. Ejecuta `npm install` para instalar las dependencias.
+2. Navega hacia una de las carpetas del repositorio principal (backend o frontend).
+3. Ejecuta `npm install` para instalar las dependencias en cada carpeta.
+4. Configurar las variables de entornos correspondientes.
+4. Ejecuta `npm start` en el backend una vez que hayas realizado el paso anterior.
+5. Ejecuta `npm start` en el frontend, esperar a que nos indique que el puerto 3000 ya está en uso e indicarle que continue desde el puerto 3001.
 
-#### Ejecución con Docker
-También puedes ejecutar el proyecto usando Docker. Asegúrate de tener Docker y docker-compose instalados en tu sistema.
-1. Clona este repositorio.
-2. Navega a la carpeta del proyecto en tu terminal.
-3. Ejecuta `docker-compose up` para construir y levantar los contenedores.
+- Es importante indicar que primero se debe ejecutar el backend y luego el frontend para evitar errores. 
+- Si queremos acceder a Swagger usaremos la siguiente ruta `http://localhost:3000/api-docs/`
 
-### Variables de entorno
+### Variables de entorno (SOLO PARA LA INSTALACIÓN USANDO NPM)
 Asegúrate de configurar las siguientes variables de entorno en un archivo `.env` en la raíz del proyecto.
 
-- **Usando-MongoATLAS**
+- **BACKEND**
     - PORT=3000
     - SECRET_KEY=macacobrasileiro
     - MONGODB_USER=jaseggom
     - MONGODB_PASSWORD=Ja1977-1980
 
-- **Ya no lo uso-MongoDB**
-    - MONGODB_HOST=localhost
-    - MONGODB_PORT=27017
-    - MONGODB_DBNAME=test
+- **BACKEND**
+    - REACT_APP_URL=http://localhost:3000
+
+#### Ejecución con Docker (RECOMENDADO)
+También puedes ejecutar el proyecto usando Docker lo que nos permitirá poder desplegar el frontend y el backend a la vez, sin necesidad de modificar ni añadir variables de entorno. Asegúrate de tener Docker-Desktop instalado en tu sistema.
+1. Clona este repositorio.
+2. Navega a la carpeta del raiz del proyecto en tu terminal (./proyecto).
+3. Ejecuta `docker-compose build` para construir los contenedores.
+4. Ejecuta `docker-compose up` para levantar los correspondientes contenedores.
+5. Abrimos el navegador y accederemos a esta URL `http://localhost:4001/`.
+
+- Si queremos acceder a Swagger usaremos la siguiente ruta `http://localhost:4000/api-docs/`
 
 ### Pruebas
 #### POSTMAN
@@ -66,7 +50,7 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 
 #### 🔐 Autenticación:
 
-- `/login`: Endpoint para iniciar sesión.
+- POST:`/login` Endpoint para iniciar sesión.
 
 #### 👤 Usuarios:
 
@@ -90,19 +74,19 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 - `/carrito/agregar`: Agregar producto al carrito.
 - `/carrito`: Modificar cantidad de producto en el carrito.
 - `/carrito/:carritoId`: Eliminar producto del carrito.
+- `/carrito/:confirmar-compra`: Recopila todos los endpoint anteriores para en un único endpoint realizar todo el proceso de compra.
 
 #### 🧾 Facturas:
 
 - `/factura/agregar`: Agregar una factura.
 - `/factura/:userId`: Obtener todas las facturas de un usuario.
+- `/factura/admin/:userId`: Obtener facturas de otros usuarios desde el administrador.
 - `/factura/:facturaId`: Eliminar una factura.
 
 ### 🗝️ Middleware Utilizado:
 
 - `checkToken`: Middleware para verificar el token de autenticación en las rutas protegidas.
 - `isAdmin`: Middleware para el rol del usuario a la hora de loguearse.
-
-
 
 ## Middleware
 - El proyecto utiliza algunos middlewares para ciertas funcionalidades. Puedes encontrarlos en los archivos correspondientes en la carpeta `middlewares`.
@@ -112,7 +96,7 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 
 ##  TEST-SONAR
 
-- Puedes acceder a los tests generados con la configuración de SonarQube realizando el siguiente comando:
+- Puedes acceder a los tests generados con la configuración de SonarQube realizando el siguiente comando desde la `./backend`:
   - `docker-compose -f docker-compose.test.yml up`.
 - Posteriormente, en el `package.json`, encontrarás todos los scripts necesarios para verificar cada apartado.
 
