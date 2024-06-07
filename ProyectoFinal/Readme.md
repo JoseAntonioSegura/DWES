@@ -48,40 +48,47 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 
 ### 🚃 Rutas Principales
 
+- Todos los endpoints que contengan admin o deban acceder al panel administrador deben contar con el rol `Admin` para poder ser utilizados. 
+
 #### 🔐 Autenticación:
 
-- POST:`/login` Endpoint para iniciar sesión.
+- `POST: /login` Endpoint para iniciar sesión.
 
 #### 👤 Usuarios:
 
-- `/users/me`: Obtener los datos del usuario logueado.
-- `/users`: Obtener todos los usuarios.
-- `/users/:id`: Actualizar un usuario.
-- `/users/:id`: Eliminar un usuario.
+- `GET: /users/me`: Obtener los datos del usuario logueado.
+- `GET: /users/name/:name`: Obtener los datos del usuario por su nombre desde el panel administrador.
+- `GET: /users/admin/:id`: Obtener los datos del usuario por su id desde el panel administrador.
+- `GET: /users`: Obtener todos los usuarios desde el panel administrador.
+- `POST: /users`: Crear un usuario.
+- `PATCH: /users/:id`: Actualizar un usuario.
+- `PATCH: /users/admin/:id`: Actualizar un usuario desde el panel administrador.
+- `DELETE: /users/:id`: Eliminar un usuario.
 
 #### 🎮 Juegos:
 
-- `/games`: Obtener todos los juegos.
-- `/games/name/:title`: Obtener un juego por título.
-- `/games/id/:id`: Obtener un juego por ID.
-- `/games`: Crear un juego.
-- `/games/:id`: Actualizar un juego.
-- `/games/:id`: Eliminar un juego.
+- `GET: /games`: Obtener todos los juegos.
+- `GET: /games/name/:title`: Obtener un juego por título.
+- `GET: /games/:id`: Obtener un juego por ID.
+- `POST: /games`: Crear un juego.
+- `PATCH: /games/:id`: Actualizar datos de forma limitada cuando el usuario realiza una compra.
+- `PATCH: /games/admin/:id`: Actualizar un juego con todos sus apartados desde el panel administrador.
+- `DELETE: /games/:id`: Eliminar un juego.
 
 #### 🛒 Carrito:
 
-- `/carrito/:userId`: Obtener productos del carrito de un usuario.
-- `/carrito/agregar`: Agregar producto al carrito.
-- `/carrito`: Modificar cantidad de producto en el carrito.
-- `/carrito/:carritoId`: Eliminar producto del carrito.
-- `/carrito/:confirmar-compra`: Recopila todos los endpoint anteriores para en un único endpoint realizar todo el proceso de compra.
+- `GET: /carrito/:userId`: Obtener productos del carrito de un usuario.
+- `POST: /carrito/agregar`: Agregar producto al carrito.
+- `PATCH: /carrito`: Modificar cantidad de producto en el carrito.
+- `DELETE: /carrito/:carritoId`: Eliminar producto del carrito.
+- `POST: /carrito/:confirmar-compra`: Recopila todos los endpoint anteriores para en un único endpoint realizar todo el proceso de compra.
 
 #### 🧾 Facturas:
 
-- `/factura/agregar`: Agregar una factura.
-- `/factura/:userId`: Obtener todas las facturas de un usuario.
-- `/factura/admin/:userId`: Obtener facturas de otros usuarios desde el administrador.
-- `/factura/:facturaId`: Eliminar una factura.
+- `GET: /factura/:userId`: Obtener todas las facturas de un usuario.
+- `GET: /factura/admin/:userId`: Obtener facturas de otros usuarios desde el administrador.
+- `POST: /factura/agregar`: Agregar una factura.
+- `DELETE: /factura/:facturaId`: Eliminar una factura.
 
 ### 🗝️ Middleware Utilizado:
 
@@ -99,25 +106,6 @@ Todos los test funcionan y pasan correctamente, los resultados exportados marcan
 - Puedes acceder a los tests generados con la configuración de SonarQube realizando el siguiente comando desde la `./backend`:
   - `docker-compose -f docker-compose.test.yml up`.
 - Posteriormente, en el `package.json`, encontrarás todos los scripts necesarios para verificar cada apartado.
-
-## 📋 Correcciones y nuevas características de la primera entrega:
-- `Correcciones realizadas:`
-  - Ahora la actualización y eliminación de usuarios se realiza mediante la ID correspondiente.
-  - La actualización y eliminación de productos ahora se realiza mediante la ID asociada.
-- `Nuevas características implementadas:`
-  - Se ha desarrollado un Panel de Administrador completamente funcional. Para acceder, es necesario iniciar sesión como usuario "admin" con la contraseña "admin". El acceso está disponible en el encabezado.
-  - Se han realizado mejoras estéticas en toda la aplicación, sobre todo en la vista inicial del usuario con un producto.
-  - Implementación de paginación de productos por categoría y orden, además de la capacidad de desplazarse fácilmente entre las páginas.
-  - El footer ha sido prácticamente finalizado e incluye la documentación correspondiente.
-  - Se han realizado pruebas utilizando AVA, principalmente enfocadas en los controladores.
-  - Se ha agregado la funcionalidad de visualizar facturas y administrarlas por usuario. La parte estética de esta función está pendiente.
-- `Próximas actualizaciones:`
-  - Mejoras estéticas en toda la aplicación, así como su adaptación a dispositivos móviles.
-  - Se implementarán más filtros para evitar errores por parte del usuario.
-  - Mejora de los iconos, logotipos y otros elementos visuales como botones, imágenes y la vista de productos.
-  - El despliegue de la aplicación web sin una urgencia inmediata.
-  - La documentación, al menos del apartado 4, será completada y se corregirá el apartado 3.
-
 
 ## Importar la colección de Postman
 Para facilitar las pruebas de la API, hemos incluido una colección de Postman. Sigue los siguientes pasos para importar la colección:
@@ -151,3 +139,23 @@ Puedes acceder a la documentación de la API utilizando Swagger. Primero de todo
 
 5. Utiliza la interfaz de Swagger para probar el endpoint y ver las cuentas en acción. Puedes enviar solicitudes directamente desde la interfaz y ver las respuestas en tiempo real.
 
+## 📋 Correcciones y nuevas características desde la correción del 2 Trimestre:
+- `Correcciones realizadas: (Recomendadas por Gabri)`
+  - Ahora la actualización y eliminación de usuarios se realiza mediante la ID correspondiente.
+  - La actualización y eliminación de productos ahora se realiza mediante la ID asociada.
+  - Además el proceso de compra ahora se realiza desde un unico endpoint.
+- `Nuevas características implementadas:`
+  - Se ha desarrollado un Panel de Administrador completamente funcional. Para acceder, es necesario iniciar sesión como usuario "admin" con la contraseña "admin". El acceso está disponible en el encabezado.
+  - Se han realizado mejoras estéticas en toda la aplicación, sobre todo en la vista inicial del usuario con un producto.
+  - Implementación de paginación de productos por categoría y orden, además de la capacidad de desplazarse fácilmente entre las páginas.
+  - El footer ha sido prácticamente finalizado e incluye la documentación correspondiente.
+  - Se han realizado pruebas utilizando AVA, principalmente enfocadas en los controladores.
+  - Se ha agregado la funcionalidad de visualizar facturas y administrarlas por usuario.
+  - Dockerización Acabada.
+  - Despliegue terminado y documentación Swagger y Postman mejorados y acabados.
+  - Versión Mobile.
+  - Se implementaron más filtros y correciones.
+  - Mejoras estéticas.
+  - El despliegue de la aplicación web desde Render y Netlify.
+  - Documentación Proyecto Acabado.
+  - Mucho más.
