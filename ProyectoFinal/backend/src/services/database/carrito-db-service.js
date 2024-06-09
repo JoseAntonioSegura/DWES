@@ -75,8 +75,8 @@ export async function confirmarCompra(userId, carritoId, productos) {
     if (productos.length === 0) {
       throw new Error('No hay productos en el carrito');
     }
-    console.log('productos');
-    console.log(carritoId);
+    //console.log('productos');
+    //console.log(carritoId);
 
     // Iterar sobre los carritoID y eliminarlos
     for (const carrito of carritoId) {

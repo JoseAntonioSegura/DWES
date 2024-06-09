@@ -36,7 +36,7 @@ export async function getAllGames(req, res, next) {
     const games = await gameService.getGames(filters, { page, limit });
     const { paginatedResults, totalPages } = await gameService.getGames(filters, { page, limit });
     // Enviar la respuesta
-    console.log(totalPages);
+    //console.log(totalPages);
     return res.send({ games: paginatedResults, totalPages });
   } catch (error) {
     // Manejar errores

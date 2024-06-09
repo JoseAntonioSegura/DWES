@@ -42,6 +42,7 @@
 .filtros div select:hover,
 .filtros div input:hover {
   border: 2px solid #00ad93;
+  cursor: pointer;
 }
 
 .filtros div input:focus,

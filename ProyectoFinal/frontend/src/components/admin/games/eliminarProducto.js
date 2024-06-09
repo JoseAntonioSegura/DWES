@@ -32,8 +32,6 @@ function EliminarProducto() {
       } else if (!response.ok) {
         throw new Error('Error al eliminar el producto');
       }
-
-      console.log('Juego eliminado correctamente');
       resetState();
     } catch (error) {
       console.error('Error al eliminar el juego:', error.message);

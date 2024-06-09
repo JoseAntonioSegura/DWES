@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Productos from '../tienda/obtenerProductos.js'; 
 import NewProduct from '../tienda/newProduct.js'; 
 import './index.css';
 import Header from './headerHome.js';
 import Footer from './footer.js';
-import baner2 from '../../resources/baner3.png';
 
 function Index() {
   const [showImage, setShowImage] = useState(true);

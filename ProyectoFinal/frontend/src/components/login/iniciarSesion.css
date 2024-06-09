@@ -113,6 +113,7 @@
 .login-form button:not([disabled]):hover {
     background-color: #24ffba;
     transform: scale(1.02);
+    cursor: pointer;
 }
 
 .login-form button[disabled]:hover {

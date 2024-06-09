@@ -30,13 +30,12 @@ function NewProduct({ cantidad, ordenar }) {
   }, [cantidad, ordenar]);
 
   if (loading) {
-    return <div>Cargando productos...</div>;
+    return <div className="producto-skeleton"></div>;
   }
 
   if (error) {
     return <div>{error}</div>;
   }
-
 
   return (
     <div>
@@ -51,21 +50,17 @@ function NewProduct({ cantidad, ordenar }) {
       ))}
     </div>
   );
-
-
 }
-
-
 
 function Producto({ titulo, precio, imagen }) {
   return (
     <div className='containerNewProduct'>
-        <img src={imagen} alt={titulo} className="imageNewProduct" />
-        <div className="cotainerTextNewProduct">
-          <div className="titleNewProduct">Último lanzamiento:</div>
-          <div className="nameNewProduct">{titulo}</div>
-          <div className="priceNewProduct">{precio}€</div>
-        </div>
+      <img src={imagen} alt={titulo} className="imageNewProduct" />
+      <div className="cotainerTextNewProduct">
+        <div className="titleNewProduct">Último lanzamiento:</div>
+        <div className="nameNewProduct">{titulo}</div>
+        <div className="priceNewProduct">{precio}€</div>
+      </div>
     </div>
   );
 }

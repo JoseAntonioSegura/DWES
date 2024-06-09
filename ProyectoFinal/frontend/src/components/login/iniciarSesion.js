@@ -91,13 +91,29 @@ function Login() {
             <div className={`imgLogin ${isError ? 'error' : ''}`}>
               <img className={`imgLogin ${isError ? 'error' : ''}`} src={userLogin} alt="User Login"/>
             </div>
-            <input type="text" value={username} placeholder='Nombre' onChange={handleUsernameChange} />
+            <input 
+              type="text" 
+              value={username} 
+              placeholder='Nombre' 
+              onChange={handleUsernameChange} 
+              autoComplete="username" 
+              name="username"
+              id="username"
+            />          
           </div>
           <div className={`form-group ${isError ? 'error' : ''}`}>
             <div className={`imgLogin ${isError ? 'error' : ''}`}>
               <img className={`imgLogin ${isError ? 'error' : ''}`} src={passwordLogin} alt="Password Login"/>
             </div>
-            <input type="password" value={password} placeholder='Contraseña' onChange={handlePasswordChange} />
+            <input 
+              type="password" 
+              value={password} 
+              placeholder='Contraseña' 
+              onChange={handlePasswordChange} 
+              autoComplete="current-password" 
+              name="password"
+              id="password"
+            />
           </div>
           {error && <div className="error-message">{error}</div>}
           

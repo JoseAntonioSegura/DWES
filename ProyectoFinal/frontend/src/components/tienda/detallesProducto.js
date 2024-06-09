@@ -4,6 +4,8 @@ import YouTube from 'react-youtube';
 import Header from '../inicio/header.js';
 import Footer from '../inicio/footer.js';
 import './detallesProducto.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function DetallesProducto() {
   const { titulo } = useParams();
@@ -115,7 +117,7 @@ function DetallesProducto() {
       }
 
       setProductoAgregado(true);
-
+      toast.success('Producto agregado al carrito correctamente');
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
       alert('Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.');
@@ -218,6 +220,7 @@ function DetallesProducto() {
 
   return (
     <>
+    <ToastContainer />
       <Header productoAgregado={productoAgregado} mostrarCarrito={true} />
       <div className="contenedorProducto">
         <div className='contenedorDatos'>

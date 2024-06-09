@@ -27,11 +27,11 @@ export async function getGames(filters = {}, options = {}) {
 
   }
   if (categoria) {
-    console.log(categoria);
+    //console.log(categoria);
     gamesQuery = gamesQuery.where('categoria').equals(categoria);
   }
   if (plataforma) {
-    console.log(plataforma);
+    //console.log(plataforma);
     gamesQuery = gamesQuery.where('plataforma').equals(plataforma);
   }
   if (precioMin !== undefined) {

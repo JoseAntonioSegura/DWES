@@ -43,7 +43,7 @@ export async function getUsers(filters){
 const cleanedQuery = Object.fromEntries(
   Object.entries(query).filter(([_, a]) => a !==undefined)
 );
-  console.log(cleanedQuery);
+  //console.log(cleanedQuery);
   // Obtener los usuarios de la base de datos
   const users = await User.find(cleanedQuery).select('-password');
   return users;

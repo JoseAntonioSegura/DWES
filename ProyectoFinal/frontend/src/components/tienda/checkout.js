@@ -55,6 +55,7 @@ const Checkout = () => {
     cvv: false
   });
   const url = process.env.REACT_APP_URL;
+  const [compraRealizada, setCompraRealizada] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -90,8 +91,6 @@ const Checkout = () => {
         throw new Error('Error al obtener productos del carrito');
       }
       const data = await response.json();
-      console.log("datosss");
-      console.log(data);
       setCarritoIDdefinitivo(data);
       calcularTotalCompra(data);
       setProductos(data);
@@ -245,6 +244,7 @@ const Checkout = () => {
     try {
       await eliminarTodosLosProductos();
       toast.success('La compra se ha realizado correctamente.');
+      setCompraRealizada(true);
       setTimeout(() => {
         navigate('/');
       }, 6000); 
@@ -361,8 +361,8 @@ const Checkout = () => {
           <input type="checkbox" id="aceptarCondiciones" checked={aceptaCondiciones} onChange={handleAceptarCondiciones} />
           <label htmlFor="aceptarCondiciones">Acepto las condiciones y servicios</label>
         </div>
-        <button className='botonProcesarCompra' onClick={procesarCompra}>Realizar el pago</button>
-      </div>
+        <button className='botonProcesarCompra' onClick={procesarCompra} disabled={compraRealizada}>Realizar el pago</button>
+        </div>
     </div>
   </>
 );

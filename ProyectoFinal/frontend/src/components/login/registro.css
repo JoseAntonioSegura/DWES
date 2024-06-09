@@ -123,6 +123,7 @@
 .register-form button:hover {
   background-color: #24ffba;
   scale: 1.01;
+  cursor: pointer;
 }
 
 .register-form button:not([disabled]) {

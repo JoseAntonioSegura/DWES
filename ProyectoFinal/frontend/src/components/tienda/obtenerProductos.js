@@ -30,32 +30,46 @@ function Productos({ cantidad, ordenar }) {
   }, [cantidad, ordenar]);
 
   if (loading) {
-    return <div>Cargando productos...</div>;
+    return (
+      <div className="skeleton-container">
+        <div className="producto-container skeleton"></div>
+        <div className="producto-container skeleton"></div>
+        <div className="producto-container skeleton"></div>
+        <div className="producto-container skeleton"></div>
+        <div className="producto-container skeleton"></div>
+        <div className="producto-container skeleton"></div>
+      </div>
+    );
   }
 
   if (error) {
     return <div>{error}</div>;
   }
 
-
-
   return (
     <div>
-      {productos.map(producto => (
-        <Link key={producto.id} to={`/producto/${producto.titulo}`}>
-          <Producto
-            titulo={producto.titulo}
-            precio={producto.precio}
-            imagen={producto.imagen}
-          />
-        </Link>
-      ))}
+      {productos.length === 0 ? (
+        <div className="skeleton-container">
+          <div className="producto-container skeleton"></div>
+          <div className="producto-container skeleton"></div>
+          <div className="producto-container skeleton"></div>
+        </div>
+      ) : (
+        productos.map(producto => (
+          <Link key={producto.id} to={`/producto/${producto.titulo}`}>
+            <Producto
+              titulo={producto.titulo}
+              precio={producto.precio}
+              imagen={producto.imagen}
+            />
+          </Link>
+        ))
+      )}
     </div>
   );
 }
 
 function Producto({ titulo, precio, imagen }) {
-
   return (
     <div className='contenedorProductoInterior'>
       <div className="producto-container">

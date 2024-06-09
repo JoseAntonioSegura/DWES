@@ -301,3 +301,9 @@ input.error {
 @media (max-width: 500px) {
 
 }
+
+.botonProcesarCompra:disabled {
+  background-color: grey;
+  color: #666;
+  cursor: not-allowed;
+}

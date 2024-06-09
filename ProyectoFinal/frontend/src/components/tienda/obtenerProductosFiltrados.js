@@ -7,7 +7,6 @@ function ProductosFiltrados({ consulta }) {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const url = process.env.REACT_APP_URL;
 
   useEffect(() => {

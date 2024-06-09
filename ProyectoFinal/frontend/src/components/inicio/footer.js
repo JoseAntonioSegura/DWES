@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './footer.css';
 import terminosycondiciones from '../../files/Terminos y Servicios.pdf';
 import privacidad from '../../files/privacidad.pdf';
@@ -9,7 +8,6 @@ import linkedln from '../../resources/linkedln.png';
 import youtube from '../../resources/youtube.png';
 import calle from '../../resources/camino.png';
 import email from '../../resources/email.png';
-import country from '../../resources/country.png';
 import telefono from '../../resources/telefono.png';
 import ubicacion from '../../resources/ubicacion.png';
 

@@ -71,7 +71,7 @@ export const eliminarProductoDelCarrito = async (req, res) => {
 export const confirmarCompra = async (req, res) => {
   const { carritoId, userId, productos } = req.body;
   try {
-    console.log('confirmarCompra', req.body);
+    //console.log('confirmarCompra', req.body);
     const result = await CarritoService.confirmarCompra(userId, carritoId, productos);
     res.json(result);
   } catch (error) {
