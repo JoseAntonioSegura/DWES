@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 function EditarProducto() {
   const [productId, setProductId] = useState('');
   const [productData, setProductData] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
   const [formData, setFormData] = useState({
     titulo: '',
     descripcion: '',
@@ -69,7 +70,7 @@ function EditarProducto() {
       if (!response.ok) {
         throw new Error('Error al actualizar el producto');
       }
-      setError('Producto actualizado con éxito.');
+      setSuccessMessage('Producto actualizado con éxito.');
     } catch (error) {
       console.error('Error al actualizar el producto:', error.message);
       setError('No se pudo actualizar el producto. Inténtalo de nuevo más tarde.');
@@ -176,6 +177,7 @@ function EditarProducto() {
             value={formData.fechaLanzamiento}
             onChange={handleInputChange}
           />
+          {successMessage && <p className="success-message">{successMessage}</p>}
           {error && <p className="error-message">{error}</p>}
           <button onClick={handleActualizarProducto}>Actualizar Producto</button>
         </div>

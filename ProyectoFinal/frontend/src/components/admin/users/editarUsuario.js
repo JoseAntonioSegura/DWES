@@ -4,6 +4,7 @@ import './editarUsuario.css';
 function EditarUsuario() {
   const [userId, setUserId] = useState('');
   const [userData, setUserData] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
     usernameImage: '',
@@ -71,6 +72,8 @@ function EditarUsuario() {
       if (!response.ok) {
         throw new Error('Error al actualizar el usuario');
       }
+      setSuccessMessage('Usuario actualizado con éxito.');
+
     } catch (error) {
       console.error('Error al actualizar el usuario:', error.message);
       setError('Error al actualizar el usuario');
@@ -161,6 +164,7 @@ function EditarUsuario() {
             <option value="Admin">Admin</option>
             <option value="User">User</option>
           </select>
+          {successMessage && <p className="success-message">{successMessage}</p>}
           <button onClick={handleActualizarUsuario}>Actualizar Usuario</button>
         </div>
       )}

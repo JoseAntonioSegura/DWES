@@ -14,6 +14,7 @@ function CrearProducto() {
   const [plataforma, setPlataforma] = useState('');
   const [fechaLanzamiento, setFechaLanzamiento] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const url = process.env.REACT_APP_URL;
 
   const handleGuardarProducto = async () => {
@@ -60,6 +61,8 @@ function CrearProducto() {
       setPlataforma('');
       setFechaLanzamiento('');
       setError('');
+      setSuccessMessage('Producto actualizado con éxito.');
+
     } catch (error) {
       console.error('Error al guardar el producto:', error.message);
       setError('No se pudo guardar el producto. Inténtalo de nuevo más tarde.');
@@ -170,8 +173,9 @@ function CrearProducto() {
         value={fechaLanzamiento}
         onChange={(e) => setFechaLanzamiento(e.target.value)}
       />
-      <button onClick={handleGuardarProducto}>Guardar</button>
+      {successMessage && <p className="success-message">{successMessage}</p>}
       {error && <p className="error-message">{error}</p>}
+      <button onClick={handleGuardarProducto}>Guardar</button>
     </div>
   );
 }
