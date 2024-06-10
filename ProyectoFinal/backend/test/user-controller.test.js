@@ -54,8 +54,7 @@ test.serial('GET /me devuelve el usuario actual', async t => {
 test.serial('GET / devuelve todos los usuarios', async t => {
     const res = await request(app)
         .get('/users')
-        .set('Authorization', `Bearer ${token}`);
-
+        .set('rol', 'Admin');
     t.is(res.status, 200);
     t.true(Array.isArray(res.body));
     t.true(res.body.length > 0);
@@ -78,7 +77,8 @@ test.serial('PATCH /:id actualiza un usuario por ID', async t => {
 test.serial('DELETE /:id elimina un usuario por ID', async t => {
     const res = await request(app)
         .delete(`/users/${newUser._id}`)
-        .set('Authorization', `Bearer ${token}`);
+        .set('Authorization', `Bearer ${token}`)
+        .set('rol', 'Admin');
 
     t.is(res.status, 200);
     t.truthy(res.body);
@@ -117,7 +117,7 @@ test.serial('DELETE /users/:id - Intento de eliminar un usuario inexistente', as
 
     const res = await request(app)
         .delete(`/users/${nonExistentUserId}`)
-        .set('Authorization', `Bearer ${token}`);
+        .set('rol', 'Admin');
 
     t.is(res.status, 500);
 });

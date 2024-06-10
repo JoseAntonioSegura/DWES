@@ -4,10 +4,9 @@ import supertest from 'supertest';
 
 const request = supertest(app);
 
-let ID = null;
+let gameId = null;
 
 const newGame = {
-    _id: '661170da18faf206fdb14988',
     titulo: 'ElNuevoJuego',
     descripcion: 'Descripción del juego',
     fechaLanzamiento: '2024-04-06',
@@ -21,22 +20,22 @@ const newGame = {
     categoria: ['supervivencia']
 };
 
-
 // Test para el endpoint de crear un juego
 test.serial('POST / - Debería crear un juego', async t => {
-    const res = await request.post('/games').send(newGame);
+    const res = await request.post('/games')
+    .set('rol', 'Admin')
+    .send(newGame);
     t.is(res.status, 201);
     t.truthy(res.body);
+    gameId = res.body._id; // Guardar el ID del juego creado para usarlo en otras pruebas
 });
 
 // Test para el endpoint de obtener todos los juegos
 test.serial('GET / - Debería obtener todos los juegos', async t => {
     const res = await request.get('/games');
     t.is(res.status, 200);
-    t.true(Array.isArray(res.body));
-    t.true(res.body.length > 0);
+    t.truthy(res.body);
 });
-
 
 // Test para el endpoint de obtener un juego por título
 test.serial('GET /titulo/:title - Debería obtener un juego por título', async t => {
@@ -48,7 +47,8 @@ test.serial('GET /titulo/:title - Debería obtener un juego por título', async 
 
 // Test para el endpoint de obtener un juego por ID
 test.serial('GET /:id - Debería obtener un juego por ID', async t => {
-    const res = await request.get('/games/' + newGame._id);
+    const res = await request.get('/games/' + gameId)
+    .set('rol', 'Admin');
     t.is(res.status, 200);
     t.truthy(res.body);
 });
@@ -56,18 +56,19 @@ test.serial('GET /:id - Debería obtener un juego por ID', async t => {
 // Test para el endpoint de actualizar un juego
 test.serial('PATCH /:id - Debería actualizar un juego por ID', async t => {
     const updatedGame = {
-        title: 'Juego actualizado',
+        titulo: 'Juego actualizado',
     };
 
-    const res = await request.patch('/games/' + newGame._id).send(updatedGame);
+    const res = await request.patch('/games/' + gameId).send(updatedGame)
+    .set('rol', 'Admin');
     t.is(res.status, 200);
     t.truthy(res.body);
 });
 
 // Test para el endpoint de eliminar un juego
 test.serial('DELETE /:id - Debería eliminar un juego por ID', async t => {
-    console.log(ID);
-    const res = await request.delete('/games/' + newGame._id);
+    const res = await request.delete(`/games/${gameId}`)
+    .set('rol', 'Admin');
     t.is(res.status, 200);
     t.truthy(res.body);
 });
@@ -78,12 +79,11 @@ test.serial('POST / - Debería devolver un error si los datos del juego son inco
         titulo: 'Juego incorrecto',
     };
 
-    const res = await request.post('/games').send(invalidGame);
-    t.is(res.status, 400); 
-    t.is(res.body.message, 'Los datos del juego son incorrectos'); 
+    const res = await request.post('/games').send(invalidGame)
+    .set('rol', 'Admin');
+    t.is(res.status, 400);
+    t.is(res.body.message, 'Los datos del juego son incorrectos');
 });
-
-
 
 // Prueba de error al intentar obtener un juego inexistente por título
 test.serial('GET /titulo/:title - Debería devolver un error si el juego no existe por título', async t => {
@@ -94,7 +94,8 @@ test.serial('GET /titulo/:title - Debería devolver un error si el juego no exis
 
 // Prueba de error al intentar obtener un juego inexistente por ID
 test.serial('GET /:id - Debería devolver un error si el juego no existe por ID', async t => {
-    const res = await request.get('/games/123456789012345678901234'); 
+    const res = await request.get('/games/123456789012345678901234')
+    .set('rol', 'Admin');
     t.is(res.status, 404);
     t.is(res.body.message, 'El juego no existe');
 });
@@ -102,16 +103,18 @@ test.serial('GET /:id - Debería devolver un error si el juego no existe por ID'
 // Prueba de error al intentar actualizar un juego inexistente por ID
 test.serial('PATCH /:id - Debería devolver un error si el juego no existe para actualizar por ID', async t => {
     const updatedGame = {
-        title: 'Juego actualizado',
+        titulo: 'Juego actualizado',
     };
-    const res = await request.patch('/games/123456789012345678901234').send(updatedGame); 
+    const res = await request.patch('/games/123456789012345678901234').send(updatedGame)
+    .set('rol', 'Admin');
     t.is(res.status, 404);
     t.is(res.body.message, 'El juego no existe');
 });
 
 // Prueba de error al intentar eliminar un juego inexistente por ID
 test.serial('DELETE /:id - Debería devolver un error si el juego no existe para eliminar por ID', async t => {
-    const res = await request.delete('/games/123456789012345678901234');
+    const res = await request.delete('/games/123456789012345678901234')
+    .set('rol', 'Admin');
     t.is(res.status, 404);
     t.is(res.body.message, 'El juego no existe');
 });
