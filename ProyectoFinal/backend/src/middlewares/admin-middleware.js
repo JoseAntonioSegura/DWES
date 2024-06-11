@@ -4,7 +4,7 @@ const isAdmin = (req, res, next) => {
     logger.info('Verificando si el usuario es administrador');
     const rol = req.headers.rol;
   
-    console.log(rol);
+    //console.log(rol);
     
     if (rol === 'Admin') {
         logger.info('El usuario es administrador');

@@ -77,7 +77,6 @@ test.serial('PATCH /:id actualiza un usuario por ID', async t => {
 test.serial('DELETE /:id elimina un usuario por ID', async t => {
     const res = await request(app)
         .delete(`/users/${newUser._id}`)
-        .set('Authorization', `Bearer ${token}`)
         .set('rol', 'Admin');
 
     t.is(res.status, 200);

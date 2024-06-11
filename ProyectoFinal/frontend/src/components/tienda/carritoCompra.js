@@ -48,7 +48,6 @@ const CarritoCompra = () => {
     productos.forEach(producto => {
       total += producto.cantidad * producto.productId.precio;
     });
-    // Redondear el total a dos decimales
     total = parseFloat(total.toFixed(2));
     setTotalCompra(total);
   };
