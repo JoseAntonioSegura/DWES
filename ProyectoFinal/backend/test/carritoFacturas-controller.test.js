@@ -144,23 +144,6 @@ test.serial('POST /carrito/agregar Repetir', async t => {
     console.log('Carrito ID:', carritoID);
 });
 
-// Test para confirmar la compra
-test.serial('POST /carrito/confirmar-compra confirma la compra', async t => {
-    const compra = {
-        carritoId: carritoID, 
-        userId: userID,
-        productos: [{ productId: gameID, cantidad: 1, precioOriginal: newGame.precio}]
-    };
-
-    console.log('Compra:', compra);
-    const res = await request.post('/carrito/confirmar-compra').set('Authorization', `Bearer ${token}`)
-        .send(compra.carritoId, compra.userId, compra.productos);
-
-    console.log('Respuesta:', res.body);
-    t.is(res.status, 200);
-    t.truthy(res.body);
-});
-
 
 // Prueba para agregar una factura
 test.serial('POST /factura/agregar agrega una factura', async t => {

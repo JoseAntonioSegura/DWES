@@ -80,7 +80,7 @@ footer img {
 .containerFooterBottom div:last-child {
     display: flex;
     justify-content: flex-end;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .containerFooterBottom a, .social {

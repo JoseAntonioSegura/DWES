@@ -27,10 +27,10 @@ function NewProduct({ cantidad, ordenar }) {
     };
 
     obtenerProductos();
-  }, [cantidad, ordenar]);
+  }, [cantidad, ordenar, url]);
 
   if (loading) {
-    return <div className="producto-skeleton"></div>;
+    return <div className="producto-skeleton containerNewProduct"></div>;
   }
 
   if (error) {
