@@ -1,117 +1,11 @@
 # Manual de uso - Proyecto Final
 
-## 🔎 Conceptos
-
-### 🕹️ Ninja Games:
-
-## 🧾 Documentación
-
-### Configuración del entorno
-Para instalar y ejecutar el proyecto, asegúrate de tener Node.js y npm instalados en tu sistema.
-
-#### Instalación usando npm (NO RECOMENDADO)
-1. Clona este repositorio.
-2. Navega hacia una de las carpetas del repositorio principal (backend o frontend).
-3. Ejecuta `npm install` para instalar las dependencias en cada carpeta.
-4. Configurar las variables de entornos correspondientes.
-4. Ejecuta `npm start` en el backend una vez que hayas realizado el paso anterior.
-5. Ejecuta `npm start` en el frontend, esperar a que nos indique que el puerto 3000 ya está en uso e indicarle que continue desde el puerto 3001.
-
-- Es importante indicar que primero se debe ejecutar el backend y luego el frontend para evitar errores. 
-- Si queremos acceder a Swagger usaremos la siguiente ruta `http://localhost:3000/api-docs/`
-
-### Variables de entorno (SOLO PARA LA INSTALACIÓN USANDO NPM)
-Asegúrate de configurar las siguientes variables de entorno en un archivo `.env` en la raíz del proyecto.
-
-- **BACKEND**
-    - PORT=3000
-    - SECRET_KEY=macacobrasileiro
-    - MONGODB_USER=jaseggom
-    - MONGODB_PASSWORD=Ja1977-1980
-
-- **BACKEND**
-    - REACT_APP_URL=http://localhost:3000
-
-#### Ejecución con Docker (RECOMENDADO)
-También puedes ejecutar el proyecto usando Docker lo que nos permitirá poder desplegar el frontend y el backend a la vez, sin necesidad de modificar ni añadir variables de entorno. Asegúrate de tener Docker-Desktop instalado en tu sistema.
-1. Clona este repositorio.
-2. Navega a la carpeta del raiz del proyecto en tu terminal (./proyecto).
-3. Ejecuta `docker-compose build` para construir los contenedores.
-4. Ejecuta `docker-compose up` para levantar los correspondientes contenedores.
-5. Abrimos el navegador y accederemos a esta URL `http://localhost:4001/`.
-
-- Si queremos acceder a Swagger usaremos la siguiente ruta `http://localhost:4000/api-docs/`
-
-### Pruebas
-#### POSTMAN
-Todos los test funcionan y pasan correctamente, los resultados exportados marcan dos errores en los DELETE de Carrito y Facturas. Si funcionan pero no he puesto los datos necesarios ya que da una pereza horrible tener que volver a buscar los ID.
-
-### 🚃 Rutas Principales
-
-- Todos los endpoints que contengan admin o deban acceder al panel administrador deben contar con el rol `Admin` para poder ser utilizados. 
-
-#### 🔐 Autenticación:
-
-- `POST: /login` Endpoint para iniciar sesión.
-
-#### 👤 Usuarios:
-
-- `GET: /users/me`: Obtener los datos del usuario logueado.
-- `GET: /users/name/:name`: Obtener los datos del usuario por su nombre desde el panel administrador.
-- `GET: /users/admin/:id`: Obtener los datos del usuario por su id desde el panel administrador.
-- `GET: /users`: Obtener todos los usuarios desde el panel administrador.
-- `POST: /users`: Crear un usuario.
-- `PATCH: /users/:id`: Actualizar un usuario.
-- `PATCH: /users/admin/:id`: Actualizar un usuario desde el panel administrador.
-- `DELETE: /users/:id`: Eliminar un usuario.
-
-#### 🎮 Juegos:
-
-- `GET: /games`: Obtener todos los juegos.
-- `GET: /games/name/:title`: Obtener un juego por título.
-- `GET: /games/:id`: Obtener un juego por ID.
-- `POST: /games`: Crear un juego.
-- `PATCH: /games/:id`: Actualizar datos de forma limitada cuando el usuario realiza una compra.
-- `PATCH: /games/admin/:id`: Actualizar un juego con todos sus apartados desde el panel administrador.
-- `DELETE: /games/:id`: Eliminar un juego.
-
-#### 🛒 Carrito:
-
-- `GET: /carrito/:userId`: Obtener productos del carrito de un usuario.
-- `POST: /carrito/agregar`: Agregar producto al carrito.
-- `PATCH: /carrito`: Modificar cantidad de producto en el carrito.
-- `DELETE: /carrito/:carritoId`: Eliminar producto del carrito.
-- `POST: /carrito/:confirmar-compra`: Recopila todos los endpoint anteriores para en un único endpoint realizar todo el proceso de compra.
-
-#### 🧾 Facturas:
-
-- `GET: /factura/:userId`: Obtener todas las facturas de un usuario.
-- `GET: /factura/admin/:userId`: Obtener facturas de otros usuarios desde el administrador.
-- `POST: /factura/agregar`: Agregar una factura.
-- `DELETE: /factura/:facturaId`: Eliminar una factura.
-
-### 🗝️ Middleware Utilizado:
-
-- `checkToken`: Middleware para verificar el token de autenticación en las rutas protegidas.
-- `isAdmin`: Middleware para el rol del usuario a la hora de loguearse.
-
-## Middleware
-- El proyecto utiliza algunos middlewares para ciertas funcionalidades. Puedes encontrarlos en los archivos correspondientes en la carpeta `middlewares`.
-
-## Swagger
-- Puedes acceder a la documentación de la API utilizando Swagger visitando `/docs` o `/api-docs` después de ejecutar el servidor.
-
-##  TEST-SONAR
-
-- Puedes acceder a los tests generados con la configuración de SonarQube realizando el siguiente comando desde la `./backend`:
-  - `docker-compose -f docker-compose.test.yml up`.
-- Posteriormente, en el `package.json`, encontrarás todos los scripts necesarios para verificar cada apartado.
+## 🕹️ Ninja Games:
 
 ## Importar la colección de Postman
 Para facilitar las pruebas de la API, hemos incluido una colección de Postman. Sigue los siguientes pasos para importar la colección:
 
-1. Descarga el archivo Postman Collection:
-    [Descargar colección Postman](./Proyecto%20Final.postman_collection.json)
+1. Descarga el archivo Postman Collection: [Descargar colección Postman](./Proyecto%20Final.postman_collection.json)
 
 2. Abre Postman y ve a `File -> Import`.
 
