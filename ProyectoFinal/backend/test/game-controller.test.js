@@ -29,6 +29,14 @@ test.serial('POST / - Debería crear un juego', async t => {
     t.truthy(res.body);
     gameId = res.body._id; // Guardar el ID del juego creado para usarlo en otras pruebas
 });
+ 
+// Test para el endpoint de crear un juego sin autenticación
+test.serial('POST / - Debería crear un juego sin admin', async t => {
+    const res = await request.post('/games')
+    .send(newGame);
+    t.is(res.status, 403);
+});
+
 
 // Test para el endpoint de obtener todos los juegos
 test.serial('GET / - Debería obtener todos los juegos', async t => {
@@ -65,12 +73,28 @@ test.serial('PATCH /:id - Debería actualizar un juego por ID', async t => {
     t.truthy(res.body);
 });
 
+// Test para el endpoint de actualizar un juego sin admin
+test.serial('PATCH /:id - Debería actualizar un juego por ID sin admin', async t => {
+    const updatedGame = {
+        titulo: 'Juego actualizado',
+    };
+
+    const res = await request.patch('/games/' + gameId).send(updatedGame)
+    t.is(res.status, 200);
+});
+
 // Test para el endpoint de eliminar un juego
 test.serial('DELETE /:id - Debería eliminar un juego por ID', async t => {
     const res = await request.delete(`/games/${gameId}`)
     .set('rol', 'Admin');
     t.is(res.status, 200);
     t.truthy(res.body);
+});
+
+// Test para el endpoint de eliminar un juego sin admin
+test.serial('DELETE /:id - Debería eliminar un juego por ID sin admin' , async t => {
+    const res = await request.delete(`/games/${gameId}`)
+    t.is(res.status, 403);
 });
 
 // Prueba de error al intentar crear un juego con datos incorrectos

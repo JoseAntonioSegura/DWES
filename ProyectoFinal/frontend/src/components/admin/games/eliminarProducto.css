@@ -1,5 +1,5 @@
 .eliminarProducto-container {
-  width: 60%;
+  min-width: 60%;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
@@ -9,8 +9,8 @@
   justify-content: center; 
 }
 
-.eliminarProducto-container .formUser {
-  width: 100%;
+.eliminarProducto-container form {
+  min-width: 100%;
 }
 .eliminarProducto-container p {
   justify-content: center;
@@ -20,7 +20,7 @@
 
 .eliminarProducto-container h2 {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
 }
 
 .eliminarProducto-container input[type="text"] {

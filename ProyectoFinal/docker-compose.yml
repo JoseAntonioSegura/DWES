@@ -24,3 +24,8 @@ services:
       - "4001:3000"
     depends_on:
       - backend
+  sonarqube:
+    image: "sonarqube"
+    ports:
+      - "9000:9000"
+      - "9092:9092"

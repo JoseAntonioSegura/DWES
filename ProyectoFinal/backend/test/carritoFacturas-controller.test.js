@@ -93,6 +93,16 @@ test.serial('POST /carrito/agregar agrega un producto al carrito', async t => {
     t.truthy(res.body);
 });
 
+// Test para agregar un producto al carrito sin token
+test.serial('POST /carrito/agregar agrega un producto al carrito sin token', async t => {
+    console.log('Producto:', producto);
+    const res = await request.post('/carrito/agregar')
+        .send(producto);
+
+    t.is(res.status, 401);
+    t.truthy(res.body);
+});
+
 // Test para obtener productos del carrito
 test.serial('GET /carrito/:userId obtiene productos del carrito', async t => {
     const res = await request.get(`/carrito/${userID}`)
@@ -104,6 +114,15 @@ test.serial('GET /carrito/:userId obtiene productos del carrito', async t => {
 
     carritoID = res.body[0]._id;
 });
+
+// Test para obtener productos del carrito sin token
+test.serial('GET /carrito/:userId obtiene productos del carrito sin token', async t => {
+    const res = await request.get(`/carrito/${userID}`);
+
+    t.is(res.status, 401);
+    t.truthy(res.body);
+});
+
 
 // Test para modificar la cantidad de un producto en el carrito
 test.serial('PATCH /carrito modifica la cantidad de un producto en el carrito', async t => {
@@ -119,6 +138,19 @@ test.serial('PATCH /carrito modifica la cantidad de un producto en el carrito', 
     t.truthy(res.body);
 });
 
+// Test para modificar la cantidad de un producto en el carrito sin token
+test.serial('PATCH /carrito modifica la cantidad de un producto en el carrito sin topken', async t => {
+    const modificaciones = {
+        carritoId: carritoID,
+        cantidad: 2
+    };
+
+    const res = await request.patch('/carrito').send(modificaciones);
+
+    t.is(res.status, 401);
+    t.truthy(res.body);
+});
+
 
 // Test para eliminar un producto del carrito
 test.serial('DELETE /carrito/:carritoId elimina un producto del carrito', async t => {
@@ -129,6 +161,15 @@ test.serial('DELETE /carrito/:carritoId elimina un producto del carrito', async 
 
     t.is(res.status, 200);
     t.truthy(res.body);
+});
+
+// Test para eliminar un producto del carrito sin token
+test.serial('DELETE /carrito/:carritoId elimina un producto del carrito sin token', async t => {
+    const carritoId = carritoID;
+
+    const res = await request.delete(`/carrito/${carritoId}`);
+
+    t.is(res.status, 401);
 });
 
 // Test para agregar un producto al carrito
@@ -143,6 +184,14 @@ test.serial('POST /carrito/agregar Repetir', async t => {
     carritoID = res.body.carrito._id;
     console.log('Carrito ID:', carritoID);
 });
+
+// Test para agregar un producto al carrito sin token
+test.serial('POST /carrito/agregar Repetir sin token', async t => {
+    const res = await request.post('/carrito/agregar').send(producto);
+
+    t.is(res.status, 401);
+});
+
 
 
 // Prueba para agregar una factura
@@ -181,7 +230,7 @@ test.serial('DELETE /factura/:facturaId elimina una factura por ID', async t => 
     t.truthy(res.body);
 });
 
-// Pruebas de ERROR //////////////////////////////////////////////////
+// Más Pruebas de ERROR //////////////////////////////////////////////////
 // Prueba para agregar un producto al carrito con datos incorrectos
 test.serial('POST /carrito/agregar - Debería devolver un error si los datos del producto son incorrectos', async t => {
     const invalidProduct = {

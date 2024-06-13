@@ -41,6 +41,7 @@ test.serial('Login devuelve un token de acceso válido', async t => {
     console.log('Token recibido:', token);
 });
 
+
 test.serial('GET /me devuelve el usuario actual', async t => {
     const res = await request(app)
         .get('/users/me')
@@ -51,6 +52,13 @@ test.serial('GET /me devuelve el usuario actual', async t => {
 
 });
 
+test.serial('GET /me devuelve el usuario actual sin token', async t => {
+    const res = await request(app)
+        .get('/users/me');
+
+    t.is(res.status, 401);
+});
+
 test.serial('GET / devuelve todos los usuarios', async t => {
     const res = await request(app)
         .get('/users')
@@ -58,6 +66,12 @@ test.serial('GET / devuelve todos los usuarios', async t => {
     t.is(res.status, 200);
     t.true(Array.isArray(res.body));
     t.true(res.body.length > 0);
+});
+
+test.serial('GET / devuelve todos los usuarios sin admin', async t => {
+    const res = await request(app)
+        .get('/users');
+    t.is(res.status, 403);
 });
 
 test.serial('PATCH /:id actualiza un usuario por ID', async t => {
@@ -74,6 +88,17 @@ test.serial('PATCH /:id actualiza un usuario por ID', async t => {
     t.truthy(res.body);
 });
 
+test.serial('PATCH /:id actualiza un usuario por ID sin token', async t => {
+    const updatedUser = {
+        username: 'testuser2223222',
+    };
+
+    const res = await request(app)
+        .patch(`/users/${newUser._id}`).send(updatedUser);
+
+    t.is(res.status, 401);
+});
+
 test.serial('DELETE /:id elimina un usuario por ID', async t => {
     const res = await request(app)
         .delete(`/users/${newUser._id}`)
@@ -82,6 +107,14 @@ test.serial('DELETE /:id elimina un usuario por ID', async t => {
     t.is(res.status, 200);
     t.truthy(res.body);
 });
+
+test.serial('DELETE /:id elimina un usuario por ID sin admin', async t => {
+    const res = await request(app)
+        .delete(`/users/${newUser._id}`);
+
+    t.is(res.status, 403);
+});
+
 
 // Casos de prueba adicionales errores
 
@@ -100,7 +133,7 @@ test.serial('POST /login - Inicio de sesión con credenciales incorrectas', asyn
 
 test.serial('PATCH /users/:id - Intento de actualizar un usuario con datos no válidos', async t => {
     const invalidUserData = {
-        sadasdasdas: '',
+        sadasdasdas: 'asd',
     };
 
     const res = await request(app)
@@ -111,13 +144,10 @@ test.serial('PATCH /users/:id - Intento de actualizar un usuario con datos no v�
     t.is(res.status, 404);
 });
 
-test.serial('DELETE /users/:id - Intento de eliminar un usuario inexistente', async t => {
-    const nonExistentUserId = 'nonexistentuserid';
-
+test.serial('DELETE /:id elimina un usuario por ID sin permisos', async t => {
     const res = await request(app)
-        .delete(`/users/${nonExistentUserId}`)
-        .set('rol', 'Admin');
+        .delete(`/users/${newUser._id}`);
 
-    t.is(res.status, 500);
+    t.is(res.status, 403);
+    t.truthy(res.body);
 });
-
