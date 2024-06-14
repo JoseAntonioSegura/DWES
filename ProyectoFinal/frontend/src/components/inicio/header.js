@@ -181,14 +181,14 @@ function Header({ productoAgregado , mostrarCarrito }) {
           {mostrarCarrito && (
             <div className="cesta" onClick={handleCartClick}>
               <Link to="/carrito">
-                <img src={cesta} alt="Carrito"  />
+                <img src={cesta} alt="Carrito" />
               </Link>
               <div className="carrito-count">
                 <span>{sumaTotal}</span>
               </div>
             </div>
           )}
-          <div className='user-profile'>
+          <div className={`user-profile ${!mostrarCarrito ? 'only-user' : ''}`}>
             {user.usernameImage && <img className='fotoPefil' onClick={handleProfileClick} src={user.usernameImage} />}
           </div>
           {dropdownVisible && (
@@ -200,7 +200,8 @@ function Header({ productoAgregado , mostrarCarrito }) {
           )}
         </div>
       );
-    } else {
+    }
+    else {
       return (
         <div className='infoUser'>
           {mostrarCarrito && (

@@ -176,6 +176,7 @@ header div div img:hover {
   background-color: #2e2e2e;
 }
 
+
  .dropdown-menu-admin {
   right: 15.5%;
 
@@ -215,6 +216,11 @@ header div div img:hover {
     margin: 0;
     padding: 20px;
   }
+
+  .only-user {
+    width: 80px;
+  }
+
 
   .user-profile {
     padding-left: 50px;
@@ -278,6 +284,11 @@ header div div img:hover {
 @media screen and (max-width: 780px) {
   header .logo {
     width: 60px;
+  }
+
+  .only-user {
+    width: 70px;
+    height: 50px;
   }
  
   header {
